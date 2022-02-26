@@ -12,6 +12,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@100;200;300;400&family=Nunito+Sans:wght@200;300&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>
 </head>
@@ -23,34 +26,33 @@
 
             <div class="container">
                 <div class="navbar__menu">
-
                     <div class="row">
                         <div class="col-4">
                             <div class="navbar__menu-item">
                                 <div class="row">
-                                    <div class="col-6">
-                                        <div class="navbar__menu-item-logo">
-                                            <img src="assets/img/Settings/logo.svg" alt="">
+                                    <div class="col-12">
+                                        <div class="navbar__menu-item-inner">
+                                            <div class="navbar__menu-item-logo">
+                                                <img src="assets/img/Settings/logo.svg" alt="">
+                                            </div>
+                                            <div class="navbar__menu-item-text">
+                                                <p>Kompüter və elektronika
+                                                    <br>
+                                                    avadanlığı dükanı
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="navbar__menu-item-text">
-                                            <p>Kompüter və elektronika
-                                                avadanlığı dükanı</p>
-                                        </div>
+
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
 
-                        <div class="col-1"></div>
 
-                        <div class="col-7">
+                        <div class="col-8">
                             <div class="navbar__menu-item">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-5">
                                         <div class="navbar__menu-item-address">
                                             <p class="fz-16">58D Bülbül Prospekti, Bakı <a href="#">(Dükanımız
                                                     xəritədə)</a></p>
@@ -59,11 +61,15 @@
                                     </div>
                                     <div class="col-3">
                                         <div class="navbar__menu-item-phone">
-                                            <p><i></i>+994 (70) 244 47 47</p>
-                                            <p>+994 (012) 598 27 47</p>
+                                            <a href="">
+                                                <p><i class="fa-brands fa-whatsapp"></i>+994 (70) 244 47 47</p>
+                                            </a>
+                                            <a href="">
+                                                <p>+994 (012) 598 27 47</p>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="col-1">
+                                    <div class="col-2">
                                         <div class="navbar__menu-item-socials d-flex">
                                             <a href="" class="mg-l">
                                                 <img src="assets/img/Settings/facebook.svg" alt="">
@@ -75,16 +81,17 @@
                                     </div>
                                     <div class="col-2">
                                         <div class="navbar__menu-item-basket">
-                                            <!-- width height -->
                                             <div class="menu-basket-box">
                                                 <div class="menu-basket-counter">
-                                                    <span></span>
+                                                    <span class="basket-counter-value">0</span>
                                                 </div>
 
-                                                <!-- width height 100% -->
-                                                <a href="">
+                                                <div class="menu-basket-icon">
+                                                    <a href="">
+                                                        <img src="assets/img/Settings/iCartWhite.png" alt="">
+                                                    </a>
+                                                </div>
 
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -93,12 +100,24 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- </div> -->
                 </div>
 
+                <div class="row">
+                    <div class="col-12">
+                        <form action="" method="get" id="searchProd">
+                            <div class="searchElements">
+                                <input type="text" placeholder="Məhsul axtarışı" id="searchstring" name="searchstring" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+                                <button class="search-button" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
 
-
+            
         </nav>
     </header>
 

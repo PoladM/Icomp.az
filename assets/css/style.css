@@ -1,29 +1,81 @@
 .main-navbar .navbar__menu {
   padding: 10px 0px; }
 
-.main-navbar .navbar__menu-item-logo {
-  margin-top: 5px;
-  width: 100%; }
-  .main-navbar .navbar__menu-item-logo img {
-    width: 65%; }
-
-.main-navbar .navbar__menu-item-text {
-  margin-top: 5px;
-  width: 70%;
-  font-size: 13px;
-  color: #969EBA; }
+.main-navbar .navbar__menu-item-inner {
+  display: flex;
+  justify-content: start; }
+  .main-navbar .navbar__menu-item-inner .navbar__menu-item-logo {
+    margin-top: 5px;
+    width: 30%; }
+    .main-navbar .navbar__menu-item-inner .navbar__menu-item-logo img {
+      width: 100%; }
+  .main-navbar .navbar__menu-item-inner .navbar__menu-item-text {
+    margin-top: 5px;
+    font-size: 13px;
+    color: #969EBA; }
 
 .main-navbar .navbar__menu-item-address {
-  margin-top: 5px; }
+  margin-top: 5px;
+  min-width: 322px; }
   .main-navbar .navbar__menu-item-address .fz-16 {
     font-size: 16px; }
   .main-navbar .navbar__menu-item-address .fz-12 {
-    font-size: 12px; }
+    font-size: 12px;
+    color: #969EBA; }
+
+.main-navbar .navbar__menu-item-phone {
+  min-width: 195px; }
+  .main-navbar .navbar__menu-item-phone p {
+    text-align: right;
+    color: #333;
+    transition: 0.3s; }
+    .main-navbar .navbar__menu-item-phone p:hover {
+      color: #4084F1; }
+    .main-navbar .navbar__menu-item-phone p i {
+      font-weight: 900;
+      margin-right: 5px;
+      color: #333; }
 
 .main-navbar .navbar__menu-item-socials {
-  margin-top: 10px; }
+  margin-top: 10px;
+  margin-left: 50px;
+  min-width: 50px; }
   .main-navbar .navbar__menu-item-socials .mg-l {
     margin-right: 5px; }
+
+.navbar__menu .navbar__menu-item-basket {
+  display: flex;
+  justify-content: end; }
+  .navbar__menu .navbar__menu-item-basket .menu-basket-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    min-height: 50px;
+    background-color: #4084F1; }
+    .navbar__menu .navbar__menu-item-basket .menu-basket-box .menu-basket-counter {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 15px;
+      height: 15px;
+      right: -5px;
+      top: -5px;
+      font-size: 11px;
+      font-weight: 900;
+      border-radius: 50%;
+      background-color: #f9ba48; }
+    .navbar__menu .navbar__menu-item-basket .menu-basket-box .menu-basket-icon a {
+      padding: 13px; }
+      .navbar__menu .navbar__menu-item-basket .menu-basket-box .menu-basket-icon a img {
+        width: 40%;
+        padding: 0 0 5px 5px; }
+
+@media only screen and (max-width: 1200px) {
+  .main-navbar .navbar__menu-item-address .fz-16 {
+    font-size: 13px; } }
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
