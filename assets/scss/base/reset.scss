@@ -25,4 +25,6 @@ p, a, b, span, h1, h2, h3, h4, h5, h6, select, input, textarea, button, label, d
     font-family: $text-font-stack;
 }
 
-
+textarea:focus, input:focus{
+    outline: none;
+}

@@ -108,7 +108,28 @@
 .main-navbar{
 
     .searchElements{
-        
+        position: relative;
+        .navbar__input{
+            width: 100%;
+            background-color: #f7f8fc;
+            height: 46px;
+            border: none;
+            transition: 0.3s;
+            padding-left: 40px;
+            &:focus{
+                background-color: #f2f2f2;
+            }
+        }
+        .search-button{
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 46px;
+            width: 50px;
+            border: none;
+            background-color: #f7f8fc;
+            color: rgb(122, 115, 115);
+        }
     }
 }
 
