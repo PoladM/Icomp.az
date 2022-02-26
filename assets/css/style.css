@@ -1,0 +1,49 @@
+.main-navbar .navbar__menu {
+  padding: 10px 0px; }
+
+.main-navbar .navbar__menu-item-logo {
+  margin-top: 5px;
+  width: 100%; }
+  .main-navbar .navbar__menu-item-logo img {
+    width: 65%; }
+
+.main-navbar .navbar__menu-item-text {
+  margin-top: 5px;
+  width: 70%;
+  font-size: 13px;
+  color: #969EBA; }
+
+.main-navbar .navbar__menu-item-address {
+  margin-top: 5px; }
+  .main-navbar .navbar__menu-item-address .fz-16 {
+    font-size: 16px; }
+  .main-navbar .navbar__menu-item-address .fz-12 {
+    font-size: 12px; }
+
+.main-navbar .navbar__menu-item-socials {
+  margin-top: 10px; }
+  .main-navbar .navbar__menu-item-socials .mg-l {
+    margin-right: 5px; }
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  box-sizing: border-box;
+  text-decoration: none; }
+
+p, a, b, span, h1, h2, h3, h4, h5, h6, select, input, textarea, button, label, div {
+  font-family: "Fira Sans Condensed", sans-serif; }

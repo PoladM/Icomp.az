@@ -1,0 +1,53 @@
+
+.main-navbar{
+    .navbar__menu{
+        padding: 10px 0px;
+        // border: 1px solid;
+    }
+}
+
+.main-navbar{
+    .navbar__menu-item-logo{
+        margin-top: 5px;
+        width: 100%;
+        // border: 1px solid;
+        img{
+            width: 65%;
+        }
+    }
+
+    .navbar__menu-item-text{
+        margin-top: 5px;
+        width: 70%;
+        // border: 1px solid;
+        font-size: 13px;
+        color: $site-gray;
+    }
+}
+
+.main-navbar{
+
+    .navbar__menu-item-address{
+        // border: 1px solid;
+        margin-top: 5px;
+        .fz-16{
+            font-size: 16px;
+        }
+        .fz-12{
+            font-size: 12px;
+        }
+    }
+
+    .navbar__menu-item-phone{
+        // border: 1px solid;
+    }
+
+    .navbar__menu-item-socials{
+        margin-top: 10px;
+        .mg-l{
+            margin-right: 5px;
+        }
+    }
+}
+
+
