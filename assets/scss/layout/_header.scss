@@ -218,6 +218,19 @@
   }
 }
 
+.main-navbar__mobile-menu{
+
+  .mobile-menu-item{
+
+    a{
+      display: block;
+      width: 100%;
+      padding: 20px 10px;
+      color: white;
+    }
+  }
+}
+
 .main-navbar {
   .sub-catalog-menu-item {
     // width: 100%;
@@ -275,20 +288,23 @@
       background-color: $home-categ-price-basket-blue;
       .main-navbar__mobile-menu{
         position: absolute;
-        width: 60%;
+        transform: translateX(-1000px);
+        width: 80%;
         left: 0;
-        bottom: -50px;
+        top: 66px;
         border: 1px solid;
-        transition: all 0.7s ease-in-out; 
+        background-color: $home-catalog-blue;
       }
 
       .deactive{
-        transform: translateX(-525px);
-        opacity: 0;
+        transform: translateX(-1000px);
+        transition: all 0.7s ease-in-out; 
+
       }
       .active{
         transform: translateX(0px);
-        opacity: 1;
+        transition: all 0.7s ease-in-out; 
+
       }
     }
   }

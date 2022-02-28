@@ -19,12 +19,23 @@ let hamburger = document.querySelector('.main-navbar__hamburger');
 let menu = document.querySelector('.main-navbar__mobile-menu');
 
 hamburger.addEventListener("click", function(){
+  
   if (menu.classList.contains('deactive')) {
     menu.classList.remove('deactive');
     menu.classList.add('active');
+    return;
   }
-  else{
+  if(menu.classList.contains('active'))
+  {
     menu.classList.remove('active');
     menu.classList.add('deactive');
+    return;
   }
+  if(menu.classList.contains('main-navbar__mobile-menu'))
+  {
+    menu.classList.add('active');
+    return;
+  }
+  
+  
 })
