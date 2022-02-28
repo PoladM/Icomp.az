@@ -10,7 +10,7 @@
     justify-content: start;
     .navbar__menu-item-logo {
       margin-top: 5px;
-      width: 30%;
+      width: 130px;
       img {
         width: 100%;
       }
@@ -55,6 +55,7 @@
   }
 
   .navbar__menu-item-socials {
+    display: flex;
     margin-top: 10px;
     margin-left: 50px;
     min-width: 50px;
@@ -129,7 +130,7 @@
       background-color: #f7f8fc;
       color: rgb(122, 115, 115);
       transition: 0.2s;
-      &:hover{
+      &:hover {
         background-color: #e9ebf0;
       }
     }
@@ -143,6 +144,7 @@
     align-items: center;
     width: 100%;
     height: 46px;
+    cursor: pointer;
     background-color: $home-catalog-blue;
 
     .catalog-text {
@@ -162,6 +164,11 @@
   .main-navbar__catalog-box {
     position: relative;
     width: 300px;
+
+    .main-navbar__hamburger {
+      display: none;
+    }
+
     .main-navbar__catalog-menu {
       position: absolute;
       display: none;
@@ -185,17 +192,16 @@
       }
     }
 
-    .show{
-        display: block;
+    .show {
+      display: block;
     }
   }
 }
 
 .main-navbar {
   .dropdown-list {
-    position: relative;
-
     .catalog-menu-item {
+      position: relative;
       &:hover {
         .main-navbar__sub-catalog-menu {
           visibility: visible;
@@ -203,8 +209,9 @@
       }
       .main-navbar__sub-catalog-menu {
         visibility: hidden;
+        min-width: 200px;
         position: absolute;
-        right: -174px;
+        left: 299px;
         top: 0;
       }
     }
@@ -229,3 +236,61 @@
     }
   }
 }
+
+@media only screen and (max-width: 992px) {
+  .main-navbar {
+    .navbar__menu-item{
+
+      .navbar__menu-item-text{
+        display: none;
+      }
+      .navbar__menu-item-address{
+        display: none;
+      }
+      .navbar__menu-item-phone{
+        display: none;
+      }
+      .navbar__menu-item-socials{
+        display: none;
+      }
+    }
+
+    .main-navbar__catalog-box {
+      .main-navbar__catalog-box-inner {
+        display: none;
+      }
+      .main-navbar__hamburger {
+        height: 46px;
+        display: block;
+        img{
+          padding: 10px;
+        }
+      }
+    }
+  }
+  .main-navbar{
+    .main-navbar__mobile{
+      position: relative;
+      padding: 10px 10px 10px 0;
+      background-color: $home-categ-price-basket-blue;
+      .main-navbar__mobile-menu{
+        position: absolute;
+        width: 60%;
+        left: 0;
+        bottom: -50px;
+        border: 1px solid;
+        transition: all 0.7s ease-in-out; 
+      }
+
+      .deactive{
+        transform: translateX(-525px);
+        opacity: 0;
+      }
+      .active{
+        transform: translateX(0px);
+        opacity: 1;
+      }
+    }
+  }
+}
+

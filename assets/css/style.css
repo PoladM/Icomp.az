@@ -6,7 +6,7 @@
   justify-content: start; }
   .main-navbar .navbar__menu-item-inner .navbar__menu-item-logo {
     margin-top: 5px;
-    width: 30%; }
+    width: 130px; }
     .main-navbar .navbar__menu-item-inner .navbar__menu-item-logo img {
       width: 100%; }
   .main-navbar .navbar__menu-item-inner .navbar__menu-item-text {
@@ -37,6 +37,7 @@
       color: #333; }
 
 .main-navbar .navbar__menu-item-socials {
+  display: flex;
   margin-top: 10px;
   margin-left: 50px;
   min-width: 50px; }
@@ -103,6 +104,7 @@
   align-items: center;
   width: 100%;
   height: 46px;
+  cursor: pointer;
   background-color: #0d7ee4; }
   .main-navbar .main-navbar__catalog-box-inner .catalog-text {
     display: flex;
@@ -117,6 +119,8 @@
 .main-navbar .main-navbar__catalog-box {
   position: relative;
   width: 300px; }
+  .main-navbar .main-navbar__catalog-box .main-navbar__hamburger {
+    display: none; }
   .main-navbar .main-navbar__catalog-box .main-navbar__catalog-menu {
     position: absolute;
     display: none;
@@ -136,14 +140,15 @@
   .main-navbar .main-navbar__catalog-box .show {
     display: block; }
 
-.main-navbar .dropdown-list {
+.main-navbar .dropdown-list .catalog-menu-item {
   position: relative; }
   .main-navbar .dropdown-list .catalog-menu-item:hover .main-navbar__sub-catalog-menu {
     visibility: visible; }
   .main-navbar .dropdown-list .catalog-menu-item .main-navbar__sub-catalog-menu {
     visibility: hidden;
+    min-width: 200px;
     position: absolute;
-    right: -174px;
+    left: 299px;
     top: 0; }
 
 .main-navbar .sub-catalog-menu-item {
@@ -152,6 +157,40 @@
 @media only screen and (max-width: 1200px) {
   .main-navbar .navbar__menu-item-address .fz-16 {
     font-size: 13px; } }
+
+@media only screen and (max-width: 992px) {
+  .main-navbar .navbar__menu-item .navbar__menu-item-text {
+    display: none; }
+  .main-navbar .navbar__menu-item .navbar__menu-item-address {
+    display: none; }
+  .main-navbar .navbar__menu-item .navbar__menu-item-phone {
+    display: none; }
+  .main-navbar .navbar__menu-item .navbar__menu-item-socials {
+    display: none; }
+  .main-navbar .main-navbar__catalog-box .main-navbar__catalog-box-inner {
+    display: none; }
+  .main-navbar .main-navbar__catalog-box .main-navbar__hamburger {
+    height: 46px;
+    display: block; }
+    .main-navbar .main-navbar__catalog-box .main-navbar__hamburger img {
+      padding: 10px; }
+  .main-navbar .main-navbar__mobile {
+    position: relative;
+    padding: 10px 10px 10px 0;
+    background-color: #4084F1; }
+    .main-navbar .main-navbar__mobile .main-navbar__mobile-menu {
+      position: absolute;
+      width: 60%;
+      left: 0;
+      bottom: -50px;
+      border: 1px solid;
+      transition: all 0.7s ease-in-out; }
+    .main-navbar .main-navbar__mobile .deactive {
+      transform: translateX(-525px);
+      opacity: 0; }
+    .main-navbar .main-navbar__mobile .active {
+      transform: translateX(0px);
+      opacity: 1; } }
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
