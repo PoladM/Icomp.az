@@ -219,26 +219,15 @@
 }
 
 .main-navbar__mobile-menu{
-
-  .mobile-menu-item{
-
-    a{
-      display: block;
-      width: 100%;
-      padding: 20px 10px;
-      color: white;
-    }
-  }
+  visibility: hidden;
 }
 
 .main-navbar {
   .sub-catalog-menu-item {
-    // width: 100%;
-    // padding: 10px 0px 10px 20px;
-    // color: $site-brown;
     border: 1px solid;
   }
 }
+
 
 @media only screen and (max-width: 1200px) {
   .main-navbar {
@@ -290,22 +279,67 @@
         position: absolute;
         transform: translateX(-1000px);
         width: 80%;
+        height: 35rem;
         left: 0;
         top: 66px;
         border: 1px solid;
+        overflow-y: scroll;
+        transition: all 0.7s ease-in-out; 
         background-color: $home-catalog-blue;
+        .mobile-menu-item{
+
+          a{
+            display: block;
+            width: 100%;
+            padding: 20px 10px;
+            color: white;
+          }
+        }
       }
 
       .deactive{
+        visibility: hidden;
         transform: translateX(-1000px);
-        transition: all 0.7s ease-in-out; 
-
       }
       .active{
+        visibility: visible;
         transform: translateX(0px);
-        transition: all 0.7s ease-in-out; 
-
       }
+    }
+  }
+  .main-navbar{
+
+    .sub-mobile-menu{
+      height: 0;
+      overflow: hidden;
+      transition: 0.3s;
+      .sub-mobile-menu-item{
+        color: white;
+        cursor: pointer;
+        padding: 20px 20px;
+      }
+      
+    }
+      
+  }
+  .main-navbar{
+    .sub-sub-mobile-menu{
+      height: 0px;
+      overflow: hidden;
+      transition: 0.3s;
+      .sub-sub-mobile-menu-item{
+        a{
+          color: white;
+        }
+        padding: 10px 0px 10px 40px;
+        
+      }
+      
+    }
+  }
+  .main-navbar{
+    .main-navbar__catalog-menu{
+      visibility: hidden;
     }
   }
 }
