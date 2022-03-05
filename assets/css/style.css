@@ -1,3 +1,129 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  box-sizing: border-box;
+  text-decoration: none; }
+
+p,
+a,
+b,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+select,
+input,
+textarea,
+button,
+label,
+div {
+  font-family: "Fira Sans Condensed", sans-serif; }
+
+textarea:focus,
+input:focus {
+  outline: none; }
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px; }
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px; }
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #525050; }
+
 .main-navbar .navbar__menu {
   padding: 10px 0px; }
 
@@ -152,7 +278,9 @@
     top: 0; }
 
 .main-navbar__mobile-menu {
-  visibility: hidden; }
+  visibility: hidden;
+  height: 0;
+  overflow: hidden; }
 
 .main-navbar .sub-catalog-menu-item {
   border: 1px solid; }
@@ -222,28 +350,66 @@
   .main-navbar .main-navbar__catalog-menu {
     visibility: hidden; } }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  list-style: none;
-  box-sizing: border-box;
-  text-decoration: none; }
+.blog-tags {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 5px; }
 
-p, a, b, span, h1, h2, h3, h4, h5, h6, select, input, textarea, button, label, div {
-  font-family: "Fira Sans Condensed", sans-serif; }
+.blog-tags a {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px 5px 5px 5px;
+  border-radius: 4px;
+  background-color: whitesmoke; }
 
-textarea:focus, input:focus {
-  outline: none; }
+.home-slider {
+  padding-bottom: 40px; }
+
+.popular-brands {
+  padding: 30px; }
+  .popular-brands .popular-brands__box {
+    display: flex;
+    justify-content: space-between; }
+    .popular-brands .popular-brands__box .box-item {
+      width: 12%;
+      height: 70px; }
+      .popular-brands .popular-brands__box .box-item a {
+        display: block;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        background: #fff; }
+        .popular-brands .popular-brands__box .box-item a img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          max-height: 100%; }
+
+.popular-categories__content .content-heading {
+  margin: 30px 0px; }
+  .popular-categories__content .content-heading h2 {
+    font-size: 25px;
+    color: #333;
+    font: 700 24px "Open Sans", sans-serif; }
+
+.popular-categories__content .popular-categories__list {
+  padding: 20px;
+  background-color: #EEF1F6; }
+  .popular-categories__content .popular-categories__list .popular-categories-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .popular-categories__content .popular-categories__list .popular-categories-item a img {
+      width: 60%;
+      text-align: center; }
+    .popular-categories__content .popular-categories__list .popular-categories-item a .category-name {
+      background-color: #0d7ee4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 130px;
+      height: 40px;
+      color: white;
+      margin-top: 20px; }

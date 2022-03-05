@@ -220,6 +220,8 @@
 
 .main-navbar__mobile-menu{
   visibility: hidden;
+  height: 0;
+  overflow: hidden;
 }
 
 .main-navbar {

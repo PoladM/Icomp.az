@@ -86,4 +86,9 @@ hamburgerSubItem.forEach(x => {
   })
 })
 
+//Slide Carousel
+$('.carousel').flickity({
+  wrapAround:true,
+  autoPlay: 5000,
+});
 

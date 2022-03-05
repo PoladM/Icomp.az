@@ -16,6 +16,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="assets/css/plugin/vendor.css" rel="stylesheet">
+    <link href="assets/css/plugin/style.css" rel="stylesheet">
+    <link href="assets/css/plugin/plugins.css" rel="stylesheet">
+    <link href="assets/css/plugin/flickity.css" rel="stylesheet">
+    <link href="assets/css/plugin/flickity.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Document</title>
 </head>
@@ -215,6 +220,36 @@
                                                         noutbukları</a> </li>
                                             </ul>
                                         </div>
+
+                                        <li class="sub-mobile-menu-item">Noutbuklar, Ultrabuklar</li>
+                                        <div class="sub-sub-mobile-menu off">
+                                            <ul class="sub-sub-dropdown-list">
+                                                <li class="sub-sub-mobile-menu-item"><a href=""> Oyun noutbukları</a>
+                                                </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">Sony noutbukları</a>
+                                                </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href=""> Acer noutbukları</a>
+                                                </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
+                                                        noutbukları</a> </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href=""> Oyun noutbukları</a>
+                                                </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">Sony noutbukları</a>
+                                                </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">Acer noutbukları</a>
+                                                </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
+                                                        noutbukları</a> </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
+                                                        noutbukları</a> </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
+                                                        noutbukları</a> </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
+                                                        noutbukları</a> </li>
+                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
+                                                        noutbukları</a> </li>
+                                            </ul>
+                                        </div>
                                     </ul>
                                 </div>
                                 <li class="mobile-menu-item"><a href="">Home</a></li>
@@ -231,10 +266,291 @@
 
 
     <main>
+        <!-- Home Page -->
+        <section id="main-home-page">
+            <div class="contentWrap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <!-- Filter -->
+                            <div class="main-home-page__filter">
+                                <div class="main-home-page__filter-box">
+                                    <div class="filter-item">
+                                        <div class="filter-item__price">
+                                            <!-- single sidebar start -->
+                                            <div class="sidebar-single">
+                                                <div class="sidebar-title">
+                                                    <h3>Categories</h3>
+                                                </div>
+                                                <div class="sidebar-body">
+                                                    <ul class="color-list">
+                                                        <li><a href="#">Mens <span>(10)</span></a></li>
+                                                        <li><a href="#">Womens <span>(05)</span></a></li>
+                                                        <li><a href="#">Sports <span>(15)</span></a></li>
+                                                        <li><a href="#">Fabric <span>(12)</span></a></li>
+                                                        <li><a href="#">Leather <span>(20)</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- single sidebar end -->
+
+                                            <!-- single sidebar start -->
+                                            <div class="sidebar-single">
+                                                <div class="sidebar-title">
+                                                    <h3>filter by price</h3>
+                                                </div>
+                                                <div class="sidebar-body">
+                                                    <div class="price-range-wrap">
+                                                        <div class="price-range" data-min="20" data-max="400"></div>
+                                                        <div class="range-slider">
+                                                            <form action="#">
+                                                                <div class="price-input">
+                                                                    <label for="amount">Price: </label>
+                                                                    <input type="text" id="amount">
+                                                                </div>
+                                                                <button class="filter-btn">filter</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- single sidebar end -->
+
+                                            <!-- single sidebar start -->
+                                            <div class="sidebar-single">
+                                                <div class="sidebar-title">
+                                                    <h3>color</h3>
+                                                </div>
+                                                <div class="sidebar-body">
+                                                    <ul class="color-list">
+                                                        <li><a href="#">gold <span>(05)</span></a></li>
+                                                        <li><a href="#">green <span>(12)</span></a></li>
+                                                        <li><a href="#">blue <span>(14)</span></a></li>
+                                                        <li><a href="#">white <span>(20)</span></a></li>
+                                                        <li><a href="#">red <span>(08)</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- single sidebar end -->
+
+                                            <!-- single sidebar start -->
+                                            <div class="sidebar-single">
+                                                <div class="sidebar-title">
+                                                    <h3>size</h3>
+                                                </div>
+                                                <div class="sidebar-body">
+                                                    <ul class="size-list">
+                                                        <li><a href="#">L <span>(05)</span></a></li>
+                                                        <li><a href="#">M <span>(06)</span></a></li>
+                                                        <li><a href="#">S <span>(02)</span></a></li>
+                                                        <li><a href="#">XL <span>(01)</span></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- single sidebar end -->
+
+                                            <!-- single sidebar start -->
+                                            <div class="sidebar-single">
+                                                <div class="sidebar-banner">
+                                                    <a href="#">
+                                                        <img src="assets/img/banner/banner_left.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- single sidebar end -->
+                                        </div>
+                                    </div>
+                                    <!-- sidebar area end -->
+                                </div>
+                            </div>
+                            <!-- <div class="filter-item">TƏYİNAT</div>
+                                    <div class="filter-item">ANA PLATA</div>
+                                    <div class="filter-item">PROSESSOR</div>
+                                    <div class="filter-item">OPERATİV YADDAŞ (RAM)</div>
+                                    <div class="filter-item">QRAFİK KART</div>
+                                    <div class="filter-item">HDD</div>
+                                    <div class="filter-item">SSD (SƏRT SƏTHLİ DİSK)</div>
+                                    <div class="filter-item">EKRAN</div> -->
+
+                            <!-- Popular Brends -->
+                            <div class="blog-tags">
+                                <div class="tags-desc">
+                                    <h3>Bakıda tanınmış brendlər</h3>
+                                </div>
+                                <div class="line">
+                                    <a href="">Apple</a>
+                                    <a href="">Asus</a>
+                                    <a href="">Lenovo</a>
+                                    <a href="">Microsoft</a>
+                                    <a href="">HP</a>
+                                    <a href="">Sony</a>
+                                    <a href="">SteelSeries</a>
+                                    <a href="">Acer</a>
+                                    <a href="">Gigabyte</a>
+                                    <a href="">Dell</a>
+                                    <a href="">MSI</a>
+                                    <a href="">Rampage</a>
+                                    <a href="">Intel</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+
+                            <!-- Carousel starts here -->
+                            <div class="home-slider">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="carousel">
+                                            <div class="carousel-cell"><img
+                                                    src="assets/img/Carousel Slider/slide_24_4_1642016054.webp" alt="">
+                                            </div>
+                                            <div class="carousel-cell"><img
+                                                    src="assets/img/Carousel Slider/slide_23_4_1642015999.webp" alt="">
+                                            </div>
+                                            <div class="carousel-cell"><img
+                                                    src="assets/img/Carousel Slider/slide_18_4_1626864372.webp" alt="">
+                                            </div>
+                                            <div class="carousel-cell"><img
+                                                    src="assets/img/Carousel Slider/slide_14_4_1626864316.webp" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="carousel">
+                                            <div class="carousel-cell"><img
+                                                    src="assets/img/Carousel Slider/slide_20_4_1626864479.webp" alt="">
+                                            </div>
+                                            <div class="carousel-cell"><img
+                                                    src="assets/img/Carousel Slider/slide_21_4_1626864488.webp" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Carousel end here -->
+
+                            <!-- Popular Brands starts here  -->
+                            <div class="popular-brands">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="popular-brands__box">
+                                            <div class="box-item">
+                                                <a href=""><img src="assets/img/Brands/Asus.png" alt=""></a>
+                                            </div>
+                                            <div class="box-item">
+                                                <a href=""><img src="assets/img/Brands/HP.png" alt=""></a>
+                                            </div>
+                                            <div class="box-item">
+                                                <a href=""><img src="assets/img/Brands/Lenovo.png" alt=""></a>
+                                            </div>
+                                            <div class="box-item">
+                                                <a href=""><img src="assets/img/Brands/MSI.png" alt=""></a>
+                                            </div>
+                                            <div class="box-item">
+                                                <a href=""><img src="assets/img/Brands/Razer.png" alt=""></a>
+                                            </div>
+                                            <div class="box-item">
+                                                <a href=""><img src="assets/img/Brands/SteelSeries.png" alt=""></a>
+                                            </div>
+                                            <div class="box-item">
+                                                <a href=""><img src="assets/img/Brands/Corsair.png" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Popular Brands end here  -->
+
+                            <!-- Popular Categories start here -->
+                            <div class="popular-categories">
+                                <div class="popular-categories__content">
+                                    <div class="content-heading">
+                                        <h2>Populyar kateqoriyalar</h2>
+                                    </div>
+                                    <div class="content-body">
+                                        <div class="popular-categories__list">
+                                            <div class="row">
+                                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                                    <div class="popular-categories-item">
+                                                        <a href="">
+                                                            <img src="assets/img/Categories/chip_1.svg" alt="">
+                                                            <div class="category-name">
+                                                                <p>Prosessorlar</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                                    <div class="popular-categories-item">
+                                                        <a href="">
+                                                            <img src="assets/img/Categories/cloud-computing_1.svg" alt="">
+                                                            <div class="category-name">
+                                                                <p>Periferiya</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                                    <div class="popular-categories-item">
+                                                        <a href="">
+                                                            <img src="assets/img/Categories/console_1.svg" alt="">
+                                                            <div class="category-name">
+                                                                <p>Gaming Zone</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                                    <div class="popular-categories-item">
+                                                        <a href="">
+                                                            <img src="assets/img/Categories/laptop.svg" alt="">
+                                                            <div class="category-name">
+                                                                <p>Noutbuklar</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                                    <div class="popular-categories-item">
+                                                        <a href="">
+                                                            <img src="assets/img/Categories/planset.svg" alt="">
+                                                            <div class="category-name">
+                                                                <p>Planşetlər</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                                    <div class="popular-categories-item">
+                                                        <a href="">
+                                                            <img src="assets/img/Categories/server.svg" alt="">
+                                                            <div class="category-name">
+                                                                <p>Serverlər</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Popular Categories end here -->
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -246,13 +562,10 @@
                     <div class="modal-body">
                         <h1>Zənbiliniz boşdur</h1>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div> -->
                 </div>
             </div>
         </div>
+
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -270,7 +583,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Carousel -->
+    <script src="assets/js/plugin/flickity.pkgd.js"></script>
+    <script src="assets/js/plugin/flickity.pkgd.min.js"></script>
+
     <script src="assets/js/main.js"></script>
+
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugin/vendor.js"></script>
+    <script src="assets/js/plugin/modernizr-2.8.3.min.js"></script>
+    <script src="assets/js/plugin/plugins.js"></script>
+    <script src="assets/js/plugin/active.js"></script>
+
 </body>
 
 </html>
