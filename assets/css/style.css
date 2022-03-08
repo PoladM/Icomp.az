@@ -380,7 +380,7 @@ input:focus {
   padding: 20px 0px; }
 
 .blog-tags {
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 40px;
   border-radius: 5px; }
 
@@ -518,3 +518,12 @@ input:focus {
   color: #fff;
   border-color: #e3a51e;
   background-color: #e3a51e; }
+
+.product-detail-box .product-detail-price {
+  font-size: 35px;
+  font-weight: 900;
+  padding: 20px 0px;
+  color: #4084F1; }
+
+.product-detail-box .product-detail-features {
+  padding: 0px 0px 20px 0px; }
