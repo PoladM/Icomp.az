@@ -1,0 +1,27 @@
+#footer{
+    .contentWrap{
+        background-color: #d9dadf5e;
+        padding: 40px 0px;
+    }
+}
+
+.footer-text{
+    font-size: 12px;
+    color: #646464;
+    .mg-b{
+        margin-bottom: 10px;
+    }
+}
+
+.footer__nav{
+    .footer__nav-item{
+        font-size: 12px;
+        a{
+            color: #646464;
+            transition: 0.3s;
+            &:hover{
+                color: $home-categ-price-basket-blue;
+            }
+        }
+    }
+}

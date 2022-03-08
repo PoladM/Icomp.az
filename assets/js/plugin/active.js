@@ -37,7 +37,7 @@
 	})
 
 	// nice select active start
-	$('select').niceSelect();
+	// $('select').niceSelect();
 
 	// Off Canvas Open close start
 	$(".off-canvas-btn").on('click', function () {

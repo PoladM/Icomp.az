@@ -1,4 +1,5 @@
 .main-navbar {
+  padding: 20px 0px;
   .navbar__menu {
     padding: 10px 0px;
   }
@@ -218,7 +219,7 @@
   }
 }
 
-.main-navbar__mobile-menu{
+.main-navbar__mobile-menu {
   visibility: hidden;
   height: 0;
   overflow: hidden;
@@ -229,7 +230,6 @@
     border: 1px solid;
   }
 }
-
 
 @media only screen and (max-width: 1200px) {
   .main-navbar {
@@ -243,18 +243,21 @@
 
 @media only screen and (max-width: 992px) {
   .main-navbar {
-    .navbar__menu-item{
-
-      .navbar__menu-item-text{
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    background-color: white;
+    .navbar__menu-item {
+      .navbar__menu-item-text {
         display: none;
       }
-      .navbar__menu-item-address{
+      .navbar__menu-item-address {
         display: none;
       }
-      .navbar__menu-item-phone{
+      .navbar__menu-item-phone {
         display: none;
       }
-      .navbar__menu-item-socials{
+      .navbar__menu-item-socials {
         display: none;
       }
     }
@@ -266,31 +269,30 @@
       .main-navbar__hamburger {
         height: 46px;
         display: block;
-        img{
+        img {
           padding: 10px;
         }
       }
     }
   }
-  .main-navbar{
-    .main-navbar__mobile{
+  .main-navbar {
+    .main-navbar__mobile {
       position: relative;
       padding: 10px 10px 10px 0;
       background-color: $home-categ-price-basket-blue;
-      .main-navbar__mobile-menu{
+      .main-navbar__mobile-menu {
         position: absolute;
         transform: translateX(-1000px);
         width: 80%;
-        height: 35rem;
+        height: 38rem;
         left: 0;
         top: 66px;
         border: 1px solid;
         overflow-y: scroll;
-        transition: all 0.7s ease-in-out; 
+        transition: all 0.7s ease-in-out;
         background-color: $home-catalog-blue;
-        .mobile-menu-item{
-
-          a{
+        .mobile-menu-item {
+          a {
             display: block;
             width: 100%;
             padding: 20px 10px;
@@ -299,50 +301,44 @@
         }
       }
 
-      .deactive{
+      .deactive {
         visibility: hidden;
         transform: translateX(-1000px);
       }
-      .active{
+      .active {
         visibility: visible;
         transform: translateX(0px);
       }
     }
   }
-  .main-navbar{
-
-    .sub-mobile-menu{
+  .main-navbar {
+    .sub-mobile-menu {
       height: 0;
       overflow: hidden;
       transition: 0.3s;
-      .sub-mobile-menu-item{
+      .sub-mobile-menu-item {
         color: white;
         cursor: pointer;
         padding: 20px 20px;
       }
-      
     }
-      
   }
-  .main-navbar{
-    .sub-sub-mobile-menu{
+  .main-navbar {
+    .sub-sub-mobile-menu {
       height: 0px;
       overflow: hidden;
       transition: 0.3s;
-      .sub-sub-mobile-menu-item{
-        a{
+      .sub-sub-mobile-menu-item {
+        a {
           color: white;
         }
         padding: 10px 0px 10px 40px;
-        
       }
-      
     }
   }
-  .main-navbar{
-    .main-navbar__catalog-menu{
+  .main-navbar {
+    .main-navbar__catalog-menu {
       visibility: hidden;
     }
   }
 }
-

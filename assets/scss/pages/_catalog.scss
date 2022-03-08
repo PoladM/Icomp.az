@@ -1,0 +1,30 @@
+.paginatoin-area {
+  padding: 20px 0 18px;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+}
+.paginatoin-area .pagination-box li {
+  display: inline-block;
+  margin-right: 10px;
+}
+.paginatoin-area .pagination-box li a {
+  color: #333333;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  padding: 0 10px;
+  text-align: center;
+  line-height: 37px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+.paginatoin-area .pagination-box li a:hover {
+  color: #fff;
+  border-color: #e3a51e;
+  background-color: #e3a51e;
+}
+.paginatoin-area .pagination-box li.active a {
+  color: #fff;
+  border-color: #e3a51e;
+  background-color: #e3a51e;
+}
