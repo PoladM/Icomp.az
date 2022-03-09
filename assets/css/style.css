@@ -520,6 +520,25 @@ input:focus {
   border-color: #e3a51e;
   background-color: #e3a51e; }
 
+.filter-input {
+  display: none;
+  overflow: hidden;
+  padding: 10px 0px 10px 20px; }
+
+.filter-title {
+  cursor: pointer;
+  position: relative;
+  border-top: 1px solid;
+  padding: 10px 10px 10px 20px; }
+  .filter-title i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px; }
+  .filter-title h2 {
+    font-size: 17px;
+    font: bold 15px "Open Sans", sans-serif; }
+
 .product-detail {
   background-color: white;
   padding: 40px 0px; }

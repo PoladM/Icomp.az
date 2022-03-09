@@ -7,6 +7,22 @@ $(document).ready(function () {
       $(".main-navbar__catalog-menu").addClass("show");
     }
   });
+
+  //filter accordion
+  $('.filter-title').on("click", function(){
+    let filterInputs = $(this).next();
+    let filterIcon = $(this).children('i');
+    if (!filterInputs.hasClass('active')) {
+      filterIcon.css({"transform": "translateY(-50%) rotate(180deg)"})
+      filterInputs.slideDown();
+      filterInputs.addClass('active');
+    }
+    else{
+      filterIcon.css({"transform": "translateY(-50%)"})
+      filterInputs.slideUp();
+      filterInputs.removeClass('active');
+    }
+  })
 });
 
 let hamburger = document.querySelector(".main-navbar__hamburger");
