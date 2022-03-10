@@ -398,6 +398,7 @@ input:focus {
 
 .blog-tags a {
   display: inline-block;
+  border: 1px solid;
   padding: 5px 10px;
   margin: 5px 5px 5px 5px;
   border-radius: 4px;
@@ -605,7 +606,7 @@ input:focus {
   cursor: pointer;
   position: relative;
   border-top: 1px solid;
-  padding: 10px 10px 10px 20px; }
+  padding: 10px; }
   .filter-title i {
     position: absolute;
     top: 50%;
@@ -613,12 +614,12 @@ input:focus {
     transition: 0.3s;
     right: 20px; }
   .filter-title h2 {
-    font-size: 17px;
-    font: bold 15px "Open Sans", sans-serif; }
+    font: bold 14px "Open Sans", sans-serif;
+    width: 80%; }
 
 .main-home-page__filter-box {
   background-color: white;
-  padding: 20px; }
+  padding: 50px 40px; }
 
 .product-detail {
   background-color: white;

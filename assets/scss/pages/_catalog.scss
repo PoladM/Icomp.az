@@ -107,7 +107,7 @@
   cursor: pointer;
   position: relative;
   border-top: 1px solid;
-  padding: 10px 10px 10px 20px;
+  padding: 10px;
   i {
     position: absolute;
     top: 50%;
@@ -116,12 +116,12 @@
     right: 20px;
   }
   h2 {
-    font-size: 17px;
-    font: bold 15px "Open Sans", sans-serif;
+    font: bold 14px "Open Sans", sans-serif;
+    width: 80%;
   }
 }
 
 .main-home-page__filter-box {
   background-color: white;
-  padding: 20px;
+  padding: 50px 40px;
 }
