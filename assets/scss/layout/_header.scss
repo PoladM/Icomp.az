@@ -242,8 +242,18 @@
 }
 
 @media only screen and (max-width: 992px) {
+  .scrolled{
+    position: fixed !important;
+    animation: navbarAnimate 0.7s;
+  }
+
+  @keyframes navbarAnimate {
+    from {top: -200px;}
+    to {top: 0px;}
+  }
+
   .main-navbar {
-    position: fixed;
+    position: relative;
     width: 100%;
     z-index: 999;
     background-color: white;

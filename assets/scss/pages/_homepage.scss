@@ -1,11 +1,9 @@
-#main-home-page{
+#main-home-page {
   .contentWrap {
     background-color: #f8f8f9;
     padding: 20px 0px;
-    
   }
 }
-
 
 // Blogs
 .blog-tags {
@@ -42,6 +40,7 @@
       a {
         display: block;
         height: 100%;
+        width: 150px;
         position: relative;
         overflow: hidden;
         background: #fff;
@@ -51,10 +50,17 @@
           left: 50%;
           transform: translate(-50%, -50%);
           max-height: 100%;
-          width: 100%;
+          max-width: 100%;
         }
       }
     }
+  }
+}
+
+.popular-brands__box {
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
   }
 }
 
@@ -130,27 +136,30 @@
 }
 
 //services
-.services{
-  .contentWrap{
+.services {
+  .contentWrap {
     background-color: white;
   }
 }
 
-.services-box{
+.services-box {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 70px;
   margin: 20px 0px;
-  .line{
+  .line {
     position: absolute;
     right: -15px;
     height: 70px;
     width: 1px;
-    background-color: #E4E4E4;
+    background-color: #e4e4e4;
   }
-  .services__icon{
+  .services__icon {
     padding-right: 20px;
   }
+}
+
+@media only screen and (max-width: 992px) {
 }

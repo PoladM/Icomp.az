@@ -1,3 +1,56 @@
+//price range
+.price-range-block {
+  margin: 60px;
+}
+.ui-slider-horizontal {
+  height: 0.6em;
+}
+.ui-slider-horizontal {
+  margin-bottom: 15px;
+  width: 100%;
+  
+}
+.ui-widget-header {
+  background: #88868696;
+}
+
+.ui-slider-handle{
+  border-radius: 50%;
+  background: $home-categ-price-basket-blue !important; 
+  border: none !important;
+}
+
+
+.price-range-search {
+  width: 40.5%;
+  background-color: #f9f9f9;
+  border: 1px solid #6e6666;
+  min-width: 40%;
+  display: inline-block;
+  height: 32px;
+  border-radius: 5px;
+  float: left;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+.price-range-field {
+  width: 40%;
+  min-width: 16%;
+  background-color: #f9f9f9;
+  border: 1px solid #6e6666;
+  color: black;
+  font-family: myFont;
+  font: normal 14px Arial, Helvetica, sans-serif;
+  border-radius: 5px;
+  height: 26px;
+  padding: 5px;
+}
+.search-results-block {
+  position: relative;
+  display: block;
+  clear: both;
+}
+
 .paginatoin-area {
   padding: 20px 0 18px;
   border: 1px solid #e5e5e5;
@@ -29,24 +82,30 @@
   background-color: #e3a51e;
 }
 
-.filter-input{
+.filter-input {
   display: none;
   overflow: hidden;
   padding: 10px 0px 10px 20px;
 }
-.filter-title{
+.filter-title {
   cursor: pointer;
   position: relative;
   border-top: 1px solid;
   padding: 10px 10px 10px 20px;
-  i{
+  i {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    transition: 0.3s;
     right: 20px;
   }
-  h2{
+  h2 {
     font-size: 17px;
     font: bold 15px "Open Sans", sans-serif;
   }
+}
+
+.main-home-page__filter-box {
+  background-color: white;
+  padding: 20px;
 }
