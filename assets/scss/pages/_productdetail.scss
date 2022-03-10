@@ -3,6 +3,24 @@
     padding: 40px 0px;
 }
 
+.prod-detail{
+  .detail-info{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0px;
+    .detail-name, .detail-value{
+      width: 20rem;
+      display: flex;
+      justify-content: flex-start;
+    }
+    .detail-value{
+      p{
+        color: #777777;
+      }
+    }
+  }
+}
+
 .product-image-box{
     display: flex;
     justify-content: center;
@@ -63,8 +81,6 @@
   color: #ffffff;
 }
 
-.prodBody {
-}
 
 .tab-content {
   .mg-b {
@@ -81,10 +97,6 @@
   display: block;
 }
 
-#pTab1C {
-}
-#pTab2C {
-}
 
 //product option
 

@@ -1,3 +1,20 @@
+.breadcrumb-nav{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .nav-item{
+    a{
+      &:hover{
+        text-decoration: underline;
+      }
+    }
+    .breadcrumb-arrow{
+      margin: 0px 10px;
+    }
+  }
+}
+
 //price range
 .price-range-block {
   margin: 60px;
@@ -29,7 +46,6 @@
   display: inline-block;
   height: 32px;
   border-radius: 5px;
-  float: left;
   margin-bottom: 20px;
   font-size: 16px;
 }

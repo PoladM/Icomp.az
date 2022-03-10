@@ -1,3 +1,15 @@
+$(function () {
+  $(document).scroll(function () {
+    var $nav = $(".main-navbar");
+    $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+    if ($(this).scrollTop() > $nav.height()) {
+      $('.breadcrumb').addClass("expand")
+    } else {
+      $('.breadcrumb').removeClass("expand")
+    }
+  });
+});
+
 $(document).ready(function () {
   //catalog open close
   $(".main-navbar__catalog-box-inner").on("click", function () {
