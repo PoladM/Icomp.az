@@ -1,0 +1,16 @@
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\bin\Debug\netcoreapp3.1\IComp.Data.deps.json
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\bin\Debug\netcoreapp3.1\IComp.Data.dll
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\bin\Debug\netcoreapp3.1\IComp.Data.pdb
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.csproj.AssemblyReference.cache
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.AssemblyInfoInputs.cache
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.AssemblyInfo.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.csproj.CoreCompileInputs.cache
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.dll
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.pdb
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\bin\Debug\netcoreapp3.1\IComp.Data.runtimeconfig.json
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\bin\Debug\netcoreapp3.1\IComp.Data.runtimeconfig.dev.json
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\bin\Debug\netcoreapp3.1\IComp.Core.dll
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\bin\Debug\netcoreapp3.1\IComp.Core.pdb
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.csproj.CopyComplete
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp.Data\obj\Debug\netcoreapp3.1\IComp.Data.genruntimeconfig.cache
