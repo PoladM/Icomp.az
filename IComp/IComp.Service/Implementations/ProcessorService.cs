@@ -31,6 +31,10 @@ namespace IComp.Service.Implementations
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.ModelName);
             }
+            if (!await _unitOfWork.ProcessorSerieRepository.IsExistAsync(x => x.Id == postDTO.ProcessorSerieId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
 
             Processor processor = _mapper.Map<Processor>(postDTO);
             
@@ -113,6 +117,10 @@ namespace IComp.Service.Implementations
             if (await _unitOfWork.ProcessorRepository.IsExistAsync(x => x.Id!=id && x.ModelName.ToLower().Trim() == postDTO.ModelName.ToLower().Trim() && !x.IsDeleted))
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.ModelName);
+            }
+            if (!await _unitOfWork.ProcessorSerieRepository.IsExistAsync(x => x.Id == postDTO.ProcessorSerieId))
+            {
+                throw new ItemNotFoundException("Item not found");
             }
 
             existProcessor.ModelName = postDTO.ModelName;

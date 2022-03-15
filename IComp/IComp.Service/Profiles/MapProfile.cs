@@ -2,6 +2,8 @@
 using IComp.Core.Entities;
 using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
+using IComp.Service.DTOs.VCSerieDTOs;
+using IComp.Service.DTOs.VideoCardDTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +19,9 @@ namespace IComp.Service.Profiles
             CreateMap<Processor, ProcessorPostDTO>();
             CreateMap<ProcessorSeriePostDto, ProcessorSerie>();
             CreateMap<ProcessorSerie, ProcessorSeriePostDto>();
-
+            CreateMap<VideoCardPostDto, VideoCard>();
+            CreateMap<VideoCard, VideoCardPostDto>();
+            CreateMap<VideoCardSerie, VCSerieGetDto>();
         }
     }
 }

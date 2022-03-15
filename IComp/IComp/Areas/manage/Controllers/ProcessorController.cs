@@ -38,7 +38,6 @@ namespace IComp.Areas.manage.Controllers
 
             var processorPostDto = await _processorService.CreateAsync(postDTO);
 
-
             return RedirectToAction("Index");
         }
 

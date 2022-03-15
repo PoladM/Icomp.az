@@ -10,7 +10,8 @@ namespace IComp.Core
     {
         IProcessorRepository ProcessorRepository { get; }
         IProcessorSerieRepository ProcessorSerieRepository { get; }
-
+        IVideoCardRepository VideoCardRepository { get; }
+        IVCSerieRepository VCSerieRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

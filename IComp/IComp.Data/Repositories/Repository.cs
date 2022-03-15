@@ -1,4 +1,4 @@
-﻿using IComp.Core.Repository;
+﻿using IComp.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

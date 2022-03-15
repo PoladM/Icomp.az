@@ -11,7 +11,7 @@ namespace IComp.Controllers
         {
             _productService = productService;
         }
-        public async Task<IActionResult> Index(int procseriesId)
+        public IActionResult Index()
         {
             return View();
         }

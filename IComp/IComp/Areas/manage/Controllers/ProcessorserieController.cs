@@ -9,7 +9,6 @@ namespace IComp.Areas.manage.Controllers
     public class ProcessorserieController : Controller
     {
         private readonly IProcessorSerieService _procSerieService;
-
         public ProcessorserieController(IProcessorSerieService procSerieService)
         {
             _procSerieService = procSerieService;
