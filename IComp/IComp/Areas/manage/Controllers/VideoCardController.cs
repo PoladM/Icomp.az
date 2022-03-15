@@ -28,13 +28,13 @@ namespace IComp.Areas.manage.Controllers
         [HttpPost]
         public async Task<IActionResult>  Create(VideoCardPostDto postDto)
         {
+            ViewBag.VCSeries = _videoCardService.GetVCSeries();
             
             if (!ModelState.IsValid)
             {
                 return View();
             }
 
-            ViewBag.VCSeries = _videoCardService.GetVCSeries();
 
             var vcGetDto = await _videoCardService.CreateAsync(postDto);
 

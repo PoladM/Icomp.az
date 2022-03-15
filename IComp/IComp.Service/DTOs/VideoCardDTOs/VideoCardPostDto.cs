@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using IComp.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,5 +15,18 @@ namespace IComp.Service.DTOs.VideoCardDTOs
         public double? Price { get; set; }
         public string MemoryCapacity { get; set; }
         public string CoreSpeed { get; set; }
+        public VideoCardSerie VideoCardSerie { get; set; }
+        public List<Product> Products { get; set; }
+    }
+
+    public class VideoCardPostDtoValidator : AbstractValidator<VideoCardPostDto>
+    {
+        public VideoCardPostDtoValidator()
+        {
+            RuleFor(x => x.ModelName).MaximumLength(50).NotEmpty().WithMessage("model is required");
+            RuleFor(x => x.Count).NotEmpty().WithMessage("count of videocard is required");
+            RuleFor(x => x.CoreSpeed).MaximumLength(50).NotEmpty().WithMessage("CoreSpeed is required");
+            RuleFor(x => x.MemoryCapacity).NotEmpty().WithMessage("memorycapacity is required");
+        }
     }
 }
