@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using IComp.Core.Entities;
+using IComp.Service.DTOs.MemoryCapacityDTOs;
+using IComp.Service.DTOs.MemoryDTOs;
 using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
@@ -23,6 +25,12 @@ namespace IComp.Service.Profiles
             CreateMap<VideoCard, VideoCardPostDto>();
             CreateMap<VideoCardSerie, VCSerieGetDto>();
             CreateMap<VCSeriePostDto, VideoCardSerie>();
+            CreateMap<ProdMemory, MemoryPostDto>();
+            CreateMap<MemoryCapacity, MCapacityGetDto>();
+            CreateMap<MemoryCapacity, MCapacityPostDto>();
+            CreateMap<MCapacityPostDto, MemoryCapacity>();
+            CreateMap<MemoryPostDto, ProdMemory>();
+
         }
     }
 }

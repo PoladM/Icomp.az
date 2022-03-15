@@ -13,6 +13,6 @@ namespace IComp.Service.Interfaces
         PaginatedListDto<MCapacityListItemDto> GetAllProd(int page);
         Task UpdateAsync(int id, MCapacityPostDto postDTO);
         Task DeleteAsync(int id);
-        Task<MCapacityGetDto> GetByIdAsync(int id);
+        Task<MCapacityPostDto> GetByIdAsync(int id);
     }
 }

@@ -35,7 +35,7 @@
                 </div>
                 <div class="form-group col-lg-3">
                     <label asp-for="MemoryCapacityId">ProcessorSerie</label>
-                    <select class="form-control" asp-for="MemoryCapacityId" asp-items="@new SelectList(ViewBag.Capacities,nameof(ProdMemory.Id),nameof(ProdMemory.ModelName))">
+                    <select class="form-control" asp-for="MemoryCapacityId" asp-items="@new SelectList(ViewBag.Capacities,nameof(MemoryCapacity.Id),nameof(MemoryCapacity.Capacity))">
                     </select>
                 </div>
                 <div class="form-group">

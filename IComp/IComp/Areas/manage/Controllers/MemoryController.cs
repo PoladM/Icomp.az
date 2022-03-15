@@ -40,7 +40,6 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.Capacities = _memoryService.GetCapacities();
 
             MemoryPostDto postDTO = await _memoryService.GetByIdAsync(id);
-
             return View(postDTO);
         }
         [HttpPost]

@@ -30,7 +30,7 @@ namespace IComp.Service.Implementations
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.ModelName);
             }
-            if (!await _unitOfWork.ProcessorSerieRepository.IsExistAsync(x => x.Id == postDTO.MemoryCapacityId))
+            if (!await _unitOfWork.MemoryCapacityRepository.IsExistAsync(x => x.Id == postDTO.MemoryCapacityId))
             {
                 throw new ItemNotFoundException("Item not found");
             }
@@ -57,6 +57,7 @@ namespace IComp.Service.Implementations
             }
 
             memory.IsDeleted = true;
+            memory.IsAvailable = false;
             await _unitOfWork.CommitAsync();
         }
 
@@ -111,7 +112,7 @@ namespace IComp.Service.Implementations
 
             if (existProd == null)
             {
-                throw new ItemNotFoundException("Item not found");
+                throw new ItemNotFoundException("Item not found or deleted");
             }
             if (await _unitOfWork.MemoryRepository.IsExistAsync(x => x.Id != id && x.ModelName.ToLower().Trim() == postDTO.ModelName.ToLower().Trim() && !x.IsDeleted))
             {

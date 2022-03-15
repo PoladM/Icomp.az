@@ -45,6 +45,7 @@ namespace IComp
             services.AddScoped<IVideoCardService, VideoCardService>();
             services.AddScoped<IVCSerieService, VCSerieService>();
             services.AddScoped<IMemoryService, MemoryService>();
+            services.AddScoped<IMemoryCapacityService, MemoryCapacityService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(cnf =>
