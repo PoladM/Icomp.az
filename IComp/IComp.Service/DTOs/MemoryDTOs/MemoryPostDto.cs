@@ -1,10 +1,11 @@
-﻿using System;
+﻿using IComp.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IComp.Core.Entities
+namespace IComp.Service.DTOs.MemoryDTOs
 {
-    public class ProdMemory : BaseEntity
+    public class MemoryPostDto
     {
         public int MemoryCapacityId { get; set; }
         public string ModelName { get; set; }
@@ -13,7 +14,7 @@ namespace IComp.Core.Entities
         public bool IsAvailable { get; set; }
         public double? Price { get; set; }
         public int Count { get; set; }
-        public MemoryCapacity MemoryCapacity { get; set; }
+        
         public List<Product> Products { get; set; }
     }
 }

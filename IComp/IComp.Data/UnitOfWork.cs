@@ -15,6 +15,8 @@ namespace IComp.Data
         private ProcessorSerieRepository _processorSerieRepository;
         private VideoCardRepository _videoCardRepository;
         private VCSerieRepository _vcSerieRepository;
+        private MemoryRepository _memoryRepository;
+        private MemoryCapacityRepository _memoryCapacityRepository;
 
         
         public UnitOfWork(StoreDbContext context)
@@ -29,6 +31,10 @@ namespace IComp.Data
         public IVideoCardRepository VideoCardRepository => _videoCardRepository ?? new VideoCardRepository(_context);
 
         public IVCSerieRepository VCSerieRepository => _vcSerieRepository ?? new VCSerieRepository(_context);
+
+        public IMemoryRepository MemoryRepository => _memoryRepository ?? new MemoryRepository(_context);
+
+        public IMemoryCapacityRepository MemoryCapacityRepository => _memoryCapacityRepository ?? new MemoryCapacityRepository(_context);
 
         public int Commit()
         {

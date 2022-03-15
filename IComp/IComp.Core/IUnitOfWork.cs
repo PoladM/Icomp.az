@@ -12,6 +12,8 @@ namespace IComp.Core
         IProcessorSerieRepository ProcessorSerieRepository { get; }
         IVideoCardRepository VideoCardRepository { get; }
         IVCSerieRepository VCSerieRepository { get; }
+        IMemoryRepository MemoryRepository { get; }
+        IMemoryCapacityRepository MemoryCapacityRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

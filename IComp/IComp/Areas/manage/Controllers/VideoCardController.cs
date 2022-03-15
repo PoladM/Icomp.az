@@ -35,7 +35,6 @@ namespace IComp.Areas.manage.Controllers
                 return View();
             }
 
-
             var vcGetDto = await _videoCardService.CreateAsync(postDto);
 
             return RedirectToAction("Index");
