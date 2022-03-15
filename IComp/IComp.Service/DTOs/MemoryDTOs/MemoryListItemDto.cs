@@ -7,7 +7,7 @@ namespace IComp.Service.DTOs.MemoryDTOs
     public class MemoryListItemDto
     {
         public int Id { get; set; }
-        public int ModelName { get; set; }
+        public string ModelName { get; set; }
         public int ProductsCount { get; set; }
         public bool IsDeleted { get; set; }
     }

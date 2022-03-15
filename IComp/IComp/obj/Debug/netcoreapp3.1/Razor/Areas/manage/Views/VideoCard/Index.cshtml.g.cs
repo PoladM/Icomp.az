@@ -35,27 +35,41 @@ using IComp.Service.DTOs.VideoCardDTOs;
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
-using IComp.Service.DTOs.VCSerieDTOs;
+using IComp.Service.DTOs.MemoryDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
-using IComp.Service.DTOs;
+using IComp.Service.DTOs.MemoryCapacityDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs.VCSerieDTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
 using IComp.Core.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ab080ffbd0212f4c3937168e8de761bd2d74037b", @"/Areas/manage/Views/VideoCard/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c57907b0c6e888ae5083ba84bb62e236a3e366e2", @"/Areas/manage/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2218dbc42ad16314ce491623901127fa56fd0725", @"/Areas/manage/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_manage_Views_VideoCard_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PaginatedListDto<VideoCardListItemDto>>
     #nullable disable
@@ -102,7 +116,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12 d-flex justify-content-between\">\r\n            <h3>Product</h3>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b7086", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b7508", async() => {
                 WriteLiteral("Go To Series");
             }
             );
@@ -121,7 +135,7 @@ using IComp.Core.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b8548", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b8970", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -185,7 +199,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("</td>\r\n                            <td></td>\r\n                            <td>\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b11633", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b12055", async() => {
                 WriteLiteral("Edit");
             }
             );
@@ -217,7 +231,7 @@ using IComp.Core.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b13930", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b14352", async() => {
 #nullable restore
 #line 35 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\VideoCard\Index.cshtml"
                                                                                                                                                                                          Write(item.IsDeleted?"Restore":"Delete");
@@ -292,7 +306,7 @@ AddHtmlAttributeValue("", 1496, item.IsDeleted?"info restore-button":"danger rem
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b18545", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b18967", async() => {
 #nullable restore
 #line 47 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\VideoCard\Index.cshtml"
                                                                                                      Write("<<");
@@ -321,7 +335,7 @@ AddHtmlAttributeValue("", 1496, item.IsDeleted?"info restore-button":"danger rem
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b20604", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b21026", async() => {
 #nullable restore
 #line 48 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\VideoCard\Index.cshtml"
                                                                                                                           Write("<");
@@ -377,7 +391,7 @@ AddHtmlAttributeValue("", 1496, item.IsDeleted?"info restore-button":"danger rem
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b23790", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b24212", async() => {
 #nullable restore
 #line 54 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\VideoCard\Index.cshtml"
                                                                                                      Write(i);
@@ -431,7 +445,7 @@ AddHtmlAttributeValue("", 1496, item.IsDeleted?"info restore-button":"danger rem
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b26873", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b27295", async() => {
 #nullable restore
 #line 58 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\VideoCard\Index.cshtml"
                                                                                                                           Write(">");
@@ -469,7 +483,7 @@ AddHtmlAttributeValue("", 1496, item.IsDeleted?"info restore-button":"danger rem
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b29522", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab080ffbd0212f4c3937168e8de761bd2d74037b29944", async() => {
 #nullable restore
 #line 59 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\VideoCard\Index.cshtml"
                                                                                                                     Write(">>");

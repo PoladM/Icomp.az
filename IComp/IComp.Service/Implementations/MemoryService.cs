@@ -3,11 +3,12 @@ using IComp.Core;
 using IComp.Core.Entities;
 using IComp.Service.DTOs;
 using IComp.Service.DTOs.MemoryDTOs;
-using IComp.Service.DTOs.MemorySerieGetDTOs;
+using IComp.Service.DTOs.MemoryCapacityDTOs;
 using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,38 +43,94 @@ namespace IComp.Service.Implementations
             return new MemoryGetDto
             {
                 Id = memory.Id,
-                Model = memory.ModelName
+                ModelName = memory.ModelName
             };
         }
 
-        public Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var memory = await _unitOfWork.MemoryRepository.GetAsync(x => x.Id == id && !x.IsDeleted);
+
+            if (memory == null)
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
+            memory.IsDeleted = true;
+            await _unitOfWork.CommitAsync();
         }
 
         public PaginatedListDto<MemoryListItemDto> GetAllProd(int page)
         {
-            throw new NotImplementedException();
+            var query = _unitOfWork.MemoryRepository.GetAll();
+            int pageSize = 3;
+
+            List<MemoryListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new MemoryListItemDto { Id = x.Id, ModelName = x.ModelName, ProductsCount = x.Products.Count, IsDeleted = x.IsDeleted }).ToList();
+
+            var listDto = new PaginatedListDto<MemoryListItemDto>(items, query.Count(), page, pageSize);
+
+            return listDto;
         }
 
-        public Task<MemoryPostDto> GetByIdAsync(int id)
+        public async Task<MemoryPostDto> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var memory = await _unitOfWork.MemoryRepository.GetAsync(x => x.Id == id);
+
+            if (memory == null)
+            {
+                throw new ItemNotFoundException("Item not Found");
+            }
+
+            return _mapper.Map<MemoryPostDto>(memory);
         }
 
-        public List<MCapacityGetDto> GetProcSeries()
+        public List<MCapacityGetDto> GetCapacities()
         {
-            throw new NotImplementedException();
+            var procSeries = _unitOfWork.MemoryCapacityRepository.GetAll().ToList();
+
+            var procSeriesDto = _mapper.Map<List<MCapacityGetDto>>(procSeries);
+            return procSeriesDto;
         }
 
-        public Task RestoreAsync(int id)
+        public async Task RestoreAsync(int id)
         {
-            throw new NotImplementedException();
+            var memory = await _unitOfWork.MemoryRepository.GetAsync(x => x.Id == id && x.IsDeleted);
+
+            if (memory == null)
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
+            memory.IsDeleted = false;
+            await _unitOfWork.CommitAsync();
         }
 
-        public Task UpdateAsync(int id, MemoryPostDto postDTO)
+        public async Task UpdateAsync(int id, MemoryPostDto postDTO)
         {
-            throw new NotImplementedException();
+            var existProd = await _unitOfWork.MemoryRepository.GetAsync(x => x.Id == id && !x.IsDeleted);
+
+            if (existProd == null)
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (await _unitOfWork.MemoryRepository.IsExistAsync(x => x.Id != id && x.ModelName.ToLower().Trim() == postDTO.ModelName.ToLower().Trim() && !x.IsDeleted))
+            {
+                throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.ModelName);
+            }
+            if (!await _unitOfWork.MemoryCapacityRepository.IsExistAsync(x => x.Id == postDTO.MemoryCapacityId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
+            existProd.ModelName = postDTO.ModelName;
+            existProd.Price = postDTO.Price;
+            existProd.MemoryCapacityId = postDTO.MemoryCapacityId;
+            existProd.DDRType = postDTO.DDRType;
+            existProd.Count = postDTO.Count;
+            existProd.IsAvailable = postDTO.IsAvailable;
+            existProd.Speed = postDTO.Speed;
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }

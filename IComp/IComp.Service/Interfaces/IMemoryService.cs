@@ -1,6 +1,6 @@
 ﻿using IComp.Service.DTOs;
 using IComp.Service.DTOs.MemoryDTOs;
-using IComp.Service.DTOs.MemorySerieGetDTOs;
+using IComp.Service.DTOs.MemoryCapacityDTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,7 +12,7 @@ namespace IComp.Service.Interfaces
     {
         Task<MemoryGetDto> CreateAsync(MemoryPostDto postDTO);
         PaginatedListDto<MemoryListItemDto> GetAllProd(int page);
-        List<MCapacityGetDto> GetProcSeries();
+        List<MCapacityGetDto> GetCapacities();
         Task UpdateAsync(int id, MemoryPostDto postDTO);
         Task DeleteAsync(int id);
         Task RestoreAsync(int id);

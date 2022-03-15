@@ -35,27 +35,41 @@ using IComp.Service.DTOs.VideoCardDTOs;
 #nullable disable
 #nullable restore
 #line 4 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
-using IComp.Service.DTOs.VCSerieDTOs;
+using IComp.Service.DTOs.MemoryDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 5 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
-using IComp.Service.DTOs;
+using IComp.Service.DTOs.MemoryCapacityDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 6 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs.VCSerieDTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 7 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 8 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
 using IComp.Core.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2218092737e6858302c10adaa35fc2bd202470df", @"/Areas/manage/Views/Processorserie/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"c57907b0c6e888ae5083ba84bb62e236a3e366e2", @"/Areas/manage/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2218dbc42ad16314ce491623901127fa56fd0725", @"/Areas/manage/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_manage_Views_Processorserie_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PaginatedListDto<ProcessorSerieListItemDto>>
     #nullable disable
@@ -104,7 +118,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12 d-flex justify-content-between\">\r\n            <h3>Product</h3>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df7785", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df8207", async() => {
                 WriteLiteral("Go To Processors");
             }
             );
@@ -123,7 +137,7 @@ using IComp.Core.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df9251", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df9673", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -179,7 +193,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("</td>\r\n                            <td></td>\r\n                            <td>\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df12039", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df12461", async() => {
                 WriteLiteral("Edit");
             }
             );
@@ -211,7 +225,7 @@ using IComp.Core.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df14341", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df14763", async() => {
                 WriteLiteral("Delete");
             }
             );
@@ -260,7 +274,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df17415", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df17837", async() => {
 #nullable restore
 #line 46 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Processorserie\Index.cshtml"
                                                                                                      Write("<<");
@@ -289,7 +303,7 @@ using IComp.Core.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df19479", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df19901", async() => {
 #nullable restore
 #line 47 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Processorserie\Index.cshtml"
                                                                                                                           Write("<");
@@ -345,7 +359,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df22685", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df23107", async() => {
 #nullable restore
 #line 53 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Processorserie\Index.cshtml"
                                                                                                      Write(i);
@@ -399,7 +413,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df25788", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df26210", async() => {
 #nullable restore
 #line 57 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Processorserie\Index.cshtml"
                                                                                                                           Write(">");
@@ -437,7 +451,7 @@ using IComp.Core.Entities;
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df28447", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2218092737e6858302c10adaa35fc2bd202470df28869", async() => {
 #nullable restore
 #line 58 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Processorserie\Index.cshtml"
                                                                                                                     Write(">>");

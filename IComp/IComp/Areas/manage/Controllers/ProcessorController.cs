@@ -12,7 +12,6 @@ namespace IComp.Areas.manage.Controllers
     public class ProcessorController : Controller
     {
         private readonly IProcessorService _processorService;
-
         public ProcessorController(IProcessorService processorService)
         {
             _processorService = processorService;
