@@ -16,6 +16,8 @@ namespace IComp.Service.Profiles
             CreateMap<ProcessorPostDTO, Processor>();
             CreateMap<Processor, ProcessorPostDTO>();
             CreateMap<ProcessorSeriePostDto, ProcessorSerie>();
+            CreateMap<ProcessorSerie, ProcessorSeriePostDto>();
+
         }
     }
 }

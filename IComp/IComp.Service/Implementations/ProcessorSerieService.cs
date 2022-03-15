@@ -60,16 +60,23 @@ namespace IComp.Service.Implementations
             var query = _unitOfWork.ProcessorSerieRepository.GetAll();
             int pageSize = 3;
 
-            List<ProcessorSerieListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProcessorSerieListItemDto { Name = x.Name }).ToList();
+            List<ProcessorSerieListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProcessorSerieListItemDto { Name = x.Name, Id = x.Id }).ToList();
 
             var listDto = new PaginatedListDto<ProcessorSerieListItemDto>(items, query.Count(), page, pageSize);
 
             return listDto;
         }
 
-        public Task<ProcessorSeriePostDto> GetByIdAsync(int id)
+        public async Task<ProcessorSeriePostDto> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var procSerie = await _unitOfWork.ProcessorSerieRepository.GetAsync(x => x.Id == id);
+
+            if (procSerie == null)
+            {
+                throw new ItemNotFoundException("Item not Found");
+            }
+
+            return _mapper.Map<ProcessorSeriePostDto>(procSerie);
         }
 
         public async Task UpdateAsync(int id, ProcessorSeriePostDto postDTO)
@@ -80,7 +87,7 @@ namespace IComp.Service.Implementations
             {
                 throw new ItemNotFoundException("Item not Found");
             }
-            if (await _unitOfWork.ProcessorSerieRepository.IsExistAsync(x => x.Name.ToLower().Trim() == postDTO.Name.ToLower().Trim()))
+            if (await _unitOfWork.ProcessorSerieRepository.IsExistAsync(x => x.Id != id && x.Name.ToLower().Trim() == postDTO.Name.ToLower().Trim()))
             {
                 throw new RecordDuplicatedException("Item already exist with name " + postDTO.Name);
             }
