@@ -37,7 +37,7 @@ namespace IComp.Service.Implementations
             return new VCSerieGetDto
             {
                 Id = vcSerie.Id,
-                ModelName = vcSerie.Name,
+                Name = vcSerie.Name,
             };
         }
 

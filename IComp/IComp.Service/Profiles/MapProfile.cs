@@ -22,6 +22,7 @@ namespace IComp.Service.Profiles
             CreateMap<VideoCardPostDto, VideoCard>();
             CreateMap<VideoCard, VideoCardPostDto>();
             CreateMap<VideoCardSerie, VCSerieGetDto>();
+            CreateMap<VCSeriePostDto, VideoCardSerie>();
         }
     }
 }

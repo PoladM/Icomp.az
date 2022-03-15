@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace IComp.Areas.manage.Controllers
 {
-    public class VideCardSerieController : Controller
+    [Area("manage")]
+    public class VideoCardSerieController : Controller
     {
         private readonly IVCSerieService _vcSerieService;
-        public VideCardSerieController(IVCSerieService procSerieService)
+        public VideoCardSerieController(IVCSerieService procSerieService)
         {
             _vcSerieService = procSerieService;
         }

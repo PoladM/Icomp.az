@@ -30,7 +30,7 @@ namespace IComp.Service.Implementations
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.ModelName);
             }
-            if (!await _unitOfWork.VCSerieRepository.IsExistAsync(x => x.Id == postDTO.VCSerieId))
+            if (!await _unitOfWork.VCSerieRepository.IsExistAsync(x => x.Id == postDTO.VideoCardSerieId))
             {
                 throw new ItemNotFoundException("Item not found");
             }
@@ -62,7 +62,7 @@ namespace IComp.Service.Implementations
 
         public PaginatedListDto<VideoCardListItemDto> GetAllProd(int page)
         {
-            var query = _unitOfWork.ProcessorRepository.GetAll();
+            var query = _unitOfWork.VideoCardRepository.GetAll();
             int pageSize = 3;
 
             List<VideoCardListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new VideoCardListItemDto { Id = x.Id, ModelName = x.ModelName, ProductsCount = x.Products.Count, IsDeleted = x.IsDeleted }).ToList();
@@ -81,9 +81,10 @@ namespace IComp.Service.Implementations
                 throw new ItemNotFoundException("Item not Found");
             }
 
-            return _mapper.Map<VideoCardPostDto>(videoCard);
+            var postDto = _mapper.Map<VideoCardPostDto>(videoCard);
+
+            return postDto;
         }
-        //mapping
         public List<VCSerieGetDto> GetVCSeries()
         {
             var vcSeries = _unitOfWork.VCSerieRepository.GetAll().ToList();
@@ -113,22 +114,22 @@ namespace IComp.Service.Implementations
             {
                 throw new ItemNotFoundException("Item not found");
             }
-            if (await _unitOfWork.VideoCardRepository.IsExistAsync(x => x.Id != id && x.ModelName.ToLower().Trim() == postDTO.ModelName.ToLower().Trim() && !x.IsDeleted))
+            if (await _unitOfWork.VideoCardRepository.IsExistAsync(x => x.Id!=id && x.ModelName.ToLower().Trim() == postDTO.ModelName.ToLower().Trim() && !x.IsDeleted))
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.ModelName);
             }
-            if (!await _unitOfWork.VCSerieRepository.IsExistAsync(x => x.Id == postDTO.VCSerieId))
+            if (!await _unitOfWork.VCSerieRepository.IsExistAsync(x => x.Id == postDTO.VideoCardSerieId))
             {
                 throw new ItemNotFoundException("Item not found");
             }
 
             existVC.ModelName = postDTO.ModelName;
             existVC.Price = postDTO.Price;
-            existVC.VideoCardSerieId = postDTO.VCSerieId;
+            existVC.VideoCardSerieId = postDTO.VideoCardSerieId;
             existVC.Count = postDTO.Count;
             existVC.IsAvailable = postDTO.IsAvailable;
             existVC.CoreSpeed = postDTO.CoreSpeed;
-            existVC.MemoryCapacity = postDTO.MemoryCapaciry;
+            existVC.MemoryCapacity = postDTO.MemoryCapacity;
             
             await _unitOfWork.CommitAsync();
         }

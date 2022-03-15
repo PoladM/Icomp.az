@@ -7,6 +7,6 @@ namespace IComp.Service.DTOs.VCSerieDTOs
     public class VCSerieGetDto
     {
         public int Id { get; set; }
-        public string ModelName { get; set; }
+        public string Name { get; set; }
     }
 }

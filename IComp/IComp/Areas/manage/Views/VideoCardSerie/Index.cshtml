@@ -1,4 +1,5 @@
-﻿@model PaginatedListDto<VideoCardListItemDto>
+﻿@model PaginatedListDto<VCSerieListItemDto>
+
 @{
     ViewData["Title"] = "Index";
     var counter = 0;
@@ -8,7 +9,7 @@
     <div class="row">
         <div class="col-lg-12 d-flex justify-content-between">
             <h3>Product</h3>
-            <a asp-action="index" asp-controller="videocardserie" class="btn btn-primary">Go To Series</a>
+            <a asp-action="index" asp-controller="videocard" class="btn btn-primary">Go To Video Cards</a>
             <a asp-action="create" class="btn btn-primary">Create</a>
         </div>
         <div class="col-lg-12">
@@ -16,7 +17,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Model</th>
+                        <th scope="col">Name</th>
                         <th scope="col">ProductCount</th>
                         <th scope="col"></th>
                     </tr>
@@ -27,12 +28,11 @@
                         counter++;
                         <tr>
                             <th scope="row">@counter</th>
-                            <td>@item.ModelName</td>
-                            <td>@item.ProductsCount</td>
+                            <td>@item.Name</td>
                             <td></td>
                             <td>
                                 <a asp-action="edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                                <a asp-action="@(item.IsDeleted?"restore":"delete")" asp-route-id="@item.Id" class="btn btn-@(item.IsDeleted?"info restore-button":"danger remove-button") ">@(item.IsDeleted?"Restore":"Delete")</a>
+                                <a asp-action="delete" asp-route-id="@item.Id" class="btn btn-danger remove-button">Delete</a>
                             </td>
                         </tr>
                     }
@@ -63,4 +63,7 @@
         </div>
     </div>
 </div>
+
+
+
 
