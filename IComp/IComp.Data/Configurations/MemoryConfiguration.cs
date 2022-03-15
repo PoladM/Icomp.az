@@ -14,7 +14,7 @@ namespace IComp.Data.Configurations
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
             builder.Property(x => x.ModifiedAt).HasDefaultValueSql("GETUTCDATE()");
-            builder.Property(x => x.Model).IsRequired().HasMaxLength(150);
+            builder.Property(x => x.ModelName).IsRequired().HasMaxLength(150);
             builder.Property(x => x.IsAvailable).HasDefaultValue(false);
             builder.Property(x => x.Speed).HasMaxLength(50).IsRequired();
             builder.Property(x => x.DDRType).HasMaxLength(50).IsRequired();

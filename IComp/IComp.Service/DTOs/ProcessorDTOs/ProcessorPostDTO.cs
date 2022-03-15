@@ -9,7 +9,7 @@ namespace IComp.Service.DTOs.ProcessorDTOs
     public class ProcessorPostDTO
     {
         public int ProcessorSerieId { get; set; }
-        public string Model { get; set; }
+        public string ModelName { get; set; }
         public string Speed { get; set; }
         public int CoreCount { get; set; }
         public bool IsAvailable { get; set; }
@@ -23,7 +23,7 @@ namespace IComp.Service.DTOs.ProcessorDTOs
     {
         public ProcessorPostDTOValidator()
         {
-            RuleFor(x => x.Model).NotEmpty().MaximumLength(50).WithMessage("model is required");
+            RuleFor(x => x.ModelName).MaximumLength(50).NotEmpty().WithMessage("model is required");
             RuleFor(x => x.Count).NotEmpty().WithMessage("count of processor is required");
             RuleFor(x => x.Speed).MaximumLength(50).NotEmpty().WithMessage("processor speed is required");
             RuleFor(x => x.CoreCount).NotEmpty().WithMessage("processor corecount is required");

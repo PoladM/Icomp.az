@@ -14,7 +14,7 @@ namespace IComp.Data.Configurations
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
             builder.Property(x => x.ModifiedAt).HasDefaultValueSql("GETUTCDATE()");
-            builder.Property(x => x.Model).IsRequired().HasMaxLength(150);
+            builder.Property(x => x.ModelName).IsRequired().HasMaxLength(150);
             builder.Property(x => x.IsAvailable).HasDefaultValue(false);
             
             builder.Property(x => x.Price).HasColumnType("decimal(18,2)").IsRequired(false);

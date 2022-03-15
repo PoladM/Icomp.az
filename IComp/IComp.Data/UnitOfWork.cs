@@ -11,8 +11,8 @@ namespace IComp.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly StoreDbContext _context;
-        private readonly ProcessorRepository _processorRepository;
-        private readonly ProcessorSerieRepository _processorSerieRepository;
+        private ProcessorRepository _processorRepository;
+        private ProcessorSerieRepository _processorSerieRepository;
 
         
         public UnitOfWork(StoreDbContext context)

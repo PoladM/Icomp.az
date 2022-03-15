@@ -7,7 +7,7 @@ namespace IComp.Core.Entities
     public class HardDisc : BaseEntity
     {
         public int HDDCapacityId { get; set; }
-        public string Model { get; set; }
+        public string ModelName { get; set; }
         public bool IsAvailable { get; set; }
         public double? Price { get; set; }
         public int Count { get; set; }

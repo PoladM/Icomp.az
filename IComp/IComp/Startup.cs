@@ -5,6 +5,7 @@ using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.Implementations;
 using IComp.Service.Interfaces;
 using IComp.Service.Profiles;
+using IComp.ServiceExtentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,6 +41,7 @@ namespace IComp
             }).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<ProcessorPostDTOValidator>());
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProcessorService, ProcessorService>();
+            services.AddScoped<IProcessorSerieService, ProcessorSerieService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(cnf =>
@@ -56,11 +58,12 @@ namespace IComp
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            //app.ExceptionHandler();
 
             app.UseRouting();
 

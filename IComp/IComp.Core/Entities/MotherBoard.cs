@@ -9,7 +9,7 @@ namespace IComp.Core.Entities
     {
         [Required]
         [StringLength(maximumLength:100)]
-        public string Model { get; set; }
+        public string ModelName { get; set; }
         public bool IsAvailable { get; set; }
         public double? Price { get; set; }
         public int Count { get; set; }

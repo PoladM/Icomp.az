@@ -12,31 +12,68 @@ namespace IComp.Areas.manage.Controllers
     public class ProcessorController : Controller
     {
         private readonly IProcessorService _processorService;
-        private readonly IUnitOfWork _unitOfWork;
 
-        public ProcessorController(IProcessorService processorService, IUnitOfWork unitOfWork)
+        public ProcessorController(IProcessorService processorService)
         {
             _processorService = processorService;
-            _unitOfWork = unitOfWork;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View();
+            return View(_processorService.GetAllProd(page));
         }
         public IActionResult Create()
         {
-            ViewBag.ProcSeries = _unitOfWork.ProcessorSerieRepository.GetAll();
+            ViewBag.ProcSeries = _processorService.GetProcSeries();
 
-            
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(ProcessorPostDTO postDTO)
         {
+            ViewBag.ProcSeries = _processorService.GetProcSeries();
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             var processorPostDto = await _processorService.CreateAsync(postDTO);
 
 
-            return Ok(processorPostDto);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            ViewBag.ProcSeries = _processorService.GetProcSeries();
+            
+            ProcessorPostDTO postDTO = await _processorService.GetByIdAsync(id);
+
+            return View(postDTO);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ProcessorPostDTO postDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            await _processorService.UpdateAsync(id, postDTO);
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _processorService.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Restore(int id)
+        {
+            await _processorService.RestoreAsync(id);
+            return RedirectToAction("Index");
         }
     }
 }

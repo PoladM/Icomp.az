@@ -7,7 +7,7 @@ namespace IComp.Core.Entities
     public class VideoCard : BaseEntity
     {
         public int VideoCardSerieId { get; set; }
-        public string Model { get; set; }
+        public string ModelName { get; set; }
         public bool IsAvailable { get; set; }
         public double? Price { get; set; }
         public string MemoryCapacity { get; set; }
