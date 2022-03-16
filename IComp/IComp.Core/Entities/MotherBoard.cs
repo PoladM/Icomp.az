@@ -13,5 +13,6 @@ namespace IComp.Core.Entities
         public bool IsAvailable { get; set; }
         public double? Price { get; set; }
         public int Count { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

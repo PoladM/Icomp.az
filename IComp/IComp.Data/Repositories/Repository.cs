@@ -37,9 +37,18 @@ namespace IComp.Data.Repositories
             return query.Where(exp);
         }
 
-        public IQueryable<TEntity> GetAll()
+        public IQueryable<TEntity> GetAll(params string[] includes)
         {
-            return _context.Set<TEntity>().AsQueryable();
+            var query = _context.Set<TEntity>().AsQueryable();
+
+            if (includes != null)
+            {
+                foreach (var item in includes)
+                {
+                    query = query.Include(item);
+                }
+            }
+            return query;
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> exp, params string[] includes)

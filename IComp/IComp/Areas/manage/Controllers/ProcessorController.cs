@@ -30,6 +30,7 @@ namespace IComp.Areas.manage.Controllers
         public async Task<IActionResult> Create(ProcessorPostDTO postDTO)
         {
             ViewBag.ProcSeries = _processorService.GetProcSeries();
+
             if (!ModelState.IsValid)
             {
                 return View();

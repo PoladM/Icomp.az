@@ -14,6 +14,9 @@ namespace IComp.Core
         IVCSerieRepository VCSerieRepository { get; }
         IMemoryRepository MemoryRepository { get; }
         IMemoryCapacityRepository MemoryCapacityRepository { get; }
+        IMotherBoardRepository MotherBoardRepository { get; }
+        IHardDiscRepository HardDiscRepository { get; }
+        IHardDiscCapacityRepository HardDiscCapacityRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

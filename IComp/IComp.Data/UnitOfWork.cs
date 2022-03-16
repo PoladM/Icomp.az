@@ -17,7 +17,9 @@ namespace IComp.Data
         private VCSerieRepository _vcSerieRepository;
         private MemoryRepository _memoryRepository;
         private MemoryCapacityRepository _memoryCapacityRepository;
-
+        private MotherBoardRepository _motherBoardRepository;
+        private HardDiscRepository _hardwareDiscRepository;
+        private HardDiscCapacityRepository _hardwareDiscCapacityRepository;
         
         public UnitOfWork(StoreDbContext context)
         {
@@ -35,6 +37,12 @@ namespace IComp.Data
         public IMemoryRepository MemoryRepository => _memoryRepository ?? new MemoryRepository(_context);
 
         public IMemoryCapacityRepository MemoryCapacityRepository => _memoryCapacityRepository ?? new MemoryCapacityRepository(_context);
+
+        public IMotherBoardRepository MotherBoardRepository => _motherBoardRepository ?? new MotherBoardRepository(_context);
+
+        public IHardDiscRepository HardDiscRepository => _hardwareDiscRepository ?? new HardDiscRepository(_context);
+
+        public IHardDiscCapacityRepository HardDiscCapacityRepository => _hardwareDiscCapacityRepository ?? new HardDiscCapacityRepository(_context);
 
         public int Commit()
         {

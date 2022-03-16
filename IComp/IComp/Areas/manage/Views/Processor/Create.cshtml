@@ -34,7 +34,7 @@
                     <input class="form-control" asp-for="Speed" placeholder="Enter SubTitle">
                     <span class="text-danger" asp-validation-for="Speed"></span>
                 </div>
-                <div class="form-group col-lg-3">
+                <div class="form-group">
                     <label asp-for="ProcessorSerieId">ProcessorSerie</label>
                     <select class="form-control" asp-for="ProcessorSerieId" asp-items="@new SelectList(ViewBag.ProcSeries,nameof(ProcessorSerie.Id),nameof(ProcessorSerie.Name))">
                     </select>

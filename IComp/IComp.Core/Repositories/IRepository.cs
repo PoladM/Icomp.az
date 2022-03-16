@@ -13,7 +13,7 @@ namespace IComp.Core.Repositories
         void Remove(TEntity entity);
         Task<TEntity> GetAsync(Expression<Func<TEntity,bool>> exp,params string[] includes);
         IQueryable<TEntity> GetAll(Expression<Func<TEntity,bool>> exp,params string[] includes);
-        IQueryable<TEntity> GetAll();
+        IQueryable<TEntity> GetAll(params string[] includes);
         Task<bool> IsExistAsync(Expression<Func<TEntity,bool>> exp,params string[] includes);
     }
 }
