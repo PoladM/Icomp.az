@@ -12,5 +12,6 @@ namespace IComp.Core.Entities
         public double? Price { get; set; }
         public int Count { get; set; }
         public HDDCapacity HDDCapacity { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using IComp.Core.Entities;
+using IComp.Service.DTOs.HardDiscCapacityDTOs;
+using IComp.Service.DTOs.HardDiscDTOs;
 using IComp.Service.DTOs.MemoryCapacityDTOs;
 using IComp.Service.DTOs.MemoryDTOs;
 using IComp.Service.DTOs.ProcessorDTOs;
@@ -30,6 +32,8 @@ namespace IComp.Service.Profiles
             CreateMap<MemoryCapacity, MCapacityPostDto>();
             CreateMap<MCapacityPostDto, MemoryCapacity>();
             CreateMap<MemoryPostDto, ProdMemory>();
+            CreateMap<HDDCapacity, HardDiscCapacityGetDto>();
+            CreateMap<HardDiscPostDto, HardDisc>();
 
         }
     }
