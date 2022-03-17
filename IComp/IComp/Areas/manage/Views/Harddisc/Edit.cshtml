@@ -1,0 +1,51 @@
+﻿@model HardDiscPostDto
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1>Create</h1>
+            <form method="post" asp-action="Edit" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="ModelName">Model</label>
+                    <input type="text" asp-for="ModelName" class="form-control" placeholder="Enter Title">
+                    <span class="text-danger" asp-validation-for="ModelName"></span>
+                </div>
+              
+                <div class="form-group">
+                    <label asp-for="Count">Count</label>
+                    <input class="form-control" asp-for="Count" placeholder="Enter Count">
+                    <span class="text-danger" asp-validation-for="Count"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price">Price</label>
+                    <input class="form-control" asp-for="Price" placeholder="Enter Price">
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                </div>
+                <div class="form-group">
+                    <label >for SSD</label>
+                    <input class="form-control check-btn" type="radio" name="chooseHardDisk" id="ssd-btn" placeholder="Enter Price">
+                </div>
+                <div class="form-group col-lg-3 d-none" id="SSD">
+                   
+                </div>
+                <div class="form-group">
+                    <label >for HDD</label>
+                    <input class="form-control check-btn" type="radio" name="chooseHardDisk" id="hdd-btn" placeholder="Enter Price">
+                </div>
+                <div class="form-group col-lg-3 d-none" id="HDD">
+                    
+                </div>
+                <div class="form-group">
+                    <label asp-for="IsAvailable">IsAvailable</label>
+                    <input class="form-control" asp-for="IsAvailable" placeholder="Enter SubTitle">
+                    <span class="text-danger" asp-validation-for="IsAvailable"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+

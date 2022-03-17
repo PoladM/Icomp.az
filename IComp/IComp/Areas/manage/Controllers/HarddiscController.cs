@@ -44,5 +44,32 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
+        public async Task<IActionResult> Edit(int id)
+        {
+            HardDiscPostDto postDTO = await _hardDiscService.GetByIdAsync(id);
+            return View(postDTO);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, HardDiscPostDto postDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            await _hardDiscService.UpdateAsync(id, postDTO);
+
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _hardDiscService.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Restore(int id)
+        {
+            await _hardDiscService.RestoreAsync(id);
+            return RedirectToAction("Index");
+        }
     }
 }

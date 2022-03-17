@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using IComp.Core.Entities;
+using IComp.Service.DTOs.BrandDTOs;
+using IComp.Service.DTOs.CategoryDTOs;
 using IComp.Service.DTOs.HardDiscCapacityDTOs;
 using IComp.Service.DTOs.HardDiscDTOs;
 using IComp.Service.DTOs.MemoryCapacityDTOs;
@@ -34,6 +36,13 @@ namespace IComp.Service.Profiles
             CreateMap<MemoryPostDto, ProdMemory>();
             CreateMap<HDDCapacity, HardDiscCapacityGetDto>();
             CreateMap<HardDiscPostDto, HardDisc>();
+            CreateMap<HardDisc, HardDiscPostDto>();
+            CreateMap<HardDiscCapacityPostDto, HDDCapacity>();
+            CreateMap<HDDCapacity, HardDiscCapacityPostDto>();
+            CreateMap<BrandPostDto, Brand>();
+            CreateMap<Brand, BrandPostDto>();
+            CreateMap<CategoryPostDto, Category>();
+            CreateMap<Category, CategoryPostDto>();
 
         }
     }

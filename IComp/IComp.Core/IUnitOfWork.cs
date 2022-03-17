@@ -17,6 +17,9 @@ namespace IComp.Core
         IMotherBoardRepository MotherBoardRepository { get; }
         IHardDiscRepository HardDiscRepository { get; }
         IHardDiscCapacityRepository HardDiscCapacityRepository { get; }
+        IBrandRepository BrandRepository { get; }
+        ICategoryRepository CategoryRepository { get; }
+        IProductRepository ProductRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

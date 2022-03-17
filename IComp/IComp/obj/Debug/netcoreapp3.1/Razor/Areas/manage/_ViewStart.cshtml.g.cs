@@ -63,20 +63,41 @@ using IComp.Service.DTOs.HardDiscDTOs;
 #nullable disable
 #nullable restore
 #line 8 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
-using IComp.Service.DTOs;
+using IComp.Service.DTOs.HardDiscCapacityDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs.BrandDTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs.CategoryDTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
 using IComp.Core.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Areas/manage/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"18f84cccee070fb72255d3a927c44c4723eccedc", @"/Areas/manage/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a09464ab92b774a49b6b5270241a8da7da501942", @"/Areas/manage/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_manage__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable

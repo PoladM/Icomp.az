@@ -63,20 +63,41 @@ using IComp.Service.DTOs.HardDiscDTOs;
 #nullable disable
 #nullable restore
 #line 8 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
-using IComp.Service.DTOs;
+using IComp.Service.DTOs.HardDiscCapacityDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 9 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs.BrandDTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 10 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs.CategoryDTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 11 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
 using IComp.Core.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"bc09ef221a21c7983388aa8c3ad7d8507c2fc48f", @"/Areas/manage/Views/Dashboard/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"18f84cccee070fb72255d3a927c44c4723eccedc", @"/Areas/manage/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a09464ab92b774a49b6b5270241a8da7da501942", @"/Areas/manage/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_manage_Views_Dashboard_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     #nullable disable
@@ -238,7 +259,7 @@ using IComp.Core.Entities;
                                                             nostrud exercitation <i class=""fa fa-quote-right""></i>
                                                         </div>
                                                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f14265", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f14900", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -270,7 +291,7 @@ using IComp.Core.Entities;
                                                             nostrud exercitation <i class=""fa fa-quote-right""></i>
                                                         </div>
                                                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f16831", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f17466", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -302,7 +323,7 @@ using IComp.Core.Entities;
                                                             nostrud exercitation <i class=""fa fa-quote-right""></i>
                                                         </div>
                                                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f19397", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f20032", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -334,7 +355,7 @@ using IComp.Core.Entities;
                                                             nostrud exercitation <i class=""fa fa-quote-right""></i>
                                                         </div>
                                                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f21963", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f22598", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -366,7 +387,7 @@ using IComp.Core.Entities;
                                                             nostrud exercitation <i class=""fa fa-quote-right""></i>
                                                         </div>
                                                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f24529", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f25164", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -398,7 +419,7 @@ using IComp.Core.Entities;
                                                             nostrud exercitation <i class=""fa fa-quote-right""></i>
                                                         </div>
                                                         ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f27095", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f27730", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -642,7 +663,7 @@ using IComp.Core.Entities;
                                     <div class=""media"">
                                         <div class=""media-left"">
                                             <a href=""#"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f41221", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f41856", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -668,7 +689,7 @@ using IComp.Core.Entities;
                                     <div class=""media"">
                                         <div class=""media-left"">
                                             <a href=""#"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f43099", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f43734", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -694,7 +715,7 @@ using IComp.Core.Entities;
                                     <div class=""media"">
                                         <div class=""media-left"">
                                             <a href=""#"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f44977", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f45612", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -720,7 +741,7 @@ using IComp.Core.Entities;
                                     <div class=""media"">
                                         <div class=""media-left"">
                                             <a href=""#"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f46857", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f47492", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -746,7 +767,7 @@ using IComp.Core.Entities;
                                     <div class=""media"">
                                         <div class=""media-left"">
                                             <a href=""#"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f48735", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f49370", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -772,7 +793,7 @@ using IComp.Core.Entities;
                                     <div class=""media no-border"">
                                         <div class=""media-left"">
                                             <a href=""#"">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f50623", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bc09ef221a21c7983388aa8c3ad7d8507c2fc48f51258", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

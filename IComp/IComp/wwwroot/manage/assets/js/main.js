@@ -1,5 +1,7 @@
 ﻿let radioButtons = document.querySelectorAll(".check-btn");
 
+
+
 radioButtons.forEach(x => {
     x.addEventListener("click", function () {
 
@@ -41,25 +43,6 @@ radioButtons.forEach(x => {
                     selectOptionsHdd.innerHTML = null;
                 }
             })
-
-        
-        
-        //if (ssdBtn.checked == true) {
-        //    selectOptionsSsd.classList.remove("d-none")
-        //    selectOptionsSsd.classList.add("d-block")
-        //}
-        //else {
-        //    selectOptionsSsd.classList.remove("d-block")
-        //    selectOptionsSsd.classList.add("d-none")
-        //}
-        //if (hddBtn.checked == true) {
-        //    selectOptionsHdd.classList.remove("d-none")
-        //    selectOptionsHdd.classList.add("d-block")
-        //}
-        //else {
-        //    selectOptionsHdd.classList.remove("d-block")
-        //    selectOptionsHdd.classList.add("d-none")
-        //}
     })
 })
 

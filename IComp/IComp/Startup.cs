@@ -47,6 +47,9 @@ namespace IComp
             services.AddScoped<IMemoryService, MemoryService>();
             services.AddScoped<IMemoryCapacityService, MemoryCapacityService>();
             services.AddScoped<IHardDiscService, HardDiscService>();
+            services.AddScoped<IHardDiscCapacityService, HardDiscCapacityService>();
+            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(cnf =>

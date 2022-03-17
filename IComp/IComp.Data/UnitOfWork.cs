@@ -20,7 +20,10 @@ namespace IComp.Data
         private MotherBoardRepository _motherBoardRepository;
         private HardDiscRepository _hardwareDiscRepository;
         private HardDiscCapacityRepository _hardwareDiscCapacityRepository;
-        
+        private BrandRepository _brandRepository;
+        private CategoryRepository _categoryRepository;
+        private ProductRepository _productRepository;
+
         public UnitOfWork(StoreDbContext context)
         {
             _context = context;
@@ -43,6 +46,12 @@ namespace IComp.Data
         public IHardDiscRepository HardDiscRepository => _hardwareDiscRepository ?? new HardDiscRepository(_context);
 
         public IHardDiscCapacityRepository HardDiscCapacityRepository => _hardwareDiscCapacityRepository ?? new HardDiscCapacityRepository(_context);
+
+        public IBrandRepository BrandRepository => _brandRepository ?? new BrandRepository(_context);
+
+        public ICategoryRepository CategoryRepository => _categoryRepository ?? new CategoryRepository(_context);
+
+        public IProductRepository ProductRepository => _productRepository ?? new ProductRepository(_context);
 
         public int Commit()
         {
