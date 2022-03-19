@@ -19,7 +19,9 @@
 
   <ItemGroup>
     <Folder Include="Areas\manage\Data\" />
+    <Folder Include="Areas\ViewModels\" />
     <Folder Include="wwwroot\uploads\brands\" />
+    <Folder Include="wwwroot\uploads\products\" />
   </ItemGroup>
 
 </Project>

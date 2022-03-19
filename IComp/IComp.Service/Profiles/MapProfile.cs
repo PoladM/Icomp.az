@@ -2,12 +2,16 @@
 using IComp.Core.Entities;
 using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.DTOs.CategoryDTOs;
+using IComp.Service.DTOs.DestinationDTOs;
 using IComp.Service.DTOs.HardDiscCapacityDTOs;
 using IComp.Service.DTOs.HardDiscDTOs;
 using IComp.Service.DTOs.MemoryCapacityDTOs;
 using IComp.Service.DTOs.MemoryDTOs;
+using IComp.Service.DTOs.MotherBoardDTOs;
 using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
+using IComp.Service.DTOs.ProdTypeDTOs;
+using IComp.Service.DTOs.ProductDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
 using System;
@@ -23,13 +27,21 @@ namespace IComp.Service.Profiles
             CreateMap<ProcessorSerie, ProcessorSerieGetDto>();
             CreateMap<ProcessorPostDTO, Processor>();
             CreateMap<Processor, ProcessorPostDTO>();
+            CreateMap<Processor, ProcessorGetDto>();
             CreateMap<ProcessorSeriePostDto, ProcessorSerie>();
             CreateMap<ProcessorSerie, ProcessorSeriePostDto>();
             CreateMap<VideoCardPostDto, VideoCard>();
             CreateMap<VideoCard, VideoCardPostDto>();
+            CreateMap<VideoCard, VideoCardGetDto>();
+
+            CreateMap<ProdType, ProdTypeGetDto>();
+
+            CreateMap<Destination, DestinationGetDto>();
+
             CreateMap<VideoCardSerie, VCSerieGetDto>();
             CreateMap<VCSeriePostDto, VideoCardSerie>();
             CreateMap<ProdMemory, MemoryPostDto>();
+            CreateMap<ProdMemory, MemoryGetDto>();
             CreateMap<MemoryCapacity, MCapacityGetDto>();
             CreateMap<MemoryCapacity, MCapacityPostDto>();
             CreateMap<MCapacityPostDto, MemoryCapacity>();
@@ -37,12 +49,22 @@ namespace IComp.Service.Profiles
             CreateMap<HDDCapacity, HardDiscCapacityGetDto>();
             CreateMap<HardDiscPostDto, HardDisc>();
             CreateMap<HardDisc, HardDiscPostDto>();
+            CreateMap<HardDisc, HardDiscGetDto>();
             CreateMap<HardDiscCapacityPostDto, HDDCapacity>();
             CreateMap<HDDCapacity, HardDiscCapacityPostDto>();
             CreateMap<BrandPostDto, Brand>();
             CreateMap<Brand, BrandPostDto>();
+            CreateMap<Brand, BrandGetDto>();
             CreateMap<CategoryPostDto, Category>();
             CreateMap<Category, CategoryPostDto>();
+            CreateMap<Category, CategoryGetDto>();
+            
+            CreateMap<MotherBoardPostDto, MotherBoard>();
+            CreateMap<MotherBoard, MotherBoardPostDto>();
+            CreateMap<MotherBoard, MotherBoardGetDto>();
+
+            CreateMap<ProductPostDto, Product>();
+            CreateMap<Product, ProductPostDto>();
 
         }
     }

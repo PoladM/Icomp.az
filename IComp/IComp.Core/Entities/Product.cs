@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace IComp.Core.Entities
@@ -19,6 +21,7 @@ namespace IComp.Core.Entities
         public string Name { get; set; }
         public double Price { get; set; }
         public bool IsAvailable { get; set; }
+        public int Count { get; set; }
 
         public Processor Processor { get; set; }
         public VideoCard VideoCard { get; set; }
@@ -29,5 +32,11 @@ namespace IComp.Core.Entities
         public Destination Destination { get; set; }
         public HardDisc HardDisc { get; set; }
         public Category Category { get; set; }
+        [NotMapped]
+        public IFormFile PosterFile { get; set; }
+        [NotMapped]
+        public List<IFormFile> ImageFiles { get; set; }
+
+        public List<ProductImage> ProductImages { get; set; }
     }
 }

@@ -404,6 +404,9 @@ namespace IComp.Data.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -474,6 +477,29 @@ namespace IComp.Data.Migrations
                     b.HasIndex("VideoCardId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("IComp.Core.Entities.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("PosterStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("IComp.Core.Entities.VideoCard", b =>
@@ -581,7 +607,7 @@ namespace IComp.Data.Migrations
             modelBuilder.Entity("IComp.Core.Entities.Product", b =>
                 {
                     b.HasOne("IComp.Core.Entities.Brand", "Brand")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -599,13 +625,13 @@ namespace IComp.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("IComp.Core.Entities.HardDisc", "HardDisc")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("HardDiscId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IComp.Core.Entities.MotherBoard", "MotherBoard")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("MotherBoardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -617,7 +643,7 @@ namespace IComp.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("IComp.Core.Entities.ProdMemory", "ProdMemory")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("ProdMemoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -629,8 +655,17 @@ namespace IComp.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("IComp.Core.Entities.VideoCard", "VideoCard")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("VideoCardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("IComp.Core.Entities.ProductImage", b =>
+                {
+                    b.HasOne("IComp.Core.Entities.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

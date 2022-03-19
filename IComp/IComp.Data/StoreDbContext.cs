@@ -27,6 +27,7 @@ namespace IComp.Data
         public DbSet<VideoCard> VideoCards { get; set; }
         public DbSet<HardDisc> HardDiscs { get; set; }
         public DbSet<HDDCapacity> HDDCapacities { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

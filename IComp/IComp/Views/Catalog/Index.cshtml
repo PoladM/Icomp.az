@@ -1,0 +1,389 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<main>
+    <!-- Home Page -->
+    <section id="main-home-page">
+        <div class="contentWrap">
+            <div class="container">
+                <div class="breadcrumb">
+                    <ul class="breadcrumb-nav">
+                        <li class="nav-item"><a href="#">Kompüter mağazası "iComp"</a></li>
+                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a href="#">Kompüterlər</a></li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <!-- aside start -->
+                    <div class="col-lg-3 col-md-12">
+                        <!-- Filter -->
+                        <div class="main-home-page__filter">
+                            <h3 style="margin-bottom: 20px;">Filter</h3>
+                            <div class="main-home-page__filter-box">
+                                <div class="filter-item">
+                                    <div class="filter-item__price">
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <div id="slider-range" class="price-filter-range" name="rangeInput">
+                                                </div>
+
+                                                <div style="margin:30px auto">
+                                                    <input type="number" min=0 max="9900"
+                                                           oninput="validity.valid||(value='0');" id="min_price"
+                                                           class="price-range-field" />
+                                                    <input type="number" min=0 max="10000"
+                                                           oninput="validity.valid||(value='10000');" id="max_price"
+                                                           class="price-range-field" />
+                                                </div>
+
+                                                <button class="price-range-search"
+                                                        id="price-range-submit">
+                                                    Search
+                                                </button>
+
+                                                <div id="searchResults" class="search-results-block"></div>
+
+                                                <div class="clear-fix"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>TƏYİNAT</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+                                    </div>
+                                    <div class="filter-input">
+                                        @foreach (var item in Model.destinationGetDtos)
+                                        {
+                                            <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="destinationid" value="@item.Id" id="destination-@item.Id">
+                                                <label for="destination-@item.Id">@item.Name <span>(318)</span></label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>ANA PLATA</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                        @foreach (var item in Model.motherBoardGetDtos)
+                                        {
+                                            <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="motherboardid" value="@item.Id" id="motherboard-@item.Id">
+                                                <label for="motherboard-@item.Id">@item.ModelName <span>(318)</span></label>
+                                            </div>
+                                        }
+
+
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>PROSESSOR</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                        @foreach (var item in Model.processorSerieGetDtos)
+                                       {
+                                           <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="processorserieid" value="@item.Id" id="processor-@item.Id">
+                                                <label for="processor-@item.Id">@item.Name <span>(318)</span></label>
+                                            </div>
+                                       }
+                                      
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>OPERATİV YADDAŞ (RAM)</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                        @foreach (var item in Model.mCapacityGetDtos)
+                                       {
+                                           <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="memorycapacityid" value="@item.Id" id="memory-@item.Id">
+                                                <label for="memory-@item.Id">@item.Capacity <span>(318)</span></label>
+                                            </div>
+                                       }
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>QRAFİK KART</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                         @foreach (var item in Model.vCSerieGets)
+                                       {
+                                           <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="videocardserieid" value="@item.Id" id="vc-@item.Id">
+                                                <label for="vc-@item.Id">@item.Name <span>(318)</span></label>
+                                            </div>
+                                       }
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>HDD</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                         @foreach (var item in Model.hardDiscCapacityGetDtos)
+                                       {
+                                           if (item.IsHDD)
+                                           {
+                                           <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
+                                                <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                            </div>    
+                                           }
+                                           
+                                       }
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>SSD (SƏRT SƏTHLİ DİSK)</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                        @foreach (var item in Model.hardDiscCapacityGetDtos)
+                                       {
+                                           if (item.IsSSD)
+                                           {
+                                           <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
+                                                <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                            </div>    
+                                           }
+                                       }
+                                    </div>
+                                </div>
+                                 <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>Brands</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                        @foreach (var item in Model.brandGetDtos)
+                                       {
+                                           <div class="input-block">
+                                                <input form="filterForm" type="checkbox" name="brandid" value="@item.Id" id="brand-@item.Id">
+                                                <label for="brand-@item.Id">@item.Name <span>(318)</span></label>
+                                            </div>
+                                       }
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <div class="filter-title">
+                                        <h2>EKRAN</h2>
+                                        <i class="fa-solid fa-angle-down"></i>
+
+                                    </div>
+                                    <div class="filter-input">
+                                        <div class="input-block">
+                                            <input type="checkbox">
+                                            <label for="">Gaming <span>(318)</span></label>
+                                        </div>
+                                        <div class="input-block">
+                                            <input type="checkbox">
+                                            <label for="">Universal <span>(104)</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filter-item">
+                                    <form id="filterForm" asp-action="Index" asp-controller="Catalog" method="get">
+                                        <button type="submit" class="btn btn-primary filter-btn">filter</button>
+                                    </form>
+                                </div>
+                                <!-- sidebar area end -->
+                            </div>
+                        </div>
+
+
+                        <!-- Popular Brends -->
+                        <div class="blog-tags">
+                            <div class="tags-desc">
+                                <h3>Bakıda tanınmış brendlər</h3>
+                            </div>
+                            <div class="line">
+                                <a href="">Apple</a>
+                                <a href="">Asus</a>
+                                <a href="">Lenovo</a>
+                                <a href="">Microsoft</a>
+                                <a href="">HP</a>
+                                <a href="">Sony</a>
+                                <a href="">SteelSeries</a>
+                                <a href="">Acer</a>
+                                <a href="">Gigabyte</a>
+                                <a href="">Dell</a>
+                                <a href="">MSI</a>
+                                <a href="">Rampage</a>
+                                <a href="">Intel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- aside end -->
+
+                    <div class="col-lg-9 col-md-12">
+
+
+                        <!-- New Products start here  -->
+                        <div class="new-products">
+                            <div class="content-heading">
+                                <h2>Kompüterlər</h2>
+                            </div>
+
+                            <div class="sub-categories">
+                                <div class="blog-tags">
+                                    <div class="line">
+                                        <a href="">Acer kompüterləri</a>
+                                        <a href="">Asus Mini kompüterləri</a>
+                                        <a href="">Gigabyte kompüterləri</a>
+                                        <a href="">HP Kompüterləri</a>
+                                        <a href=""> iComp Kompüterləri</a>
+                                        <a href="">Lenovo Kompüterləri</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="order-filter">
+                                <select name="orferFilter" id="orferFilter">
+                                    <option value="">Varsayılan olaraq</option>
+                                    <option value="">Qiyməti artır</option>
+                                    <option value="">Qiyməti azalır</option>
+                                    <option value="">Başlıq</option>
+                                    <option value="">Populyarlıq</option>
+                                </select>
+                            </div>
+
+                            <div class="paginatoin-area ">
+                                <ul class="pagination-box">
+                                    <li>
+                                        <a class="Previous" href="#"><i class="fa-solid fa-chevron-left"></i></a>
+                                    </li>
+                                    <li class="active"><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a class="Next" href="#"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                </ul>
+                            </div>
+
+                            <div class="new-products-inner">
+                                <div class="row">
+                                    @foreach (var item in Model.Paginated.Items)
+                                    {
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="new-products__item">
+                                                <div class="new-products__item-card">
+                                                    <div class="item__card-header">
+                                                        <div class="product-photo">
+                                                            <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+                                                        </div>
+                                                        <div class="product-title">
+                                                            <a href="#">@item.Name</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item__card-body">
+                                                        <div class="product-desc">
+                                                            <p>
+                                                                R5 5500U | 16GB DDR4 | 512GB SSD | AMD Radeon™ | 27 FHD
+                                                                IPS
+                                                            </p>
+                                                        </div>
+                                                        <div class="product-price">
+                                                            <span>1749 <sup>azn</sup></span>
+                                                        </div>
+                                                        <div class="product-checkout">
+                                                            <a href="" class="btn btn-primary">Səbətə</a>
+                                                            <a href="" class="btn btn-danger">Tez Sifariş</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- New Products end here  -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="contentWrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="assets/img/Services/s1.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>Sürətli çatdırılma</h6>
+                            </div>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="assets/img/Services/s2.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>RƏSMİ ZƏMANƏT</h6>
+                            </div>
+                            <div class="line"></div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="assets/img/Services/s3.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>KREDİTLƏ SATIŞ</h6>
+                            </div>
+                            <div class="line"></div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="assets/img/Services/s4.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>YÜKSƏK KEYFİYYƏT</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

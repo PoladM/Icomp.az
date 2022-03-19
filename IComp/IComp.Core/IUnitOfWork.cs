@@ -20,6 +20,8 @@ namespace IComp.Core
         IBrandRepository BrandRepository { get; }
         ICategoryRepository CategoryRepository { get; }
         IProductRepository ProductRepository { get; }
+        IProdTypeRepository ProdTypeRepository { get; }
+        IDestinationRepository DestinationRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

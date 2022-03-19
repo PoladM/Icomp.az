@@ -15,5 +15,7 @@ namespace IComp.Core.Repositories
         IQueryable<TEntity> GetAll(Expression<Func<TEntity,bool>> exp,params string[] includes);
         IQueryable<TEntity> GetAll(params string[] includes);
         Task<bool> IsExistAsync(Expression<Func<TEntity,bool>> exp,params string[] includes);
+        
+
     }
 }

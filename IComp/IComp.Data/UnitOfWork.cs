@@ -23,6 +23,8 @@ namespace IComp.Data
         private BrandRepository _brandRepository;
         private CategoryRepository _categoryRepository;
         private ProductRepository _productRepository;
+        private ProdTypeRepository _prodTypeRepository;
+        private DestinationRepository _destinationRepository;
 
         public UnitOfWork(StoreDbContext context)
         {
@@ -53,6 +55,9 @@ namespace IComp.Data
 
         public IProductRepository ProductRepository => _productRepository ?? new ProductRepository(_context);
 
+        public IProdTypeRepository ProdTypeRepository => _prodTypeRepository ?? new ProdTypeRepository(_context);
+
+        public IDestinationRepository DestinationRepository => _destinationRepository ?? new DestinationRepository(_context);
         public int Commit()
         {
             return _context.SaveChanges();

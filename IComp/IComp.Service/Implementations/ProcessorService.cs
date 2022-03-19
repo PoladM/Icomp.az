@@ -44,7 +44,7 @@ namespace IComp.Service.Implementations
             return new ProcessorGetDto
             {
                 Id = processor.Id,
-                Model = processor.ModelName
+                ModelName = processor.ModelName
             };
         }
 
