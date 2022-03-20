@@ -130,6 +130,9 @@ namespace IComp.Service.Implementations
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.CategoryId == categoryid);
             }
 
+            
+
+
             switch (sort)
             {
                 case "price_high":

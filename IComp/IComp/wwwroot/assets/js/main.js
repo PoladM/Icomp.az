@@ -167,3 +167,14 @@ hamburgerSubItem.forEach((x) => {
     }
   });
 });
+
+
+//current selected option
+document.getElementById('orderFilter').onchange = function () {
+    localStorage.setItem('selectedtem', document.getElementById('orderFilter').value);
+};
+
+if (localStorage.getItem('selectedtem')) {
+    var selectedOptionVal = localStorage.getItem('selectedtem');
+    document.getElementById('orderFilter').options[selectedOptionVal == "default" ? 0 : selectedOptionVal == "price_high" ? 1 : selectedOptionVal == "price_low" ? 2 : selectedOptionVal == "name_asc" ? 3 : selectedOptionVal == "name_desc" ? 4 : 5 ].selected = true;
+}

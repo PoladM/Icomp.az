@@ -15,7 +15,19 @@ namespace IComp.Controllers
         {
             ProductViewModel viewModel = null;
 
+            // fix values pageindex onclick
             var products = _productService.FilterProd(sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid,  categoryid, pagesize, page);
+
+            ViewBag.processorserieid = processorserieid;
+            ViewBag.videocardserieid = videocardserieid;
+            ViewBag.motherboardid = motherboardid;
+            ViewBag.prodtypeid = prodtypeid;
+            ViewBag.memorycapacityid = memorycapacityid;
+            ViewBag.brandid = brandid;
+            ViewBag.destinationid = destinationid;
+            ViewBag.categoryid = categoryid;
+            ViewBag.hddcapacityid = hddcapacityid;
+            ViewBag.sort = sort;
 
             viewModel = new ProductViewModel
             {
