@@ -95,7 +95,7 @@ namespace IComp.Service.Implementations
             }
             if (videocardserieid != null)
             {
-                query = _unitOfWork.ProductRepository.Filter(query, x => x.VideoCardId == videocardserieid);
+                query = _unitOfWork.ProductRepository.Filter(query, x => x.VideoCard.VideoCardSerieId == videocardserieid);
             }
             if (motherboardid != null)
             {
@@ -112,10 +112,6 @@ namespace IComp.Service.Implementations
             if (prodmemorycapacityid != null)
             {
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.ProdMemory.MemoryCapacityId == prodmemorycapacityid);
-            }
-            if (brandid != null)
-            {
-                query = _unitOfWork.ProductRepository.Filter(query, x => x.BrandId == brandid);
             }
             if (brandid != null)
             {

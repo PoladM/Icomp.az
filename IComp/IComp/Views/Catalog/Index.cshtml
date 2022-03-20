@@ -62,7 +62,7 @@
                                         @foreach (var item in Model.destinationGetDtos)
                                         {
                                             <div class="input-block">
-                                                <input form="filterForm" type="checkbox" @(ViewBag.destinationid == item.Id ? "checked" : "") name="destinationid" value="@item.Id" id="destination-@item.Id">
+                                                <input form="filterForm" type="radio" @(ViewBag.destinationid == item.Id ? "checked" : "") name="destinationid" value="@item.Id" id="destination-@item.Id">
                                                 <label for="destination-@item.Id">@item.Name <span>(318)</span></label>
                                             </div>
                                         }
@@ -78,7 +78,7 @@
                                         @foreach (var item in Model.motherBoardGetDtos)
                                         {
                                             <div class="input-block">
-                                                <input form="filterForm" type="checkbox" @(ViewBag.motherboardid == item.Id ? "checked" : "") name="motherboardid" value="@item.Id" id="motherboard-@item.Id">
+                                                <input form="filterForm" type="radio" @(ViewBag.motherboardid == item.Id ? "checked" : "") name="motherboardid" value="@item.Id" id="motherboard-@item.Id">
                                                 <label for="motherboard-@item.Id">@item.ModelName <span>(318)</span></label>
                                             </div>
                                         }
@@ -96,7 +96,7 @@
                                         @foreach (var item in Model.processorSerieGetDtos)
                                         {
                                             <div class="input-block">
-                                                <input form="filterForm" type="checkbox" @(ViewBag.processorserieid == item.Id ? "checked" : "") name="processorserieid" value="@item.Id" id="processor-@item.Id">
+                                                <input form="filterForm" type="radio" @(ViewBag.processorserieid == item.Id ? "checked" : "") name="processorserieid" value="@item.Id" id="processor-@item.Id">
                                                 <label for="processor-@item.Id">@item.Name <span>(318)</span></label>
                                             </div>
                                         }
@@ -113,7 +113,7 @@
                                         @foreach (var item in Model.mCapacityGetDtos)
                                         {
                                             <div class="input-block">
-                                                <input form="filterForm" type="checkbox" @(ViewBag.memorycapacityid == item.Id ? "checked" : "") name="memorycapacityid" value="@item.Id" id="memory-@item.Id">
+                                                <input form="filterForm" type="radio" @(ViewBag.memorycapacityid == item.Id ? "checked" : "") name="memorycapacityid" value="@item.Id" id="memory-@item.Id">
                                                 <label for="memory-@item.Id">@item.Capacity <span>(318)</span></label>
                                             </div>
                                         }
@@ -129,7 +129,7 @@
                                         @foreach (var item in Model.vCSerieGets)
                                         {
                                             <div class="input-block">
-                                                <input form="filterForm" type="checkbox" @(ViewBag.videocardserieid == item.Id ? "checked" : "") name="videocardserieid" value="@item.Id" id="vc-@item.Id">
+                                                <input form="filterForm" type="radio" @(ViewBag.videocardserieid == item.Id ? "checked" : "") name="videocardserieid" value="@item.Id" id="vc-@item.Id">
                                                 <label for="vc-@item.Id">@item.Name <span>(318)</span></label>
                                             </div>
                                         }
@@ -147,7 +147,7 @@
                                             if (item.IsHDD)
                                             {
                                                 <div class="input-block">
-                                                    <input form="filterForm" type="checkbox" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
+                                                    <input form="filterForm" type="radio" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
                                                     <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
                                                 </div>
                                             }
@@ -167,7 +167,7 @@
                                             if (item.IsSSD)
                                             {
                                                 <div class="input-block">
-                                                    <input form="filterForm" type="checkbox" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
+                                                    <input form="filterForm" type="radio" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
                                                     <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
                                                 </div>
                                             }
@@ -184,7 +184,7 @@
                                         @foreach (var item in Model.brandGetDtos)
                                         {
                                             <div class="input-block">
-                                                <input form="filterForm" type="checkbox" @(ViewBag.brandid == item.Id ? "checked" : "") name="brandid" value="@item.Id" id="brand-@item.Id">
+                                                <input form="filterForm" type="radio" @(ViewBag.brandid == item.Id ? "checked" : "") name="brandid" value="@item.Id" id="brand-@item.Id">
                                                 <label for="brand-@item.Id">@item.Name <span>(318)</span></label>
                                             </div>
                                         }
