@@ -72,7 +72,7 @@ namespace IComp.Service.Implementations
             await _unitOfWork.CommitAsync();
         }
 
-        public PaginatedListDto<ProductListItemDto> GetAllProd( int page)
+        public PaginatedListDto<ProductListItemDto> GetAllProd(int page)
         {
             var query = _unitOfWork.ProductRepository.GetAll();
 
@@ -137,6 +137,12 @@ namespace IComp.Service.Implementations
                     break;
                 case "price_low":
                     query = _unitOfWork.ProductRepository.FilterByPrice(query, sort);
+                    break;
+                case "name_asc":
+                    query = _unitOfWork.ProductRepository.FilterByNameAsc(query, sort);
+                    break;
+                case "name_desc":
+                    query = _unitOfWork.ProductRepository.FilterByNameAsc(query, sort);
                     break;
                 default:
                     break;

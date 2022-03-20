@@ -11,13 +11,11 @@ namespace IComp.Controllers
         {
             _productService = productService;
         }
-        public IActionResult Index(string? sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? categoryid, int? pagesize, int page = 1)
+        public IActionResult Index(string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? categoryid, int? pagesize, int page = 1)
         {
             ProductViewModel viewModel = null;
 
             var products = _productService.FilterProd(sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid,  categoryid, pagesize, page);
-
-
 
             viewModel = new ProductViewModel
             {
