@@ -23,8 +23,8 @@ namespace IComp.Service.Interfaces
     public interface IProductService
     {
         Task<ProductGetDTO> CreateAsync(ProductPostDto postDTO);
-        PaginatedListDto<ProductListItemDto> GetAllProd(int? pagesize, int page);
-        PaginatedListDto<ProductListItemDto> FilterProd(int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
+        PaginatedListDto<ProductListItemDto> GetAllProd(int page);
+        PaginatedListDto<ProductListItemDto> FilterProd(string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
 
         List<ProcessorGetDto> GetProcessors();
         List<CategoryGetDto> GetCategories();

@@ -21,5 +21,16 @@ namespace IComp.Data.Repositories
         {
             return query.Where(exp);
         }
+        public IQueryable<Product> FilterByPrice(IQueryable<Product> query, string AscOrDesc)
+        {
+            if (AscOrDesc == "price_low")
+            {
+                return query.OrderByDescending(x => x.Price);
+            }
+            else
+            {
+                return query.OrderBy(x => x.Price);
+            }
+        }
     }
 }

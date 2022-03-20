@@ -22,9 +22,10 @@ namespace IComp.Areas.manage.Controllers
             _env = env;
         }
 
-        public IActionResult Index(int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page = 1)
+        public IActionResult Index(int page = 1)
         {
-            return View(_productService.FilterProd(processorserieid, videocardserieid, motherboardid, prodtypeid, prodmemoryid, brandid, destinationid, harddiscid, categoryid, pagesize, page));
+            
+            return View(_productService.GetAllProd(page));
         }
         public IActionResult Create()
         {

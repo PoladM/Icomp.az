@@ -10,5 +10,7 @@ namespace IComp.Core.Repositories
     public interface IProductRepository : IRepository<Product>
     {
         IQueryable<Product> Filter(IQueryable<Product> query, Expression<Func<Product, bool>> exp);
+        IQueryable<Product> FilterByPrice(IQueryable<Product> query, string AscOrDesc);
+
     }
 }

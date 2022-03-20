@@ -72,11 +72,11 @@ namespace IComp.Service.Implementations
             await _unitOfWork.CommitAsync();
         }
 
-        public PaginatedListDto<ProductListItemDto> GetAllProd( int? pagesize, int page)
+        public PaginatedListDto<ProductListItemDto> GetAllProd( int page)
         {
             var query = _unitOfWork.ProductRepository.GetAll();
 
-            var pageSize = pagesize ?? 3;
+            var pageSize = 3;
 
             List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.Price, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
 
@@ -85,7 +85,7 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
-        public PaginatedListDto<ProductListItemDto> FilterProd(int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? categoryid, int? pagesize, int page)
+        public PaginatedListDto<ProductListItemDto> FilterProd(string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? categoryid, int? pagesize, int page)
         {
             var query = _unitOfWork.ProductRepository.GetAll("Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity");
 
@@ -129,6 +129,19 @@ namespace IComp.Service.Implementations
             {
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.CategoryId == categoryid);
             }
+
+            switch (sort)
+            {
+                case "price_high":
+                    query = _unitOfWork.ProductRepository.FilterByPrice(query, sort);
+                    break;
+                case "price_low":
+                    query = _unitOfWork.ProductRepository.FilterByPrice(query, sort);
+                    break;
+                default:
+                    break;
+            }
+
 
             var pageSize = pagesize ?? 3;
 

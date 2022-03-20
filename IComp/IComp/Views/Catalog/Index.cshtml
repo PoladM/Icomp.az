@@ -94,13 +94,13 @@
                                     </div>
                                     <div class="filter-input">
                                         @foreach (var item in Model.processorSerieGetDtos)
-                                       {
-                                           <div class="input-block">
+                                        {
+                                            <div class="input-block">
                                                 <input form="filterForm" type="checkbox" name="processorserieid" value="@item.Id" id="processor-@item.Id">
                                                 <label for="processor-@item.Id">@item.Name <span>(318)</span></label>
                                             </div>
-                                       }
-                                      
+                                        }
+
                                     </div>
                                 </div>
                                 <div class="filter-item">
@@ -111,12 +111,12 @@
                                     </div>
                                     <div class="filter-input">
                                         @foreach (var item in Model.mCapacityGetDtos)
-                                       {
-                                           <div class="input-block">
+                                        {
+                                            <div class="input-block">
                                                 <input form="filterForm" type="checkbox" name="memorycapacityid" value="@item.Id" id="memory-@item.Id">
                                                 <label for="memory-@item.Id">@item.Capacity <span>(318)</span></label>
                                             </div>
-                                       }
+                                        }
                                     </div>
                                 </div>
                                 <div class="filter-item">
@@ -126,13 +126,13 @@
 
                                     </div>
                                     <div class="filter-input">
-                                         @foreach (var item in Model.vCSerieGets)
-                                       {
-                                           <div class="input-block">
+                                        @foreach (var item in Model.vCSerieGets)
+                                        {
+                                            <div class="input-block">
                                                 <input form="filterForm" type="checkbox" name="videocardserieid" value="@item.Id" id="vc-@item.Id">
                                                 <label for="vc-@item.Id">@item.Name <span>(318)</span></label>
                                             </div>
-                                       }
+                                        }
                                     </div>
                                 </div>
                                 <div class="filter-item">
@@ -142,17 +142,17 @@
 
                                     </div>
                                     <div class="filter-input">
-                                         @foreach (var item in Model.hardDiscCapacityGetDtos)
-                                       {
-                                           if (item.IsHDD)
-                                           {
-                                           <div class="input-block">
-                                                <input form="filterForm" type="checkbox" name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
-                                                <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
-                                            </div>    
-                                           }
-                                           
-                                       }
+                                        @foreach (var item in Model.hardDiscCapacityGetDtos)
+                                        {
+                                            if (item.IsHDD)
+                                            {
+                                                <div class="input-block">
+                                                    <input form="filterForm" type="checkbox" name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
+                                                    <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                                </div>
+                                            }
+
+                                        }
                                     </div>
                                 </div>
                                 <div class="filter-item">
@@ -163,18 +163,18 @@
                                     </div>
                                     <div class="filter-input">
                                         @foreach (var item in Model.hardDiscCapacityGetDtos)
-                                       {
-                                           if (item.IsSSD)
-                                           {
-                                           <div class="input-block">
-                                                <input form="filterForm" type="checkbox" name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
-                                                <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
-                                            </div>    
-                                           }
-                                       }
+                                        {
+                                            if (item.IsSSD)
+                                            {
+                                                <div class="input-block">
+                                                    <input form="filterForm" type="checkbox" name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
+                                                    <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                                </div>
+                                            }
+                                        }
                                     </div>
                                 </div>
-                                 <div class="filter-item">
+                                <div class="filter-item">
                                     <div class="filter-title">
                                         <h2>Brands</h2>
                                         <i class="fa-solid fa-angle-down"></i>
@@ -182,12 +182,12 @@
                                     </div>
                                     <div class="filter-input">
                                         @foreach (var item in Model.brandGetDtos)
-                                       {
-                                           <div class="input-block">
+                                        {
+                                            <div class="input-block">
                                                 <input form="filterForm" type="checkbox" name="brandid" value="@item.Id" id="brand-@item.Id">
                                                 <label for="brand-@item.Id">@item.Name <span>(318)</span></label>
                                             </div>
-                                       }
+                                        }
                                     </div>
                                 </div>
                                 <div class="filter-item">
@@ -264,24 +264,32 @@
                             </div>
 
                             <div class="order-filter">
-                                <select name="orferFilter" id="orferFilter">
-                                    <option value="">Varsayılan olaraq</option>
-                                    <option value="">Qiyməti artır</option>
-                                    <option value="">Qiyməti azalır</option>
-                                    <option value="">Başlıq</option>
+                                <select form="filterForm" name="sort" id="orderFilter">
+                                    <option value="default">Varsayılan olaraq</option>
+                                    <option value="price_high">Qiyməti artır</option>
+                                    <option value="price_low">Qiyməti azalır</option>
+                                    <option value="name_desc">Başlıq</option>
                                     <option value="">Populyarlıq</option>
                                 </select>
                             </div>
 
                             <div class="paginatoin-area ">
                                 <ul class="pagination-box">
-                                    <li>
-                                        <a class="Previous" href="#"><i class="fa-solid fa-chevron-left"></i></a>
-                                    </li>
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a class="Next" href="#"><i class="fa-solid fa-chevron-right"></i></a></li>
+
+                                    @if (Model.Paginated.HasPrev)
+                                    {
+                                        <li>
+                                            <a class="Previous" asp-action="index" asp-route-page="@(Model.Paginated.PageIndex - 1)"><i class="fa-solid fa-chevron-left"></i></a>
+                                        </li>
+                                    }
+                                    @for (var i = 1; i <= Model.Paginated.TotalPage; i++)
+                                    {
+                                        <li  class="@(Model.Paginated.PageIndex == i ? "active" : "" )"><a asp-action="index" asp-route-page="@i">@i</a></li>
+                                    }
+                                    @if (Model.Paginated.HasNext)
+                                   {
+                                        <li><a class="Next" asp-action="index" asp-route-page="@(Model.Paginated.PageIndex + 1)"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                   }
                                 </ul>
                             </div>
 
@@ -308,7 +316,7 @@
                                                             </p>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>1749 <sup>azn</sup></span>
+                                                            <span>@item.Price <sup>azn</sup></span>
                                                         </div>
                                                         <div class="product-checkout">
                                                             <a href="" class="btn btn-primary">Səbətə</a>
