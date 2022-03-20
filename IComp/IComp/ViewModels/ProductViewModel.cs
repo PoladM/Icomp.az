@@ -25,5 +25,7 @@ namespace IComp.ViewModels
         public List<DestinationGetDto> destinationGetDtos { get; set; }
         public List<HardDiscCapacityGetDto> hardDiscCapacityGetDtos { get; set; }
         public List<CategoryGetDto> categoryGetDtos { get; set; }
+        public decimal MaxPrice { get; set; }
+        public decimal MinPrice { get; set; }
     }
 }

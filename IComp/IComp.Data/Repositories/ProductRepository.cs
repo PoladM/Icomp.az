@@ -43,5 +43,21 @@ namespace IComp.Data.Repositories
             }
         }
 
+        public decimal FilterByPriceRange(string val)
+        {
+            var products = _context.Products;
+            if (products.Any())
+            {
+                if (val == "max")
+                {
+                    return products.Max(x => x.Price);
+                }
+                else if (val == "min")
+                {
+                    return products.Min(x => x.Price);
+                }
+            }
+            return 0;
+        }
     }
 }

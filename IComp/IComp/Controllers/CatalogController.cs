@@ -1,6 +1,7 @@
 ﻿using IComp.Service.Interfaces;
 using IComp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace IComp.Controllers
 {
@@ -11,12 +12,11 @@ namespace IComp.Controllers
         {
             _productService = productService;
         }
-        public IActionResult Index(string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? categoryid, int? pagesize, int page = 1)
+        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? categoryid, int? pagesize, int page = 1)
         {
             ProductViewModel viewModel = null;
 
-            // fix values pageindex onclick
-            var products = _productService.FilterProd(sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid,  categoryid, pagesize, page);
+            var products = _productService.FilterProd(minprice, maxprice, sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid,  categoryid, pagesize, page);
 
             ViewBag.processorserieid = processorserieid;
             ViewBag.videocardserieid = videocardserieid;
@@ -28,6 +28,8 @@ namespace IComp.Controllers
             ViewBag.categoryid = categoryid;
             ViewBag.hddcapacityid = hddcapacityid;
             ViewBag.sort = sort;
+
+
 
             viewModel = new ProductViewModel
             {
@@ -41,7 +43,14 @@ namespace IComp.Controllers
                 destinationGetDtos = _productService.GetDestinations(),
                 hardDiscCapacityGetDtos = _productService.GetHardDiscCapacities(),
                 categoryGetDtos = _productService.GetCategories(),
+                MaxPrice = _productService.FilterByPrice("max"),
+                MinPrice = _productService.FilterByPrice("min")
             };
+
+            ViewBag.FilterMaxPrice = maxprice ?? viewModel.MaxPrice;
+            ViewBag.FilterMinPrice = minprice ?? viewModel.MinPrice;
+
+           
 
             return View(viewModel);
         }

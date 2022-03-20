@@ -22,7 +22,7 @@ namespace IComp.Service.DTOs.ProductDTOs
         public int Count { get; set; }
         public bool IsDeleted { get; set; }
         public string Image { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public List<ProductImage> ProductImages { get; set; }
 
         public Processor Processor { get; set; }

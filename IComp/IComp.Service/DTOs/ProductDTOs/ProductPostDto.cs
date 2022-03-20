@@ -19,7 +19,7 @@ namespace IComp.Service.DTOs.ProductDTOs
         public int VideoCardId { get; set; }
 
         public string Name { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public bool IsAvailable { get; set; }
         public int Count { get; set; }
 

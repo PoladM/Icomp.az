@@ -12,6 +12,7 @@ namespace IComp.Core.Repositories
         IQueryable<Product> Filter(IQueryable<Product> query, Expression<Func<Product, bool>> exp);
         IQueryable<Product> FilterByPrice(IQueryable<Product> query, string AscOrDesc);
         IQueryable<Product> FilterByNameAsc(IQueryable<Product> query, string AscOrDesc);
+        decimal FilterByPriceRange(string val);
 
     }
 }

@@ -281,16 +281,16 @@
                                     @if (Model.Paginated.HasPrev)
                                     {
                                         <li>
-                                            <a class="Previous" asp-action="index" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
+                                            <a class="Previous" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
                                         </li>
                                     }
                                     @for (var i = 1; i <= Model.Paginated.TotalPage; i++)
                                     {
-                                        <li class="@(Model.Paginated.PageIndex == i ? "active" : "" )"><a asp-action="index" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort">@i</a></li>
+                                        <li class="@(Model.Paginated.PageIndex == i ? "active" : "" )"><a asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort">@i</a></li>
                                     }
                                     @if (Model.Paginated.HasNext)
                                     {
-                                        <li><a class="Next" asp-action="index" asp-route-page="@(Model.Paginated.PageIndex + 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                        <li><a class="Next" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex + 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     }
                                 </ul>
                             </div>
@@ -397,3 +397,41 @@
         </div>
     </section>
 </main>
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+
+        $(function () {
+        $("#slider-range").slider({
+            range: true,
+            orientation: "horizontal",
+            min: @((double)Model.MinPrice),
+            max: @((double)Model.MaxPrice),
+            values: [@((double)ViewBag.FilterMinPrice), @((double)ViewBag.FilterMaxPrice)],
+            //   step: 100,
+
+            slide: function (event, ui) {
+                if (ui.values[0] == ui.values[1]) {
+                    return false;
+                }
+
+                $("#min_price").val(ui.values[0]);
+                $("#max_price").val(ui.values[1]);
+            },
+            //change: function (event, ui) {
+            //    if (true) {
+
+            //    }
+            //}
+        });
+
+
+        $("#min_price").val($("#slider-range").slider("values", 0));
+        $("#max_price").val($("#slider-range").slider("values", 1));
+
+    });
+
+    })
+</script>
+}

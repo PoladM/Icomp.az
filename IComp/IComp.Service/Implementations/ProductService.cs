@@ -85,7 +85,7 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
-        public PaginatedListDto<ProductListItemDto> FilterProd(string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? categoryid, int? pagesize, int page)
+        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? categoryid, int? pagesize, int page)
         {
             var query = _unitOfWork.ProductRepository.GetAll("Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity");
 
@@ -151,6 +151,8 @@ namespace IComp.Service.Implementations
                     break;
             }
 
+            if (minprice != null && maxprice != null)
+                query = query.Where(x => x.Price >= minprice && x.Price <= maxprice);
 
             var pageSize = pagesize ?? 3;
 
@@ -161,6 +163,14 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
+        public decimal FilterByPrice(string val)
+        {
+            if (val == "max")
+                return _unitOfWork.ProductRepository.FilterByPriceRange("max");
+            else if (val == "min")
+                return _unitOfWork.ProductRepository.FilterByPriceRange("min");
+            return 0;
+        }
 
         public async Task<ProductPostDto> GetByIdAsync(int id)
         {

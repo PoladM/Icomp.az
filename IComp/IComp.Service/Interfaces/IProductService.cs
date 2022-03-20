@@ -24,8 +24,8 @@ namespace IComp.Service.Interfaces
     {
         Task<ProductGetDTO> CreateAsync(ProductPostDto postDTO);
         PaginatedListDto<ProductListItemDto> GetAllProd(int page);
-        PaginatedListDto<ProductListItemDto> FilterProd(string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
-
+        PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
+        decimal FilterByPrice(string val);
         List<ProcessorGetDto> GetProcessors();
         List<CategoryGetDto> GetCategories();
         List<BrandGetDto> GetBrands();

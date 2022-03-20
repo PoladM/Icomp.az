@@ -44,35 +44,35 @@
     });
 
 
-    $(function () {
-        $("#slider-range").slider({
-            range: true,
-            orientation: "horizontal",
-            min: 0,
-            max: 10000,
-            values: [0, 10000],
-            //   step: 100,
+    //$(function () {
+    //    $("#slider-range").slider({
+    //        range: true,
+    //        orientation: "horizontal",
+    //        min: 0,
+    //        max: 10000,
+    //        values: [0, 10000],
+    //        //   step: 100,
 
-            slide: function (event, ui) {
-                if (ui.values[0] == ui.values[1]) {
-                    return false;
-                }
+    //        slide: function (event, ui) {
+    //            if (ui.values[0] == ui.values[1]) {
+    //                return false;
+    //            }
 
-                $("#min_price").val(ui.values[0]);
-                $("#max_price").val(ui.values[1]);
-            },
-            //change: function (event, ui) {
-            //    if (true) {
+    //            $("#min_price").val(ui.values[0]);
+    //            $("#max_price").val(ui.values[1]);
+    //        },
+    //        //change: function (event, ui) {
+    //        //    if (true) {
 
-            //    }
-            //}
-        });
+    //        //    }
+    //        //}
+    //    });
 
 
-        $("#min_price").val($("#slider-range").slider("values", 0));
-        $("#max_price").val($("#slider-range").slider("values", 1));
+    //    $("#min_price").val($("#slider-range").slider("values", 0));
+    //    $("#max_price").val($("#slider-range").slider("values", 1));
 
-    });
+    //});
 
     $("#slider-range,#price-range-submit").click(function () {
 
