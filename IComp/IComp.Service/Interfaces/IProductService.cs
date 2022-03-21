@@ -1,6 +1,8 @@
-﻿using IComp.Service.DTOs;
+﻿using IComp.Core.Entities;
+using IComp.Service.DTOs;
 using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.DTOs.CategoryDTOs;
+using IComp.Service.DTOs.ColorDTOs;
 using IComp.Service.DTOs.DestinationDTOs;
 using IComp.Service.DTOs.HardDiscCapacityDTOs;
 using IComp.Service.DTOs.HardDiscDTOs;
@@ -11,6 +13,7 @@ using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
 using IComp.Service.DTOs.ProdTypeDTOs;
 using IComp.Service.DTOs.ProductDTOs;
+using IComp.Service.DTOs.SoftwareDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
 using System;
@@ -27,7 +30,8 @@ namespace IComp.Service.Interfaces
         PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
         decimal FilterByPrice(string val);
         Task<ProductGetDTO> FindByIdAsync(int id);
-        
+        List<ColorGetDto> GetColors();
+        List<SoftwareGetDto> GetSoftwares();
         List<ProcessorGetDto> GetProcessors();
         List<CategoryGetDto> GetCategories();
         List<BrandGetDto> GetBrands();
@@ -44,7 +48,7 @@ namespace IComp.Service.Interfaces
         
 
         
-        Task UpdateAsync(int id, ProductPostDto postDTO);
+        Task UpdateAsync(int id, ProductPostDto exisProduct);
         Task DeleteAsync(int id);
         Task RestoreAsync(int id);
         Task<ProductPostDto> GetByIdAsync(int id);

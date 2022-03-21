@@ -2,6 +2,7 @@
 using IComp.Core.Entities;
 using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.DTOs.CategoryDTOs;
+using IComp.Service.DTOs.ColorDTOs;
 using IComp.Service.DTOs.DestinationDTOs;
 using IComp.Service.DTOs.HardDiscCapacityDTOs;
 using IComp.Service.DTOs.HardDiscDTOs;
@@ -12,6 +13,7 @@ using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
 using IComp.Service.DTOs.ProdTypeDTOs;
 using IComp.Service.DTOs.ProductDTOs;
+using IComp.Service.DTOs.SoftwareDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
 using System;
@@ -66,6 +68,9 @@ namespace IComp.Service.Profiles
             CreateMap<ProductPostDto, Product>();
             CreateMap<Product, ProductPostDto>();
             CreateMap<Product, ProductGetDTO>();
+
+            CreateMap<Color, ColorGetDto>();
+            CreateMap<Software, SoftwareGetDto>();
 
         }
     }

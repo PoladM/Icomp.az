@@ -9,6 +9,8 @@ namespace IComp.Service.DTOs.MemoryDTOs
     {
         public int Id { get; set; }
         public string ModelName { get; set; }
+        public bool IsDeleted { get; set; }
+
         public List<Product> Products { get; set; }
     }
 }

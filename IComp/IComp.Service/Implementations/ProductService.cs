@@ -5,6 +5,7 @@ using IComp.Data;
 using IComp.Service.DTOs;
 using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.DTOs.CategoryDTOs;
+using IComp.Service.DTOs.ColorDTOs;
 using IComp.Service.DTOs.DestinationDTOs;
 using IComp.Service.DTOs.HardDiscCapacityDTOs;
 using IComp.Service.DTOs.HardDiscDTOs;
@@ -15,6 +16,7 @@ using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
 using IComp.Service.DTOs.ProdTypeDTOs;
 using IComp.Service.DTOs.ProductDTOs;
+using IComp.Service.DTOs.SoftwareDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
 using IComp.Service.Exceptions;
@@ -170,7 +172,7 @@ namespace IComp.Service.Implementations
 
         public async Task<ProductPostDto> GetByIdAsync(int id)
         {
-            var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id);
+            var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages");
 
             if (product == null)
             {
@@ -181,7 +183,7 @@ namespace IComp.Service.Implementations
         }
         public async Task<ProductGetDTO> FindByIdAsync(int id)
         {
-            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor", "VideoCard", "MotherBoard", "ProdType", "ProdMemory", "Brand", "Destination", "HardDisc", "Category", "Color", "Software", "ProductImages");
+            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "Category", "Color", "Software", "ProductImages");
 
             if (existProduct == null)
             {
@@ -274,23 +276,49 @@ namespace IComp.Service.Implementations
             await _unitOfWork.CommitAsync();
         }
 
-        public async Task UpdateAsync(int id, ProductPostDto postDTO)
+        public async Task UpdateAsync(int id, ProductPostDto postDto)
         {
-            var existProd = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id && !x.IsDeleted);
+            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id && !x.IsDeleted);
 
-            if (existProd == null)
+            if (existProduct == null)
             {
                 throw new ItemNotFoundException("Item not found or deleted");
             }
-            if (await _unitOfWork.ProductRepository.IsExistAsync(x => x.Id != id && x.Name.ToLower().Trim() == postDTO.Name.ToLower().Trim() && !x.IsDeleted))
+            if (await _unitOfWork.ProductRepository.IsExistAsync(x => x.Id != id && x.Name.ToLower().Trim() == postDto.Name.ToLower().Trim() && !x.IsDeleted))
             {
-                throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.Name);
+                throw new RecordDuplicatedException("ModelName already exist with name " + postDto.Name);
             }
 
-            existProd.Name = postDTO.Name;
-            existProd.SalePrice = postDTO.SalePrice;
-            existProd.Count = postDTO.Count;
-            existProd.IsAvailable = postDTO.IsAvailable;
+            existProduct.ProcessorId = postDto.ProcessorId;
+            existProduct.CategoryId = postDto.CategoryId;
+            existProduct.BrandId = postDto.BrandId;
+            existProduct.DestinationId = postDto.DestinationId;
+            existProduct.HardDiscId = postDto.HardDiscId;
+            existProduct.ProdMemoryId = postDto.ProdMemoryId;
+            existProduct.MotherBoardId = postDto.MotherBoardId;
+            existProduct.ProdTypeId = postDto.ProdTypeId;
+            existProduct.VideoCardId = postDto.VideoCardId;
+            existProduct.ColorId = postDto.ColorId;
+            existProduct.SoftwareId = postDto.SoftwareId;
+            existProduct.Name = postDto.Name;
+            existProduct.SalePrice = postDto.SalePrice;
+            existProduct.CostPrice = postDto.CostPrice;
+            existProduct.DiscountPercent = postDto.DiscountPercent;
+            existProduct.Count = postDto.Count;
+            existProduct.IsAvailable = postDto.IsAvailable;
+            existProduct.IsNew = postDto.IsNew;
+            existProduct.IsFeatured = postDto.IsFeatured;
+            existProduct.IsPopular = postDto.IsPopular;
+            existProduct.HasBluetooth = postDto.HasBluetooth;
+            existProduct.HasWifi = postDto.HasWifi;
+            existProduct.SoundType = postDto.SoundType;
+            existProduct.InputPorts = postDto.InputPorts;
+            existProduct.USB = postDto.USB;
+            existProduct.USBTypeC = postDto.USBTypeC;
+            existProduct.Network = postDto.Network;
+            existProduct.PowerSupply = postDto.PowerSupply;
+            existProduct.Weight = postDto.Weight;
+            existProduct.WarrantyPeriod = postDto.WarrantyPeriod;
 
             await _unitOfWork.CommitAsync();
         }
@@ -327,6 +355,20 @@ namespace IComp.Service.Implementations
             return serieGetDtos;
         }
 
-        
+        public List<ColorGetDto> GetColors()
+        {
+            var colors = _unitOfWork.ColorRepository.GetAll().ToList();
+
+            var colorGetDtos = _mapper.Map<List<ColorGetDto>>(colors);
+            return colorGetDtos;
+        }
+
+        public List<SoftwareGetDto> GetSoftwares()
+        {
+            var softwares = _unitOfWork.SoftWareRepository.GetAll().ToList();
+
+            var softwareGetDtos = _mapper.Map<List<SoftwareGetDto>>(softwares);
+            return softwareGetDtos;
+        }
     }
 }

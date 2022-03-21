@@ -28,10 +28,9 @@ namespace IComp.Service.DTOs.ProductDTOs
         public decimal DiscountPercent { get; set; }
 
         public int Count { get; set; }
-        [Range(1, 5)]
-        public int Rate { get; set; }
 
         public bool IsAvailable { get; set; }
+        public bool IsDeleted { get; set; }
         public bool IsNew { get; set; }
         public bool IsFeatured { get; set; }
         public bool IsPopular { get; set; }
@@ -76,6 +75,7 @@ namespace IComp.Service.DTOs.ProductDTOs
         public Software Software { get; set; }
         public IFormFile PosterFile { get; set; }
         public List<IFormFile> ImageFiles { get; set; }
+        public List<int> FileIds { get; set; }
         public List<ProductImage> ProductImages { get; set; }
 
     }

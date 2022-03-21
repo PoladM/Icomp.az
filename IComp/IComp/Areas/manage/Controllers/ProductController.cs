@@ -6,6 +6,7 @@ using IComp.Service.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IComp.Areas.manage.Controllers
@@ -24,7 +25,7 @@ namespace IComp.Areas.manage.Controllers
 
         public IActionResult Index(int page = 1)
         {
-            
+
             return View(_productService.GetAllProd(page));
         }
         public IActionResult Create()
@@ -39,6 +40,8 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.VideoCards = _productService.GetVideoCards();
             ViewBag.Destinations = _productService.GetDestinations();
             ViewBag.ProdTypes = _productService.GetProdTypes();
+            ViewBag.Colors = _productService.GetColors();
+            ViewBag.Softwares = _productService.GetSoftwares();
 
             return View();
         }
@@ -54,6 +57,8 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.VideoCards = _productService.GetVideoCards();
             ViewBag.Destinations = _productService.GetDestinations();
             ViewBag.ProdTypes = _productService.GetProdTypes();
+            ViewBag.Colors = _productService.GetColors();
+            ViewBag.Softwares = _productService.GetSoftwares();
 
             if (!ModelState.IsValid)
             {
@@ -119,6 +124,165 @@ namespace IComp.Areas.manage.Controllers
             }
 
             var getDto = await _productService.CreateAsync(postDto);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var existProduct = await _productService.GetByIdAsync(id);
+
+            ViewBag.Processors = _productService.GetProcessors();
+            ViewBag.Brands = _productService.GetBrands();
+            ViewBag.Memories = _productService.GetMemories();
+            ViewBag.Categories = _productService.GetCategories();
+            ViewBag.HardDiscs = _productService.GetHardDiscs();
+            ViewBag.MotherBoards = _productService.GetMotherBoards();
+            ViewBag.VideoCards = _productService.GetVideoCards();
+            ViewBag.Destinations = _productService.GetDestinations();
+            ViewBag.ProdTypes = _productService.GetProdTypes();
+            ViewBag.Colors = _productService.GetColors();
+            ViewBag.Softwares = _productService.GetSoftwares();
+
+            return View(existProduct);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, ProductPostDto postDto)
+        {
+            var existProduct = await _productService.GetByIdAsync(id);
+
+            ViewBag.Processors = _productService.GetProcessors();
+            ViewBag.Brands = _productService.GetBrands();
+            ViewBag.Memories = _productService.GetMemories();
+            ViewBag.Categories = _productService.GetCategories();
+            ViewBag.HardDiscs = _productService.GetHardDiscs();
+            ViewBag.MotherBoards = _productService.GetMotherBoards();
+            ViewBag.VideoCards = _productService.GetVideoCards();
+            ViewBag.Destinations = _productService.GetDestinations();
+            ViewBag.ProdTypes = _productService.GetProdTypes();
+            ViewBag.Colors = _productService.GetColors();
+            ViewBag.Softwares = _productService.GetSoftwares();
+
+
+            var processors = _productService.GetProcessors();
+            var brands = _productService.GetBrands();
+            var memories = _productService.GetMemories();
+            var categories = _productService.GetCategories();
+            var hardDiscs = _productService.GetHardDiscs();
+            var motherBoards = _productService.GetMotherBoards();
+            var videoCards = _productService.GetVideoCards();
+            var destinations = _productService.GetDestinations();
+            var prodTypes = _productService.GetProdTypes();
+            var colors = _productService.GetColors();
+            var softwares = _productService.GetSoftwares();
+
+            if (!processors.Any(x => x.Id == postDto.ProcessorId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("ProcessorId", "Processor not found");
+            }
+            if(!brands.Any(x => x.Id == postDto.BrandId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("BrandId", "Brand not found");
+            }
+            if (!memories.Any(x => x.Id == postDto.ProdMemoryId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("ProdMemoryId", "Memory not found");
+            }
+            if (!categories.Any(x => x.Id == postDto.CategoryId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("CategoryId", "Category not found");
+            }
+            if (!hardDiscs.Any(x => x.Id == postDto.HardDiscId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("HardDiscId", "Harddisc not found");
+            }
+            if (!motherBoards.Any(x => x.Id == postDto.MotherBoardId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("MotherBoardId", "MotherBoard not found");
+            }
+            if (!videoCards.Any(x => x.Id == postDto.VideoCardId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("VideoCardId", "VideoCard not found");
+            }
+            if (!destinations.Any(x => x.Id == postDto.DestinationId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("DestinationId", "Destination not found");
+            }
+            if (!prodTypes.Any(x => x.Id == postDto.ProdTypeId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("ProdTypeId", "productType not found");
+            }
+            if (!colors.Any(x => x.Id == postDto.ColorId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("ColoId", "color not found");
+            }
+            if (!softwares.Any(x => x.Id == postDto.SoftwareId && !x.IsDeleted))
+            {
+                ModelState.AddModelError("SoftwareId", "Os not found");
+            }
+
+            if (postDto.PosterFile != null && postDto.PosterFile.ContentType != "image/jpeg" && postDto.PosterFile.ContentType != "image/png")
+            {
+                ModelState.AddModelError("PosterFile", "file type must be image/jpeg or image/png");
+                return View();
+            }
+
+            if (postDto.PosterFile != null && postDto.PosterFile.Length > 2097152)
+            {
+                ModelState.AddModelError("PosterFile", "file size must be less than 2mb");
+                return View();
+            }
+
+            if (postDto.ImageFiles != null)
+            {
+                foreach (var file in postDto.ImageFiles)
+                {
+                    if (file.ContentType != "image/jpeg" && file.ContentType != "image/png")
+                    {
+                        ModelState.AddModelError("Files", "file type must be image/jpeg or image/png");
+                        return View();
+                    }
+
+                    if (file.Length > 2097152)
+                    {
+                        ModelState.AddModelError("Files", "file size must be less than 2mb");
+                        return View();
+                    }
+                }
+            }
+
+            ProductImage poster = existProduct.ProductImages.FirstOrDefault(x => x.PosterStatus == true);
+
+            if (postDto.PosterFile != null)
+            {
+                string newPosterImg = FileManager.Save(_env.WebRootPath, "uploads/products", postDto.PosterFile);
+                if (poster != null)
+                {
+                    FileManager.Delete(_env.WebRootPath, "uploads/products", poster.Image);
+                    poster.Image = newPosterImg;
+                }
+                else
+                {
+                    poster = new ProductImage { Image = newPosterImg, PosterStatus = true };
+                    existProduct.ProductImages.Add(poster);
+                }
+            }
+
+            existProduct.ProductImages.RemoveAll(x => x.PosterStatus == null && !postDto.FileIds.Contains(x.Id));
+
+            if (postDto.ImageFiles != null)
+            {
+                foreach (var file in postDto.ImageFiles)
+                {
+                    ProductImage productImage = new ProductImage
+                    {
+                        PosterStatus = null,
+                        Image = FileManager.Save(_env.WebRootPath, "uploads/products", file)
+                    };
+                    existProduct.ProductImages.Add(productImage);
+                }
+            }
+
+            await _productService.UpdateAsync(id, existProduct);
             return RedirectToAction("Index");
         }
     }

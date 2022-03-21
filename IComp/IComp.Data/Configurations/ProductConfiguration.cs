@@ -24,6 +24,7 @@ namespace IComp.Data.Configurations
             builder.Property(x => x.CostPrice).HasColumnType("decimal(18,2)").IsRequired();
             builder.Property(x => x.SalePrice).HasColumnType("decimal(18,2)").IsRequired();
             builder.Property(x => x.DiscountPercent).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(x => x.Rate).IsRequired(false);
             
         }
     }

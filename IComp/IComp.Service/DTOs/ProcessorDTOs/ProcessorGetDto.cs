@@ -8,5 +8,6 @@ namespace IComp.Service.DTOs.ProcessorDTOs
     {
         public int Id { get; set; }
         public string ModelName { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

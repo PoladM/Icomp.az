@@ -8,5 +8,7 @@ namespace IComp.Service.DTOs.HardDiscDTOs
     {
         public int Id { get; set; }
         public string ModelName { get; set; }
+        public bool IsDeleted { get; set; }
+
     }
 }

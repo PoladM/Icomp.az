@@ -26,6 +26,7 @@ namespace IComp.Data
         private ProdTypeRepository _prodTypeRepository;
         private DestinationRepository _destinationRepository;
         private ColorRepository _colorRepository;
+        private SoftWareRepository _softwareWareRepository;
 
         public UnitOfWork(StoreDbContext context)
         {
@@ -61,6 +62,8 @@ namespace IComp.Data
         public IDestinationRepository DestinationRepository => _destinationRepository ?? new DestinationRepository(_context);
 
         public IColorRepository ColorRepository => _colorRepository ?? new ColorRepository(_context);
+
+        public ISoftWareRepository SoftWareRepository => _softwareWareRepository ?? new SoftWareRepository(_context);
         public int Commit()
         {
             return _context.SaveChanges();

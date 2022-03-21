@@ -52,7 +52,7 @@
                     <div class="col-lg-9">
                         <div class="content-heading">
                             <h2>
-                                HP ProDesk 400 G7 (11M80EA) Desktop PC
+                                @Model.Name
                             </h2>
                         </div>
                         <!-- Detail start -->
@@ -60,28 +60,31 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="product-image-box">
+
                                         <div class="product-detail-image">
-                                            <img src="assets/img/Products/medium_11m80ea-1.webp" alt="">
+                                            <img src="~/uploads/products/@Model.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
                                         </div>
                                         <div class="product-image-nav">
+
                                             <ul>
-                                                <li>
-                                                    <img src="assets/img/Products/medium_11m80ea-1.webp" alt="">
-                                                </li>
-                                                <li>
-                                                    <img src="assets/img/Products/medium_11m80ea-1.webp" alt="">
-                                                </li>
+                                                @foreach (var item in Model.ProductImages.Where(x => x.PosterStatus == null))
+                                                {
+                                                    <li>
+                                                        <img src="~/uploads/products/@item?.Image" alt="">
+                                                    </li>
+                                                }
                                             </ul>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="product-detail-box">
                                         <div class="product-detail-desc">
-                                            <p>i7-10700 | 8GB DDR4 | 512 GB SSD | Intel UHD | Windows 10</p>
+                                            <p>@Model.Processor.ModelName | @Model.ProdMemory.MemoryCapacity?.Capacity @Model.ProdMemory.DDRType | @Model.HardDisc.HDDCapacity?.Capacity @Model.HardDisc.ModelName | @Model.MotherBoard.ModelName | @Model.Software.Name</p>
                                         </div>
                                         <div class="product-detail-price">
-                                            <p><span>2199</span>azn</p>
+                                            <p><span>@Model.SalePrice</span>azn</p>
                                         </div>
                                         <div class="product-detail-features">
                                             <div class="prod-detail">
@@ -90,7 +93,7 @@
                                                         <p>Tip</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>Kompüter</p>
+                                                        <p>@Model.ProdType.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -98,7 +101,7 @@
                                                         <p>Brand</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>iComp</p>
+                                                        <p>@Model.Brand.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -106,7 +109,7 @@
                                                         <p>Rəng</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>Qara</p>
+                                                        <p>@Model.Color.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -114,7 +117,7 @@
                                                         <p>Təyinat</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>Gaming</p>
+                                                        <p>@Model.Destination.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -124,7 +127,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>Intel® H310</p>
+                                                        <p>@Model.MotherBoard.ModelName</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -142,15 +145,14 @@
                                     <div class="tab-content">
                                         <ul class="prodNav">
                                             <li id="pTab1" class="ptItem active">
-                                                TƏSVİR HP PRODESK 400 G7 (11M80EA)
-                                                DESKTOP PC
+                                                TƏSVİR @Model.Name
                                             </li>
                                             <li id="pTab2" class="ptItem ">Reviews</li>
                                         </ul>
                                         <div class="prodBody">
                                             <div class="prodMain active" id="pTab1C">
                                                 <p class="mg-b">
-                                                    HP ProDesk 400 G7 (11M80EA) modelini Azərbaycanda ən ucuz qiymətə
+                                                    @Model.Name modelini Azərbaycanda ən ucuz qiymətə
                                                     iComp internet mağazasından əldə edin. Bizim mağazada yalnız
                                                     dünyanın aparıcı istehsalçılarının rəsmi zəmanətli məhsullarının
                                                     satışı həyata keçirilir. Mağazamızda həm nəğd, həm də kreditlə
@@ -163,13 +165,13 @@
 
                                                 </p>
                                                 <p class="mg-b">
-                                                    Siz HP ProDesk 400 G7 (11M80EA) modelini Bakıda yerləşən
+                                                    Siz @Model.Name modelini Bakıda yerləşən
                                                     mağazamızdan götürə və ya ünvana çatdırılma sifariş edə
                                                     bilərsiniz.
 
                                                 </p>
                                                 <p class="mg-b">
-                                                    HP ProDesk 400 G7 (11M80EA) kreditlə hissə-hissə ödəmə ilə
+                                                    @Model.Name kreditlə hissə-hissə ödəmə ilə
                                                     dükanımızdan almaq imkanına maliksiniz.
 
                                                 </p>
@@ -190,7 +192,7 @@
                                                             <p>Tip</p>
                                                         </div>
                                                         <div class="option-value">
-                                                            <p>Kompüter</p>
+                                                            <p>@Model.ProdType.Name</p>
                                                         </div>
                                                     </div>
                                                     <div class="option-info">
@@ -198,7 +200,7 @@
                                                             <p>Brand</p>
                                                         </div>
                                                         <div class="option-value">
-                                                            <p>HP</p>
+                                                            <p>@Model.Brand.Name</p>
                                                         </div>
                                                     </div>
                                                     <div class="option-info">
@@ -207,7 +209,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                HP ProDesk 400 G7 (11M80EA)
+                                                                @Model.Name
                                                             </p>
                                                         </div>
                                                     </div>
@@ -216,7 +218,7 @@
                                                             <p>Rəng</p>
                                                         </div>
                                                         <div class="option-value">
-                                                            <p>Qara</p>
+                                                            <p>@Model.Color.Name</p>
                                                         </div>
                                                     </div>
                                                     <div class="option-head">
@@ -232,7 +234,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                Windows 10
+                                                                @Model.Software.Name
                                                             </p>
                                                         </div>
                                                     </div>
@@ -249,7 +251,19 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                Core i7
+                                                                @Model.Processor.ModelName
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Prosessor sürəti
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                @Model.Processor.Speed
                                                             </p>
                                                         </div>
                                                     </div>
@@ -261,22 +275,11 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                8 GB
+                                                                @Model.ProdMemory.MemoryCapacity.Capacity
                                                             </p>
                                                         </div>
                                                     </div>
-                                                    <div class="option-info">
-                                                        <div class="option-name">
-                                                            <p>
-                                                                Prosessor
-                                                            </p>
-                                                        </div>
-                                                        <div class="option-value">
-                                                            <p>
-                                                                Core i7
-                                                            </p>
-                                                        </div>
-                                                    </div>
+
                                                     <div class="option-info">
                                                         <div class="option-name">
                                                             <p>
@@ -285,7 +288,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                DDR4 8 GB 2933 MHz
+                                                                @Model.ProdMemory.DDRType @Model.ProdMemory.MemoryCapacity.Capacity @Model.ProdMemory.Speed
                                                             </p>
                                                         </div>
                                                     </div>
@@ -297,7 +300,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                Daxili
+                                                                @Model.VideoCard.ModelName
                                                             </p>
                                                         </div>
                                                     </div>
@@ -310,7 +313,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                Daxili səs kartı
+                                                                @Model.SoundType
                                                             </p>
                                                         </div>
                                                     </div>
@@ -322,12 +325,71 @@
                                                     <div class="option-info">
                                                         <div class="option-name">
                                                             <p>
-                                                                SSD (Sərt səthli disk)
+                                                                @(Model.HardDisc.HDDCapacity?.IsSSD == true? "SSD" : "HDD")
                                                             </p>
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                512 GB
+                                                                @Model.HardDisc.HDDCapacity?.Capacity
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-head">
+                                                        <h5>
+                                                            Şəbəkə
+                                                        </h5>
+                                                    </div>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Şəbəkə
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                @Model.Network
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-info">
+
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Simsiz əlaqə
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                @(Model.HasWifi == true ? "✔" : "-")
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-head">
+                                                        <h5>
+                                                            Əlavə
+                                                        </h5>
+                                                    </div>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Şəbəkə
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                @Model.PowerSupply
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Zəmanət müddəti
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                @Model.WarrantyPeriod
                                                             </p>
                                                         </div>
                                                     </div>
@@ -422,7 +484,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="assets/img/Services/s1.png" alt="">
+                                <img src="~/assets/img/Services/s1.png" alt="">
                             </div>
                             <div class="services__title">
                                 <h6>Sürətli çatdırılma</h6>
@@ -433,7 +495,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="assets/img/Services/s2.png" alt="">
+                                <img src="~/assets/img/Services/s2.png" alt="">
                             </div>
                             <div class="services__title">
                                 <h6>RƏSMİ ZƏMANƏT</h6>
@@ -445,7 +507,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="assets/img/Services/s3.png" alt="">
+                                <img src="~/assets/img/Services/s3.png" alt="">
                             </div>
                             <div class="services__title">
                                 <h6>KREDİTLƏ SATIŞ</h6>
@@ -457,7 +519,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="assets/img/Services/s4.png" alt="">
+                                <img src="~/assets/img/Services/s4.png" alt="">
                             </div>
                             <div class="services__title">
                                 <h6>YÜKSƏK KEYFİYYƏT</h6>

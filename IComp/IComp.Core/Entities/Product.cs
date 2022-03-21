@@ -29,7 +29,7 @@ namespace IComp.Core.Entities
 
         public int Count { get; set; }
         [Range(1,5)]
-        public int Rate { get; set; }
+        public int? Rate { get; set; }
 
         public bool IsAvailable { get; set; }
         public bool IsNew { get; set; }
@@ -80,6 +80,8 @@ namespace IComp.Core.Entities
         public IFormFile PosterFile { get; set; }
         [NotMapped]
         public List<IFormFile> ImageFiles { get; set; }
+        [NotMapped]
+        public List<int> FileIds { get; set; }
 
         public List<ProductImage> ProductImages { get; set; }
     }
