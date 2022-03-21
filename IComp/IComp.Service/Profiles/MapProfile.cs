@@ -65,6 +65,7 @@ namespace IComp.Service.Profiles
 
             CreateMap<ProductPostDto, Product>();
             CreateMap<Product, ProductPostDto>();
+            CreateMap<Product, ProductGetDTO>();
 
         }
     }

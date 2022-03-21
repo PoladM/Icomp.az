@@ -35,11 +35,11 @@ namespace IComp.Data.Repositories
         {
             if (AscOrDesc == "price_low")
             {
-                return query.OrderByDescending(x => x.Price);
+                return query.OrderByDescending(x => x.SalePrice);
             }
             else
             {
-                return query.OrderBy(x => x.Price);
+                return query.OrderBy(x => x.SalePrice);
             }
         }
 
@@ -50,11 +50,11 @@ namespace IComp.Data.Repositories
             {
                 if (val == "max")
                 {
-                    return products.Max(x => x.Price);
+                    return products.Max(x => x.SalePrice);
                 }
                 else if (val == "min")
                 {
-                    return products.Min(x => x.Price);
+                    return products.Min(x => x.SalePrice);
                 }
             }
             return 0;

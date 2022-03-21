@@ -22,6 +22,7 @@ namespace IComp.Core
         IProductRepository ProductRepository { get; }
         IProdTypeRepository ProdTypeRepository { get; }
         IDestinationRepository DestinationRepository { get; }
+        IColorRepository ColorRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

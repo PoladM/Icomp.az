@@ -15,8 +15,15 @@ namespace IComp.Data.Configurations
             builder.Property(x => x.CreatedAt).HasDefaultValueSql("GETUTCDATE()");
             builder.Property(x => x.ModifiedAt).HasDefaultValueSql("GETUTCDATE()");
             builder.Property(x => x.IsAvailable).HasDefaultValue(false);
+            builder.Property(x => x.IsNew).HasDefaultValue(false);
+            builder.Property(x => x.IsFeatured).HasDefaultValue(false);
+            builder.Property(x => x.IsPopular).HasDefaultValue(false);
+            builder.Property(x => x.HasBluetooth).HasDefaultValue(false);
+            builder.Property(x => x.HasWifi).HasDefaultValue(false);
             builder.Property(x => x.Name).HasMaxLength(100).IsRequired();
-            builder.Property(x => x.Price).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(x => x.CostPrice).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(x => x.SalePrice).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(x => x.DiscountPercent).HasColumnType("decimal(18,2)").IsRequired();
             
         }
     }

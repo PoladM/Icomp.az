@@ -28,6 +28,9 @@ namespace IComp.Data
         public DbSet<HardDisc> HardDiscs { get; set; }
         public DbSet<HDDCapacity> HDDCapacities { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<Setting> Settings { get; set; }
+        public DbSet<Software> Softwares { get; set; }
+        public DbSet<Color> Colors { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

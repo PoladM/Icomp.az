@@ -78,7 +78,7 @@ namespace IComp.Service.Implementations
 
             var pageSize = 3;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.Price, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -148,11 +148,11 @@ namespace IComp.Service.Implementations
             }
 
             if (minprice != null && maxprice != null)
-                query = query.Where(x => x.Price >= minprice && x.Price <= maxprice);
+                query = query.Where(x => x.SalePrice >= minprice && x.SalePrice <= maxprice);
 
             var pageSize = pagesize ?? 3;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.Price, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -178,6 +178,17 @@ namespace IComp.Service.Implementations
             }
 
             return _mapper.Map<ProductPostDto>(product);
+        }
+        public async Task<ProductGetDTO> FindByIdAsync(int id)
+        {
+            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor", "VideoCard", "MotherBoard", "ProdType", "ProdMemory", "Brand", "Destination", "HardDisc", "Category", "Color", "Software", "ProductImages");
+
+            if (existProduct == null)
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
+            return _mapper.Map<ProductGetDTO>(existProduct);
         }
         public List<BrandGetDto> GetBrands()
         {
@@ -277,7 +288,7 @@ namespace IComp.Service.Implementations
             }
 
             existProd.Name = postDTO.Name;
-            existProd.Price = postDTO.Price;
+            existProd.SalePrice = postDTO.SalePrice;
             existProd.Count = postDTO.Count;
             existProd.IsAvailable = postDTO.IsAvailable;
 
@@ -315,5 +326,7 @@ namespace IComp.Service.Implementations
             var serieGetDtos = _mapper.Map<List<VCSerieGetDto>>(series);
             return serieGetDtos;
         }
+
+        
     }
 }

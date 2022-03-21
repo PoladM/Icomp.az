@@ -26,6 +26,8 @@ namespace IComp.Service.Interfaces
         PaginatedListDto<ProductListItemDto> GetAllProd(int page);
         PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
         decimal FilterByPrice(string val);
+        Task<ProductGetDTO> FindByIdAsync(int id);
+        
         List<ProcessorGetDto> GetProcessors();
         List<CategoryGetDto> GetCategories();
         List<BrandGetDto> GetBrands();
@@ -35,7 +37,6 @@ namespace IComp.Service.Interfaces
         List<VideoCardGetDto> GetVideoCards();
         List<ProdTypeGetDto> GetProdTypes();
         List<DestinationGetDto> GetDestinations();
-
         List<ProcessorSerieGetDto> GetProcessirSeries();
         List<HardDiscCapacityGetDto> GetHardDiscCapacities();
         List<MCapacityGetDto> GetMemoryCapacities();
