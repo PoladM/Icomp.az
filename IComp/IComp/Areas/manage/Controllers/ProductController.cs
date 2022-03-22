@@ -179,7 +179,7 @@ namespace IComp.Areas.manage.Controllers
             {
                 ModelState.AddModelError("ProcessorId", "Processor not found");
             }
-            if(!brands.Any(x => x.Id == postDto.BrandId && !x.IsDeleted))
+            if (!brands.Any(x => x.Id == postDto.BrandId && !x.IsDeleted))
             {
                 ModelState.AddModelError("BrandId", "Brand not found");
             }
@@ -223,13 +223,13 @@ namespace IComp.Areas.manage.Controllers
             if (postDto.PosterFile != null && postDto.PosterFile.ContentType != "image/jpeg" && postDto.PosterFile.ContentType != "image/png")
             {
                 ModelState.AddModelError("PosterFile", "file type must be image/jpeg or image/png");
-                return View();
+                return View(existProduct);
             }
 
             if (postDto.PosterFile != null && postDto.PosterFile.Length > 2097152)
             {
                 ModelState.AddModelError("PosterFile", "file size must be less than 2mb");
-                return View();
+                return View(existProduct);
             }
 
             if (postDto.ImageFiles != null)
@@ -267,7 +267,8 @@ namespace IComp.Areas.manage.Controllers
                 }
             }
 
-            existProduct.ProductImages.RemoveAll(x => x.PosterStatus == null && !postDto.FileIds.Contains(x.Id));
+            //not working
+            //existProduct.ProductImages.RemoveAll(x => x.PosterStatus == null && !postDto.FileIds.Contains(x.Id));
 
             if (postDto.ImageFiles != null)
             {
@@ -282,8 +283,50 @@ namespace IComp.Areas.manage.Controllers
                 }
             }
 
+            existProduct.ProcessorId = postDto.ProcessorId;
+            existProduct.CategoryId = postDto.CategoryId;
+            existProduct.BrandId = postDto.BrandId;
+            existProduct.DestinationId = postDto.DestinationId;
+            existProduct.HardDiscId = postDto.HardDiscId;
+            existProduct.ProdMemoryId = postDto.ProdMemoryId;
+            existProduct.MotherBoardId = postDto.MotherBoardId;
+            existProduct.ProdTypeId = postDto.ProdTypeId;
+            existProduct.VideoCardId = postDto.VideoCardId;
+            existProduct.ColorId = postDto.ColorId;
+            existProduct.SoftwareId = postDto.SoftwareId;
+            existProduct.Name = postDto.Name;
+            existProduct.SalePrice = postDto.SalePrice;
+            existProduct.CostPrice = postDto.CostPrice;
+            existProduct.DiscountPercent = postDto.DiscountPercent;
+            existProduct.Count = postDto.Count;
+            existProduct.IsAvailable = postDto.IsAvailable;
+            existProduct.IsNew = postDto.IsNew;
+            existProduct.IsFeatured = postDto.IsFeatured;
+            existProduct.IsPopular = postDto.IsPopular;
+            existProduct.HasBluetooth = postDto.HasBluetooth;
+            existProduct.HasWifi = postDto.HasWifi;
+            existProduct.SoundType = postDto.SoundType;
+            existProduct.InputPorts = postDto.InputPorts;
+            existProduct.USB = postDto.USB;
+            existProduct.USBTypeC = postDto.USBTypeC;
+            existProduct.Network = postDto.Network;
+            existProduct.PowerSupply = postDto.PowerSupply;
+            existProduct.Weight = postDto.Weight;
+            existProduct.WarrantyPeriod = postDto.WarrantyPeriod;
+
             await _productService.UpdateAsync(id, existProduct);
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteImage(int id)
+        {
+            var productImage = await _productService.GetProductImage(id);
+
+            FileManager.Delete(_env.WebRootPath, "uploads/products", productImage.Image);
+
+            await _productService.DeleteProductImage(productImage);
+
+            return Ok();
         }
     }
 }

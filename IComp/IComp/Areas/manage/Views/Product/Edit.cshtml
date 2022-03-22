@@ -191,14 +191,14 @@
                     <label asp-for="ImageFiles">Files</label>
                     <input class="form-control" asp-for="ImageFiles" placeholder="Enter ImageFile">
                     <span class="text-danger" asp-validation-for="ImageFiles"></span>
-                     @foreach (var item in Model.ProductImages.Where(x => x.PosterStatus == null))
-                        {
-                            <div class="img-box mt-2" style="position:relative;display:inline-block">
-                                <i class="fas fa-times remove-img-box" style="position: absolute;right: -5px;top: -8px; color: red; cursor: pointer;"></i>
-                                <input type="hidden" name="FileIds[]" value="@item.Id" />
-                                <img width="100" src="~/uploads/products/@item.Image" />
-                            </div>
-                        }
+                    @foreach (var item in Model.ProductImages.Where(x => x.PosterStatus == null))
+                    {
+                        <div class="img-box mt-2" style="position:relative;display:inline-block">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <a class="remove-action" asp-action="deleteimage" asp-route-id="@item.Id" style="position: absolute;right: -5px;top: -8px; color: red; cursor: pointer;">x</a>
+                            <img width="100" src="~/uploads/products/@item.Image" />
+                        </div>
+                    }
                 </div>
                 <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
             </form>
@@ -207,12 +207,24 @@
 </div>
 
 @section Scripts{
-    <script>
+<script>
     $(document).ready(function () {
-        $(document).on("click", ".remove-img-box", function () {
-            $(this).parent().remove()
+        $(document).on("click", ".remove-action", function (e) {
+            e.preventDefault();
+            var url = $(this).attr("href");
+
+            fetch(url)
+            .then(response => {
+                if(response.ok){
+                    alert("Image removed")
+                    $(this).next().remove();
+                }
+                else{
+                    alert("something went wrong")
+                }
+            })
         })
     })
-    </script>
+</script>
 }
 

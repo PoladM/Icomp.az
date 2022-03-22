@@ -52,5 +52,8 @@ namespace IComp.Service.Interfaces
         Task DeleteAsync(int id);
         Task RestoreAsync(int id);
         Task<ProductPostDto> GetByIdAsync(int id);
+        Task<ProductImage> GetProductImage(int id);
+        Task DeleteProductImage(ProductImage productImage);
+
     }
 }

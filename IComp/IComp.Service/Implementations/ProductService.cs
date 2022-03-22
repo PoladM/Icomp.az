@@ -319,6 +319,7 @@ namespace IComp.Service.Implementations
             existProduct.PowerSupply = postDto.PowerSupply;
             existProduct.Weight = postDto.Weight;
             existProduct.WarrantyPeriod = postDto.WarrantyPeriod;
+            existProduct.ProductImages = postDto.ProductImages;
 
             await _unitOfWork.CommitAsync();
         }
@@ -369,6 +370,25 @@ namespace IComp.Service.Implementations
 
             var softwareGetDtos = _mapper.Map<List<SoftwareGetDto>>(softwares);
             return softwareGetDtos;
+        }
+
+        public async Task<ProductImage> GetProductImage(int id)
+        {
+            var productImage = await _unitOfWork.ProductImageRepository.GetAsync(x => x.Id == id);
+
+            if (productImage == null)
+            {
+                throw new ItemNotFoundException("Item not Found");
+            }
+
+            return productImage;
+        }
+
+        public async Task DeleteProductImage(ProductImage productImage)
+        {
+            _unitOfWork.ProductImageRepository.Remove(productImage);
+
+            await _unitOfWork.CommitAsync();
         }
     }
 }
