@@ -45,7 +45,7 @@ namespace IComp.Service.Interfaces
         List<HardDiscCapacityGetDto> GetHardDiscCapacities();
         List<MCapacityGetDto> GetMemoryCapacities();
         List<VCSerieGetDto> GetVideoCardSeries();
-        
+        Dictionary<string, string> GetSettings();
 
         
         Task UpdateAsync(int id, ProductPostDto exisProduct);

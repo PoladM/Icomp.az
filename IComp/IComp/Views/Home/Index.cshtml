@@ -96,27 +96,16 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="popular-brands__box">
-                                        <div class="box-item">
-                                            <a href=""><img src="~/assets/img/Brands/Asus.png" alt=""></a>
-                                        </div>
-                                        <div class="box-item">
-                                            <a href=""><img src="~/assets/img/Brands/HP.png" alt=""></a>
-                                        </div>
-                                        <div class="box-item">
-                                            <a href=""><img src="~/assets/img/Brands/Lenovo.png" alt=""></a>
-                                        </div>
-                                        <div class="box-item">
-                                            <a href=""><img src="~/assets/img/Brands/MSI.png" alt=""></a>
-                                        </div>
-                                        <div class="box-item">
-                                            <a href=""><img src="~/assets/img/Brands/Razer.png" alt=""></a>
-                                        </div>
-                                        <div class="box-item">
-                                            <a href=""><img src="~/assets/img/Brands/SteelSeries.png" alt=""></a>
-                                        </div>
-                                        <div class="box-item">
-                                            <a href=""><img src="~/assets/img/Brands/Corsair.png" alt=""></a>
-                                        </div>
+                                        @foreach (var item in Model.Brands)
+                                        {
+                                            if (item.IsDeleted == false)
+                                            {
+                                                <div class="box-item">
+                                                    <a href=""><img src="~/uploads/brands/@item.Image" alt=""></a>
+                                                </div>
+                                            }
+
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +225,7 @@
                             </div>
                             <div class="new-products-inner">
                                 <div class="row">
-                                     @foreach (var item in Model.Paginated.Items)
+                                    @foreach (var item in Model.Paginated.Items)
                                     {
                                         <div class="col-lg-3 col-md-6 col-sm-12">
                                             <div class="new-products__item">
@@ -286,10 +275,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="~/assets/img/Services/s1.png" alt="">
+                                <img src="~/assets/img/Services/@Model.Settings["serviceIcon1"]" alt="">
                             </div>
                             <div class="services__title">
-                                <h6>Sürətli çatdırılma</h6>
+                                <h6>@Model.Settings["serviceTitle1"]</h6>
                             </div>
                             <div class="line"></div>
                         </div>
@@ -297,22 +286,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="~/assets/img/Services/s2.png" alt="">
+                                <img src="~/assets/img/Services/@Model.Settings["serviceIcon2"]" alt="">
                             </div>
                             <div class="services__title">
-                                <h6>RƏSMİ ZƏMANƏT</h6>
-                            </div>
-                            <div class="line"></div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="services-box">
-                            <div class="services__icon">
-                                <img src="~/assets/img/Services/s3.png" alt="">
-                            </div>
-                            <div class="services__title">
-                                <h6>KREDİTLƏ SATIŞ</h6>
+                                <h6>@Model.Settings["serviceTitle2"]</h6>
                             </div>
                             <div class="line"></div>
 
@@ -321,10 +298,22 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="~/assets/img/Services/s4.png" alt="">
+                                <img src="~/assets/img/Services/@Model.Settings["serviceIcon3"]" alt="">
                             </div>
                             <div class="services__title">
-                                <h6>YÜKSƏK KEYFİYYƏT</h6>
+                                <h6>@Model.Settings["serviceTitle3"]</h6>
+                            </div>
+                            <div class="line"></div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="~/assets/img/Services/@Model.Settings["serviceIcon4"]" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>@Model.Settings["serviceTitle4"]</h6>
                             </div>
                         </div>
                     </div>

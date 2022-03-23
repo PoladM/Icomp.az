@@ -25,6 +25,7 @@ namespace IComp.Core
         IColorRepository ColorRepository { get; }
         ISoftWareRepository SoftWareRepository { get; }
         IProductImageRepository ProductImageRepository { get; }
+        ISettingRepository SettingRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

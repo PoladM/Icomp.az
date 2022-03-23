@@ -390,5 +390,12 @@ namespace IComp.Service.Implementations
 
             await _unitOfWork.CommitAsync();
         }
+
+        public Dictionary<string, string> GetSettings()
+        {
+            var settings = _unitOfWork.SettingRepository.GetAll().ToDictionary(x => x.Key, x => x.Value);
+            
+            return settings;
+        }
     }
 }
