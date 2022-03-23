@@ -1,4 +1,5 @@
 ﻿using IComp.Service.Interfaces;
+using IComp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -11,9 +12,18 @@ namespace IComp.Controllers
         {
             _productService = productService;
         }
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View();
+            HomeViewModel viewModel = null;
+
+            var products = _productService.GetAllProd(page);
+
+            viewModel = new HomeViewModel
+            {
+                Paginated = products
+            };
+
+            return View(viewModel);
         }
     }
 }

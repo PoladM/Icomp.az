@@ -128,6 +128,16 @@ input:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: #525050; }
 
+.menu-head {
+  background-color: #0d7ee4; }
+  .menu-head ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5vh; }
+    .menu-head ul li a {
+      color: white; }
+
 .main-navbar {
   padding: 20px 0px; }
   .main-navbar .navbar__menu {
@@ -469,7 +479,8 @@ input:focus {
 .new-products-inner {
   background-color: white; }
   .new-products-inner .new-products__item-card {
-    padding: 20px; }
+    height: 30rem;
+    padding: 10px; }
     .new-products-inner .new-products__item-card .item__card-header {
       margin: 20px 0px; }
       .new-products-inner .new-products__item-card .item__card-header .product-photo {
@@ -649,6 +660,11 @@ input:focus {
     .product-image-box li img {
       max-width: 100%;
       max-height: 100%; }
+
+.product-detail-image {
+  width: 35%; }
+  .product-detail-image img {
+    width: 100%; }
 
 .product-detail-box .product-detail-price {
   font-size: 35px;

@@ -67,12 +67,16 @@
                                         <div class="product-image-nav">
 
                                             <ul>
+                                                <div class="gallery">
                                                 @foreach (var item in Model.ProductImages.Where(x => x.PosterStatus == null))
                                                 {
                                                     <li>
-                                                        <img src="~/uploads/products/@item?.Image" alt="">
+                                                            <a href="~/uploads/products/@item?.Image" class="big" rel="rel1">
+                                                                <img src="~/uploads/products/@item?.Image" alt="" title="Image 1">
+                                                            </a>
                                                     </li>
                                                 }
+                                                </div>
                                             </ul>
                                         </div>
 

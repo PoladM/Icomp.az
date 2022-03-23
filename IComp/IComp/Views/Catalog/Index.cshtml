@@ -307,7 +307,7 @@
                                                             <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
                                                         </div>
                                                         <div class="product-title">
-                                                            <a href="#">@item.Name</a>
+                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Name</a>
                                                         </div>
                                                     </div>
                                                     <div class="item__card-body">

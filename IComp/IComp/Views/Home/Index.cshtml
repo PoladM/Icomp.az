@@ -1,7 +1,336 @@
-﻿
+﻿@model HomeViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+
+<main>
+    <!-- Home Page -->
+    <section id="main-home-page">
+        <div class="contentWrap">
+            <div class="container">
+                <div class="row">
+                    <!-- aside start -->
+                    <div class="col-lg-3">
+                        <div class="breadcrumb"></div>
+
+                        <!-- Popular Brends -->
+                        <div class="blog-tags">
+                            <div class="tags-desc">
+                                <h3>Bakıda tanınmış brendlər</h3>
+                            </div>
+                            <div class="line">
+                                <a href="">Apple</a>
+                                <a href="">Asus</a>
+                                <a href="">Lenovo</a>
+                                <a href="">Microsoft</a>
+                                <a href="">HP</a>
+                                <a href="">Sony</a>
+                                <a href="">SteelSeries</a>
+                                <a href="">Acer</a>
+                                <a href="">Gigabyte</a>
+                                <a href="">Dell</a>
+                                <a href="">MSI</a>
+                                <a href="">Rampage</a>
+                                <a href="">Intel</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- aside end -->
+
+                    <div class="col-lg-9">
+
+                        <!-- Carousel starts here -->
+                        <div class="home-slider">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="carousel">
+                                        <div class="carousel-cell">
+                                            <a href="">
+                                                <img src="~/assets/img/Carousel Slider/slide_24_4_1642016054.webp"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-cell">
+                                            <a href="">
+                                                <img src="~/assets/img/Carousel Slider/slide_23_4_1642015999.webp"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-cell">
+                                            <a href="">
+                                                <img src="~/assets/img/Carousel Slider/slide_18_4_1626864372.webp"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-cell">
+                                            <a href="">
+                                                <img src="~/assets/img/Carousel Slider/slide_14_4_1626864316.webp"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="carousel">
+                                        <div class="carousel-cell">
+                                            <a href="">
+                                                <img src="~/assets/img/Carousel Slider/slide_20_4_1626864479.webp"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                        <div class="carousel-cell">
+                                            <a href="">
+                                                <img src="~/assets/img/Carousel Slider/slide_21_4_1626864488.webp"
+                                                     alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carousel end here -->
+                        <!-- Popular Brands starts here  -->
+                        <div class="popular-brands">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="popular-brands__box">
+                                        <div class="box-item">
+                                            <a href=""><img src="~/assets/img/Brands/Asus.png" alt=""></a>
+                                        </div>
+                                        <div class="box-item">
+                                            <a href=""><img src="~/assets/img/Brands/HP.png" alt=""></a>
+                                        </div>
+                                        <div class="box-item">
+                                            <a href=""><img src="~/assets/img/Brands/Lenovo.png" alt=""></a>
+                                        </div>
+                                        <div class="box-item">
+                                            <a href=""><img src="~/assets/img/Brands/MSI.png" alt=""></a>
+                                        </div>
+                                        <div class="box-item">
+                                            <a href=""><img src="~/assets/img/Brands/Razer.png" alt=""></a>
+                                        </div>
+                                        <div class="box-item">
+                                            <a href=""><img src="~/assets/img/Brands/SteelSeries.png" alt=""></a>
+                                        </div>
+                                        <div class="box-item">
+                                            <a href=""><img src="~/assets/img/Brands/Corsair.png" alt=""></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Popular Brands end here  -->
+                        <!-- Popular Categories start here -->
+                        <div class="popular-categories">
+                            <div class="popular-categories__content">
+                                <div class="content-heading">
+                                    <h2>Populyar kateqoriyalar</h2>
+                                </div>
+                                <div class="content-body">
+                                    <div class="popular-categories__list">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-md-6 col-sm-12">
+                                                <!-- Category Item -->
+                                                <div class="popular-categories-item">
+                                                    <a href="">
+                                                        <img src="~/assets/img/Categories/chip_1.svg" alt="">
+                                                        <div class="category-name">
+                                                            <p>Prosessorlar</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!-- Category Item -->
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-12">
+                                                <!-- Category Item -->
+                                                <div class="popular-categories-item">
+                                                    <a href="">
+                                                        <img src="~/assets/img/Categories/cloud-computing_1.svg"
+                                                             alt="">
+                                                        <div class="category-name">
+                                                            <p>Periferiya</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!-- Category Item -->
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-12">
+                                                <!-- Category Item -->
+                                                <div class="popular-categories-item">
+                                                    <a href="">
+                                                        <img src="~/assets/img/Categories/console_1.svg" alt="">
+                                                        <div class="category-name">
+                                                            <p>Gaming Zone</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!-- Category Item -->
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-12">
+                                                <!-- Category Item -->
+                                                <div class="popular-categories-item">
+                                                    <a href="">
+                                                        <img src="~/assets/img/Categories/laptop.svg" alt="">
+                                                        <div class="category-name">
+                                                            <p>Noutbuklar</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!-- Category Item -->
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-12">
+                                                <!-- Category Item -->
+                                                <div class="popular-categories-item">
+                                                    <a href="">
+                                                        <img src="~/assets/img/Categories/planset.svg" alt="">
+                                                        <div class="category-name">
+                                                            <p>Planşetlər</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!-- Category Item -->
+                                            </div>
+                                            <div class="col-lg-2 col-md-6 col-sm-12">
+                                                <!-- Category Item -->
+                                                <div class="popular-categories-item">
+                                                    <a href="">
+                                                        <img src="~/assets/img/Categories/server.svg" alt="">
+                                                        <div class="category-name">
+                                                            <p>Serverlər</p>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <!-- Category Item -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Popular Categories end here -->
+                        <!-- New Products start here  -->
+                        <div class="new-products">
+                            <div class="content-heading">
+                                <h2>Yeni daxil olanlar</h2>
+                            </div>
+                            <div class="paginatoin-area">
+                                <ul class="pagination-box">
+
+                                    @if (Model.Paginated.HasPrev)
+                                    {
+                                        <li>
+                                            <a class="Previous" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
+                                        </li>
+                                    }
+                                    @for (var i = 1; i <= Model.Paginated.TotalPage; i++)
+                                    {
+                                        <li class="@(Model.Paginated.PageIndex == i ? "active" : "" )"><a asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort">@i</a></li>
+                                    }
+                                    @if (Model.Paginated.HasNext)
+                                    {
+                                        <li><a class="Next" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex + 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="new-products-inner">
+                                <div class="row">
+                                     @foreach (var item in Model.Paginated.Items)
+                                    {
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="new-products__item">
+                                                <div class="new-products__item-card">
+                                                    <div class="item__card-header">
+                                                        <div class="product-photo">
+                                                            <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+                                                        </div>
+                                                        <div class="product-title">
+                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Name</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item__card-body">
+                                                        <div class="product-desc">
+                                                            <p>
+                                                                R5 5500U | 16GB DDR4 | 512GB SSD | AMD Radeon™ | 27 FHD
+                                                                IPS
+                                                            </p>
+                                                        </div>
+                                                        <div class="product-price">
+                                                            <span>@item.Price <sup>azn</sup></span>
+                                                        </div>
+                                                        <div class="product-checkout">
+                                                            <a href="" class="btn btn-primary">Səbətə</a>
+                                                            <a href="" class="btn btn-danger">Tez Sifariş</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- New Products end here  -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="contentWrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="~/assets/img/Services/s1.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>Sürətli çatdırılma</h6>
+                            </div>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="~/assets/img/Services/s2.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>RƏSMİ ZƏMANƏT</h6>
+                            </div>
+                            <div class="line"></div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="~/assets/img/Services/s3.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>KREDİTLƏ SATIŞ</h6>
+                            </div>
+                            <div class="line"></div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="~/assets/img/Services/s4.png" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>YÜKSƏK KEYFİYYƏT</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 

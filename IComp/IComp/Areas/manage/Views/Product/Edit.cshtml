@@ -194,7 +194,6 @@
                     @foreach (var item in Model.ProductImages.Where(x => x.PosterStatus == null))
                     {
                         <div class="img-box mt-2" style="position:relative;display:inline-block">
-                            <input type="hidden" name="id" value="@item.Id" />
                             <a class="remove-action" asp-action="deleteimage" asp-route-id="@item.Id" style="position: absolute;right: -5px;top: -8px; color: red; cursor: pointer;">x</a>
                             <img width="100" src="~/uploads/products/@item.Image" />
                         </div>

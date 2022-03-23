@@ -238,14 +238,14 @@ namespace IComp.Areas.manage.Controllers
                 {
                     if (file.ContentType != "image/jpeg" && file.ContentType != "image/png")
                     {
-                        ModelState.AddModelError("Files", "file type must be image/jpeg or image/png");
-                        return View();
+                        ModelState.AddModelError("ImageFiles", "file type must be image/jpeg or image/png");
+                        return View(existProduct);
                     }
 
                     if (file.Length > 2097152)
                     {
-                        ModelState.AddModelError("Files", "file size must be less than 2mb");
-                        return View();
+                        ModelState.AddModelError("ImageFiles", "file size must be less than 2mb");
+                        return View(existProduct);
                     }
                 }
             }
@@ -266,9 +266,6 @@ namespace IComp.Areas.manage.Controllers
                     existProduct.ProductImages.Add(poster);
                 }
             }
-
-            //not working
-            //existProduct.ProductImages.RemoveAll(x => x.PosterStatus == null && !postDto.FileIds.Contains(x.Id));
 
             if (postDto.ImageFiles != null)
             {
