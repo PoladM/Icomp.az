@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IComp.ViewModels
+namespace IComp.Service.ViewModels
 {
     public class UserRegisterViewModel
     {

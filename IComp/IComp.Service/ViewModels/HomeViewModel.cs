@@ -4,7 +4,7 @@ using IComp.Service.DTOs.CategoryDTOs;
 using IComp.Service.DTOs.ProductDTOs;
 using System.Collections.Generic;
 
-namespace IComp.ViewModels
+namespace IComp.Service.ViewModels
 {
     public class HomeViewModel
     {

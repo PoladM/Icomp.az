@@ -11,7 +11,7 @@ using IComp.Service.DTOs.ProductDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using System.Collections.Generic;
 
-namespace IComp.ViewModels
+namespace IComp.Service.ViewModels
 {
     public class ProductViewModel
     {

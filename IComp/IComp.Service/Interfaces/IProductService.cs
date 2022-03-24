@@ -16,6 +16,7 @@ using IComp.Service.DTOs.ProductDTOs;
 using IComp.Service.DTOs.SoftwareDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
+using IComp.Service.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -47,13 +48,17 @@ namespace IComp.Service.Interfaces
         List<VCSerieGetDto> GetVideoCardSeries();
         Dictionary<string, string> GetSettings();
 
-        
         Task UpdateAsync(int id, ProductPostDto exisProduct);
         Task DeleteAsync(int id);
         Task RestoreAsync(int id);
         Task<ProductPostDto> GetByIdAsync(int id);
         Task<ProductImage> GetProductImage(int id);
         Task DeleteProductImage(ProductImage productImage);
+
+        Task<CommonBasketViewModel> _getBasket(List<BasketCookieItemViewModel> basketItems);
+        Task<CommonBasketViewModel> _getBasket(List<BasketItem> cardItems);
+        Task<bool> AnyProd(int id);
+        Task<List<BasketItem>> UserBasket(int id, AppUser appUser);
 
     }
 }

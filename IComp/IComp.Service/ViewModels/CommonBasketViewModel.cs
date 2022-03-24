@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace IComp.ViewModels
+namespace IComp.Service.ViewModels
 {
     public class CommonBasketViewModel
     {

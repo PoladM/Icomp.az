@@ -105,6 +105,35 @@ $(document).ready(function () {
     });
 
 
+    //add to basket 
+    $(document).on("click", ".add-to-basket", function (e) {
+        e.preventDefault();
+
+        let path = $(this).attr("href");
+
+
+        fetch(path).then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            else {
+                throw response
+            }
+        })
+            .then(data => {
+                $("#myModal .modal-body").html(data)
+                $("#myModal").modal('show');
+            })
+            .catch(err => {
+                err.json().then(json => {
+                    $("#myModal .modal-body").html(json.message)
+                    $("#myModal").modal("show");
+                })
+            })
+
+    })
+
+
 });
 
 let hamburger = document.querySelector(".main-navbar__hamburger");
@@ -218,3 +247,4 @@ loginSubmit.addEventListener("click", function (e) {
         })
 
 })
+

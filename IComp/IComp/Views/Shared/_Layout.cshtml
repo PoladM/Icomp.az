@@ -5,6 +5,7 @@
 @inject UserManager<AppUser> userManager
 @{
     var loginPost = layoutService.GetLoginPost();
+    var basket = await layoutService.GetBasketItems();
     AppUser appUser = null;
     if (User.Identity.IsAuthenticated)
     {
@@ -314,7 +315,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <h1>Zənbiliniz boşdur</h1>
+                         @(Html.Partial("_BasketPartial",basket))
                     </div>
                 </div>
             </div>

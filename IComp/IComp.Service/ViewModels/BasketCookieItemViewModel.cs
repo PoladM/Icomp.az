@@ -1,4 +1,4 @@
-﻿namespace IComp.ViewModels
+﻿namespace IComp.Service.ViewModels
 {
     public class BasketCookieItemViewModel
     {

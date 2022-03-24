@@ -1,5 +1,5 @@
 ﻿using IComp.Service.Interfaces;
-using IComp.ViewModels;
+using IComp.Service.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -8,11 +8,9 @@ namespace IComp.Controllers
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
-        private readonly IBrandService _brandService;
         public HomeController(IProductService productService, IBrandService brandService)
         {
             _productService = productService;
-            _brandService = brandService;
         }
         public IActionResult Index(int page = 1)
         {

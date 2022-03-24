@@ -1,6 +1,6 @@
 ﻿using IComp.Core.Entities;
 
-namespace IComp.ViewModels
+namespace IComp.Service.ViewModels
 {
     public class BasketProductViewModel
     {

@@ -21,6 +21,8 @@ using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
 using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
+using IComp.Service.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,13 +42,17 @@ namespace IComp.Service.Implementations
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+        public ProductService()
+        {
+        }
+
         public async Task<ProductGetDTO> CreateAsync(ProductPostDto postDTO)
         {
             if (await _unitOfWork.MemoryRepository.IsExistAsync(x => x.ModelName.ToLower().Trim() == postDTO.Name.ToLower().Trim() && !x.IsDeleted))
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.Name);
             }
-
 
             Product product = _mapper.Map<Product>(postDTO);
 
@@ -396,6 +402,89 @@ namespace IComp.Service.Implementations
             var settings = _unitOfWork.SettingRepository.GetAll().ToDictionary(x => x.Key, x => x.Value);
             
             return settings;
+        }
+
+
+        public async Task<CommonBasketViewModel> _getBasket(List<BasketCookieItemViewModel> basketItems)
+        {
+
+            CommonBasketViewModel basketVM = new CommonBasketViewModel
+            {
+                BasketItems = new List<BasketProductViewModel>(),
+                TotalPrice = 0
+            };
+
+
+            foreach (var item in basketItems)
+            {
+                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+
+                BasketProductViewModel basketBook = new BasketProductViewModel
+                {
+                    Product = product,
+                    Count = item.Count
+                };
+
+                basketVM.BasketItems.Add(basketBook);
+                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                basketVM.TotalPrice += totalPrice * item.Count;
+            }
+
+            return basketVM;
+        }
+
+        public async Task<CommonBasketViewModel> _getBasket(List<BasketItem> cardItems)
+        {
+            CommonBasketViewModel cardVM = new CommonBasketViewModel
+            {
+                BasketItems = new List<BasketProductViewModel>(),
+                TotalPrice = 0
+            };
+
+            foreach (var item in cardItems)
+            {
+                Product product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId);
+                BasketProductViewModel basketProductVM = new BasketProductViewModel
+                {
+                    Product = product,
+                    Count = item.Count
+                };
+
+                cardVM.BasketItems.Add(basketProductVM);
+                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                cardVM.TotalPrice += totalPrice * item.Count;
+            }
+            return cardVM;
+        }
+
+        public async Task<bool> AnyProd(int id)
+        {
+            return await _unitOfWork.ProductRepository.IsExistAsync(x => x.Id == id && !x.IsDeleted);
+        }
+
+        public async Task<List<BasketItem>> UserBasket(int id, AppUser appUser)
+        {
+            BasketItem item = await _unitOfWork.BasketItemRepository.GetAsync(x => x.AppUserId == appUser.Id && x.ProductId == id);
+
+            if (item == null)
+            {
+                item = new BasketItem
+                {
+                    AppUserId = appUser.Id,
+                    ProductId = id,
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    Count = 1
+                };
+                await _unitOfWork.BasketItemRepository.AddAsync(item);
+            }
+            else
+            {
+                item.Count++;
+            }
+            await _unitOfWork.CommitAsync();
+
+            var items = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).ToList();
+            return items;
         }
     }
 }

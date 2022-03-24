@@ -81,13 +81,13 @@ namespace IComp
             }
             else
             {
-                app.UseExceptionHandler("/Error");
+                //app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            //app.ExceptionHandler();
+            app.ExceptionHandler();
 
             app.UseRouting();
 

@@ -98,7 +98,7 @@ using IComp.Service.DTOs.AppUserDTOs;
 #nullable disable
 #nullable restore
 #line 13 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Views\_ViewImports.cshtml"
-using IComp.ViewModels;
+using IComp.Service.ViewModels;
 
 #line default
 #line hidden
@@ -118,7 +118,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9c625c01b56cefcdb3a5f27ec659e464ed0bc668", @"/Views/Catalog/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d0c17b9ab87e5a6f0a87263423293e639e27fc6c", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0f0b1916e23bf383ca432bf3823fc5036b2dd16b", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Catalog_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ProductViewModel>
     #nullable disable
@@ -813,7 +813,7 @@ WriteAttributeValue("", 11568, item.Id, 11568, 8, false);
                                 </div>
                                 <div class=""filter-item"">
                                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66842082", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66842090", async() => {
                 WriteLiteral("\r\n                                        <input type=\"hidden\" name=\"page\"");
                 BeginWriteAttribute("value", " value=\"", 13054, "\"", 13088, 1);
 #nullable restore
@@ -941,7 +941,7 @@ WriteAttributeValue("", 13062, Model.Paginated.PageIndex, 13062, 26, false);
                             <div class=""order-filter"">
                                 <select form=""filterForm"" name=""sort"" id=""orderFilter"">
                                     ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66849815", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66849823", async() => {
                 WriteLiteral("Varsayılan olaraq");
             }
             );
@@ -958,7 +958,7 @@ WriteAttributeValue("", 13062, Model.Paginated.PageIndex, 13062, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66851105", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66851113", async() => {
                 WriteLiteral("Qiyməti artır");
             }
             );
@@ -974,7 +974,7 @@ WriteAttributeValue("", 13062, Model.Paginated.PageIndex, 13062, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66852308", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66852316", async() => {
                 WriteLiteral("Qiyməti azalır");
             }
             );
@@ -990,7 +990,7 @@ WriteAttributeValue("", 13062, Model.Paginated.PageIndex, 13062, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66853512", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66853520", async() => {
                 WriteLiteral("Başlığa görə(A-Z)");
             }
             );
@@ -1006,7 +1006,7 @@ WriteAttributeValue("", 13062, Model.Paginated.PageIndex, 13062, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66854719", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66854727", async() => {
                 WriteLiteral("Başlığa görə(Z-A)");
             }
             );
@@ -1022,7 +1022,7 @@ WriteAttributeValue("", 13062, Model.Paginated.PageIndex, 13062, 26, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                    ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66855926", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66855934", async() => {
                 WriteLiteral("Populyarlıq");
             }
             );
@@ -1047,7 +1047,7 @@ WriteAttributeValue("", 13062, Model.Paginated.PageIndex, 13062, 26, false);
 #line hidden
 #nullable disable
             WriteLiteral("                                        <li>\r\n                                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66857707", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66857715", async() => {
                 WriteLiteral("<i class=\"fa-solid fa-chevron-left\"></i>");
             }
             );
@@ -1237,7 +1237,7 @@ WriteAttributeValue("", 17673, Model.Paginated.PageIndex == i ? "active" : "" , 
 #nullable disable
             EndWriteAttribute();
             WriteLiteral(">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66874436", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66874444", async() => {
 #nullable restore
 #line 289 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Views\Catalog\Index.cshtml"
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         Write(i);
@@ -1422,7 +1422,7 @@ WriteAttributeValue("", 17673, Model.Paginated.PageIndex == i ? "active" : "" , 
 #line hidden
 #nullable disable
             WriteLiteral("                                        <li>");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66891616", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc66891624", async() => {
                 WriteLiteral("<i class=\"fa-solid fa-chevron-right\"></i>");
             }
             );
@@ -1608,7 +1608,7 @@ WriteAttributeValue("", 17673, Model.Paginated.PageIndex == i ? "active" : "" , 
                                                     <div class=""item__card-header"">
                                                         <div class=""product-photo"">
                                                             ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "9c625c01b56cefcdb3a5f27ec659e464ed0bc668108512", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "9c625c01b56cefcdb3a5f27ec659e464ed0bc668108520", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -1632,7 +1632,7 @@ AddHtmlAttributeValue("", 20075, item.ProductImages.FirstOrDefault(x => x.Poster
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                                        </div>\r\n                                                        <div class=\"product-title\">\r\n                                                            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc668110371", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9c625c01b56cefcdb3a5f27ec659e464ed0bc668110379", async() => {
 #nullable restore
 #line 310 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Views\Catalog\Index.cshtml"
                                                                                                                              Write(item.Name);
