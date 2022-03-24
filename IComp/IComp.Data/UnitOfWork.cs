@@ -29,6 +29,7 @@ namespace IComp.Data
         private SoftWareRepository _softwareWareRepository;
         private ProductImageRepository _productImageRepository;
         private SettingRepository _settingRepository;
+        private IBasketItemRepository _basketItemRepository;
 
         public UnitOfWork(StoreDbContext context)
         {
@@ -70,6 +71,8 @@ namespace IComp.Data
         public IProductImageRepository ProductImageRepository => _productImageRepository ?? new ProductImageRepository(_context);
 
         public ISettingRepository SettingRepository => _settingRepository ?? new SettingRepository(_context);
+
+        public IBasketItemRepository BasketItemRepository => _basketItemRepository ?? new BasketItemRepository(_context);
 
         public int Commit()
         {

@@ -85,6 +85,7 @@ namespace IComp
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
             //app.ExceptionHandler();
 

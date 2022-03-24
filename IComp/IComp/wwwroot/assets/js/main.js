@@ -103,6 +103,8 @@ $(document).ready(function () {
         dots: true,
         autoplay: true,
     });
+
+
 });
 
 let hamburger = document.querySelector(".main-navbar__hamburger");
@@ -177,3 +179,42 @@ hamburgerSubItem.forEach((x) => {
         }
     });
 });
+
+
+//login form
+let loginSubmit = document.getElementById("loginSubmit")
+loginSubmit.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    let loginForm = document.getElementById("loginForm");
+    let userInp = document.getElementById("inputUsername");
+    let passInp = document.getElementById("inputPassword")
+    let errMsg = document.getElementsByClassName("error-msg-box")[0];
+
+    const formdata = new FormData();
+
+    formdata.append("UserName", userInp.value)
+    formdata.append("Password", passInp.value)
+
+    var url = loginForm.action;
+
+    fetch(url, {
+        method: "POST",
+        body: formdata,
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw response
+            }
+            window.location.reload()
+        })
+        .catch(err => {
+            err.text().then(errorMessage => {
+                errMsg.innerHTML = errorMessage
+            })
+        })
+
+})

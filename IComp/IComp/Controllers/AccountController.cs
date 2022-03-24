@@ -6,6 +6,7 @@ using IComp.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IComp.Controllers
@@ -59,16 +60,16 @@ namespace IComp.Controllers
                 }
             }
 
-            //var role = await _userManager.AddToRoleAsync(appUser, "Member");
+            var role = await _userManager.AddToRoleAsync(appUser, "Member");
 
-            //if (!role.Succeeded)
-            //{
-            //    foreach (var error in role.Errors)
-            //    {
-            //        ModelState.AddModelError("", error.Description);
-            //    }
-            //    return View();
-            //}
+            if (!role.Succeeded)
+            {
+                foreach (var error in role.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            }
 
             await _signInManager.SignInAsync(appUser, true);
 
@@ -79,26 +80,33 @@ namespace IComp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AppUserLoginPostDto postDto)
         {
+            
+
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                var message = string.Join(" | ", ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage));
+
+                return BadRequest(message);
             }
 
             var appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == postDto.UserName && !x.IsAdmin);
 
             if (appUser == null)
             {
-                ModelState.AddModelError("", "UserName or Password is incorrect");
-                return RedirectToAction("Index", "Home");
+                return BadRequest("UserName or Password is incorrect");
             }
 
             var result = await _signInManager.PasswordSignInAsync(appUser, postDto.Password, postDto.IsPersistent, false);
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError("", "UserName or Password is incorrect");
-                return RedirectToAction("Index", "Home");
+                return BadRequest("UserName or Password is incorrect");
+
             }
+
+
 
             return RedirectToAction("Index", "Home");
         }

@@ -33,6 +33,8 @@ namespace IComp.Data
         public DbSet<Software> Softwares { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
