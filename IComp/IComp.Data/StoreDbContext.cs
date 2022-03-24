@@ -1,5 +1,6 @@
 ﻿using IComp.Core.Entities;
 using IComp.Data.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace IComp.Data
 {
-    public class StoreDbContext : DbContext
+    public class StoreDbContext : IdentityDbContext
     {
         public StoreDbContext(DbContextOptions<StoreDbContext> options) : base(options)
         {
@@ -31,7 +32,7 @@ namespace IComp.Data
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Software> Softwares { get; set; }
         public DbSet<Color> Colors { get; set; }
-
+        public DbSet<AppUser> AppUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

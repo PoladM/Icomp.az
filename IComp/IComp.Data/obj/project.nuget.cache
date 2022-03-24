@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "JHPIyCXY5kCBrmzd/jf7ml+jRHZN9e/NdvmodGeaHNwmFkPE+Koa0nTp11jIx7hnw6hI2Te1ifFni+MVPv3FlA==",
+  "dgSpecHash": "S0u/fNa6zN+DuUO5Mz316PN36pTjtgoWZuiJ0Ck63UOwXho9esyC9nFOO8RJ/CslLg8dujrqoRf4IsYlk0N66w==",
   "success": true,
   "projectFilePath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.23\\microsoft.aspnetcore.cryptography.internal.3.1.23.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.23\\microsoft.aspnetcore.cryptography.keyderivation.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.23\\microsoft.aspnetcore.http.features.3.1.23.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.23\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.23\\microsoft.aspnetcore.jsonpatch.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.23\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
@@ -25,6 +28,8 @@
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.23\\microsoft.extensions.configuration.binder.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.23\\microsoft.extensions.dependencyinjection.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.23\\microsoft.extensions.dependencyinjection.abstractions.3.1.23.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.identity.core\\3.1.23\\microsoft.extensions.identity.core.3.1.23.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.identity.stores\\3.1.23\\microsoft.extensions.identity.stores.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.logging\\3.1.23\\microsoft.extensions.logging.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.23\\microsoft.extensions.logging.abstractions.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.options\\3.1.23\\microsoft.extensions.options.3.1.23.nupkg.sha512",

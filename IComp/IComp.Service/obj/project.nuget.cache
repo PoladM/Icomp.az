@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "X0sa8oXHUaAzrGCmmz1+UUDl0sMy948RYCahHgNu8cyLt7tT3peBj9nv+vQvNRrMRg0Jjk3pARCCbIpEMvrS0A==",
+  "dgSpecHash": "OBxzCv2KCFirOpbeahoMsRYE2kpTN3j6By9DSwXzRlUCI8cRt3XLDKX+L9SpEz/OrMItwOd2bMMRUB2Iznepqg==",
   "success": true,
   "projectFilePath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,10 @@
     "C:\\Users\\memme\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.4.0\\fluentvalidation.aspnetcore.10.4.0.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.4.0\\fluentvalidation.dependencyinjectionextensions.10.4.0.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.23\\microsoft.aspnetcore.cryptography.internal.3.1.23.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.23\\microsoft.aspnetcore.cryptography.keyderivation.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.23\\microsoft.aspnetcore.http.features.3.1.23.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.23\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.23\\microsoft.aspnetcore.jsonpatch.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.23\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
@@ -28,6 +31,8 @@
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.23\\microsoft.extensions.configuration.binder.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.23\\microsoft.extensions.dependencyinjection.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.identity.core\\3.1.23\\microsoft.extensions.identity.core.3.1.23.nupkg.sha512",
+    "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.identity.stores\\3.1.23\\microsoft.extensions.identity.stores.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.logging\\3.1.23\\microsoft.extensions.logging.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.23\\microsoft.extensions.logging.abstractions.3.1.23.nupkg.sha512",
     "C:\\Users\\memme\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",

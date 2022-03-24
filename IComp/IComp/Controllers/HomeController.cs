@@ -22,7 +22,6 @@ namespace IComp.Controllers
             var brands = _productService.GetBrands();
             var settings = _productService.GetSettings();
             var categories = _productService.GetCategories();
-            //categories
 
             viewModel = new HomeViewModel
             {

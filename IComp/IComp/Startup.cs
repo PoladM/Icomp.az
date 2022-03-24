@@ -1,7 +1,9 @@
 using FluentValidation.AspNetCore;
 using IComp.Core;
+using IComp.Core.Entities;
 using IComp.Data;
 using IComp.Service.DTOs.ProcessorDTOs;
+using IComp.Service.Helpers;
 using IComp.Service.Implementations;
 using IComp.Service.Interfaces;
 using IComp.Service.Profiles;
@@ -9,6 +11,8 @@ using IComp.ServiceExtentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,7 +54,18 @@ namespace IComp
             services.AddScoped<IHardDiscCapacityService, HardDiscCapacityService>();
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IAppUserService, AppUserService>();
+            services.AddScoped<LayoutService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddIdentity<AppUser, IdentityRole>(c =>
+            {
+                c.Password.RequireDigit = true;
+                c.Password.RequiredLength = 8;
+                c.Password.RequireUppercase = true;
+                c.Password.RequireNonAlphanumeric = false;
+                c.User.RequireUniqueEmail = true;
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<StoreDbContext>();
 
             services.AddAutoMapper(cnf =>
             {
@@ -75,6 +90,7 @@ namespace IComp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

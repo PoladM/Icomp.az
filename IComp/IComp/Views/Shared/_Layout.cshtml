@@ -1,4 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@using IComp.Service.Helpers
+@using Microsoft.AspNetCore.Identity
+
+@inject LayoutService layoutService
+@inject UserManager<AppUser> userManager
+@{
+    var loginPost = layoutService.GetLoginPost();
+    AppUser appUser = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        appUser = userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -33,7 +47,17 @@
             <div class="container">
                 <ul>
                     <li><a href="#" style="font-weight: 700;">Kompüter yığılması</a></li>
-                    <li><img src="~/assets/img/Icons/user.svg" alt=""> <a href="#" style="font-weight: 700;" data-bs-toggle="modal" data-bs-target="#loginModal">Daxil ol</a></li>
+                    @if (appUser != null)
+                   {
+                       
+                        <li><img src="~/assets/img/Icons/user.svg" alt=""> <a href="#" style="font-weight: 700;">@appUser.FullName</a> <a asp-action="logout" asp-controller="account" style="font-weight: 700;" >Çıxış</a></li>
+                        
+
+                   }
+                    else
+                    {
+                        <li><img src="~/assets/img/Icons/user.svg" alt=""> <a href="#" style="font-weight: 700;" data-bs-toggle="modal" data-bs-target="#loginModal">Daxil ol</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -308,20 +332,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="inputEmail" style="font-size: 25px;">Email</label>
-                                <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword" style="font-size: 25px;">Password</label>
-                                <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-check-label"><input type="checkbox"> Remember me</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
-                        </form>
+                        @Html.Partial("_LoginFormPartial", loginPost)
                     </div>
                 </div>
             </div>
