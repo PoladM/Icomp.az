@@ -105,6 +105,10 @@ $(document).ready(function () {
     });
 
 
+    // basket item count on load
+    let prodcount = $(".basket-count").val();
+    $(".basket-counter-value").html(prodcount)
+
     //add to basket 
     $(document).on("click", ".add-to-basket", function (e) {
         e.preventDefault();
@@ -122,6 +126,8 @@ $(document).ready(function () {
         })
             .then(data => {
                 $("#myModal .modal-body").html(data)
+                let prodCount = $(".basket-count").val()
+                $(".basket-counter-value").html(prodCount);
                 $("#myModal").modal('show');
             })
             .catch(err => {
