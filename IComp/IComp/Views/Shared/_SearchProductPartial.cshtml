@@ -1,0 +1,13 @@
+﻿@model List<Product>
+
+<ul>
+    @foreach (var item in Model)
+   {
+       <li class="search-item">
+        <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+        <p>@item.Name</p>
+        <p>@item.SalePrice</p>
+    </li>
+   }
+    
+</ul>

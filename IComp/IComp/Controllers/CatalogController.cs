@@ -120,5 +120,11 @@ namespace IComp.Controllers
         {
             return PartialView("_BasketPartial", await _productService.DeleteBasket(id));
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Search(string searchString)
+        {
+            return PartialView("_SearchProductPartial",await _productService.SearchProd(searchString));
+        }
     }
 }

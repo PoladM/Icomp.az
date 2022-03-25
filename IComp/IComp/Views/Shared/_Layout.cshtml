@@ -87,6 +87,10 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="search-table">
+                                
+                            </div>
                         </div>
 
 
@@ -202,16 +206,16 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-10 col-sm-10 col-10">
-                            <form action="" method="get" id="searchProd">
+                            <form asp-action="search" asp-controller="catalog" method="get" id="searchProd">
                                 <div class="searchElements">
                                     <input type="text" class="navbar__input" placeholder="Məhsul axtarışı"
-                                        id="searchstring" name="searchstring" autocomplete="off" role="textbox"
-                                        aria-autocomplete="list" aria-haspopup="true">
+                                        id="searchString" name="searchString" role="textbox">
                                     <button class="search-button" type="submit">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </div>
                             </form>
+                            
                         </div>
                         <div class="main-navbar__mobile-menu deactive">
                             <ul class="mobile-menu__dropdown-list">

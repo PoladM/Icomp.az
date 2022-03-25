@@ -227,6 +227,43 @@ $(document).ready(function () {
         }
 
     })
+
+    //searchFilter
+    $("#searchString").on("keyup", function () {
+        var formSearch = document.getElementById("searchProd");
+        var url = formSearch.action;
+
+        var value = $(this).val().toLowerCase();
+
+        if (value == undefined || value == null || value == "") {
+            $(".search-table").children().remove();
+            $(".search-table").css("display", "none");
+            return;
+        }
+
+        const formData = new FormData();
+
+        formData.append("searchString", value)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw response
+                }
+                return response.text();
+            })
+            .then(data => {
+                $(".search-table").html(data);
+                $(".search-table").css("display","block")
+            })
+    })
+
 });
 
 let hamburger = document.querySelector(".main-navbar__hamburger");

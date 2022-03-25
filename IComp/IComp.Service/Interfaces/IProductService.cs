@@ -61,5 +61,7 @@ namespace IComp.Service.Interfaces
         Task<List<BasketItem>> UserBasket(int id, AppUser appUser);
         Task<CommonBasketViewModel> DeleteBasket(int id);
 
+        Task<List<Product>> SearchProd(string searchString);
+
     }
 }

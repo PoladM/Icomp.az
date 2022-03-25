@@ -554,5 +554,22 @@ namespace IComp.Service.Implementations
                 return await _getBasket(items);
             }
         }
+
+        public async Task<List<Product>> SearchProd(string searchString)
+        {
+            var products = _unitOfWork.ProductRepository.GetAll("ProductImages");
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Trim().ToLower().Contains(searchString));
+            }
+            else
+            {
+                products = null;
+            }
+            
+
+            return await products.ToListAsync();
+        }
     }
 }
