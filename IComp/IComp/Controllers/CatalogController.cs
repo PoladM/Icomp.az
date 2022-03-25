@@ -116,6 +116,9 @@ namespace IComp.Controllers
         }
 
 
-      
+        public async Task<IActionResult> DeleteBasket(int id)
+        {
+            return PartialView("_BasketPartial", await _productService.DeleteBasket(id));
+        }
     }
 }

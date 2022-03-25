@@ -23,7 +23,9 @@ using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
 using IComp.Service.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,11 +38,16 @@ namespace IComp.Service.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
+
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
         }
 
         public ProductService()
@@ -443,7 +450,7 @@ namespace IComp.Service.Implementations
 
             foreach (var item in cardItems)
             {
-                Product product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId);
+                Product product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
                 BasketProductViewModel basketProductVM = new BasketProductViewModel
                 {
                     Product = product,
@@ -485,6 +492,67 @@ namespace IComp.Service.Implementations
 
             var items = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).ToList();
             return items;
+        }
+
+        public async Task<CommonBasketViewModel> DeleteBasket(int id)
+        {
+            if (!await AnyProd(id))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
+            AppUser appUser = null;
+
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (appUser == null)
+            {
+                string cookie = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
+                List<BasketCookieItemViewModel> cookieItems = new List<BasketCookieItemViewModel>();
+
+                if (!string.IsNullOrWhiteSpace(cookie))
+                {
+                    cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookie);
+                }
+
+                BasketCookieItemViewModel cookieItem = cookieItems.FirstOrDefault(x => x.ProductId == id);
+
+
+                if (cookieItem.Count > 1)
+                {
+                    cookieItem.Count--;
+                }
+                else
+                {
+                    cookieItems.Remove(cookieItem);
+                }
+
+                cookie = JsonConvert.SerializeObject(cookieItems);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("basket", cookie);
+
+                return await _getBasket(cookieItems);
+            }
+            else
+            {
+                BasketItem item = await _unitOfWork.BasketItemRepository.GetAsync(x => x.AppUserId == appUser.Id && x.ProductId == id);
+
+
+                if (item.Count > 1)
+                {
+                    item.Count--;
+                }
+                else
+                {
+                    _unitOfWork.BasketItemRepository.Remove(item);
+                }
+                await _unitOfWork.CommitAsync();
+
+                var items = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).ToList();
+                return await _getBasket(items);
+            }
         }
     }
 }

@@ -1,22 +1,17 @@
 ﻿@model CommonBasketViewModel
 @{
     var counter = 0;
+    decimal productTotalPrice = 0;
 }
-<div class="shopping-cart">
 
-    <div class="column-labels">
-        <label class="product-image">Image</label>
-        <label class="product-details">Product</label>
-        <label class="product-price">Price</label>
-        <label class="product-quantity">Quantity</label>
-        <label class="product-removal">Remove</label>
-        <label class="product-line-price">Total</label>
-    </div>
+
+<div class="shopping-cart">
 
     @foreach (var item in Model.BasketItems)
     {
         {
             counter += item.Count;
+            productTotalPrice = item.Count * (item.Product.DiscountPercent > 0 ? item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100) : item.Product.SalePrice);
         }
 
         <div class="product">
@@ -31,16 +26,19 @@
                     fan.
                 </p>
             </div>
-            <div class="product-price-basket">@((item.Product.DiscountPercent > 0 ?item.Product.SalePrice*(1-item.Product.DiscountPercent/100):item.Product.SalePrice).ToString("0.00"))</div>
+            <div class="product-price-basket">price:  $@((item.Product.DiscountPercent > 0 ?item.Product.SalePrice*(1-item.Product.DiscountPercent/100):item.Product.SalePrice).ToString("0.00"))</div>
             <div class="product-quantity">
-                <input type="number" value="@item.Count" min="1">
+                <input type="number" value="@item.Count" min="1" class="change-val">
+                <input type="hidden" value="@item.Count" class="current-val" >
+                <input type="hidden" value="@item.Product.Id" class="product-Id" >
+
             </div>
             <div class="product-removal">
-                <button class="remove-product">
+                <a asp-action="deletebasket" asp-controller="catalog" asp-route-id="@item.Product.Id" class="remove-product">
                     Remove
-                </button>
+                </a>
             </div>
-            <div class="product-line-price">25.98</div>
+            <div class="product-line-price">@productTotalPrice.ToString("0.00")</div>
         </div>
     }
 
@@ -48,21 +46,9 @@
 
 
     <div class="totals">
-        <div class="totals-item">
-            <label>Subtotal</label>
-            <div class="totals-value" id="cart-subtotal">71.97</div>
-        </div>
-        <div class="totals-item">
-            <label>Tax (5%)</label>
-            <div class="totals-value" id="cart-tax">3.60</div>
-        </div>
-        <div class="totals-item">
-            <label>Shipping</label>
-            <div class="totals-value" id="cart-shipping">15.00</div>
-        </div>
         <div class="totals-item totals-item-total">
-            <label>Grand Total</label>
-            <div class="totals-value" id="cart-total">90.57</div>
+            <label>Total</label>
+            <div class="totals-value" id="cart-total">@(Model.TotalPrice.ToString("0.00"))</div>
         </div>
     </div>
 

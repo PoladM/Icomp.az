@@ -125,21 +125,108 @@ $(document).ready(function () {
             }
         })
             .then(data => {
-                $("#myModal .modal-body").html(data)
+                $("#myModal .modal-body-inner").html(data)
                 let prodCount = $(".basket-count").val()
                 $(".basket-counter-value").html(prodCount);
                 $("#myModal").modal('show');
             })
             .catch(err => {
                 err.json().then(json => {
-                    $("#myModal .modal-body").html(json.message)
+                    $("#myModal .modal-body-inner").html(json.message)
                     $("#myModal").modal("show");
                 })
+            })
+    })
+    // remove from basket
+    $(document).on("click", ".remove-product", function (e) {
+        e.preventDefault();
+
+        let path = $(this).attr("href");
+
+        fetch(path)
+            .then(response => {
+                if (response.ok) {
+                    return response.text()
+                }
+                else {
+                    alert("Failed:(")
+                    return;
+                }
+
+            }).then(data => {
+                $("#myModal .modal-body-inner").html(data)
+                let prodCount = $(".basket-count").val()
+                $(".basket-counter-value").html(prodCount);
+                $("#myModal").modal('show');
             })
 
     })
 
+    //update basket for quantity
+    $(document).on("click", ".change-val", function (e) {
+        $(".loader-wrapper").css("display", "flex")
+        $(".shopping-cart").css("display", "none")
 
+        let currentVal = $(this).next().val();
+        let changedVal = $(this).val()
+        let prodId = $(this).next().next().val()
+
+        let currentValInt = parseInt(currentVal);
+        let changedValInt = parseInt(changedVal);
+        let prodIdInt = parseInt(prodId);
+
+        let url = null;
+
+        if (changedValInt > currentValInt) {
+            url = "/catalog/addbasket" + "/" + prodIdInt;
+
+            fetch(url).then(response => {
+                if (response.ok) {
+                    $(".loader-wrapper").css("display", "none")
+                    $(".shopping-cart").css("display", "block")
+                    return response.text();
+                }
+                else {
+                    throw response
+                }
+            })
+                .then(data => {
+                    $("#myModal .modal-body-inner").html(data)
+                    let prodCount = $(".basket-count").val()
+                    $(".basket-counter-value").html(prodCount);
+                    $("#myModal").modal('show');
+                })
+                .catch(err => {
+                    err.json().then(json => {
+                        $("#myModal .modal-body-inner").html(json.message)
+                        $("#myModal").modal("show");
+                    })
+                })
+        }
+        else {
+            url = "/catalog/deletebasket" + "/" + prodIdInt;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        $(".loader-wrapper").css("display", "none")
+                        $(".shopping-cart").css("display", "block")
+                        return response.text();
+                    }
+                    else {
+                        alert("Failed:(")
+                        return;
+                    }
+
+                }).then(data => {
+                    $("#myModal .modal-body-inner").html(data)
+                    let prodCount = $(".basket-count").val()
+                    $(".basket-counter-value").html(prodCount);
+                    $("#myModal").modal('show');
+                })
+        }
+
+    })
 });
 
 let hamburger = document.querySelector(".main-navbar__hamburger");

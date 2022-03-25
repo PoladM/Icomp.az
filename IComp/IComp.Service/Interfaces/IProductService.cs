@@ -59,6 +59,7 @@ namespace IComp.Service.Interfaces
         Task<CommonBasketViewModel> _getBasket(List<BasketItem> cardItems);
         Task<bool> AnyProd(int id);
         Task<List<BasketItem>> UserBasket(int id, AppUser appUser);
+        Task<CommonBasketViewModel> DeleteBasket(int id);
 
     }
 }
