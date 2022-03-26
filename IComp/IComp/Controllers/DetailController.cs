@@ -17,10 +17,10 @@ namespace IComp.Controllers
             return View(await _productService.FindByIdAsync(id));
         }
         [HttpPost]
-        public IActionResult Comment(ProductComment comment)
+        public async Task<IActionResult> Comment(ProductComment comment)
         {
-            var Id = _productService.Comment(comment);
-            return RedirectToAction("index",new {id = Id});
+            var Id = await _productService.Comment(comment);
+            return RedirectToAction("index", new { id = Id });
         }
     }
 }

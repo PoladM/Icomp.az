@@ -10,7 +10,7 @@
         <div class="rate-prod">
             <div class="rate">
                 <input asp-for="Rate" type="radio" id="star5"
-                       value="5" />
+                       value="5" checked="checked"/>
                 <label for="star5" title="text">
                     5
                     stars
@@ -43,9 +43,12 @@
         </div>
         <div class="clear-fix"></div>
     </div>
+    @if (!User.Identity.IsAuthenticated)
+   {
     <div class="comment-input pg-b">
         <input type="text" asp-for="Name" placeholder="Ad">
     </div>
+   }
     <div class="comment-textarea pg-b">
         <textarea asp-for="Text" placeholder="Mesaj mətni" id="" cols="50" rows="10"></textarea>
     </div>

@@ -196,7 +196,7 @@ namespace IComp.Service.Implementations
         }
         public async Task<DetailViewModel> FindByIdAsync(int id)
         {
-            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments");
+            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
             
             if (existProduct == null)
             {
@@ -595,19 +595,16 @@ namespace IComp.Service.Implementations
                 throw new ItemNotFoundException("Item not found");
             }
 
-            //if (appUser == null)
-            //{
-            //    comment.CreatedAt = DateTime.UtcNow.AddHours(4);
-            //    await _unitOfWork.ProductCommentRepository.AddAsync(comment);
-            //    await _unitOfWork.CommitAsync();
-            //    var sum = product.ProductComments.Sum(x => x.Rate);
-            //    var rate = Math.Ceiling( sum / (double)product.ProductComments.Count);
-            //    product.Rate = (int)rate;
-            //    await _unitOfWork.CommitAsync();
-            //    return comment.ProductId;
-            //}
-            //comment.AppUserId = appUser.Id;
-            //comment.CreatedAt = DateTime.UtcNow.AddHours(4);
+            if (appUser == null)
+            {
+                comment.CreatedAt = DateTime.UtcNow.AddHours(4);
+                await _unitOfWork.ProductCommentRepository.AddAsync(comment);
+                product.Rate = (int)(Math.Ceiling(product.ProductComments.Sum(x => x.Rate) / (double)product.ProductComments.Count));
+                await _unitOfWork.CommitAsync();
+                return comment.ProductId;
+            }
+            comment.AppUserId = appUser.Id;
+            comment.CreatedAt = DateTime.UtcNow.AddHours(4);
             await _unitOfWork.ProductCommentRepository.AddAsync(comment);
             product.Rate = (int)Math.Ceiling(product.ProductComments.Sum(x => x.Rate) / (double)product.ProductComments.Count);
             await _unitOfWork.CommitAsync();
