@@ -28,6 +28,8 @@ namespace IComp.Core
         ISettingRepository SettingRepository { get; }
         IBasketItemRepository BasketItemRepository { get; }
         IProductCommentRepository ProductCommentRepository { get; }
+        IOrderRepository OrderRepository { get; }
+        IOrderItemRepository OrderItemRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

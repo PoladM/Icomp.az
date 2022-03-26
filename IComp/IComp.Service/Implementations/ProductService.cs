@@ -610,5 +610,82 @@ namespace IComp.Service.Implementations
             await _unitOfWork.CommitAsync();
             return comment.ProductId;
         }
+
+        public async Task<FastCheckOutViewModel> FastOrder(int id)
+        {
+            AppUser appUser = null;
+
+            FastCheckOutViewModel model = null;
+
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = _userManager.Users.FirstOrDefault(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (appUser == null)
+            {
+                model = new FastCheckOutViewModel
+                {
+                    Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
+                    Order = new Order()
+                };
+                return model;
+            }
+
+            model = new FastCheckOutViewModel
+            {
+                Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id),
+                Order = new Order
+                {
+                    FullName = appUser?.FullName,
+                    Email = appUser?.Email,
+                    Address = null,
+                    Phone = null
+                }
+            };
+
+            return model;
+        }
+
+        public async Task CreateOrder(int id, Order order)
+        {
+            AppUser appUser = null;
+            FastCheckOutViewModel model = new FastCheckOutViewModel();
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = _userManager.Users.FirstOrDefault(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+            if (appUser == null)
+            {
+                throw new ItemNotFoundException("User not found");
+            }
+
+            model = new FastCheckOutViewModel
+            {
+                Order = order,
+                Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
+            };
+
+            order.AppUserId = appUser?.Id;
+            order.CreatedAt = DateTime.UtcNow.AddHours(4);
+            order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+            order.OrderItems = new List<OrderItem>();
+            model.Product.Count--;
+
+            OrderItem orderItem = new OrderItem
+            {
+                ProductId = model.Product.Id,
+                SalePrice = model.Product.SalePrice,
+                CostPrice = model.Product.CostPrice,
+                DiscountedPrice = model.Product.DiscountPercent > 0 ? (model.Product.SalePrice * (1 - model.Product.DiscountPercent / 100)) : model.Product.SalePrice,
+                Count = 1
+            };
+
+            order.OrderItems.Add(orderItem);
+            order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
+
+            await _unitOfWork.OrderRepository.AddAsync(order);
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

@@ -31,6 +31,8 @@ namespace IComp.Data
         private SettingRepository _settingRepository;
         private BasketItemRepository _basketItemRepository;
         private ProductCommentRepository _productCommentRepository;
+        private OrderRepository _orderRepository;
+        private OrderItemRepository _orderItemRepository;
 
         public UnitOfWork(StoreDbContext context)
         {
@@ -76,6 +78,10 @@ namespace IComp.Data
         public IBasketItemRepository BasketItemRepository => _basketItemRepository ?? new BasketItemRepository(_context);
 
         public IProductCommentRepository ProductCommentRepository => _productCommentRepository ?? new ProductCommentRepository(_context);
+
+        public IOrderRepository OrderRepository => _orderRepository ?? new OrderRepository(_context);
+
+        public IOrderItemRepository OrderItemRepository => _orderItemRepository ?? new OrderItemRepository(_context);
 
         public int Commit()
         {
