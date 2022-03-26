@@ -17,13 +17,18 @@ namespace IComp.Controllers
         {
             var viewModel = await _productService.FastOrder(id);
 
-            return Ok(viewModel);
+            return PartialView("_FastOrderPartial",viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int id, Order order)
+        public async Task<IActionResult> Create(int productid, Order order)
         {
-            await _productService.CreateOrder(id, order);
+            if (!ModelState.IsValid)
+            {
+                return Ok();
+            }
+
+            await _productService.CreateOrder(productid, order);
             return RedirectToAction("Index", "Home");
         }
     }

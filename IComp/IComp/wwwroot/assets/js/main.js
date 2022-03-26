@@ -260,7 +260,27 @@ $(document).ready(function () {
             })
             .then(data => {
                 $(".search-table").html(data);
-                $(".search-table").css("display","block")
+                $(".search-table").css("display", "block")
+            })
+    })
+
+    //fast order
+    $(document).on("click", ".fast-order", function (e) {
+        e.preventDefault();
+
+        let path = $(this).attr("href");
+
+        fetch(path)
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                }
+                alert("Fail")
+                return;
+            })
+            .then(data => {
+                $("#fastOrderModal .modal-body-inner").html(data);
+                $("#fastOrderModal").modal('show');
             })
     })
 

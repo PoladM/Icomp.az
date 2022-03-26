@@ -657,7 +657,36 @@ namespace IComp.Service.Implementations
             }
             if (appUser == null)
             {
-                throw new ItemNotFoundException("User not found");
+                model = new FastCheckOutViewModel
+                {
+                    Order = order,
+                    Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
+                };
+
+                order.AppUserId = null;
+                order.CreatedAt = DateTime.UtcNow.AddHours(4);
+                order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+                order.IsDeleted = false;
+                order.OrderItems = new List<OrderItem>();
+                model.Product.Count = model.Product.Count - 1;
+                await _unitOfWork.CommitAsync();
+
+                OrderItem orderItm = new OrderItem
+                {
+
+                    ProductId = model.Product.Id,
+                    SalePrice = model.Product.SalePrice,
+                    CostPrice = model.Product.CostPrice,
+                    DiscountedPrice = model.Product.DiscountPercent > 0 ? (model.Product.SalePrice * (1 - model.Product.DiscountPercent / 100)) : model.Product.SalePrice,
+                    Count = 1,
+                };
+
+                order.OrderItems.Add(orderItm);
+                order.TotalPrice += orderItm.DiscountedPrice * orderItm.Count;
+
+                await _unitOfWork.OrderRepository.AddAsync(order);
+                await _unitOfWork.CommitAsync();
+                return;
             }
 
             model = new FastCheckOutViewModel
@@ -670,7 +699,7 @@ namespace IComp.Service.Implementations
             order.CreatedAt = DateTime.UtcNow.AddHours(4);
             order.ModifiedAt = DateTime.UtcNow.AddHours(4);
             order.OrderItems = new List<OrderItem>();
-            model.Product.Count--;
+            model.Product.Count = model.Product.Count - 1;
 
             OrderItem orderItem = new OrderItem
             {

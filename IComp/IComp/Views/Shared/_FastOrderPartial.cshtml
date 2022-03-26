@@ -1,0 +1,63 @@
+﻿@model FastCheckOutViewModel
+
+@{
+    var counter = 0;
+    decimal productTotalPrice = 0;
+    var item = Model.Product;
+}
+
+<div class="shopping-cart">
+        
+            @{
+                productTotalPrice = item.Count * (item.DiscountPercent > 0 ? item.SalePrice * (1 - item.DiscountPercent / 100) : item.SalePrice);
+            }
+
+        <div class="product">
+            <div class="product-image-basket" style="width: 10%;">
+                <img style="width: 80%;" src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image">
+            </div>
+            <div class="product-details">
+                <div class="product-title">@item.Name</div>
+                <p class="product-description">
+                    The best dog bones of all time. Holy crap. Your dog
+                    will be begging for these things! I got curious once and ate one myself. I'm a
+                    fan.
+                </p>
+            </div>
+            <div class="product-price-basket">price:  $@((item.DiscountPercent > 0 ?item.SalePrice*(1-item.DiscountPercent/100):item.SalePrice).ToString("0.00"))</div>
+            <div class="product-quantity">
+                <input type="number" value="@item.Count" min="1" class="change-val">
+                <input type="hidden" value="@item.Count" class="current-val" >
+                <input type="hidden" value="@item.Id" class="product-Id" >
+
+            </div>
+            <div class="product-removal">
+                <a asp-action="deletebasket" asp-controller="catalog" asp-route-id="@item.Id" class="remove-product">
+                    Remove
+                </a>
+            </div>
+            <div class="product-line-price">@productTotalPrice.ToString("0.00")</div>
+        </div>
+    <input type="hidden" value="@counter" id="basket-count" />
+
+
+    <div class="totals">
+        <div class="totals-item totals-item-total">
+            <label>Total</label>
+            <div class="totals-value" id="cart-total">@(productTotalPrice.ToString("0.00"))</div>
+        </div>
+    </div>
+
+    
+
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1>Create</h1>
+            @(await Html.PartialAsync("_FastOrderFormPartial", Model.Order))
+            <input form="fastOrder" type="hidden" name="productid" value="@item.Id" />
+        </div>
+    </div>
+</div>
