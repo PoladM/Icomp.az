@@ -100,9 +100,9 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
-        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? categoryid, int? pagesize, int page)
+        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? categoryid, int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll("Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity");
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable,"Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity");
 
             if (processorserieid != null)
             {
@@ -141,7 +141,7 @@ namespace IComp.Service.Implementations
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.CategoryId == categoryid);
             }
 
-            
+
 
 
             switch (sort)
@@ -165,7 +165,7 @@ namespace IComp.Service.Implementations
             if (minprice != null && maxprice != null)
                 query = query.Where(x => x.SalePrice >= minprice && x.SalePrice <= maxprice);
 
-            var pageSize = pagesize ?? 3;
+            var pageSize =  3;
 
             List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
 
@@ -197,7 +197,7 @@ namespace IComp.Service.Implementations
         public async Task<DetailViewModel> FindByIdAsync(int id)
         {
             var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
-            
+
             if (existProduct == null)
             {
                 throw new ItemNotFoundException("Item not found");
@@ -415,7 +415,7 @@ namespace IComp.Service.Implementations
         public Dictionary<string, string> GetSettings()
         {
             var settings = _unitOfWork.SettingRepository.GetAll().ToDictionary(x => x.Key, x => x.Value);
-            
+
             return settings;
         }
 
@@ -575,7 +575,7 @@ namespace IComp.Service.Implementations
             {
                 products = null;
             }
-            
+
 
             return await products.ToListAsync();
         }
@@ -668,7 +668,16 @@ namespace IComp.Service.Implementations
                 order.ModifiedAt = DateTime.UtcNow.AddHours(4);
                 order.IsDeleted = false;
                 order.OrderItems = new List<OrderItem>();
-                model.Product.Count = model.Product.Count - 1;
+                if (model.Product.Count <= 1)
+                {
+                    model.Product.Count = model.Product.Count - 1;
+                    model.Product.IsAvailable = false;
+                    model.Product.IsDeleted = true;
+                }
+                else
+                {
+                    model.Product.Count = model.Product.Count - 1;
+                }
                 await _unitOfWork.CommitAsync();
 
                 OrderItem orderItm = new OrderItem
@@ -699,7 +708,18 @@ namespace IComp.Service.Implementations
             order.CreatedAt = DateTime.UtcNow.AddHours(4);
             order.ModifiedAt = DateTime.UtcNow.AddHours(4);
             order.OrderItems = new List<OrderItem>();
-            model.Product.Count = model.Product.Count - 1;
+            if (model.Product.Count <= 1)
+            {
+                model.Product.Count = model.Product.Count - 1;
+                model.Product.IsAvailable = false;
+                model.Product.IsDeleted = true;
+            }
+            else
+            {
+                model.Product.Count = model.Product.Count - 1;
+            }
+            await _unitOfWork.CommitAsync();
+
 
             OrderItem orderItem = new OrderItem
             {
@@ -715,6 +735,19 @@ namespace IComp.Service.Implementations
 
             await _unitOfWork.OrderRepository.AddAsync(order);
             await _unitOfWork.CommitAsync();
+        }
+
+        public PaginatedListDto<ProductListItemDto> GetAllProdWithFilter(int page)
+        {
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable);
+
+            var pageSize = 3;
+
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
+
+            var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
+
+            return listDto;
         }
     }
 }

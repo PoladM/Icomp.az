@@ -28,7 +28,8 @@ namespace IComp.Service.Interfaces
     {
         Task<ProductGetDTO> CreateAsync(ProductPostDto postDTO);
         PaginatedListDto<ProductListItemDto> GetAllProd(int page);
-        PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
+        PaginatedListDto<ProductListItemDto> GetAllProdWithFilter(int page);
+        PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int page);
         decimal FilterByPrice(string val);
         Task<DetailViewModel> FindByIdAsync(int id);
         List<ColorGetDto> GetColors();

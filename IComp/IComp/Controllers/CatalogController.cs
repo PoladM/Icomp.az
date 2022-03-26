@@ -21,11 +21,11 @@ namespace IComp.Controllers
             _productService = productService;
             _userManager = userManager;
         }
-        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? categoryid, int? pagesize, int page = 1)
+        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? categoryid, int page = 1)
         {
             ProductViewModel viewModel = null;
 
-            var products = _productService.FilterProd(minprice, maxprice, sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid,  categoryid, pagesize, page);
+            var products = _productService.FilterProd(minprice, maxprice, sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid,  categoryid, page);
 
             ViewBag.processorserieid = processorserieid;
             ViewBag.videocardserieid = videocardserieid;

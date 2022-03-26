@@ -1,11 +1,3 @@
-$(document).ready(function () {
-    var gallery = $(".gallery a").simpleLightbox({
-        /* options */
-    });
-});
-
-
-
 
 $(function () {
     $(document).scroll(function () {
@@ -20,6 +12,27 @@ $(function () {
 });
 
 $(document).ready(function () {
+    var gallery = $(".gallery a").simpleLightbox({
+        /* options */
+    });
+
+    //toaster
+    let toasterMsg = $("#toaster").val();
+
+    if (toasterMsg === "" | toasterMsg === null | toasterMsg === undefined) {
+        
+    }
+    else {
+        $.toast({
+            text: toasterMsg,
+            hideAfter: 5000,
+            position: 'top-left',
+            bgColor: '#42ba96',
+            textColor: '#FFFFFF',
+        })
+    }
+
+
     //catalog open close
     $(".main-navbar__catalog-box-inner").on("click", function () {
         if ($(".main-navbar__catalog-menu").hasClass("show")) {

@@ -16,7 +16,7 @@ namespace IComp.Controllers
         {
             HomeViewModel viewModel = null;
 
-            var products = _productService.GetAllProd(page);
+            var products = _productService.GetAllProdWithFilter(page);
             var brands = _productService.GetBrands();
             var settings = _productService.GetSettings();
             var categories = _productService.GetCategories();

@@ -29,6 +29,7 @@ namespace IComp.Controllers
             }
 
             await _productService.CreateOrder(productid, order);
+            TempData["Success"] = "Product order pending. Our manager will contact you";
             return RedirectToAction("Index", "Home");
         }
     }
