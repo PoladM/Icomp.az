@@ -30,7 +30,7 @@ namespace IComp.Service.Interfaces
         PaginatedListDto<ProductListItemDto> GetAllProd(int page);
         PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int? pagesize, int page);
         decimal FilterByPrice(string val);
-        Task<ProductGetDTO> FindByIdAsync(int id);
+        Task<DetailViewModel> FindByIdAsync(int id);
         List<ColorGetDto> GetColors();
         List<SoftwareGetDto> GetSoftwares();
         List<ProcessorGetDto> GetProcessors();
@@ -62,6 +62,7 @@ namespace IComp.Service.Interfaces
         Task<CommonBasketViewModel> DeleteBasket(int id);
 
         Task<List<Product>> SearchProd(string searchString);
+        Task<int> Comment(ProductComment comment);
 
     }
 }

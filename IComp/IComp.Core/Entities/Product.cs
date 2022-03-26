@@ -84,5 +84,6 @@ namespace IComp.Core.Entities
         public List<int> FileIds { get; set; }
 
         public List<ProductImage> ProductImages { get; set; }
+        public List<ProductComment> ProductComments { get; set; }
     }
 }

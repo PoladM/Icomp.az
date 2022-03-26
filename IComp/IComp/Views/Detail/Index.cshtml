@@ -1,6 +1,7 @@
-﻿@model ProductGetDTO
+﻿@model DetailViewModel
 @{
     ViewData["Title"] = "Index";
+    var product = Model.Product;
 }
 
 
@@ -52,7 +53,7 @@
                     <div class="col-lg-9">
                         <div class="content-heading">
                             <h2>
-                                @Model.Name
+                                @product.Name
                             </h2>
                         </div>
                         <!-- Detail start -->
@@ -62,13 +63,13 @@
                                     <div class="product-image-box">
 
                                         <div class="product-detail-image">
-                                            <img src="~/uploads/products/@Model.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+                                            <img src="~/uploads/products/@product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
                                         </div>
                                         <div class="product-image-nav">
 
                                             <ul>
                                                 <div class="gallery">
-                                                @foreach (var item in Model.ProductImages.Where(x => x.PosterStatus == null))
+                                                @foreach (var item in product.ProductImages.Where(x => x.PosterStatus == null))
                                                 {
                                                     <li>
                                                             <a href="~/uploads/products/@item?.Image" class="big" rel="rel1">
@@ -85,10 +86,10 @@
                                 <div class="col-lg-6">
                                     <div class="product-detail-box">
                                         <div class="product-detail-desc">
-                                            <p>@Model.Processor.ModelName | @Model.ProdMemory.MemoryCapacity?.Capacity @Model.ProdMemory.DDRType | @Model.HardDisc.HDDCapacity?.Capacity @Model.HardDisc.ModelName | @Model.MotherBoard.ModelName | @Model.Software.Name</p>
+                                            <p>@product.Processor.ModelName | @product.ProdMemory.MemoryCapacity?.Capacity @product.ProdMemory.DDRType | @product.HardDisc.HDDCapacity?.Capacity @product.HardDisc.ModelName | @product.MotherBoard.ModelName | @product.Software.Name</p>
                                         </div>
                                         <div class="product-detail-price">
-                                            <p><span>@Model.SalePrice</span>azn</p>
+                                            <p><span>@product.SalePrice</span>azn</p>
                                         </div>
                                         <div class="product-detail-features">
                                             <div class="prod-detail">
@@ -97,7 +98,7 @@
                                                         <p>Tip</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>@Model.ProdType.Name</p>
+                                                        <p>@product.ProdType.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -105,7 +106,7 @@
                                                         <p>Brand</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>@Model.Brand.Name</p>
+                                                        <p>@product.Brand.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -113,7 +114,7 @@
                                                         <p>Rəng</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>@Model.Color.Name</p>
+                                                        <p>@product.Color.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -121,7 +122,7 @@
                                                         <p>Təyinat</p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>@Model.Destination.Name</p>
+                                                        <p>@product.Destination.Name</p>
                                                     </div>
                                                 </div>
                                                 <div class="detail-info">
@@ -131,7 +132,7 @@
                                                         </p>
                                                     </div>
                                                     <div class="detail-value">
-                                                        <p>@Model.MotherBoard.ModelName</p>
+                                                        <p>@product.MotherBoard.ModelName</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,14 +150,14 @@
                                     <div class="tab-content">
                                         <ul class="prodNav">
                                             <li id="pTab1" class="ptItem active">
-                                                TƏSVİR @Model.Name
+                                                TƏSVİR @product.Name
                                             </li>
                                             <li id="pTab2" class="ptItem ">Reviews</li>
                                         </ul>
                                         <div class="prodBody">
                                             <div class="prodMain active" id="pTab1C">
                                                 <p class="mg-b">
-                                                    @Model.Name modelini Azərbaycanda ən ucuz qiymətə
+                                                    @product.Name modelini Azərbaycanda ən ucuz qiymətə
                                                     iComp internet mağazasından əldə edin. Bizim mağazada yalnız
                                                     dünyanın aparıcı istehsalçılarının rəsmi zəmanətli məhsullarının
                                                     satışı həyata keçirilir. Mağazamızda həm nəğd, həm də kreditlə
@@ -169,13 +170,13 @@
 
                                                 </p>
                                                 <p class="mg-b">
-                                                    Siz @Model.Name modelini Bakıda yerləşən
+                                                    Siz @product.Name modelini Bakıda yerləşən
                                                     mağazamızdan götürə və ya ünvana çatdırılma sifariş edə
                                                     bilərsiniz.
 
                                                 </p>
                                                 <p class="mg-b">
-                                                    @Model.Name kreditlə hissə-hissə ödəmə ilə
+                                                    @product.Name kreditlə hissə-hissə ödəmə ilə
                                                     dükanımızdan almaq imkanına maliksiniz.
 
                                                 </p>
@@ -196,7 +197,7 @@
                                                             <p>Tip</p>
                                                         </div>
                                                         <div class="option-value">
-                                                            <p>@Model.ProdType.Name</p>
+                                                            <p>@product.ProdType.Name</p>
                                                         </div>
                                                     </div>
                                                     <div class="option-info">
@@ -204,7 +205,7 @@
                                                             <p>Brand</p>
                                                         </div>
                                                         <div class="option-value">
-                                                            <p>@Model.Brand.Name</p>
+                                                            <p>@product.Brand.Name</p>
                                                         </div>
                                                     </div>
                                                     <div class="option-info">
@@ -213,7 +214,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.Name
+                                                                @product.Name
                                                             </p>
                                                         </div>
                                                     </div>
@@ -222,7 +223,7 @@
                                                             <p>Rəng</p>
                                                         </div>
                                                         <div class="option-value">
-                                                            <p>@Model.Color.Name</p>
+                                                            <p>@product.Color.Name</p>
                                                         </div>
                                                     </div>
                                                     <div class="option-head">
@@ -238,7 +239,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.Software.Name
+                                                                @product.Software.Name
                                                             </p>
                                                         </div>
                                                     </div>
@@ -255,7 +256,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.Processor.ModelName
+                                                                @product.Processor.ModelName
                                                             </p>
                                                         </div>
                                                     </div>
@@ -267,7 +268,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.Processor.Speed
+                                                                @product.Processor.Speed
                                                             </p>
                                                         </div>
                                                     </div>
@@ -279,7 +280,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.ProdMemory.MemoryCapacity.Capacity
+                                                                @product.ProdMemory.MemoryCapacity.Capacity
                                                             </p>
                                                         </div>
                                                     </div>
@@ -292,7 +293,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.ProdMemory.DDRType @Model.ProdMemory.MemoryCapacity.Capacity @Model.ProdMemory.Speed
+                                                                @product.ProdMemory.DDRType @product.ProdMemory.MemoryCapacity.Capacity @product.ProdMemory.Speed
                                                             </p>
                                                         </div>
                                                     </div>
@@ -304,7 +305,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.VideoCard.ModelName
+                                                                @product.VideoCard.ModelName
                                                             </p>
                                                         </div>
                                                     </div>
@@ -317,7 +318,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.SoundType
+                                                                @product.SoundType
                                                             </p>
                                                         </div>
                                                     </div>
@@ -329,12 +330,12 @@
                                                     <div class="option-info">
                                                         <div class="option-name">
                                                             <p>
-                                                                @(Model.HardDisc.HDDCapacity?.IsSSD == true? "SSD" : "HDD")
+                                                                @(product.HardDisc.HDDCapacity?.IsSSD == true? "SSD" : "HDD")
                                                             </p>
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.HardDisc.HDDCapacity?.Capacity
+                                                                @product.HardDisc.HDDCapacity?.Capacity
                                                             </p>
                                                         </div>
                                                     </div>
@@ -351,7 +352,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.Network
+                                                                @product.Network
                                                             </p>
                                                         </div>
                                                     </div>
@@ -364,7 +365,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @(Model.HasWifi == true ? "✔" : "-")
+                                                                @(product.HasWifi == true ? "✔" : "-")
                                                             </p>
                                                         </div>
                                                     </div>
@@ -381,7 +382,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.PowerSupply
+                                                                @product.PowerSupply
                                                             </p>
                                                         </div>
                                                     </div>
@@ -393,7 +394,7 @@
                                                         </div>
                                                         <div class="option-value">
                                                             <p>
-                                                                @Model.WarrantyPeriod
+                                                                @product.WarrantyPeriod
                                                             </p>
                                                         </div>
                                                     </div>
@@ -404,64 +405,13 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="comment-form">
-                                                            <form action="#">
-                                                                <div class="comment-title pg-b">
-                                                                    <h2>Yeni mesaj</h2>
-                                                                </div>
-                                                                <div class="comment-rating pg-b">
-                                                                    <span>Məhsul reytinqi:</span>
-                                                                    <div class="rate-prod">
-                                                                        <div class="rate">
-                                                                            <input type="radio" id="star5" name="rate"
-                                                                                   value="5" />
-                                                                            <label for="star5" title="text">
-                                                                                5
-                                                                                stars
-                                                                            </label>
-                                                                            <input type="radio" id="star4" name="rate"
-                                                                                   value="4" />
-                                                                            <label for="star4" title="text">
-                                                                                4
-                                                                                stars
-                                                                            </label>
-                                                                            <input type="radio" id="star3" name="rate"
-                                                                                   value="3" />
-                                                                            <label for="star3" title="text">
-                                                                                3
-                                                                                stars
-                                                                            </label>
-                                                                            <input type="radio" id="star2" name="rate"
-                                                                                   value="2" />
-                                                                            <label for="star2" title="text">
-                                                                                2
-                                                                                stars
-                                                                            </label>
-                                                                            <input type="radio" id="star1" name="rate"
-                                                                                   value="1" />
-                                                                            <label for="star1" title="text">
-                                                                                1
-                                                                                star
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="clear-fix"></div>
-                                                                </div>
-                                                                <div class="comment-input pg-b">
-                                                                    <input type="text" placeholder="Ad">
-                                                                </div>
-                                                                <div class="comment-textarea pg-b">
-                                                                    <textarea name="" placeholder="Mesaj mətni" id="" cols="50" rows="10"></textarea>
-                                                                </div>
-                                                                <div class="comment-button pg-b">
-                                                                    <a href="#" class="btn btn-primary">Mesaj əlavə etmək</a>
-                                                                </div>
-                                                            </form>
+                                                            @Html.Partial("_CommentFormPartial",@Model.Comment)
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
                                                         <div class="comment-block">
                                                             <h1>Müzakirə</h1>
-                                                            <div class="noComments">bu element üçün ismarıc yoxdur</div>
+                                                            @Html.Partial("_CommentPartial",product.ProductComments)
                                                         </div>
                                                     </div>
                                                 </div>

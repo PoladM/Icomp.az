@@ -68,7 +68,7 @@ namespace IComp.Service.Helpers
 
             foreach (var item in cookieItems)
             {
-                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId);
+                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
 
                 BasketProductViewModel basketProduct = new BasketProductViewModel
                 {

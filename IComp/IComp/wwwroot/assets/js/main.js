@@ -106,7 +106,7 @@ $(document).ready(function () {
 
 
     // basket item count on load
-    let prodcount = $(".basket-count").val();
+    let prodcount = $("#basket-count").val();
     $(".basket-counter-value").html(prodcount)
 
     //add to basket 
@@ -126,7 +126,7 @@ $(document).ready(function () {
         })
             .then(data => {
                 $("#myModal .modal-body-inner").html(data)
-                let prodCount = $(".basket-count").val()
+                prodCount = $("#basket-count").val()
                 $(".basket-counter-value").html(prodCount);
                 $("#myModal").modal('show');
             })
@@ -155,7 +155,7 @@ $(document).ready(function () {
 
             }).then(data => {
                 $("#myModal .modal-body-inner").html(data)
-                let prodCount = $(".basket-count").val()
+                prodCount = $("#basket-count").val()
                 $(".basket-counter-value").html(prodCount);
                 $("#myModal").modal('show');
             })
@@ -192,7 +192,7 @@ $(document).ready(function () {
             })
                 .then(data => {
                     $("#myModal .modal-body-inner").html(data)
-                    let prodCount = $(".basket-count").val()
+                    prodCount = $("#basket-count").val()
                     $(".basket-counter-value").html(prodCount);
                     $("#myModal").modal('show');
                 })
@@ -220,7 +220,7 @@ $(document).ready(function () {
 
                 }).then(data => {
                     $("#myModal .modal-body-inner").html(data)
-                    let prodCount = $(".basket-count").val()
+                    prodCount = $("#basket-count").val()
                     $(".basket-counter-value").html(prodCount);
                     $("#myModal").modal('show');
                 })

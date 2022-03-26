@@ -27,6 +27,7 @@ namespace IComp.Core
         IProductImageRepository ProductImageRepository { get; }
         ISettingRepository SettingRepository { get; }
         IBasketItemRepository BasketItemRepository { get; }
+        IProductCommentRepository ProductCommentRepository { get; }
         int Commit();
         Task<int> CommitAsync();
     }

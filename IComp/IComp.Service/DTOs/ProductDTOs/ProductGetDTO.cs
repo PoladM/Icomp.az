@@ -65,5 +65,6 @@ namespace IComp.Service.DTOs.ProductDTOs
         public Color Color { get; set; }
         public Software Software { get; set; }
         public List<ProductImage> ProductImages { get; set; }
+        public List<ProductComment> ProductComments { get; set; }
     }
 }

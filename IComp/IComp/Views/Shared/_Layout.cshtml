@@ -322,7 +322,7 @@
                         <div class="modal-body-inner">
                              @if (basket.BasketItems.Any(x => x.Product != null))
                         {
-                             @(Html.Partial("_BasketPartial",basket))
+                             @( await Html.PartialAsync("_BasketPartial",basket))
                         }
                         </div>
                        <div class="loader-wrapper" style="display: none;"><div class="reverse-spinner"></div></div>
@@ -345,7 +345,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        @Html.Partial("_LoginFormPartial", loginPost)
+                        @(await Html.PartialAsync("_LoginFormPartial", loginPost))
                     </div>
                 </div>
             </div>
@@ -445,7 +445,7 @@
      
 
     <!-- Carousel -->
-    <script src="assets/css/slick/slick.min.js"></script>
+    <script src="~/assets/css/slick/slick.min.js"></script>
 
 
     <script src="~/assets/js/main.js"></script>

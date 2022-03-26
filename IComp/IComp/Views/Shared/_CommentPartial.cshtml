@@ -1,0 +1,23 @@
+﻿@model List<ProductComment>
+
+@foreach (var item in Model)
+{
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <h1>@item.AppUser.FullName</h1>
+            <p>@item.Text</p>
+        </div>
+    }
+    else if (Model == null)
+    {
+        <div class="noComments">bu element üçün ismarıc yoxdur</div>
+    }
+    else
+    {
+        <div>
+            <h1>@item.Name</h1>
+            <p>@item.Text</p>
+        </div>
+    }
+}

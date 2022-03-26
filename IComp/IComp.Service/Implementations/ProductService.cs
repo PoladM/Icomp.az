@@ -194,16 +194,24 @@ namespace IComp.Service.Implementations
 
             return _mapper.Map<ProductPostDto>(product);
         }
-        public async Task<ProductGetDTO> FindByIdAsync(int id)
+        public async Task<DetailViewModel> FindByIdAsync(int id)
         {
-            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "Category", "Color", "Software", "ProductImages");
-
+            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments");
+            
             if (existProduct == null)
             {
                 throw new ItemNotFoundException("Item not found");
             }
 
-            return _mapper.Map<ProductGetDTO>(existProduct);
+            var productDto = _mapper.Map<ProductGetDTO>(existProduct);
+
+            var viewModel = new DetailViewModel
+            {
+                Product = productDto,
+                Comment = new ProductComment { ProductId = id }
+            };
+
+            return viewModel;
         }
         public List<BrandGetDto> GetBrands()
         {
@@ -570,6 +578,40 @@ namespace IComp.Service.Implementations
             
 
             return await products.ToListAsync();
+        }
+
+        public async Task<int> Comment(ProductComment comment)
+        {
+            AppUser appUser = null;
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = _userManager.Users.FirstOrDefault(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+
+
+            var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == comment.ProductId, "ProductComments");
+            if (product == null)
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
+            //if (appUser == null)
+            //{
+            //    comment.CreatedAt = DateTime.UtcNow.AddHours(4);
+            //    await _unitOfWork.ProductCommentRepository.AddAsync(comment);
+            //    await _unitOfWork.CommitAsync();
+            //    var sum = product.ProductComments.Sum(x => x.Rate);
+            //    var rate = Math.Ceiling( sum / (double)product.ProductComments.Count);
+            //    product.Rate = (int)rate;
+            //    await _unitOfWork.CommitAsync();
+            //    return comment.ProductId;
+            //}
+            //comment.AppUserId = appUser.Id;
+            //comment.CreatedAt = DateTime.UtcNow.AddHours(4);
+            await _unitOfWork.ProductCommentRepository.AddAsync(comment);
+            product.Rate = (int)Math.Ceiling(product.ProductComments.Sum(x => x.Rate) / (double)product.ProductComments.Count);
+            await _unitOfWork.CommitAsync();
+            return comment.ProductId;
         }
     }
 }
