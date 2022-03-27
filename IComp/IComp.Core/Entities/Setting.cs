@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace IComp.Core.Entities
@@ -14,5 +16,7 @@ namespace IComp.Core.Entities
         [Required]
         [StringLength(maximumLength: 500)]
         public string Value { get; set; }
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
     }
 }

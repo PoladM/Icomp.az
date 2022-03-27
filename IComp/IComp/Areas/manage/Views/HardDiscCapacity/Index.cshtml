@@ -1,7 +1,8 @@
 ﻿@model PaginatedListDto<HardDiscCapacityListItemDto>
 @{
     ViewData["Title"] = "Index";
-    var counter = 0;
+        int counter = (Model.PageIndex - 1) * 3;
+
 }
 
 <div class="container">

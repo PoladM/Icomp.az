@@ -54,6 +54,7 @@ namespace IComp
             services.AddScoped<IHardDiscCapacityService, HardDiscCapacityService>();
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ISettingService, SettingService>();
             services.AddScoped<IAppUserService, AppUserService>();
             services.AddScoped<LayoutService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
