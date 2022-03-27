@@ -325,5 +325,17 @@ namespace IComp.Areas.manage.Controllers
 
             return Ok();
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productService.DeleteAsync(id);
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Restore(int id)
+        {
+            await _productService.RestoreAsync(id);
+            return RedirectToAction("Index");
+        }
     }
 }

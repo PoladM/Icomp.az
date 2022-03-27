@@ -7,6 +7,7 @@ namespace IComp.Service.DTOs.MotherBoardDTOs
 {
     public class MotherBoardPostDto
     {
+        public int Id { get; set; }
         public string ModelName { get; set; }
         public bool IsAvailable { get; set; }
         public double? Price { get; set; }

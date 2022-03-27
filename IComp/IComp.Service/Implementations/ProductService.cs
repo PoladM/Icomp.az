@@ -61,6 +61,47 @@ namespace IComp.Service.Implementations
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.Name);
             }
 
+            if (!await _unitOfWork.VideoCardRepository.IsExistAsync(x => x.Id == postDTO.VideoCardId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.ProcessorRepository.IsExistAsync(x => x.Id == postDTO.ProcessorId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.MotherBoardRepository.IsExistAsync(x => x.Id == postDTO.MotherBoardId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.HardDiscRepository.IsExistAsync(x => x.Id == postDTO.HardDiscId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.ColorRepository.IsExistAsync(x => x.Id == postDTO.ColorId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.CategoryRepository.IsExistAsync(x => x.Id == postDTO.CategoryId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.BrandRepository.IsExistAsync(x => x.Id == postDTO.BrandId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.DestinationRepository.IsExistAsync(x => x.Id == postDTO.DestinationId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.ProdTypeRepository.IsExistAsync(x => x.Id == postDTO.ProdTypeId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.SoftWareRepository.IsExistAsync(x => x.Id == postDTO.SoftwareId ))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
             Product product = _mapper.Map<Product>(postDTO);
 
             await _unitOfWork.ProductRepository.AddAsync(product);
@@ -215,7 +256,7 @@ namespace IComp.Service.Implementations
         }
         public List<BrandGetDto> GetBrands()
         {
-            var brands = _unitOfWork.BrandRepository.GetAll().ToList();
+            var brands = _unitOfWork.BrandRepository.GetAll(x => !x.IsDeleted).ToList();
 
             var brandsDto = _mapper.Map<List<BrandGetDto>>(brands);
             return brandsDto;
@@ -223,7 +264,7 @@ namespace IComp.Service.Implementations
 
         public List<CategoryGetDto> GetCategories()
         {
-            var categories = _unitOfWork.CategoryRepository.GetAll().ToList();
+            var categories = _unitOfWork.CategoryRepository.GetAll(x => !x.IsDeleted).ToList();
 
             var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories);
             return categoryGetDtos;
@@ -231,7 +272,7 @@ namespace IComp.Service.Implementations
 
         public List<HardDiscGetDto> GetHardDiscs()
         {
-            var hardDiscs = _unitOfWork.HardDiscRepository.GetAll().ToList();
+            var hardDiscs = _unitOfWork.HardDiscRepository.GetAll(x => !x.IsDeleted).ToList();
 
             var hardDiscGetDtos = _mapper.Map<List<HardDiscGetDto>>(hardDiscs);
             return hardDiscGetDtos;
@@ -239,7 +280,7 @@ namespace IComp.Service.Implementations
 
         public List<MemoryGetDto> GetMemories()
         {
-            var memories = _unitOfWork.MemoryRepository.GetAll().ToList();
+            var memories = _unitOfWork.MemoryRepository.GetAll(x => !x.IsDeleted).ToList();
 
             var memoryGetDtos = _mapper.Map<List<MemoryGetDto>>(memories);
             return memoryGetDtos;
@@ -247,7 +288,7 @@ namespace IComp.Service.Implementations
 
         public List<MotherBoardGetDto> GetMotherBoards()
         {
-            var motherBoards = _unitOfWork.MotherBoardRepository.GetAll().ToList();
+            var motherBoards = _unitOfWork.MotherBoardRepository.GetAll(x => !x.IsDeleted).ToList();
 
             var motherBoardGetDtos = _mapper.Map<List<MotherBoardGetDto>>(motherBoards);
             return motherBoardGetDtos;
@@ -255,7 +296,7 @@ namespace IComp.Service.Implementations
 
         public List<ProcessorGetDto> GetProcessors()
         {
-            var processors = _unitOfWork.ProcessorRepository.GetAll().ToList();
+            var processors = _unitOfWork.ProcessorRepository.GetAll(x => !x.IsDeleted).ToList();
 
             var processorGetDtos = _mapper.Map<List<ProcessorGetDto>>(processors);
             return processorGetDtos;
@@ -263,7 +304,7 @@ namespace IComp.Service.Implementations
 
         public List<VideoCardGetDto> GetVideoCards()
         {
-            var videoCards = _unitOfWork.VideoCardRepository.GetAll().ToList();
+            var videoCards = _unitOfWork.VideoCardRepository.GetAll(x => !x.IsDeleted).ToList();
 
             var videoCardGetDtos = _mapper.Map<List<VideoCardGetDto>>(videoCards);
             return videoCardGetDtos;
@@ -308,6 +349,46 @@ namespace IComp.Service.Implementations
             if (await _unitOfWork.ProductRepository.IsExistAsync(x => x.Id != id && x.Name.ToLower().Trim() == postDto.Name.ToLower().Trim() && !x.IsDeleted))
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDto.Name);
+            }
+            if (!await _unitOfWork.VideoCardRepository.IsExistAsync(x => x.Id == postDto.VideoCardId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.ProcessorRepository.IsExistAsync(x => x.Id == postDto.ProcessorId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.MotherBoardRepository.IsExistAsync(x => x.Id == postDto.MotherBoardId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.HardDiscRepository.IsExistAsync(x => x.Id == postDto.HardDiscId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.ColorRepository.IsExistAsync(x => x.Id == postDto.ColorId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.CategoryRepository.IsExistAsync(x => x.Id == postDto.CategoryId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.BrandRepository.IsExistAsync(x => x.Id == postDto.BrandId && !x.IsDeleted))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.DestinationRepository.IsExistAsync(x => x.Id == postDto.DestinationId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.ProdTypeRepository.IsExistAsync(x => x.Id == postDto.ProdTypeId))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (!await _unitOfWork.SoftWareRepository.IsExistAsync(x => x.Id == postDto.SoftwareId))
+            {
+                throw new ItemNotFoundException("Item not found");
             }
 
             existProduct.ProcessorId = postDto.ProcessorId;

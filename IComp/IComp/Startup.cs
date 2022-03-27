@@ -57,6 +57,10 @@ namespace IComp
             services.AddScoped<IColorService, ColorService>();
             services.AddScoped<ISettingService, SettingService>();
             services.AddScoped<IAppUserService, AppUserService>();
+            services.AddScoped<IDestinationService, DestinationService>();
+            services.AddScoped<IProdTypeService, ProdTypeService>();
+            services.AddScoped<IMotherBoardService, MotherBoardSevice>();
+            services.AddScoped<ISoftwareService, SoftwareService>();
             services.AddScoped<LayoutService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

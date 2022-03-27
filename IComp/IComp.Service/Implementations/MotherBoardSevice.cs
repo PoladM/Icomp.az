@@ -59,7 +59,7 @@ namespace IComp.Service.Implementations
 
         public PaginatedListDto<MotherBoardListItemDto> GetAllProd(int page)
         {
-            var query = _unitOfWork.MemoryRepository.GetAll();
+            var query = _unitOfWork.MotherBoardRepository.GetAll();
             int pageSize = 3;
 
             List<MotherBoardListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new MotherBoardListItemDto { Id = x.Id, ModelName = x.ModelName, ProductsCount = x.Products.Count, IsDeleted = x.IsDeleted }).ToList();
