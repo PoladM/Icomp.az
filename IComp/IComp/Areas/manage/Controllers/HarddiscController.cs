@@ -18,23 +18,16 @@ namespace IComp.Areas.manage.Controllers
         {
             return View(_hardDiscService.GetAllProd(page));
         }
-        public IActionResult GetSSD()
-        {
-            ViewBag.Capacity = _hardDiscService.GetCapacitiesForSSD();
-            return PartialView("_HardDiscCapacityPartial");
-        }
-        public IActionResult GetHDD()
-        {
-            ViewBag.Capacity = _hardDiscService.GetCapacitiesForHDD();
-            return PartialView("_HardDiscCapacityPartial");
-        }
         public IActionResult Create()
         {
+            ViewBag.CapacityHDD = _hardDiscService.GetCapacitiesForHDD();
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(HardDiscPostDto postDto)
         {
+            ViewBag.CapacityHDD = _hardDiscService.GetCapacitiesForHDD();
+
             if (!ModelState.IsValid)
             {
                 return View();
@@ -46,12 +39,15 @@ namespace IComp.Areas.manage.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
+            ViewBag.CapacityHDD = _hardDiscService.GetCapacitiesForHDD();
             HardDiscPostDto postDTO = await _hardDiscService.GetByIdAsync(id);
             return View(postDTO);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(int id, HardDiscPostDto postDTO)
         {
+            ViewBag.CapacityHDD = _hardDiscService.GetCapacitiesForHDD();
+
             if (!ModelState.IsValid)
             {
                 return View();

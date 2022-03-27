@@ -87,16 +87,7 @@ namespace IComp.Service.Implementations
 
         public List<HardDiscCapacityGetDto> GetCapacitiesForHDD()
         {
-            var capacities = _unitOfWork.HardDiscCapacityRepository.GetAll(x => x.IsHDD);
-
-            var capacitiesDto = _mapper.Map<List<HardDiscCapacityGetDto>>(capacities);
-
-            return capacitiesDto;
-        }
-        //Mapping
-        public List<HardDiscCapacityGetDto> GetCapacitiesForSSD()
-        {
-            var capacities = _unitOfWork.HardDiscCapacityRepository.GetAll(x => x.IsSSD);
+            var capacities = _unitOfWork.HardDiscCapacityRepository.GetAll();
 
             var capacitiesDto = _mapper.Map<List<HardDiscCapacityGetDto>>(capacities);
 

@@ -148,6 +148,15 @@
                     <div class="form-group col-lg-4">
                         <label asp-for="HardDiscId">HardDiscs</label>
                         <select class="form-control" asp-for="HardDiscId" asp-items="@new SelectList(ViewBag.HardDiscs,nameof(HardDisc.Id),nameof(HardDisc.ModelName))">
+                            <option value="0">none</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label asp-for="SSDId">SSDs</label>
+                        <select class="form-control" asp-for="SSDId" asp-items="@new SelectList(ViewBag.SSDs,nameof(SSD.Id),nameof(SSD.ModelName))">
+                            <option value="0">none</option>
+
                         </select>
                     </div>
                     <div class="form-group col-lg-4">

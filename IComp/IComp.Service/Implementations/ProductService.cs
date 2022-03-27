@@ -75,7 +75,17 @@ namespace IComp.Service.Implementations
             }
             if (!await _unitOfWork.HardDiscRepository.IsExistAsync(x => x.Id == postDTO.HardDiscId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.HardDiscId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+            }
+            if (!await _unitOfWork.SSDRepository.IsExistAsync(x => x.Id == postDTO.SSDId && !x.IsDeleted))
+            {
+                if (postDTO.SSDId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.ColorRepository.IsExistAsync(x => x.Id == postDTO.ColorId))
             {
@@ -97,12 +107,21 @@ namespace IComp.Service.Implementations
             {
                 throw new ItemNotFoundException("Item not found");
             }
-            if (!await _unitOfWork.SoftWareRepository.IsExistAsync(x => x.Id == postDTO.SoftwareId ))
+            if (!await _unitOfWork.SoftWareRepository.IsExistAsync(x => x.Id == postDTO.SoftwareId))
             {
                 throw new ItemNotFoundException("Item not found");
             }
 
             Product product = _mapper.Map<Product>(postDTO);
+
+            if (postDTO.SSDId == 0)
+            {
+                product.SSDId = default;
+            }
+            if (postDTO.HardDiscId == 0)
+            {
+                product.HardDiscId = default;
+            }
 
             await _unitOfWork.ProductRepository.AddAsync(product);
             await _unitOfWork.CommitAsync();
@@ -141,9 +160,9 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
-        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? categoryid, int page)
+        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable,"Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity");
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity");
 
             if (processorserieid != null)
             {
@@ -177,12 +196,14 @@ namespace IComp.Service.Implementations
             {
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.HardDisc.HDDCapacityId == harddiscapacitycid);
             }
+            if (ssdcapacityid != null)
+            {
+                query = _unitOfWork.ProductRepository.Filter(query, x => x.SSD.SSDCapacityID == ssdcapacityid);
+            }
             if (categoryid != null)
             {
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.CategoryId == categoryid);
             }
-
-
 
 
             switch (sort)
@@ -206,7 +227,7 @@ namespace IComp.Service.Implementations
             if (minprice != null && maxprice != null)
                 query = query.Where(x => x.SalePrice >= minprice && x.SalePrice <= maxprice);
 
-            var pageSize =  3;
+            var pageSize = 3;
 
             List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
 
@@ -237,7 +258,7 @@ namespace IComp.Service.Implementations
         }
         public async Task<DetailViewModel> FindByIdAsync(int id)
         {
-            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
+            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
 
             if (existProduct == null)
             {
@@ -364,7 +385,17 @@ namespace IComp.Service.Implementations
             }
             if (!await _unitOfWork.HardDiscRepository.IsExistAsync(x => x.Id == postDto.HardDiscId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.HardDiscId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+            }
+            if (!await _unitOfWork.SSDRepository.IsExistAsync(x => x.Id == postDto.SSDId && !x.IsDeleted))
+            {
+                if (postDto.SSDId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.ColorRepository.IsExistAsync(x => x.Id == postDto.ColorId))
             {
@@ -395,7 +426,23 @@ namespace IComp.Service.Implementations
             existProduct.CategoryId = postDto.CategoryId;
             existProduct.BrandId = postDto.BrandId;
             existProduct.DestinationId = postDto.DestinationId;
-            existProduct.HardDiscId = postDto.HardDiscId;
+            if (postDto.HardDiscId == 0)
+            {
+                existProduct.HardDiscId = default;
+            }
+            else
+            {
+                existProduct.HardDiscId = postDto.HardDiscId;
+
+            }
+            if (postDto.SSDId == 0)
+            {
+                existProduct.SSDId = default;
+            }
+            else
+            {
+                existProduct.SSDId = postDto.SSDId;
+            }
             existProduct.ProdMemoryId = postDto.ProdMemoryId;
             existProduct.MotherBoardId = postDto.MotherBoardId;
             existProduct.ProdTypeId = postDto.ProdTypeId;
@@ -822,13 +869,27 @@ namespace IComp.Service.Implementations
         {
             var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable);
 
-            var pageSize = 3;
+            var pageSize = 3;   
 
             List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
             return listDto;
+        }
+
+        public List<SSDCapacity> GetSSDCapacities()
+        {
+            var capacity = _unitOfWork.SSDCapacityRepository.GetAll().ToList();
+
+            return capacity;
+        }
+
+        public List<SSD> GetSSDs()
+        {
+            var sSDs = _unitOfWork.SSDRepository.GetAll().ToList();
+
+            return sSDs;
         }
     }
 }

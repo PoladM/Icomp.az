@@ -168,16 +168,6 @@ namespace IComp.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<bool>("IsHDD")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<bool>("IsSSD")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
                     b.HasKey("Id");
 
                     b.ToTable("HDDCapacities");
@@ -555,7 +545,7 @@ namespace IComp.Data.Migrations
                     b.Property<decimal>("DiscountPercent")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("HardDiscId")
+                    b.Property<int?>("HardDiscId")
                         .HasColumnType("int");
 
                     b.Property<bool>("HasBluetooth")
@@ -633,6 +623,9 @@ namespace IComp.Data.Migrations
                     b.Property<int?>("Rate")
                         .HasColumnType("int");
 
+                    b.Property<int?>("SSDId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("SalePrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -686,6 +679,8 @@ namespace IComp.Data.Migrations
                     b.HasIndex("ProdMemoryId");
 
                     b.HasIndex("ProdTypeId");
+
+                    b.HasIndex("SSDId");
 
                     b.HasIndex("SoftwareId");
 
@@ -751,6 +746,68 @@ namespace IComp.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
+                });
+
+            modelBuilder.Entity("IComp.Core.Entities.SSD", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModelName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<DateTime>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("SSDCapacityID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SSDCapacityID");
+
+                    b.ToTable("SSDs");
+                });
+
+            modelBuilder.Entity("IComp.Core.Entities.SSDCapacity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Capacity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("CycleRate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SSDCapacities");
                 });
 
             modelBuilder.Entity("IComp.Core.Entities.Setting", b =>
@@ -1181,9 +1238,7 @@ namespace IComp.Data.Migrations
 
                     b.HasOne("IComp.Core.Entities.HardDisc", "HardDisc")
                         .WithMany("Products")
-                        .HasForeignKey("HardDiscId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HardDiscId");
 
                     b.HasOne("IComp.Core.Entities.MotherBoard", "MotherBoard")
                         .WithMany("Products")
@@ -1208,6 +1263,10 @@ namespace IComp.Data.Migrations
                         .HasForeignKey("ProdTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("IComp.Core.Entities.SSD", "SSD")
+                        .WithMany("Products")
+                        .HasForeignKey("SSDId");
 
                     b.HasOne("IComp.Core.Entities.Software", "Software")
                         .WithMany()
@@ -1240,6 +1299,15 @@ namespace IComp.Data.Migrations
                     b.HasOne("IComp.Core.Entities.Product", "Product")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("IComp.Core.Entities.SSD", b =>
+                {
+                    b.HasOne("IComp.Core.Entities.SSDCapacity", "SSDCapacity")
+                        .WithMany("SSDs")
+                        .HasForeignKey("SSDCapacityID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -143,22 +143,35 @@
                     <div class="form-group col-lg-4">
                         <label asp-for="HardDiscId">HardDiscs</label>
                         <select class="form-control" asp-for="HardDiscId" asp-items="@new SelectList(ViewBag.HardDiscs,nameof(HardDisc.Id),nameof(HardDisc.ModelName))">
+                            <option value="0">none</option>
                         </select>
+                        <span class="text-danger" asp-validation-for="HardDiscId"></span>
+
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label asp-for="SSDId">SSDs</label>
+                        <select class="form-control" asp-for="SSDId" asp-items="@new SelectList(ViewBag.SSDs,nameof(SSD.Id),nameof(SSD.ModelName))">
+                            <option value="0">none</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="SSDId"></span>
+
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="MotherBoardId">MotherBoards</label>
                         <select class="form-control" asp-for="MotherBoardId" asp-items="@new SelectList(ViewBag.MotherBoards,nameof(MotherBoard.Id),nameof(MotherBoard.ModelName))">
                         </select>
+                        <span class="text-danger" asp-validation-for="MotherBoardId"></span>
+
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-lg-6">
-                        <label asp-for="ColorId">Categories</label>
+                        <label asp-for="ColorId">Color</label>
                         <select class="form-control" asp-for="ColorId" asp-items="@new SelectList(ViewBag.Colors,nameof(Color.Id),nameof(Color.Name))">
                         </select>
                     </div>
                     <div class="form-group col-lg-6">
-                        <label asp-for="SoftwareId">HardDiscs</label>
+                        <label asp-for="SoftwareId">Software</label>
                         <select class="form-control" asp-for="SoftwareId" asp-items="@new SelectList(ViewBag.Softwares,nameof(Software.Id),nameof(Software.Name))">
                         </select>
                     </div>

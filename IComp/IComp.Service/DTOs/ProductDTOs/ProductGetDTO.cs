@@ -61,6 +61,7 @@ namespace IComp.Service.DTOs.ProductDTOs
         public Brand Brand { get; set; }
         public Destination Destination { get; set; }
         public HardDisc HardDisc { get; set; }
+        public SSD SSD { get; set; }
         public Category Category { get; set; }
         public Color Color { get; set; }
         public Software Software { get; set; }

@@ -30,6 +30,9 @@ namespace IComp.Core
         IProductCommentRepository ProductCommentRepository { get; }
         IOrderRepository OrderRepository { get; }
         IOrderItemRepository OrderItemRepository { get; }
+        ISSDCapacityRepository SSDCapacityRepository { get; }
+        ISSDRepository SSDRepository { get; }
+
         int Commit();
         Task<int> CommitAsync();
     }

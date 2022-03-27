@@ -11,8 +11,6 @@ namespace IComp.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<HDDCapacity> builder)
         {
-            builder.Property(x => x.IsHDD).HasDefaultValue(false);
-            builder.Property(x => x.IsSSD).HasDefaultValue(false);
             builder.Property(x => x.Capacity).IsRequired().HasMaxLength(100);
             builder.Property(x => x.CycleRate).IsRequired().HasMaxLength(100);
         }

@@ -37,6 +37,8 @@ namespace IComp.Data
         public DbSet<ProductComment> ProductComments { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<SSD> SSDs { get; set; }
+        public DbSet<SSDCapacity> SSDCapacities { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

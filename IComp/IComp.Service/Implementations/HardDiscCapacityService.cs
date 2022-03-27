@@ -29,14 +29,6 @@ namespace IComp.Service.Implementations
             {
                 throw new RecordDuplicatedException("Item already exist with name " + postDTO.Capacity);
             }
-            if (postDTO.IsHDD == true && postDTO.IsSSD == true)
-            {
-                throw new RecordDuplicatedException("Choose only HDD or SSD");
-            }
-            else if(postDTO.IsHDD == false && postDTO.IsSSD == false)
-            {
-                throw new RecordDuplicatedException("Choose SSD or HDD");
-            }
 
             var capacity = _mapper.Map<HDDCapacity>(postDTO);
             await _unitOfWork.HardDiscCapacityRepository.AddAsync(capacity);
@@ -98,18 +90,7 @@ namespace IComp.Service.Implementations
             {
                 throw new RecordDuplicatedException("Item already exist with name " + postDTO.Capacity);
             }
-            if (postDTO.IsHDD==true && postDTO.IsSSD==true)
-            {
-                throw new RecordDuplicatedException("choose only SSD or HDD");
-            }
-            else if(postDTO.IsSSD ==false && postDTO.IsHDD==false)
-            {
-                throw new RecordDuplicatedException("choose SSD or HDD");
-            }
-
             existSerie.Capacity = postDTO.Capacity;
-            existSerie.IsHDD = postDTO.IsHDD;
-            existSerie.IsSSD = postDTO.IsSSD;
             existSerie.CycleRate = postDTO.CycleRate;
             await _unitOfWork.CommitAsync();
         }

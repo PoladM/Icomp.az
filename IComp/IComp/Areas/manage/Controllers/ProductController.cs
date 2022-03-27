@@ -36,6 +36,7 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.Memories = _productService.GetMemories();
             ViewBag.Categories = _productService.GetCategories();
             ViewBag.HardDiscs = _productService.GetHardDiscs();
+            ViewBag.SSDs = _productService.GetSSDs();
             ViewBag.MotherBoards = _productService.GetMotherBoards();
             ViewBag.VideoCards = _productService.GetVideoCards();
             ViewBag.Destinations = _productService.GetDestinations();
@@ -53,6 +54,8 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.Memories = _productService.GetMemories();
             ViewBag.Categories = _productService.GetCategories();
             ViewBag.HardDiscs = _productService.GetHardDiscs();
+            ViewBag.SSDs = _productService.GetSSDs();
+            ViewBag.SSDs = _productService.GetSSDs();
             ViewBag.MotherBoards = _productService.GetMotherBoards();
             ViewBag.VideoCards = _productService.GetVideoCards();
             ViewBag.Destinations = _productService.GetDestinations();
@@ -136,6 +139,7 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.Memories = _productService.GetMemories();
             ViewBag.Categories = _productService.GetCategories();
             ViewBag.HardDiscs = _productService.GetHardDiscs();
+            ViewBag.SSDs = _productService.GetSSDs();
             ViewBag.MotherBoards = _productService.GetMotherBoards();
             ViewBag.VideoCards = _productService.GetVideoCards();
             ViewBag.Destinations = _productService.GetDestinations();
@@ -155,6 +159,7 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.Memories = _productService.GetMemories();
             ViewBag.Categories = _productService.GetCategories();
             ViewBag.HardDiscs = _productService.GetHardDiscs();
+            ViewBag.SSDs = _productService.GetSSDs();
             ViewBag.MotherBoards = _productService.GetMotherBoards();
             ViewBag.VideoCards = _productService.GetVideoCards();
             ViewBag.Destinations = _productService.GetDestinations();
@@ -168,6 +173,7 @@ namespace IComp.Areas.manage.Controllers
             var memories = _productService.GetMemories();
             var categories = _productService.GetCategories();
             var hardDiscs = _productService.GetHardDiscs();
+            var ssDs = _productService.GetSSDs();
             var motherBoards = _productService.GetMotherBoards();
             var videoCards = _productService.GetVideoCards();
             var destinations = _productService.GetDestinations();
@@ -285,6 +291,7 @@ namespace IComp.Areas.manage.Controllers
             existProduct.BrandId = postDto.BrandId;
             existProduct.DestinationId = postDto.DestinationId;
             existProduct.HardDiscId = postDto.HardDiscId;
+            existProduct.SSDId = postDto.SSDId;
             existProduct.ProdMemoryId = postDto.ProdMemoryId;
             existProduct.MotherBoardId = postDto.MotherBoardId;
             existProduct.ProdTypeId = postDto.ProdTypeId;

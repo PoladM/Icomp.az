@@ -21,11 +21,11 @@ namespace IComp.Controllers
             _productService = productService;
             _userManager = userManager;
         }
-        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? categoryid, int page = 1)
+        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? ssdcapacityid, int? categoryid, int page = 1)
         {
             ProductViewModel viewModel = null;
 
-            var products = _productService.FilterProd(minprice, maxprice, sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid,  categoryid, page);
+            var products = _productService.FilterProd(minprice, maxprice, sort, processorserieid, videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
             ViewBag.processorserieid = processorserieid;
             ViewBag.videocardserieid = videocardserieid;
@@ -36,6 +36,7 @@ namespace IComp.Controllers
             ViewBag.destinationid = destinationid;
             ViewBag.categoryid = categoryid;
             ViewBag.hddcapacityid = hddcapacityid;
+            ViewBag.ssdcapacityid = ssdcapacityid;
             ViewBag.sort = sort;
 
 
@@ -51,6 +52,7 @@ namespace IComp.Controllers
                 brandGetDtos = _productService.GetBrands(),
                 destinationGetDtos = _productService.GetDestinations(),
                 hardDiscCapacityGetDtos = _productService.GetHardDiscCapacities(),
+                SSDCapacities = _productService.GetSSDCapacities(),
                 categoryGetDtos = _productService.GetCategories(),
                 MaxPrice = _productService.FilterByPrice("max"),
                 MinPrice = _productService.FilterByPrice("min")

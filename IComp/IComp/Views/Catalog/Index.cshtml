@@ -31,11 +31,11 @@
                                                 </div>
 
                                                 <div style="margin:30px auto">
-                                                    <input type="number" min=0 max="9900"
-                                                           oninput="validity.valid||(value='0');" name="minPrice" form="filterForm" id="min_price"
+                                                    <input type="number" min=@Model.MinPrice max="@Model.MaxPrice"
+                                                           oninput="validity.valid||(value='@Model.MinPrice');" name="minPrice" form="filterForm" id="min_price"
                                                            class="price-range-field" />
-                                                    <input type="number" min=0 max="10000"
-                                                           oninput="validity.valid||(value='10000');" name="maxPrice" form="filterForm" id="max_price"
+                                                    <input type="number" min=@Model.MinPrice max="@Model.MaxPrice"
+                                                           oninput="validity.valid||(value='@Model.MaxPrice');" name="maxPrice" form="filterForm" id="max_price"
                                                            class="price-range-field" />
                                                 </div>
 
@@ -144,13 +144,11 @@
                                     <div class="filter-input">
                                         @foreach (var item in Model.hardDiscCapacityGetDtos)
                                         {
-                                            if (item.IsHDD)
-                                            {
-                                                <div class="input-block">
-                                                    <input form="filterForm" type="radio" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
-                                                    <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
-                                                </div>
-                                            }
+
+                                            <div class="input-block">
+                                                <input form="filterForm" type="radio" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
+                                                <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                            </div>
 
                                         }
                                     </div>
@@ -162,15 +160,13 @@
 
                                     </div>
                                     <div class="filter-input">
-                                        @foreach (var item in Model.hardDiscCapacityGetDtos)
+                                        @foreach (var item in Model.SSDCapacities)
                                         {
-                                            if (item.IsSSD)
-                                            {
-                                                <div class="input-block">
-                                                    <input form="filterForm" type="radio" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
-                                                    <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
-                                                </div>
-                                            }
+
+                                            <div class="input-block">
+                                                <input form="filterForm" type="radio" @(ViewBag.ssdcapacityid == item.Id ? "checked" : "") name="ssdcapacityid" value="@item.Id" id="ssd-@item.Id">
+                                                <label for="ssd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                            </div>
                                         }
                                     </div>
                                 </div>
@@ -281,16 +277,16 @@
                                     @if (Model.Paginated.HasPrev)
                                     {
                                         <li>
-                                            <a class="Previous" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
+                                            <a class="Previous" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
                                         </li>
                                     }
                                     @for (var i = 1; i <= Model.Paginated.TotalPage; i++)
                                     {
-                                        <li class="@(Model.Paginated.PageIndex == i ? "active" : "" )"><a asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort">@i</a></li>
+                                        <li class="@(Model.Paginated.PageIndex == i ? "active" : "" )"><a asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort">@i</a></li>
                                     }
                                     @if (Model.Paginated.HasNext)
                                     {
-                                        <li><a class="Next" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex + 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                        <li><a class="Next" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex + 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     }
                                 </ul>
                             </div>

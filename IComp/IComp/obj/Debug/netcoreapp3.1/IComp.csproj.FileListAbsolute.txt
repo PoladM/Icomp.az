@@ -234,3 +234,9 @@ C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Software\Index.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Software\Create.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Software\Edit.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSD\Index.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSD\Create.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSD\Edit.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSDCapacity\Index.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSDCapacity\Create.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSDCapacity\Edit.cshtml.g.cs

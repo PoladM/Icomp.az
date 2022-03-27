@@ -1,4 +1,5 @@
-﻿using IComp.Service.DTOs;
+﻿using IComp.Core.Entities;
+using IComp.Service.DTOs;
 using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.DTOs.CategoryDTOs;
 using IComp.Service.DTOs.DestinationDTOs;
@@ -25,6 +26,7 @@ namespace IComp.Service.ViewModels
         public List<DestinationGetDto> destinationGetDtos { get; set; }
         public List<HardDiscCapacityGetDto> hardDiscCapacityGetDtos { get; set; }
         public List<CategoryGetDto> categoryGetDtos { get; set; }
+        public List<SSDCapacity> SSDCapacities { get; set; }
         public decimal MaxPrice { get; set; }
         public decimal MinPrice { get; set; }
     }

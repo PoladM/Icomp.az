@@ -12,7 +12,6 @@ namespace IComp.Service.Interfaces
     {
         Task<HardDiscGetDto> CreateAsync(HardDiscPostDto postDTO);
         PaginatedListDto<HardDiscListItemDto> GetAllProd(int page);
-        List<HardDiscCapacityGetDto> GetCapacitiesForSSD();
         List<HardDiscCapacityGetDto> GetCapacitiesForHDD();
         Task UpdateAsync(int id, HardDiscPostDto postDTO);
         Task DeleteAsync(int id);

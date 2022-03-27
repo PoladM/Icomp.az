@@ -29,7 +29,7 @@ namespace IComp.Service.Interfaces
         Task<ProductGetDTO> CreateAsync(ProductPostDto postDTO);
         PaginatedListDto<ProductListItemDto> GetAllProd(int page);
         PaginatedListDto<ProductListItemDto> GetAllProdWithFilter(int page);
-        PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? categoryid, int page);
+        PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemoryid, int? brandid, int? destinationid, int? harddiscid, int? ssdcapacityid, int? categoryid, int page);
         decimal FilterByPrice(string val);
         Task<DetailViewModel> FindByIdAsync(int id);
         List<ColorGetDto> GetColors();
@@ -38,6 +38,7 @@ namespace IComp.Service.Interfaces
         List<CategoryGetDto> GetCategories();
         List<BrandGetDto> GetBrands();
         List<HardDiscGetDto> GetHardDiscs();
+        List<SSD> GetSSDs();
         List<MemoryGetDto> GetMemories();
         List<MotherBoardGetDto> GetMotherBoards();
         List<VideoCardGetDto> GetVideoCards();
@@ -45,6 +46,7 @@ namespace IComp.Service.Interfaces
         List<DestinationGetDto> GetDestinations();
         List<ProcessorSerieGetDto> GetProcessirSeries();
         List<HardDiscCapacityGetDto> GetHardDiscCapacities();
+        List<SSDCapacity> GetSSDCapacities();
         List<MCapacityGetDto> GetMemoryCapacities();
         List<VCSerieGetDto> GetVideoCardSeries();
         Dictionary<string, string> GetSettings();

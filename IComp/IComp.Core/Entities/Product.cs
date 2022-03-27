@@ -13,7 +13,8 @@ namespace IComp.Core.Entities
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
         public int DestinationId { get; set; }
-        public int HardDiscId { get; set; }
+        public int? HardDiscId { get; set; }
+        public int? SSDId { get; set; }
         public int ProdMemoryId { get; set; }
         public int MotherBoardId { get; set; }
         public int ProdTypeId { get; set; }
@@ -73,6 +74,7 @@ namespace IComp.Core.Entities
         public Brand Brand { get; set; }
         public Destination Destination { get; set; }
         public HardDisc HardDisc { get; set; }
+        public SSD SSD { get; set; }
         public Category Category { get; set; }
         public Color Color { get; set; }
         public Software Software { get; set; }

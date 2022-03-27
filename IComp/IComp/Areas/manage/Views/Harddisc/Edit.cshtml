@@ -24,24 +24,16 @@
                     <input class="form-control" asp-for="Price" placeholder="Enter Price">
                     <span class="text-danger" asp-validation-for="Price"></span>
                 </div>
-                <div class="form-group">
-                    <label >for SSD</label>
-                    <input class="form-control check-btn" type="radio" name="chooseHardDisk" id="ssd-btn" placeholder="Enter Price">
-                </div>
-                <div class="form-group col-lg-3 d-none" id="SSD">
-                   
-                </div>
-                <div class="form-group">
-                    <label >for HDD</label>
-                    <input class="form-control check-btn" type="radio" name="chooseHardDisk" id="hdd-btn" placeholder="Enter Price">
-                </div>
-                <div class="form-group col-lg-3 d-none" id="HDD">
-                    
-                </div>
+                
                 <div class="form-group">
                     <label asp-for="IsAvailable">IsAvailable</label>
                     <input class="form-control" asp-for="IsAvailable" placeholder="Enter SubTitle">
                     <span class="text-danger" asp-validation-for="IsAvailable"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HDDCapacityId">ProcessorSerie</label>
+                    <select class="form-control" asp-for="HDDCapacityId" asp-items="@new SelectList(ViewBag.CapacityHDD,nameof(HDDCapacity.Id),nameof(HDDCapacity.Capacity))">
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
             </form>

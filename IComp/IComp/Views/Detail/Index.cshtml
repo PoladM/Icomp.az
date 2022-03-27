@@ -330,12 +330,24 @@
                                                 <div class="option-info">
                                                     <div class="option-name">
                                                         <p>
-                                                                @(product.HardDisc.HDDCapacity?.IsSSD == true? "SSD" : "HDD")
+                                                                SSD
                                                         </p>
                                                     </div>
                                                     <div class="option-value">
                                                         <p>
-                                                                @product.HardDisc.HDDCapacity?.Capacity
+                                                                @product.SSD?.SSDCapacity.Capacity
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="option-info">
+                                                    <div class="option-name">
+                                                        <p>
+                                                                HDD
+                                                        </p>
+                                                    </div>
+                                                    <div class="option-value">
+                                                        <p>
+                                                                @product.HardDisc?.HDDCapacity.Capacity
                                                         </p>
                                                     </div>
                                                 </div>
