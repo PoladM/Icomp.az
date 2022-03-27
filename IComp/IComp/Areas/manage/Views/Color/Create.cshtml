@@ -1,4 +1,4 @@
-﻿@model CategoryPostDto
+﻿@model Color
 @{
     ViewData["Title"] = "Create";
 }
@@ -10,16 +10,13 @@
             <form method="post" asp-action="Create" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Name">Name</label>
-                    <input type="text" asp-for="Name" class="form-control" placeholder="Enter Name">
+                    <input type="text" asp-for="Name" class="form-control" placeholder="Enter ColorName">
                     <span class="text-danger" asp-validation-for="Name"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="ImageFile">Image</label>
-                    <input asp-for="ImageFile" class="form-control" placeholder="Enter Image">
-                    <span class="text-danger" asp-validation-for="ImageFile"></span>
-                </div>
+                
                 <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
             </form>
         </div>
     </div>
 </div>
+

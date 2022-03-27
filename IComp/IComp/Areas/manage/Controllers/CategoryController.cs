@@ -28,6 +28,20 @@ namespace IComp.Areas.manage.Controllers
             {
                 return View();
             }
+            if (postDto.ImageFile != null)
+            {
+                if (postDto.ImageFile.ContentType != "image/jpeg" && postDto.ImageFile.ContentType != "image/png")
+                {
+                    ModelState.AddModelError("ImageFile", "file type must be image/jpeg or image/png");
+                    return View();
+                }
+
+                if (postDto.ImageFile.Length > 2097152)
+                {
+                    ModelState.AddModelError("ImageFile", "file size must be less than 2mb");
+                    return View();
+                }
+            }
 
             var processorPostDto = await _categoryService.CreateAsync(postDto);
 
@@ -45,7 +59,20 @@ namespace IComp.Areas.manage.Controllers
             {
                 return View();
             }
+            if (postDTO.ImageFile != null)
+            {
+                if (postDTO.ImageFile.ContentType != "image/jpeg" && postDTO.ImageFile.ContentType != "image/png")
+                {
+                    ModelState.AddModelError("ImageFile", "file type must be image/jpeg or image/png");
+                    return View();
+                }
 
+                if (postDTO.ImageFile.Length > 2097152)
+                {
+                    ModelState.AddModelError("ImageFile", "file size must be less than 2mb");
+                    return View();
+                }
+            }
             await _categoryService.UpdateAsync(id, postDTO);
 
             return RedirectToAction("Index");

@@ -4,7 +4,9 @@ using IComp.Core.Entities;
 using IComp.Service.DTOs;
 using IComp.Service.DTOs.CategoryDTOs;
 using IComp.Service.Exceptions;
+using IComp.Service.Helpers;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +19,13 @@ namespace IComp.Service.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _env;
 
-        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper)
+        public CategoryService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _env = env;
         }
         public async Task<CategoryGetDto> CreateAsync(CategoryPostDto postDTO)
         {
@@ -29,9 +33,13 @@ namespace IComp.Service.Implementations
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.Name);
             }
+            if (postDTO.ImageFile != null)
+            {
+                postDTO.Image = FileManager.Save(_env.WebRootPath, "uploads/categories", postDTO.ImageFile);
+            }
+
 
             Category category = _mapper.Map<Category>(postDTO);
-
             await _unitOfWork.CategoryRepository.AddAsync(category);
             await _unitOfWork.CommitAsync();
 
@@ -60,7 +68,7 @@ namespace IComp.Service.Implementations
             var query = _unitOfWork.CategoryRepository.GetAll();
             int pageSize = 3;
 
-            List<CategoryListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new CategoryListItemDto { Id = x.Id, Name = x.Name, ProductsCount = x.Products.Count, IsDeleted = x.IsDeleted }).ToList();
+            List<CategoryListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new CategoryListItemDto { Id = x.Id, Name = x.Name, ProductsCount = x.Products.Count, IsDeleted = x.IsDeleted, Image = x.Image }).ToList();
 
             var listDto = new PaginatedListDto<CategoryListItemDto>(items, query.Count(), page, pageSize);
 
@@ -103,6 +111,17 @@ namespace IComp.Service.Implementations
             if (await _unitOfWork.CategoryRepository.IsExistAsync(x => x.Id != id && x.Name.ToLower().Trim() == postDTO.Name.ToLower().Trim() && !x.IsDeleted))
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.Name);
+            }
+            if (postDTO.ImageFile != null)
+            {
+                string newImage = FileManager.Save(_env.WebRootPath, "uploads/categories", postDTO.ImageFile);
+                postDTO.Image = newImage;
+
+                if (existProd.Image != null)
+                {
+                    FileManager.Delete(_env.WebRootPath, "uploads/categories", existProd.Image);
+                }
+                existProd.Image = postDTO.Image;
             }
 
             existProd.Name = postDTO.Name;

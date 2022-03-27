@@ -10,6 +10,7 @@ namespace IComp.Service.DTOs.CategoryDTOs
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
+        public string Image { get; set; }
         public int ProductsCount { get; set; }
     }
 }
