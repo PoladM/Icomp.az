@@ -467,6 +467,9 @@ textarea:focus, input:focus {
         top: 45px;
         left: 0;
         width: 100%;
+        z-index: 999;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        background-color : white;
     }
 
         .main-navbar .main-navbar__catalog-box .main-navbar__catalog-menu .catalog-menu-item a {

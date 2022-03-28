@@ -832,6 +832,30 @@ namespace IComp.Data.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("IComp.Core.Entities.Slider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFirst")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsSecond")
+                        .HasColumnType("bit");
+
+                    b.Property<byte>("Order")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sliders");
+                });
+
             modelBuilder.Entity("IComp.Core.Entities.Software", b =>
                 {
                     b.Property<int>("Id")

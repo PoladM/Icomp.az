@@ -9,6 +9,7 @@ using IComp.Service.DTOs.MotherBoardDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
 using IComp.Service.DTOs.ProdTypeDTOs;
 using IComp.Service.DTOs.ProductDTOs;
+using IComp.Service.DTOs.SoftwareDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using System.Collections.Generic;
 
@@ -27,6 +28,7 @@ namespace IComp.Service.ViewModels
         public List<HardDiscCapacityGetDto> hardDiscCapacityGetDtos { get; set; }
         public List<CategoryGetDto> categoryGetDtos { get; set; }
         public List<SSDCapacity> SSDCapacities { get; set; }
+        public List<SoftwareGetDto> Softwares { get; set; }
         public decimal MaxPrice { get; set; }
         public decimal MinPrice { get; set; }
     }

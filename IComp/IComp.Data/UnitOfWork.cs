@@ -35,6 +35,7 @@ namespace IComp.Data
         private OrderItemRepository _orderItemRepository;
         private SSDCapacityRepository _sdCapacityRepository;
         private SSDRepository _sdRepository;
+        private SliderRepository _sliderRepository;
 
         public UnitOfWork(StoreDbContext context)
         {
@@ -88,6 +89,8 @@ namespace IComp.Data
         public ISSDCapacityRepository SSDCapacityRepository => _sdCapacityRepository ?? new SSDCapacityRepository(_context);
 
         public ISSDRepository SSDRepository => _sdRepository ?? new SSDRepository(_context);
+
+        public ISliderRepository SliderRepository => _sliderRepository ?? new SliderRepository(_context);
 
         public int Commit()
         {

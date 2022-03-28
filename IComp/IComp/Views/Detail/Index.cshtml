@@ -12,12 +12,11 @@
             <div class="container">
                 <div class="breadcrumb">
                     <ul class="breadcrumb-nav">
-                        <li class="nav-item"><a href="#">Kompüter mağazası "iComp"</a></li>
-                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a href="#">Kompüterlər</a></li>
-                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a href="#">Hp Kompüterləri</a></li>
+                        <li class="nav-item"><a asp-action="index" asp-controller="home">Kompüter mağazası "iComp"</a></li>
+                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a asp-action="index" asp-controller="catalog" asp-route-categoryid="@product.Category.Id">@product.Category?.Name</a></li>
                         <li class="nav-item">
                             <span class="breadcrumb-arrow">></span><a href="#">
-                                HP ProDesk 400 G7 (11M80EA) Desktop PC
+                                @product.Name
                             </a>
                         </li>
                     </ul>
@@ -138,8 +137,8 @@
                                         </div>
                                     </div>
                                     <div class="product-checkout">
-                                        <a href="" class="btn btn-primary">Səbətə</a>
-                                        <a href="" class="btn btn-danger">Tez Sifariş</a>
+                                        <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@product.Id" class="btn btn-primary add-to-basket">Səbətə</a>
+                                        <a asp-action="checkout" asp-controller="order" asp-route-id="@product.Id" class="btn btn-danger fast-order">Tez Sifariş</a>
                                     </div>
                                 </div>
                             </div>

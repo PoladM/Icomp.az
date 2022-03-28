@@ -39,6 +39,7 @@ namespace IComp.Data
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<SSD> SSDs { get; set; }
         public DbSet<SSDCapacity> SSDCapacities { get; set; }
+        public DbSet<Slider> Sliders { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

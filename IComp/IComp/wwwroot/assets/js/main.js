@@ -248,6 +248,14 @@ $(document).ready(function () {
 
         var value = $(this).val().toLowerCase();
 
+        if (value.length < 3) {
+            if (value == undefined || value == null || value == "") {
+                $(".search-table").children().remove();
+                $(".search-table").css("display", "none");
+            }
+            return;
+        }
+
         if (value == undefined || value == null || value == "") {
             $(".search-table").children().remove();
             $(".search-table").css("display", "none");

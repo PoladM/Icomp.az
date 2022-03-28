@@ -188,24 +188,26 @@
                                 </div>
                                 <div class="filter-item">
                                     <div class="filter-title">
-                                        <h2>EKRAN</h2>
+                                        <h2>Əməliyyat Sistemi</h2>
                                         <i class="fa-solid fa-angle-down"></i>
 
                                     </div>
                                     <div class="filter-input">
-                                        <div class="input-block">
-                                            <input type="checkbox">
-                                            <label for="">Gaming <span>(318)</span></label>
-                                        </div>
-                                        <div class="input-block">
-                                            <input type="checkbox">
-                                            <label for="">Universal <span>(104)</span></label>
-                                        </div>
+                                        @foreach (var item in Model.Softwares)
+                                        {
+                                            <div class="input-block">
+                                                <input form="filterForm" type="radio" @(ViewBag.softwareid == item.Id ? "checked" : "") name="softwareid" value="@item.Id" id="software-@item.Id">
+                                                <label for="software-@item.Id">@item.Name <span>(318)</span></label>
+                                            </div>
+                                        }
+
                                     </div>
                                 </div>
                                 <div class="filter-item">
                                     <form id="filterForm" asp-action="Index" asp-controller="Catalog" method="get">
                                         <input type="hidden" name="page" value="@Model.Paginated.PageIndex" />
+                                        <input type="hidden" name="categoryid" value="@ViewBag.categoryid" />
+
                                         <button type="submit" class="btn btn-primary filter-btn">filter</button>
                                     </form>
                                 </div>
@@ -220,19 +222,11 @@
                                 <h3>Bakıda tanınmış brendlər</h3>
                             </div>
                             <div class="line">
-                                <a href="">Apple</a>
-                                <a href="">Asus</a>
-                                <a href="">Lenovo</a>
-                                <a href="">Microsoft</a>
-                                <a href="">HP</a>
-                                <a href="">Sony</a>
-                                <a href="">SteelSeries</a>
-                                <a href="">Acer</a>
-                                <a href="">Gigabyte</a>
-                                <a href="">Dell</a>
-                                <a href="">MSI</a>
-                                <a href="">Rampage</a>
-                                <a href="">Intel</a>
+                                @foreach (var item in Model.brandGetDtos)
+                                {
+                                    <a asp-action="index" asp-controller="catalog" asp-route-brandid="@item.Id">@item.Name</a>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -309,7 +303,7 @@
                                                     <div class="item__card-body">
                                                         <div class="product-desc">
                                                             <p>
-                                                                R5 5500U | 16GB DDR4 | 512GB SSD | AMD Radeon™ | 27 FHD
+                                                                @item.Processor?.ProcessorSerie?.Name | @item.ProdMemory?.MemoryCapacity?.Capacity @item.ProdMemory?.DDRType | @(item.SSD?.SSDCapacity?.Capacity == null? "" : item.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.HardDisc?.HDDCapacity?.Capacity == null? "" : item.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @item.Processor.ModelName | 27 FHD
                                                                 IPS
                                                             </p>
                                                         </div>
@@ -317,8 +311,8 @@
                                                             <span>@item.Price <sup>azn</sup></span>
                                                         </div>
                                                         <div class="product-checkout">
-                                                            <a href="" class="btn btn-primary">Səbətə</a>
-                                                            <a href="" class="btn btn-danger">Tez Sifariş</a>
+                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.Id" class="btn btn-primary add-to-basket">Səbətə</a>
+                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item.Id" class="btn btn-danger fast-order">Tez Sifariş</a>
                                                         </div>
                                                     </div>
                                                 </div>

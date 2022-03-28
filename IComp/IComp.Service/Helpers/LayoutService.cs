@@ -28,6 +28,15 @@ namespace IComp.Service.Helpers
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<Dictionary<string,string>> GetSetting()
+        {
+            return await _unitOfWork.SettingRepository.GetAll().ToDictionaryAsync(x => x.Key , x => x.Value);
+        }
+
+        public async Task<List<Category>> GetCagegories()
+        {
+            return await _unitOfWork.CategoryRepository.GetAll().ToListAsync();
+        }
         public AppUserLoginPostDto GetLoginPost()
         {
             return new AppUserLoginPostDto();

@@ -1,4 +1,5 @@
-﻿using IComp.Service.DTOs;
+﻿using IComp.Core.Entities;
+using IComp.Service.DTOs;
 using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.DTOs.CategoryDTOs;
 using IComp.Service.DTOs.ProductDTOs;
@@ -13,5 +14,6 @@ namespace IComp.Service.ViewModels
         public List<CategoryGetDto> Categories { get; set; }
 
         public Dictionary<string,string> Settings { get; set; }
+        public List<Slider> Sliders { get; set; }
     }
 }

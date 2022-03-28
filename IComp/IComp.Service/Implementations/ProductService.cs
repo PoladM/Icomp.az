@@ -160,9 +160,9 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
-        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
+        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity");
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
             if (processorserieid != null)
             {
@@ -204,6 +204,10 @@ namespace IComp.Service.Implementations
             {
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.CategoryId == categoryid);
             }
+            if (softwareid != null)
+            {
+                query = _unitOfWork.ProductRepository.Filter(query, x => x.SoftwareId == softwareid);
+            }
 
 
             switch (sort)
@@ -229,7 +233,7 @@ namespace IComp.Service.Implementations
 
             var pageSize = 3;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard, SSD = x.SSD, Color = x.Color, Software = x.Software }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -762,7 +766,7 @@ namespace IComp.Service.Implementations
 
             model = new FastCheckOutViewModel
             {
-                Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id),
+                Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
                 Order = new Order
                 {
                     FullName = appUser?.FullName,
@@ -867,7 +871,7 @@ namespace IComp.Service.Implementations
 
         public PaginatedListDto<ProductListItemDto> GetAllProdWithFilter(int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable);
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
             var pageSize = 3;   
 
@@ -890,6 +894,11 @@ namespace IComp.Service.Implementations
             var sSDs = _unitOfWork.SSDRepository.GetAll().ToList();
 
             return sSDs;
+        }
+
+        public List<Slider> GetSlider()
+        {
+            return _unitOfWork.SliderRepository.GetAll().ToList();
         }
     }
 }

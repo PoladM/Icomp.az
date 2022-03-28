@@ -20,13 +20,15 @@ namespace IComp.Controllers
             var brands = _productService.GetBrands();
             var settings = _productService.GetSettings();
             var categories = _productService.GetCategories();
+            var sliders = _productService.GetSlider();
 
             viewModel = new HomeViewModel
             {
                 Paginated = products,
                 Brands = brands,
                 Settings = settings,
-                Categories = categories
+                Categories = categories,
+                Sliders = sliders,
             };
 
             return View(viewModel);

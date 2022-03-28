@@ -240,3 +240,6 @@ C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSDCapacity\Index.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSDCapacity\Create.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\SSDCapacity\Edit.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Slider\Index.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Slider\Create.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Slider\Edit.cshtml.g.cs

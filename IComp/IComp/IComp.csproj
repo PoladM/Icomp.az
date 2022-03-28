@@ -21,6 +21,7 @@
     <Folder Include="Areas\manage\Data\" />
     <Folder Include="wwwroot\uploads\brands\" />
     <Folder Include="wwwroot\uploads\categories\" />
+    <Folder Include="wwwroot\uploads\sliders\" />
     <Folder Include="wwwroot\uploads\settings\" />
     <Folder Include="wwwroot\uploads\products\" />
   </ItemGroup>

@@ -6,6 +6,8 @@
 @{
     var loginPost = layoutService.GetLoginPost();
     var basket = await layoutService.GetBasketItems();
+    var setting = await layoutService.GetSetting();
+    var categories = await layoutService.GetCagegories();
     AppUser appUser = null;
     if (User.Identity.IsAuthenticated)
     {
@@ -77,7 +79,8 @@
                                     <div class="col-12">
                                         <div class="navbar__menu-item-inner">
                                             <div class="navbar__menu-item-logo">
-                                                <img src="~/assets/img/Settings/logo.svg" alt="">
+                                                <a asp-action="Index" asp-controller="home">
+                                                <img src="~/assets/img/Settings/logo.svg" alt=""></a>
                                             </div>
                                             <div class="navbar__menu-item-text">
                                                 <p>Kompüter və elektronika
@@ -167,39 +170,13 @@
                                 </div>
                                 <div class="main-navbar__catalog-menu">
                                     <ul class="dropdown-list">
+                                        @foreach (var item in categories)
+                                       {
                                         <li class="catalog-menu-item">
-                                            <a href="#"><img src="~/assets/img/CatalogIcons/computer_1.svg" alt="">
-                                                Kompüterlər</a>
-                                            <div class="main-navbar__sub-catalog-menu">
-                                                <ul class="sub-dropdown-list">
-                                                    <li class="sub-catalog-menu-item"><a href="#">Acer Kompüterləri</a>
-                                                    </li>
-                                                    <li class="sub-catalog-menu-item"><a href="#">Asus Mini
-                                                            Kompüterləri</a>
-                                                    </li>
-                                                    <li class="sub-catalog-menu-item"><a href="#">Gigabyte
-                                                            Kompüterləri</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="catalog-menu-item">
-                                            <a href="#"><img src="~/assets/img/CatalogIcons/computer_1.svg" alt="">
-                                                Noutbuklar, Ultrabuklar</a>
-                                            <div class="main-navbar__sub-catalog-menu">
-                                                <ul class="sub-dropdown-list">
-                                                    <li class="sub-catalog-menu-item"><a href="#">Oyun Noutbukları</a>
-                                                    </li>
-                                                    <li class="sub-catalog-menu-item"><a href="#">Sony Noutbukları</a>
-                                                    </li>
-                                                    <li class="sub-catalog-menu-item"><a href="#">Acer Noutbukları</a>
-                                                    </li>
-                                                    <li class="sub-catalog-menu-item"><a href="#">MacBook - Apple
-                                                            Noutbukları</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                            <a asp-action="index" asp-controller="catalog" asp-route-categoryid="@item.Id"><img src="~/assets/img/CatalogIcons/computer_1.svg" alt="">
+                                                @item.Name</a>
+                                        </li>   
+                                       }
                                     </ul>
                                 </div>
                                 <div class="main-navbar__hamburger">
