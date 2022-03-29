@@ -1,6 +1,7 @@
 ﻿using IComp.Core;
 using IComp.Core.Entities;
 using IComp.Service.DTOs.AppUserDTOs;
+using IComp.Service.Exceptions;
 using IComp.Service.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -66,6 +67,7 @@ namespace IComp.Service.Helpers
                 if (!string.IsNullOrWhiteSpace(cookieItemsStr))
                 {
                     cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookieItemsStr);
+
                 }
             }
             else
@@ -78,6 +80,11 @@ namespace IComp.Service.Helpers
             foreach (var item in cookieItems)
             {
                 var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+
+                if (product == null)
+                {
+                    throw new ItemNotFoundException("Product not found in basket");
+                }
 
                 BasketProductViewModel basketProduct = new BasketProductViewModel
                 {

@@ -69,5 +69,10 @@ namespace IComp.Service.Interfaces
         Task<int> Comment(ProductComment comment);
         Task<FastCheckOutViewModel> FastOrder(int id);
         Task CreateOrder(int id, Order order);
+
+        Task<CheckOutViewModel> CheckOut();
+        Task CreateOrder(Order order);
+        Task<CommonBasketViewModel> GetBasketItems(AppUser appUser);
+
     }
 }

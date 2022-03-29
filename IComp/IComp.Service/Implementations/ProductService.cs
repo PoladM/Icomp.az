@@ -900,5 +900,171 @@ namespace IComp.Service.Implementations
         {
             return _unitOfWork.SliderRepository.GetAll().ToList();
         }
+
+        public async Task<CheckOutViewModel> CheckOut()
+        {
+            AppUser appUser = null;
+
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+
+            var basket = await GetBasketItems(appUser);
+
+            CheckOutViewModel checkOutVM = null;
+
+            if (appUser == null)
+            {
+                checkOutVM = new CheckOutViewModel
+                {
+                    Basket = basket,
+                    Order = new Order()
+                };
+
+                return checkOutVM;
+            }
+
+            checkOutVM = new CheckOutViewModel
+            {
+                Basket = basket,
+                Order = new Order
+                {
+                    Email = appUser?.Email,
+                    FullName = appUser?.FullName,
+                    Phone = null,
+                    Address = null
+                }
+            };
+
+            return checkOutVM;
+        }
+
+        public async Task CreateOrder(Order order)
+        {
+            AppUser member = null;
+            CheckOutViewModel checkoutVM = null;
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                member = _userManager.Users.FirstOrDefault(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (member == null)
+            {
+                checkoutVM = new CheckOutViewModel
+                {
+                    Basket = await GetBasketItems(member),
+                    Order = order
+                };
+
+                order.CreatedAt = DateTime.UtcNow.AddHours(4);
+                order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+                order.OrderItems = new List<OrderItem>();
+
+                foreach (var item in checkoutVM.Basket.BasketItems)
+                {
+                    OrderItem orderItem = new OrderItem
+                    {
+                        ProductId = item.Product.Id,
+                        SalePrice = item.Product.SalePrice,
+                        CostPrice = item.Product.CostPrice,
+                        DiscountedPrice = item.Product.DiscountPercent > 0 ? (item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100)) : item.Product.SalePrice,
+                        Count = item.Count
+                    };
+
+                    order.OrderItems.Add(orderItem);
+                    order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
+                }
+
+                await _unitOfWork.OrderRepository.AddAsync(order);
+
+                if (member == null)
+                    _httpContextAccessor.HttpContext.Response.Cookies.Delete("basket");
+                await _unitOfWork.CommitAsync();
+
+                return;
+            }
+
+            checkoutVM = new CheckOutViewModel
+            {
+                Basket = await GetBasketItems(member),
+                Order = order
+            };
+
+            order.AppUserId = member?.Id;
+            order.CreatedAt = DateTime.UtcNow.AddHours(4);
+            order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+            order.OrderItems = new List<OrderItem>();
+
+            foreach (var item in checkoutVM.Basket.BasketItems)
+            {
+                OrderItem orderItem = new OrderItem
+                {
+                    ProductId = item.Product.Id,
+                    SalePrice = item.Product.SalePrice,
+                    CostPrice = item.Product.CostPrice,
+                    DiscountedPrice = item.Product.DiscountPercent > 0 ? (item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100)) : item.Product.SalePrice,
+                    Count = item.Count
+                };
+
+                order.OrderItems.Add(orderItem);
+                order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
+            }
+
+            await _unitOfWork.OrderRepository.AddAsync(order);
+
+            if (member == null)
+               _httpContextAccessor.HttpContext.Response.Cookies.Delete("basket");
+            else
+                _unitOfWork.BasketItemRepository.RemoveRange(_unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == member.Id));
+
+            await _unitOfWork.CommitAsync();
+
+            return;
+        }
+
+        public async Task<CommonBasketViewModel> GetBasketItems(AppUser appUser)
+        {
+            CommonBasketViewModel basketItems = new CommonBasketViewModel
+            {
+                BasketItems = new List<BasketProductViewModel>(),
+                TotalPrice = 0
+            };
+
+            List<BasketCookieItemViewModel> cookieItems = new List<BasketCookieItemViewModel>();
+
+            if (appUser == null)
+            {
+                string cookieItemsStr = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
+
+                if (!string.IsNullOrWhiteSpace(cookieItemsStr))
+                {
+                    cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookieItemsStr);
+                }
+            }
+            else
+            {
+                cookieItems = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).Select(b => new BasketCookieItemViewModel { ProductId = b.ProductId, Count = b.Count }).ToList();
+            }
+
+
+
+            foreach (var item in cookieItems)
+            {
+                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+
+                BasketProductViewModel basketProduct = new BasketProductViewModel
+                {
+                    Product = product,
+                    Count = item.Count
+                };
+
+                basketItems.BasketItems.Add(basketProduct);
+                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                basketItems.TotalPrice += totalPrice * item.Count;
+            }
+
+            return basketItems;
+        }
     }
 }

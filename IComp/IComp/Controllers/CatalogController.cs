@@ -1,10 +1,13 @@
-﻿using IComp.Core.Entities;
+﻿using IComp.Core;
+using IComp.Core.Entities;
 using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
 using IComp.Service.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,12 +17,15 @@ namespace IComp.Controllers
     public class CatalogController : Controller
     {
         private IProductService _productService;
+        private IUnitOfWork _unitOfWork;
         private readonly UserManager<AppUser> _userManager;
+        
 
-        public CatalogController(IProductService productService, UserManager<AppUser> userManager)
+        public CatalogController(IProductService productService, UserManager<AppUser> userManager, IUnitOfWork unitOfWork)
         {
             _productService = productService;
             _userManager = userManager;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? softwareid , int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? ssdcapacityid, int? categoryid, int page = 1)
         {
@@ -66,6 +72,63 @@ namespace IComp.Controllers
            
 
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> GetCookie()
+        {
+            CommonBasketViewModel basketItems = new CommonBasketViewModel
+            {
+                BasketItems = new List<BasketProductViewModel>(),
+                TotalPrice = 0
+            };
+
+            List<BasketCookieItemViewModel> cookieItems = new List<BasketCookieItemViewModel>();
+
+            AppUser appUser = null;
+
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (appUser == null)
+            {
+                string cookieItemsStr = HttpContext.Request.Cookies["basket"];
+
+                if (!string.IsNullOrWhiteSpace(cookieItemsStr))
+                {
+                    cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookieItemsStr);
+
+                }
+            }
+            else
+            {
+                cookieItems = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).Select(b => new BasketCookieItemViewModel { ProductId = b.ProductId, Count = b.Count }).ToList();
+            }
+
+            return Ok(cookieItems);
+
+            foreach (var item in cookieItems)
+            {
+                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+
+                if (product == null)
+                {
+                    throw new Exception("lol");
+                }
+
+                BasketProductViewModel basketProduct = new BasketProductViewModel
+                {
+                    Product = product,
+                    Count = item.Count
+                };
+
+                basketItems.BasketItems.Add(basketProduct);
+                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                basketItems.TotalPrice += totalPrice * item.Count;
+            }
+
+            return Ok(basketItems);
         }
 
         public async Task<IActionResult> AddBasket(int id)

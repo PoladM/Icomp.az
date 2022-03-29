@@ -1,6 +1,6 @@
 ﻿@model Order
 
-<form id="fastOrder" method="post" asp-action="createfastorder" asp-controller="order" enctype="multipart/form-data">
+<form id="fastOrder" method="post" asp-action="createbasketorder" asp-controller="order" enctype="multipart/form-data" style="margin-bottom: 20px;">
     <div class="form-group">
         <label asp-for="FullName">Name</label>
         <input type="text" asp-for="FullName" class="form-control" placeholder="Enter Name">

@@ -85,5 +85,10 @@ namespace IComp.Data.Repositories
         {
             _context.Set<TEntity>().Remove(entity);
         }
+
+        public void RemoveRange(IEnumerable<TEntity> entity)
+        {
+            _context.Set<TEntity>().RemoveRange(entity);
+        }
     }
 }

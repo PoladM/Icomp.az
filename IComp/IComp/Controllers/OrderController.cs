@@ -13,6 +13,19 @@ namespace IComp.Controllers
         {
             _productService = productService;
         }
+
+        public async Task<IActionResult> BasketCheckOut()
+        {
+            return View(await _productService.CheckOut());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateBasketOrder(Order order)
+        {
+            await _productService.CreateOrder(order);
+            return RedirectToAction("Index", "Home");
+        }
+
         public async Task<IActionResult> CheckOut(int id)
         {
             var viewModel = await _productService.FastOrder(id);
@@ -21,7 +34,7 @@ namespace IComp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int productid, Order order)
+        public async Task<IActionResult> CreateFastOrder(int productid, Order order)
         {
             if (!ModelState.IsValid)
             {
