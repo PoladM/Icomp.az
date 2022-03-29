@@ -63,6 +63,7 @@ namespace IComp
             services.AddScoped<ISoftwareService, SoftwareService>();
             services.AddScoped<ISSDCapacityService, SSDCapacityService>();
             services.AddScoped<ISSDService, SSDService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<LayoutService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
