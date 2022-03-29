@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IComp.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,6 +9,7 @@ namespace IComp.Core.Entities
 {
     public class Order : BaseEntity
     {
+        public OrderStatus Status { get; set; }
         public string AppUserId { get; set; }
         [Required]
         [StringLength(maximumLength: 50)]

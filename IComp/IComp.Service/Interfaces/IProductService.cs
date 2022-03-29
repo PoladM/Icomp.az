@@ -68,7 +68,7 @@ namespace IComp.Service.Interfaces
         Task<List<Product>> SearchProd(string searchString);
         Task<int> Comment(ProductComment comment);
         Task<FastCheckOutViewModel> FastOrder(int id);
-        Task CreateOrder(int id, Order order);
+        Task CreateOrder(int id, Order order, int prodcount, int ordercount);
 
         Task<CheckOutViewModel> CheckOut();
         Task CreateOrder(Order order);

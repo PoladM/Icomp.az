@@ -779,7 +779,7 @@ namespace IComp.Service.Implementations
             return model;
         }
 
-        public async Task CreateOrder(int id, Order order)
+        public async Task CreateOrder(int id, Order order, int prodcount, int ordercount)
         {
             AppUser appUser = null;
             FastCheckOutViewModel model = new FastCheckOutViewModel();
@@ -798,8 +798,13 @@ namespace IComp.Service.Implementations
                 order.AppUserId = null;
                 order.CreatedAt = DateTime.UtcNow.AddHours(4);
                 order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+                order.Status = Core.Enums.OrderStatus.Pending;
                 order.IsDeleted = false;
                 order.OrderItems = new List<OrderItem>();
+                if (model.Product.Count < prodcount || model.Product.Count < ordercount)
+                {
+                    throw new RecordDuplicatedException("");
+                }
                 if (model.Product.Count <= 1)
                 {
                     model.Product.Count = model.Product.Count - 1;
@@ -808,7 +813,12 @@ namespace IComp.Service.Implementations
                 }
                 else
                 {
-                    model.Product.Count = model.Product.Count - 1;
+                    model.Product.Count = model.Product.Count - ordercount;
+                    if (model.Product.Count == 0)
+                    {
+                        model.Product.IsAvailable = false;
+                        model.Product.IsDeleted = true;
+                    }
                 }
                 await _unitOfWork.CommitAsync();
 
@@ -819,7 +829,7 @@ namespace IComp.Service.Implementations
                     SalePrice = model.Product.SalePrice,
                     CostPrice = model.Product.CostPrice,
                     DiscountedPrice = model.Product.DiscountPercent > 0 ? (model.Product.SalePrice * (1 - model.Product.DiscountPercent / 100)) : model.Product.SalePrice,
-                    Count = 1,
+                    Count = ordercount,
                 };
 
                 order.OrderItems.Add(orderItm);
@@ -839,7 +849,12 @@ namespace IComp.Service.Implementations
             order.AppUserId = appUser?.Id;
             order.CreatedAt = DateTime.UtcNow.AddHours(4);
             order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+            order.Status = Core.Enums.OrderStatus.Pending;
             order.OrderItems = new List<OrderItem>();
+            if (model.Product.Count < prodcount || model.Product.Count < ordercount)
+            {
+                throw new RecordDuplicatedException("");
+            }
             if (model.Product.Count <= 1)
             {
                 model.Product.Count = model.Product.Count - 1;
@@ -848,7 +863,12 @@ namespace IComp.Service.Implementations
             }
             else
             {
-                model.Product.Count = model.Product.Count - 1;
+                model.Product.Count = model.Product.Count - ordercount;
+                if (model.Product.Count == 0)
+                {
+                    model.Product.IsAvailable = false;
+                    model.Product.IsDeleted = true;
+                }
             }
             await _unitOfWork.CommitAsync();
 
@@ -859,7 +879,7 @@ namespace IComp.Service.Implementations
                 SalePrice = model.Product.SalePrice,
                 CostPrice = model.Product.CostPrice,
                 DiscountedPrice = model.Product.DiscountPercent > 0 ? (model.Product.SalePrice * (1 - model.Product.DiscountPercent / 100)) : model.Product.SalePrice,
-                Count = 1
+                Count = ordercount
             };
 
             order.OrderItems.Add(orderItem);
@@ -959,10 +979,34 @@ namespace IComp.Service.Implementations
 
                 order.CreatedAt = DateTime.UtcNow.AddHours(4);
                 order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+                order.Status = Core.Enums.OrderStatus.Pending;
                 order.OrderItems = new List<OrderItem>();
+
+               
 
                 foreach (var item in checkoutVM.Basket.BasketItems)
                 {
+                    if (item.Product.Count < item.Count)
+                    {
+                        throw new RecordDuplicatedException("");
+                    }
+                    if (item.Product.Count <= 1)
+                    {
+                        item.Product.Count = item.Product.Count - 1;
+                        item.Product.IsAvailable = false;
+                        item.Product.IsDeleted = true;
+                    }
+                    else
+                    {
+                        item.Product.Count = item.Product.Count - item.Count;
+                        if (item.Product.Count == 0)
+                        {
+                            item.Product.IsAvailable = false;
+                            item.Product.IsDeleted = true;
+                        }
+                    }
+
+
                     OrderItem orderItem = new OrderItem
                     {
                         ProductId = item.Product.Id,
@@ -994,6 +1038,7 @@ namespace IComp.Service.Implementations
             order.AppUserId = member?.Id;
             order.CreatedAt = DateTime.UtcNow.AddHours(4);
             order.ModifiedAt = DateTime.UtcNow.AddHours(4);
+            order.Status = Core.Enums.OrderStatus.Pending;
             order.OrderItems = new List<OrderItem>();
 
             foreach (var item in checkoutVM.Basket.BasketItems)
@@ -1051,7 +1096,7 @@ namespace IComp.Service.Implementations
 
             foreach (var item in cookieItems)
             {
-                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId && !x.IsDeleted, "ProductImages");
 
                 BasketProductViewModel basketProduct = new BasketProductViewModel
                 {

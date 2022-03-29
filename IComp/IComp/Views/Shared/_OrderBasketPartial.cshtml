@@ -1,0 +1,55 @@
+﻿@model CommonBasketViewModel
+
+@{
+    var counter = 0;
+    decimal productTotalPrice = 0;
+}
+
+<div class="shopping-cart" style="margin-top: 20px;">
+
+            @foreach (var item in Model.BasketItems)
+            {
+                {
+                    counter += item.Count;
+                    productTotalPrice = item.Count * (item.Product.DiscountPercent > 0 ? item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100) : item.Product.SalePrice);
+                }
+
+                <div class="product">
+                    <div class="product-image-basket" style="width: 10%;">
+                        <img style="width: 80%;" src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-title">@item.Product.Name</div>
+                        <p class="product-description">
+                            The best dog bones of all time. Holy crap. Your dog
+                            will be begging for these things! I got curious once and ate one myself. I'm a
+                            fan.
+                        </p>
+                    </div>
+                    <div class="product-price-basket">price:  $@((item.Product.DiscountPercent > 0 ?item.Product.SalePrice*(1-item.Product.DiscountPercent/100):item.Product.SalePrice).ToString("0.00"))</div>
+                    <div class="product-quantity">
+                        <input type="number" value="@item.Count" min="1" class="change-val-order">
+                        <input type="hidden" value="@item.Count" class="current-val">
+                        <input type="hidden" value="@item.Product.Id" class="product-Id">
+
+                    </div>
+                    <div class="product-removal">
+                        <a asp-action="deletebasket" asp-controller="catalog" asp-route-id="@item.Product.Id" class="remove-product">
+                            Remove
+                        </a>
+                    </div>
+                    <div class="product-line-price">@productTotalPrice.ToString("0.00")</div>
+                </div>
+            }
+
+            <input type="hidden" value="@counter" id="basket-count" />
+
+
+            <div class="totals">
+                <div class="totals-item totals-item-total">
+                    <label>Total</label>
+                    <div class="totals-value" id="cart-total">@(Model.TotalPrice.ToString("0.00"))</div>
+                </div>
+            </div>
+
+        </div>

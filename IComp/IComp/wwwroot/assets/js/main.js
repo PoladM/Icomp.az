@@ -241,6 +241,71 @@ $(document).ready(function () {
 
     })
 
+    //update basket order quantity
+
+    $(document).on("change", ".change-val-order", function (e) {
+        $(".loader-wrapper").css("display", "flex")
+        $(".shopping-cart").css("display", "none")
+
+        let currentVal = $(this).next().val();
+        let changedVal = $(this).val()
+        let prodId = $(this).next().next().val()
+
+        let currentValInt = parseInt(currentVal);
+        let changedValInt = parseInt(changedVal);
+        let prodIdInt = parseInt(prodId);
+
+        let url = null;
+
+        if (changedValInt > currentValInt) {
+            url = "/order/addorderbasket" + "/" + prodIdInt;
+
+            fetch(url).then(response => {
+                if (response.ok) {
+                    $(".loader-wrapper").css("display", "none")
+                    $(".shopping-cart").css("display", "block")
+                    return response.text();
+                }
+                else {
+                    window.location.reload();
+                    return;
+                }
+            })
+                .then(data => {
+                    $(".order-content").html(data)
+                    prodCount = $("#basket-count").val()
+                    $(".basket-counter-value").html(prodCount);
+                })
+                .catch(err => {
+                    err.json().then(json => {
+                        $(".order-content").html(json.message)
+                    })
+                })
+        }
+        else {
+            url = "/order/deleteorderbasket" + "/" + prodIdInt;
+
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        $(".loader-wrapper").css("display", "none")
+                        $(".shopping-cart").css("display", "block")
+                        return response.text();
+                    }
+                    else {
+                        alert("Failed:(")
+                        return;
+                    }
+
+                }).then(data => {
+                    $(".order-content").html(data)
+                    prodCount = $("#basket-count").val()
+                    $(".basket-counter-value").html(prodCount);
+                })
+        }
+
+    })
+
     //searchFilter
     $("#searchString").on("keyup", function () {
         var formSearch = document.getElementById("searchProd");

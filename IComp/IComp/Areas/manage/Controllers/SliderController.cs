@@ -49,7 +49,7 @@ namespace IComp.Areas.manage.Controllers
             {
                 throw new RecordDuplicatedException("");
             }
-            else
+            else if(slider.IsFirst == false && slider.IsSecond == false)
             {
                 throw new RecordDuplicatedException("");
             }
@@ -110,7 +110,7 @@ namespace IComp.Areas.manage.Controllers
             {
                 throw new RecordDuplicatedException("");
             }
-            else
+            else if (slider.IsFirst == false && slider.IsSecond == false)
             {
                 throw new RecordDuplicatedException("");
             }
