@@ -613,6 +613,17 @@ namespace IComp.Service.Implementations
         {
             BasketItem item = await _unitOfWork.BasketItemRepository.GetAsync(x => x.AppUserId == appUser.Id && x.ProductId == id);
 
+            var product = await GetByIdAsync(id);
+
+            if (product == null)
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            if (product.Count <= item?.Count)
+            {
+                throw new ItemNotFoundException("There are only " + product.Count + " products in stock");
+            }
+
             if (item == null)
             {
                 item = new BasketItem
@@ -659,7 +670,16 @@ namespace IComp.Service.Implementations
                 }
 
                 BasketCookieItemViewModel cookieItem = cookieItems.FirstOrDefault(x => x.ProductId == id);
+                var product = await GetByIdAsync(id);
 
+                if (product == null)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+                if (product.Count < cookieItem.Count)
+                {
+                    throw new Exception();
+                }
 
                 if (cookieItem.Count > 1)
                 {
@@ -679,6 +699,16 @@ namespace IComp.Service.Implementations
             {
                 BasketItem item = await _unitOfWork.BasketItemRepository.GetAsync(x => x.AppUserId == appUser.Id && x.ProductId == id);
 
+                var product = await GetByIdAsync(id);
+
+                if (product == null)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+                if (product.Count < item?.Count)
+                {
+                    throw new Exception();
+                }
 
                 if (item.Count > 1)
                 {
@@ -1043,6 +1073,22 @@ namespace IComp.Service.Implementations
 
             foreach (var item in checkoutVM.Basket.BasketItems)
             {
+                if (item.Product.Count <= 1)
+                {
+                    item.Product.Count = item.Product.Count - 1;
+                    item.Product.IsAvailable = false;
+                    item.Product.IsDeleted = true;
+                }
+                else
+                {
+                    item.Product.Count = item.Product.Count - item.Count;
+                    if (item.Product.Count == 0)
+                    {
+                        item.Product.IsAvailable = false;
+                        item.Product.IsDeleted = true;
+                    }
+                }
+
                 OrderItem orderItem = new OrderItem
                 {
                     ProductId = item.Product.Id,

@@ -156,6 +156,16 @@ namespace IComp.Controllers
                 }
 
                 BasketCookieItemViewModel cookieItem = cookieItems.FirstOrDefault(x => x.ProductId == id);
+                var product = await _productService.GetByIdAsync(id);
+
+                if (product == null)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+                if (product.Count <= cookieItem?.Count)
+                {
+                    throw new ItemNotFoundException("There are only " + product.Count + " products in stock");
+                }
 
                 if (cookieItem == null)
                 {

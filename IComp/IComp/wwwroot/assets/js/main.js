@@ -1,4 +1,3 @@
-
 $(function () {
     $(document).scroll(function () {
         var $nav = $(".main-navbar");
@@ -12,15 +11,15 @@ $(function () {
 });
 
 $(document).ready(function () {
-    var gallery = $(".gallery a").simpleLightbox({
-        /* options */
-    });
+    //function timeout(ms) {
+    //    return new Promise(resolve => setTimeout(resolve, ms));
+    //}
 
     //toaster
     let toasterMsg = $("#toaster").val();
 
     if (toasterMsg === "" | toasterMsg === null | toasterMsg === undefined) {
-        
+
     }
     else {
         $.toast({
@@ -73,54 +72,10 @@ $(document).ready(function () {
     });
 
 
-
-    // Brands Carousel
-    $(".popular-brands__box").slick({
-        dots: true,
-        infinite: false,
-        speed: 300,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true,
-                },
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                },
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                },
-            },
-            // You can unslick at a given breakpoint now by adding:
-            // settings: "unslick"
-            // instead of a settings object
-        ],
-    });
-
-    //Slide Carousel
-    $(".carousel").slick({
-        dots: true,
-        autoplay: true,
-    });
-
-
     // basket item count on load
     let prodcount = $("#basket-count").val();
     $(".basket-counter-value").html(prodcount)
+
 
     //add to basket 
     $(document).on("click", ".add-to-basket", function (e) {
@@ -138,14 +93,14 @@ $(document).ready(function () {
             }
         })
             .then(data => {
-                $("#myModal .modal-body-inner").html(data)
+                $("#myModal .modal-basket-inner").html(data)
                 prodCount = $("#basket-count").val()
                 $(".basket-counter-value").html(prodCount);
                 $("#myModal").modal('show');
             })
             .catch(err => {
                 err.json().then(json => {
-                    $("#myModal .modal-body-inner").html(json.message)
+                    $("#myModal .modal-basket-inner").html(json.message)
                     $("#myModal").modal("show");
                 })
             })
@@ -189,30 +144,34 @@ $(document).ready(function () {
         let prodIdInt = parseInt(prodId);
 
         let url = null;
-
         if (changedValInt > currentValInt) {
             url = "/catalog/addbasket" + "/" + prodIdInt;
 
-            fetch(url).then(response => {
+            fetch(url, {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
                 if (response.ok) {
                     $(".loader-wrapper").css("display", "none")
                     $(".shopping-cart").css("display", "block")
                     return response.text();
                 }
                 else {
-                    throw response
+                    throw response;
                 }
             })
                 .then(data => {
-                    $("#myModal .modal-body-inner").html(data)
+                    $("#myModal .modal-basket-inner").html(data)
                     prodCount = $("#basket-count").val()
                     $(".basket-counter-value").html(prodCount);
                     $("#myModal").modal('show');
                 })
                 .catch(err => {
                     err.json().then(json => {
-                        $("#myModal .modal-body-inner").html(json.message)
-                        $("#myModal").modal("show");
+                        $(".loader-wrapper").css("display", "none")
+                        $(".shopping-cart").css("display", "block")
+                        $("#myModal .modal-basket-inner").html(json.message)
                     })
                 })
         }
@@ -267,8 +226,7 @@ $(document).ready(function () {
                     return response.text();
                 }
                 else {
-                    window.location.reload();
-                    return;
+                    throw response;
                 }
             })
                 .then(data => {

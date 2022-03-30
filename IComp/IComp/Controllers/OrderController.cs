@@ -21,6 +21,7 @@ namespace IComp.Controllers
         public OrderController(IProductService productService, UserManager<AppUser> userManager)
         {
             _productService = productService;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> BasketCheckOut()
@@ -86,9 +87,10 @@ namespace IComp.Controllers
                 {
                     throw new ItemNotFoundException("Item not found");
                 }
-                if (product.Count <= cookieItem.Count)
+                if (product.Count <= cookieItem?.Count)
                 {
-                    throw new Exception();
+                    throw new ItemNotFoundException("There are only " + product.Count + " products in stock");
+
                 }
                 if (cookieItem == null)
                 {

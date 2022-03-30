@@ -322,7 +322,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="modal-body-inner">
+                        <div class="modal-basket-inner">
                              @if (basket.BasketItems.Any(x => x.Product != null))
                         {
                              @( await Html.PartialAsync("_BasketPartial",basket))
@@ -450,7 +450,9 @@
     <!-- Carousel -->
     <script src="~/assets/css/slick/slick.min.js"></script>
 
-    <script src="~/assets/js/main.js"></script>
+    <script src="~/assets/js/main.js" ></script>
+
+    <script src="~/assets/js/slider.js" ></script>
 
     <!--=== All Plugins Js ===-->
     <script src="~/assets/js/range.js"></script>
