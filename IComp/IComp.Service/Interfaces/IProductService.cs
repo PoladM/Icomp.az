@@ -73,6 +73,7 @@ namespace IComp.Service.Interfaces
         Task<CheckOutViewModel> CheckOut();
         Task CreateOrder(Order order);
         Task<CommonBasketViewModel> GetBasketItems(AppUser appUser);
+        Task<List<Order>> GetOrdersAsync(AppUser appUser);
 
     }
 }

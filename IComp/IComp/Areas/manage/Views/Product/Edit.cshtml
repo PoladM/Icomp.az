@@ -6,7 +6,7 @@
 <<div class="container">
     <div class="row">
         <div class="col-lg-8 mx-auto">
-            <h1>Create</h1>
+            <h1>Edit</h1>
             <form method="post" asp-action="Edit" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="Name">Name</label>
@@ -113,11 +113,6 @@
                         <label asp-for="HasWifi">HasWifi</label>
                         <input asp-for="HasWifi" class="form-control">
                         <span class="text-danger" asp-validation-for="HasWifi"></span>
-                    </div>
-                    <div class="form-group col-lg-1">
-                        <label asp-for="IsDeleted">IsDeleted</label>
-                        <input asp-for="IsDeleted" class="form-control">
-                        <span class="text-danger" asp-validation-for="IsDeleted"></span>
                     </div>
                 </div>
 

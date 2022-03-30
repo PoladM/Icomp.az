@@ -122,7 +122,7 @@ $(document).ready(function () {
                 }
 
             }).then(data => {
-                $("#myModal .modal-body-inner").html(data)
+                $("#myModal .modal-basket-inner").html(data)
                 prodCount = $("#basket-count").val()
                 $(".basket-counter-value").html(prodCount);
                 $("#myModal").modal('show');

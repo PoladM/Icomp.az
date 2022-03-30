@@ -1,8 +1,10 @@
 ﻿using IComp.Core.Entities;
 using IComp.Service.DTOs.AppUserDTOs;
+using IComp.Service.Exceptions;
 using IComp.Service.Helpers;
 using IComp.Service.Implementations;
 using IComp.Service.Interfaces;
+using IComp.Service.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,9 +17,12 @@ namespace IComp.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly IProductService _productService;
+
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IProductService productService)
         {
             _signInManager = signInManager;
+            _productService = productService;
             _userManager = userManager;
         }
 
@@ -116,6 +121,117 @@ namespace IComp.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("index", "home");
+        }
+
+        public async Task<IActionResult> Profile()
+        {
+            AppUser appUser = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            }
+
+            if (appUser == null)
+            {
+                return BadRequest("user not found");
+            }
+
+            var orders = await _productService.GetOrdersAsync(appUser);
+
+            var profileVM = new ProfileViewModel
+            {
+                UserUpdate = new UserUpdateViewModel
+                {
+                    FullName = appUser.FullName,
+                    UserName = appUser.UserName,
+                    Email = appUser.Email,
+                },
+                Orders = orders
+            };
+
+            return View(profileVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Profile(UserUpdateViewModel userUpdateVM)
+        {
+            AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            if (appUser == null)
+            {
+                throw new ItemNotFoundException("User not found");
+            }
+
+            var orders = await _productService.GetOrdersAsync(appUser);
+
+            var profileVM = new ProfileViewModel
+            {
+                Orders = orders,
+                UserUpdate = userUpdateVM
+            };
+
+            if (!ModelState.IsValid)
+            {
+                return View(profileVM);
+            }
+
+            if (appUser.UserName != userUpdateVM.UserName && _userManager.Users.Any(x => x.NormalizedUserName == userUpdateVM.UserName.ToUpper()))
+            {
+                ModelState.AddModelError("UserName", "UserName has already taken");
+                return View(profileVM);
+            }
+
+            if (appUser.Email != userUpdateVM.Email && _userManager.Users.Any(x => x.NormalizedEmail == userUpdateVM.Email.ToUpper()))
+            {
+                ModelState.AddModelError("Email", "Email has already taken");
+                return View(profileVM);
+            }
+
+            appUser.FullName = userUpdateVM.FullName;
+            appUser.UserName = userUpdateVM.UserName;
+            appUser.Email = userUpdateVM.Email;
+
+            var result = await _userManager.UpdateAsync(appUser);
+
+            if (!result.Succeeded)
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
+                return View(profileVM);
+            }
+            if (userUpdateVM.Password != null)
+            {
+                if (string.IsNullOrWhiteSpace(userUpdateVM.CurrentPassword))
+                {
+                    ModelState.AddModelError("CurrentPassword", "CurrentPassword is required!");
+                    return View(profileVM);
+                }
+                if (userUpdateVM.CurrentPassword == userUpdateVM.Password)
+                {
+                    ModelState.AddModelError("CurrentPassword", "New password is same with current password");
+                    return View(profileVM);
+                }
+                if (!await _userManager.CheckPasswordAsync(appUser, userUpdateVM.CurrentPassword))
+                {
+                    ModelState.AddModelError("CurrentPassword", "CurrentPassword is incorrect!");
+                    return View(profileVM);
+                }
+
+                var passResult = _userManager.ChangePasswordAsync(appUser, userUpdateVM.CurrentPassword, userUpdateVM.Password);
+
+                if (!passResult.Result.Succeeded)
+                {
+                    foreach (var item in passResult.Result.Errors)
+                    {
+                        ModelState.AddModelError("Password", item.Description);
+                    }
+                    return View(profileVM);
+                }
+            }
+            TempData["Success"] = appUser.FullName + " Your Account successfully updated";
+            return View(profileVM);
         }
     }
 }

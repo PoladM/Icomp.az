@@ -11,5 +11,6 @@ namespace IComp.Service.Interfaces
     public interface IAppUserService
     {
         Task<bool> RegisterUser(AppUserRegisterPostDto viewModel);
+
     }
 }

@@ -122,6 +122,10 @@ namespace IComp.Service.Implementations
             {
                 product.HardDiscId = default;
             }
+            if (product.IsAvailable == false)
+            {
+                product.IsAvailable = true;
+            }
 
             await _unitOfWork.ProductRepository.AddAsync(product);
             await _unitOfWork.CommitAsync();
@@ -354,11 +358,18 @@ namespace IComp.Service.Implementations
         {
             var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id && x.IsDeleted);
 
+            if (await _unitOfWork.ProductRepository.IsExistAsync(x => x.Id != id && x.Name.ToLower().Trim() == product.Name.ToLower().Trim() && !x.IsDeleted))
+            {
+                throw new RecordDuplicatedException("ModelName already exist with name " + product.Name);
+            }
             if (product == null)
             {
                 throw new ItemNotFoundException("Item not found");
             }
-
+            if (product.Count == 0)
+            {
+                product.Count = 1;
+            }
             product.IsDeleted = false;
             await _unitOfWork.CommitAsync();
         }
@@ -446,6 +457,11 @@ namespace IComp.Service.Implementations
             else
             {
                 existProduct.SSDId = postDto.SSDId;
+            }
+            if (postDto.Count == 0)
+            {
+                existProduct.IsDeleted = true;
+                existProduct.IsAvailable = false;
             }
             existProduct.ProdMemoryId = postDto.ProdMemoryId;
             existProduct.MotherBoardId = postDto.MotherBoardId;
@@ -1156,6 +1172,12 @@ namespace IComp.Service.Implementations
             }
 
             return basketItems;
+        }
+
+        public async Task<List<Order>> GetOrdersAsync(AppUser appUser)
+        {
+            var orders = await _unitOfWork.OrderRepository.GetAll(x => x.AppUserId == appUser.Id).ToListAsync();
+            return orders;
         }
     }
 }
