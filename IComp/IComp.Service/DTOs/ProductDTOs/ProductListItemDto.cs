@@ -24,6 +24,7 @@ namespace IComp.Service.DTOs.ProductDTOs
         public string Name { get; set; }
         public int Count { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsAvailable { get; set; }
         public string Image { get; set; }
         public decimal Price { get; set; }
         public List<ProductImage> ProductImages { get; set; }

@@ -11,6 +11,7 @@ namespace IComp.Core.Entities
     {
         public OrderStatus Status { get; set; }
         public string AppUserId { get; set; }
+        public string TrackId { get; set; }
         [Required]
         [StringLength(maximumLength: 50)]
         public string FullName { get; set; }

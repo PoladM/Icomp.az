@@ -56,6 +56,26 @@ namespace IComp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult TrackOrder()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> TrackOrder(string trackid)
+        {
+            var order = await _productService.GetOrderByIdAsync(trackid);
+            if (order == null)
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+            return RedirectToAction("GetOrderByTrackId", order);
+        }
+
+        public IActionResult GetOrderByTrackId(Order order)
+        {
+            return View(order);
+        }
+
         public async Task<IActionResult> AddOrderBasket(int id)
         {
             if (!await _productService.AnyProd(id))

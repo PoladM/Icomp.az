@@ -29,6 +29,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -166,7 +168,7 @@ namespace IComp.Service.Implementations
 
         public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
             if (processorserieid != null)
             {
@@ -237,7 +239,7 @@ namespace IComp.Service.Implementations
 
             var pageSize = 3;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard, SSD = x.SSD, Color = x.Color, Software = x.Software }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard, SSD = x.SSD, Color = x.Color, Software = x.Software, IsAvailable = x.IsAvailable }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -268,19 +270,43 @@ namespace IComp.Service.Implementations
         {
             var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
 
+            AppUser appUser = null;
+            DetailViewModel viewModel = new DetailViewModel();
+
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name);
+            }
             if (existProduct == null)
             {
                 throw new ItemNotFoundException("Item not found");
             }
+            if (appUser != null)
+            {
+                var checkedProds = _unitOfWork.CheckedProductsRepository.GetAll(x => x.AppUserId == appUser.Id);
+
+                if (!checkedProds.Any(x => x.ProductId == existProduct.Id))
+                {
+                    var item = new CheckedProducts
+                    {
+                        AppUserId = appUser.Id,
+                        ProductId = existProduct.Id
+                    };
+                    await _unitOfWork.CheckedProductsRepository.AddAsync(item);
+                    await _unitOfWork.CommitAsync();
+                    viewModel.CheckedProducts = _unitOfWork.CheckedProductsRepository.GetAll(x => x.AppUserId == appUser.Id, "Product.ProductImages").ToList();
+                }
+                else
+                {
+                    viewModel.CheckedProducts = _unitOfWork.CheckedProductsRepository.GetAll(x => x.AppUserId == appUser.Id, "Product.ProductImages").ToList();
+                }
+            }
 
             var productDto = _mapper.Map<ProductGetDTO>(existProduct);
 
-            var viewModel = new DetailViewModel
-            {
-                Product = productDto,
-                Comment = new ProductComment { ProductId = id }
-            };
-
+            viewModel.Comment = new ProductComment { ProductId = id };
+            viewModel.Product = productDto;
+            
             return viewModel;
         }
         public List<BrandGetDto> GetBrands()
@@ -840,6 +866,9 @@ namespace IComp.Service.Implementations
                     Order = order,
                     Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
                 };
+                Guid guid = Guid.NewGuid();
+
+                order.TrackId = $"{guid}";
 
                 order.AppUserId = null;
                 order.CreatedAt = DateTime.UtcNow.AddHours(4);
@@ -870,13 +899,28 @@ namespace IComp.Service.Implementations
 
                 OrderItem orderItm = new OrderItem
                 {
-
                     ProductId = model.Product.Id,
                     SalePrice = model.Product.SalePrice,
                     CostPrice = model.Product.CostPrice,
                     DiscountedPrice = model.Product.DiscountPercent > 0 ? (model.Product.SalePrice * (1 - model.Product.DiscountPercent / 100)) : model.Product.SalePrice,
                     Count = ordercount,
                 };
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.To.Add(order.Email);
+                mailMessage.From = new MailAddress("poladam@code.edu.az");
+                mailMessage.Subject = "Salam hörmətli müştəri";
+
+                mailMessage.Body = order.TrackId;
+                mailMessage.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+
+                smtp.Credentials = new NetworkCredential("poladam@code.edu.az", "Polad20012022");
+                smtp.Port = 587;
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                smtp.Send(mailMessage);
 
                 order.OrderItems.Add(orderItm);
                 order.TotalPrice += orderItm.DiscountedPrice * orderItm.Count;
@@ -937,11 +981,11 @@ namespace IComp.Service.Implementations
 
         public PaginatedListDto<ProductListItemDto> GetAllProdWithFilter(int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsAvailable, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
-            var pageSize = 3;   
+            var pageSize = 3;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard, IsAvailable = x.IsAvailable }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -1028,7 +1072,7 @@ namespace IComp.Service.Implementations
                 order.Status = Core.Enums.OrderStatus.Pending;
                 order.OrderItems = new List<OrderItem>();
 
-               
+
 
                 foreach (var item in checkoutVM.Basket.BasketItems)
                 {
@@ -1121,7 +1165,7 @@ namespace IComp.Service.Implementations
             await _unitOfWork.OrderRepository.AddAsync(order);
 
             if (member == null)
-               _httpContextAccessor.HttpContext.Response.Cookies.Delete("basket");
+                _httpContextAccessor.HttpContext.Response.Cookies.Delete("basket");
             else
                 _unitOfWork.BasketItemRepository.RemoveRange(_unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == member.Id));
 
@@ -1178,6 +1222,12 @@ namespace IComp.Service.Implementations
         {
             var orders = await _unitOfWork.OrderRepository.GetAll(x => x.AppUserId == appUser.Id).ToListAsync();
             return orders;
+        }
+
+        public async Task<Order> GetOrderByIdAsync(string id)
+        {
+            var order = await _unitOfWork.OrderRepository.GetAsync(x => x.TrackId == id, "OrderItems");
+            return order;
         }
     }
 }

@@ -12,5 +12,6 @@ namespace IComp.Core.Entities
         public string Country { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
+        public List<CheckedProducts> CheckedProducts { get; set; }
     }
 }

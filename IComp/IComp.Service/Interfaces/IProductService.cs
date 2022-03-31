@@ -74,6 +74,8 @@ namespace IComp.Service.Interfaces
         Task CreateOrder(Order order);
         Task<CommonBasketViewModel> GetBasketItems(AppUser appUser);
         Task<List<Order>> GetOrdersAsync(AppUser appUser);
+        Task<Order> GetOrderByIdAsync(string id);
+
 
     }
 }
