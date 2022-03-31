@@ -187,14 +187,21 @@ $(document).ready(function () {
                     }
                     else {
                         alert("Failed:(")
-                        return;
+                        throw response
                     }
 
                 }).then(data => {
-                    $("#myModal .modal-body-inner").html(data)
+                    $("#myModal .modal-basket-inner").html(data)
                     prodCount = $("#basket-count").val()
                     $(".basket-counter-value").html(prodCount);
                     $("#myModal").modal('show');
+                })
+                .catch(err => {
+                    err.json().then(json => {
+                        $(".loader-wrapper").css("display", "none")
+                        $(".shopping-cart").css("display", "block")
+                        $("#myModal .modal-basket-inner").html(json.message)
+                    })
                 })
         }
 

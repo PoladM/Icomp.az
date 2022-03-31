@@ -449,50 +449,53 @@
                         </div>
                     </div>
                     <!-- Detail end -->
+                        @if (Model.CheckedProducts != null)
+                        {
 
-                    <div class="content-heading">
-                        <h2>Ən son baxdıqlarınız</h2>
-                    </div>
+                            <div class="content-heading">
+                                <h2>Ən son baxdıqlarınız</h2>
+                            </div>
 
-                    <div class="new-products-inner">
-                        <div class="row">
-                                @foreach (var item in Model.CheckedProducts)
-                                {
-                                <div class="col-lg-3 col-md-6 col-sm-12">
-                                    <div class="new-products__item">
-                                        <div class="new-products__item-card">
-                                            <div class="item__card-header">
-                                                <div class="product-photo">
-                                                    <img src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
-                                                </div>
-                                                <div class="product-title">
-                                                    <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Product.Name</a>
-                                                </div>
-                                            </div>
-                                            <div class="item__card-body">
-                                                <div class="product-desc">
-                                                    <p>
-                                                            @item.Product.Processor?.ProcessorSerie?.Name | @item.Product.ProdMemory?.MemoryCapacity?.Capacity @item.Product.ProdMemory?.DDRType | @(item.Product.SSD?.SSDCapacity?.Capacity == null? "" : item.Product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.Product.HardDisc?.HDDCapacity?.Capacity == null? "" : item.Product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @item.Product.Processor.ModelName | 27 FHD
-                                                        IPS
-                                                    </p>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span>@item.Product.SalePrice <sup>azn</sup></span>
-                                                </div>
-                                                <div class="product-checkout">
-                                                    <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.Id" class="btn btn-primary add-to-basket">Səbətə</a>
-                                                    <a asp-action="order" asp-controller="checkout" asp-route-id="@item.Id" class="btn btn-danger fast-order">Tez Sifariş</a>
+                            <div class="new-products-inner">
+                                <div class="row">
+                                    @foreach (var item in Model.CheckedProducts)
+                                    {
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="new-products__item">
+                                                <div class="new-products__item-card">
+                                                    <div class="item__card-header">
+                                                        <div class="product-photo">
+                                                            <img src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+                                                        </div>
+                                                        <div class="product-title">
+                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Product.Name</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item__card-body">
+                                                        <div class="product-desc">
+                                                            <p>
+                                                                @item.Product.Processor?.ProcessorSerie?.Name | @item.Product.ProdMemory?.MemoryCapacity?.Capacity @item.Product.ProdMemory?.DDRType | @(item.Product.SSD?.SSDCapacity?.Capacity == null? "" : item.Product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.Product.HardDisc?.HDDCapacity?.Capacity == null? "" : item.Product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @item.Product.Processor.ModelName | 27 FHD
+                                                                IPS
+                                                            </p>
+                                                        </div>
+                                                        <div class="product-price">
+                                                            <span>@item.Product.SalePrice <sup>azn</sup></span>
+                                                        </div>
+                                                        <div class="product-checkout">
+                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.Id" class="btn btn-primary add-to-basket">Səbətə</a>
+                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item.Id" class="btn btn-danger fast-order">Tez Sifariş</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
+
+
+
                                 </div>
-                                }
-
-
-
-                        </div>
-                    </div>
+                            </div>
+                        }
 
                 </div>
             </div>

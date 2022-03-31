@@ -718,11 +718,7 @@ namespace IComp.Service.Implementations
                 {
                     throw new ItemNotFoundException("Item not found");
                 }
-                if (product.Count < cookieItem.Count)
-                {
-                    throw new Exception();
-                }
-
+                
                 if (cookieItem.Count > 1)
                 {
                     cookieItem.Count--;
