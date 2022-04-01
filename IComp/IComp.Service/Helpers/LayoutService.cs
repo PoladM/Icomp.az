@@ -81,20 +81,18 @@ namespace IComp.Service.Helpers
             {
                 var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
 
-                if (product == null)
+                if (product != null)
                 {
-                    throw new ItemNotFoundException("Product not found in basket");
+                    BasketProductViewModel basketProduct = new BasketProductViewModel
+                    {
+                        Product = product,
+                        Count = item.Count
+                    };
+
+                    basketItems.BasketItems.Add(basketProduct);
+                    decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                    basketItems.TotalPrice += totalPrice * item.Count;
                 }
-
-                BasketProductViewModel basketProduct = new BasketProductViewModel
-                {
-                    Product = product,
-                    Count = item.Count
-                };
-
-                basketItems.BasketItems.Add(basketProduct);
-                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
-                basketItems.TotalPrice += totalPrice * item.Count;
             }
 
             return basketItems;

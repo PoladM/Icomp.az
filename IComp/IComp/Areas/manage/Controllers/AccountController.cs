@@ -35,17 +35,57 @@ namespace IComp.Areas.manage.Controllers
         //    return Ok();
         //}
 
-        //public async Task<IActionResult> Role()
-        //{
-        //    var result3 = await _roleManager.CreateAsync(new IdentityRole("Member"));
+        public async Task<IActionResult> Role()
+        {
+            var result3 = await _roleManager.CreateAsync(new IdentityRole("Reader"));
+            if (result3.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
 
-        //    AppUser appUser = await _userManager.FindByNameAsync("poladm");
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(AdminRegisterViewModel admin)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            AppUser appUser = new AppUser
+            {
+                FullName = admin.FullName,
+                UserName = admin.UserName,
+                Email = admin.Email
+            };
 
-        //    var result = await _userManager.AddToRoleAsync(appUser, "Member");
+            var result = await _userManager.CreateAsync(appUser, admin.Password);
 
-        //    return Ok();
-        //}
+            if (!result.Succeeded)
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
+                return View();
+            }
+            var role = await _userManager.AddToRoleAsync(appUser, admin.AdminRoles.ToString());
 
+            if (!role.Succeeded)
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
+                return View();
+            }
+
+            return RedirectToAction("index", "dashboard");
+        }
 
         public IActionResult Login()
         {

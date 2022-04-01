@@ -714,11 +714,6 @@ namespace IComp.Service.Implementations
                 BasketCookieItemViewModel cookieItem = cookieItems.FirstOrDefault(x => x.ProductId == id);
                 var product = await GetByIdAsync(id);
 
-                if (product == null)
-                {
-                    throw new ItemNotFoundException("Item not found");
-                }
-                
                 if (cookieItem.Count > 1)
                 {
                     cookieItem.Count--;
@@ -1018,6 +1013,11 @@ namespace IComp.Service.Implementations
 
             var basket = await GetBasketItems(appUser);
 
+            if (basket.BasketItems.Count == 0)
+            {
+                throw new ItemNotFoundException("Basket Item Not found");
+            }
+
             CheckOutViewModel checkOutVM = null;
 
             if (appUser == null)
@@ -1198,17 +1198,20 @@ namespace IComp.Service.Implementations
 
             foreach (var item in cookieItems)
             {
+
                 var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId && !x.IsDeleted, "ProductImages");
-
-                BasketProductViewModel basketProduct = new BasketProductViewModel
+                if (product != null)
                 {
-                    Product = product,
-                    Count = item.Count
-                };
+                    BasketProductViewModel basketProduct = new BasketProductViewModel
+                    {
+                        Product = product,
+                        Count = item.Count
+                    };
 
-                basketItems.BasketItems.Add(basketProduct);
-                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
-                basketItems.TotalPrice += totalPrice * item.Count;
+                    basketItems.BasketItems.Add(basketProduct);
+                    decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                    basketItems.TotalPrice += totalPrice * item.Count;
+                }
             }
 
             return basketItems;

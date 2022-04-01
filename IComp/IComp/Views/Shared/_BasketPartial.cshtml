@@ -27,17 +27,25 @@
                 </p>
             </div>
             <div class="product-price-basket">price:  $@((item.Product.DiscountPercent > 0 ?item.Product.SalePrice*(1-item.Product.DiscountPercent/100):item.Product.SalePrice).ToString("0.00"))</div>
-            <div class="product-quantity">
-                <input type="number" value="@item.Count" min="1" class="change-val">
-                <input type="hidden" value="@item.Count" class="current-val" >
-                <input type="hidden" value="@item.Product.Id" class="product-Id" >
+            @if (item.Product.IsDeleted == false)
+            {
+                <div class="product-quantity">
+                    <input type="number" value="@item.Count" min="1" class="change-val">
+                    <input type="hidden" value="@item.Count" class="current-val">
+                    <input type="hidden" value="@item.Product.Id" class="product-Id">
 
-            </div>
-            <div class="product-removal">
-                <a asp-action="deletebasket" asp-controller="catalog" asp-route-id="@item.Product.Id" class="remove-product">
-                    Remove
-                </a>
-            </div>
+                </div>
+                <div class="product-removal">
+                    <a asp-action="deletebasket" asp-controller="catalog" asp-route-id="@item.Product.Id" class="remove-product">
+                        Remove
+                    </a>
+                </div>
+            }
+            else
+            {
+                <span class="text-danger product-quantity">Bu məhsul tükənmişdir</span>
+            }
+
             <div class="product-line-price">@productTotalPrice.ToString("0.00")</div>
         </div>
     }
@@ -53,5 +61,4 @@
     </div>
 
     <a asp-action="basketcheckout" asp-controller="order" class="checkout">Checkout</a>
-
 </div>
