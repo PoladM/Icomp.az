@@ -1115,6 +1115,7 @@ textarea:focus, input:focus {
 
         .new-products-inner .new-products__item-card .item__card-header {
             margin: 20px 0px;
+            height: 14rem;
         }
 
             .new-products-inner .new-products__item-card .item__card-header .product-photo {

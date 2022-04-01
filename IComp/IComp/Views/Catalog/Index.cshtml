@@ -309,6 +309,7 @@
                                                         </div>
                                                         <div class="product-price">
                                                             <span>@item.Price <sup>azn</sup></span>
+                                                            <h6>Stokda : <span class="@(item.IsAvailable == true ? "text-success" : "text-danger")">@(item.IsAvailable == true ? "Var" : "Yox")</span></h6>
                                                         </div>
                                                         <div class="product-checkout">
                                                             <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.Id" class="btn btn-primary add-to-basket">Səbətə</a>

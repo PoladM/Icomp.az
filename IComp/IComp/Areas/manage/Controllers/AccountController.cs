@@ -35,15 +35,15 @@ namespace IComp.Areas.manage.Controllers
         //    return Ok();
         //}
 
-        public async Task<IActionResult> Role()
-        {
-            var result3 = await _roleManager.CreateAsync(new IdentityRole("Reader"));
-            if (result3.Succeeded)
-            {
-                return Ok();
-            }
-            return BadRequest();
-        }
+        //public async Task<IActionResult> Role()
+        //{
+        //    var result3 = await _roleManager.CreateAsync(new IdentityRole("Reader"));
+        //    if (result3.Succeeded)
+        //    {
+        //        return Ok();
+        //    }
+        //    return BadRequest();
+        //}
 
         public IActionResult Create()
         {
