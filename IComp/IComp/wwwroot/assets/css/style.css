@@ -860,7 +860,9 @@ textarea:focus, input:focus {
         margin: 5px 20px 5px 0;
         line-height: 1.4em;
     }
-
+    .product-desc{
+        height: 4rem;
+    }
     .product .product-quantity input {
         width: 40px;
     }

@@ -253,3 +253,12 @@ C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Order\TrackOrder.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Order\GetOrderByTrackId.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Account\Create.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProductParts\CreateProcessor.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProductParts\CreateMotherBoard.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProductParts\CreateRam.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProductParts\CreateVideoCard.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Home\Make.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ProductOptionsPartial.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProductParts\CreateCooler.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProductParts\CreateSSD.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProductParts\CreateHDD.cshtml.g.cs

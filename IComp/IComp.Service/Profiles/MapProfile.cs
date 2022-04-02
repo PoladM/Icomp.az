@@ -13,6 +13,7 @@ using IComp.Service.DTOs.ProcessorDTOs;
 using IComp.Service.DTOs.ProcessorSerieDTOs;
 using IComp.Service.DTOs.ProdTypeDTOs;
 using IComp.Service.DTOs.ProductDTOs;
+using IComp.Service.DTOs.ProductPartsDTOs;
 using IComp.Service.DTOs.SoftwareDTOs;
 using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
@@ -72,6 +73,13 @@ namespace IComp.Service.Profiles
             CreateMap<Color, ColorGetDto>();
             CreateMap<Software, SoftwareGetDto>();
 
+            CreateMap<ProdProcessorPostDto, ProductPostDto>();
+            CreateMap<ProdVideoCardDto, ProductPostDto>();
+            CreateMap<ProdMotherBoardDto, ProductPostDto>();
+            CreateMap<ProdRamDto, ProductPostDto>();
+            CreateMap<ProdCoolerDto, ProductPostDto>();
+            CreateMap<ProdSSDDto, ProductPostDto>();
+            CreateMap<ProdHddDto, ProductPostDto>();
         }
     }
 }

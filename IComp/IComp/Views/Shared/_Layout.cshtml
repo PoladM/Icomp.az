@@ -206,9 +206,13 @@
                                 </li>
                                 <div class="sub-mobile-menu close">
                                     <ul class="sub-dropdown-list">
-                                        <li class="sub-mobile-menu-item">Kompüterlər
-                                        </li>
-                                        <div class="sub-sub-mobile-menu off">
+                                        @foreach (var item in categories)
+                                       {
+                                        <li class="sub-mobile-menu-item"><a asp-action="index" asp-controller="catalog" asp-route-categoryid="@item.Id" style="color:white;"><img width="20" src="~/assets/img/CatalogIcons/computer_1.svg" alt="">
+                                                @item.Name</a></li>   
+                                       }
+                                        
+                                       @* <div class="sub-sub-mobile-menu off">
                                             <ul class="sub-sub-dropdown-list">
                                                 <li class="sub-sub-mobile-menu-item"><a href="">Acer kompüterləri</a>
                                                 </li>
@@ -219,61 +223,12 @@
                                                 <li class="sub-sub-mobile-menu-item"><a href="">HP Kompüterləri</a>
                                                 </li>
                                             </ul>
-                                        </div>
-                                        <li class="sub-mobile-menu-item">Noutbuklar, Ultrabuklar</li>
-                                        <div class="sub-sub-mobile-menu off">
-                                            <ul class="sub-sub-dropdown-list">
-                                                <li class="sub-sub-mobile-menu-item"><a href=""> Oyun noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">Sony noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href=""> Acer noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href=""> Oyun noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">Sony noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">Acer noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                            </ul>
-                                        </div>
-
-                                        <li class="sub-mobile-menu-item">Noutbuklar, Ultrabuklar</li>
-                                        <div class="sub-sub-mobile-menu off">
-                                            <ul class="sub-sub-dropdown-list">
-                                                <li class="sub-sub-mobile-menu-item"><a href=""> Oyun noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">Sony noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href=""> Acer noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href=""> Oyun noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">Sony noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">Acer noutbukları</a>
-                                                </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                                <li class="sub-sub-mobile-menu-item"><a href="">MacBook - Apple
-                                                        noutbukları</a> </li>
-                                            </ul>
-                                        </div>
+                                        </div>*@
+                                        
+                                       
                                     </ul>
                                 </div>
-                                <li class="mobile-menu-item"><a href="">Home</a></li>
+                                <li class="mobile-menu-item"><a asp-action="index" asp-controller="home">Home</a></li>
 
                             </ul>
                         </div>

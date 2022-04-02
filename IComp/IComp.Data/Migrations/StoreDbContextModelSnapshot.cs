@@ -89,6 +89,9 @@ namespace IComp.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Collectable")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -567,11 +570,14 @@ namespace IComp.Data.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<int>("DestinationId")
+                    b.Property<int?>("DestinationId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("DiscountPercent")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("GraphCard")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("HardDiscId")
                         .HasColumnType("int");
@@ -587,9 +593,7 @@ namespace IComp.Data.Migrations
                         .HasDefaultValue(false);
 
                     b.Property<string>("InputPorts")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAvailable")
                         .ValueGeneratedOnAdd()
@@ -616,13 +620,22 @@ namespace IComp.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<string>("Material")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaxResolution")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<int>("MotherBoardId")
+                    b.Property<int?>("MotherBoardId")
                         .HasColumnType("int");
+
+                    b.Property<string>("MotherBoardSound")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -630,23 +643,25 @@ namespace IComp.Data.Migrations
                         .HasMaxLength(100);
 
                     b.Property<string>("Network")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Ports")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PowerSupply")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProcessorId")
+                    b.Property<int?>("ProcessorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProdMemoryId")
+                    b.Property<int?>("ProdMemoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProdTypeId")
+                    b.Property<int?>("ProdTypeId")
                         .HasColumnType("int");
+
+                    b.Property<string>("RamLightning")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Rate")
                         .HasColumnType("int");
@@ -657,36 +672,32 @@ namespace IComp.Data.Migrations
                     b.Property<decimal>("SalePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("SoftwareId")
+                    b.Property<int?>("SoftwareId")
                         .HasColumnType("int");
 
                     b.Property<string>("SoundType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Speed")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("USB")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("USBTypeC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VideoCardId")
+                    b.Property<int?>("VideoCardId")
                         .HasColumnType("int");
 
                     b.Property<string>("WarrantyPeriod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Weight")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("procSpeed")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -1216,7 +1227,7 @@ namespace IComp.Data.Migrations
             modelBuilder.Entity("IComp.Core.Entities.CheckedProducts", b =>
                 {
                     b.HasOne("IComp.Core.Entities.AppUser", "AppUser")
-                        .WithMany()
+                        .WithMany("CheckedProducts")
                         .HasForeignKey("AppUserId");
 
                     b.HasOne("IComp.Core.Entities.Product", "Product")
@@ -1297,9 +1308,7 @@ namespace IComp.Data.Migrations
 
                     b.HasOne("IComp.Core.Entities.Destination", "Destination")
                         .WithMany()
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DestinationId");
 
                     b.HasOne("IComp.Core.Entities.HardDisc", "HardDisc")
                         .WithMany("Products")
@@ -1307,27 +1316,19 @@ namespace IComp.Data.Migrations
 
                     b.HasOne("IComp.Core.Entities.MotherBoard", "MotherBoard")
                         .WithMany("Products")
-                        .HasForeignKey("MotherBoardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MotherBoardId");
 
                     b.HasOne("IComp.Core.Entities.Processor", "Processor")
                         .WithMany("Products")
-                        .HasForeignKey("ProcessorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProcessorId");
 
                     b.HasOne("IComp.Core.Entities.ProdMemory", "ProdMemory")
                         .WithMany("Products")
-                        .HasForeignKey("ProdMemoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProdMemoryId");
 
                     b.HasOne("IComp.Core.Entities.ProdType", "ProdType")
                         .WithMany()
-                        .HasForeignKey("ProdTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProdTypeId");
 
                     b.HasOne("IComp.Core.Entities.SSD", "SSD")
                         .WithMany("Products")
@@ -1335,15 +1336,11 @@ namespace IComp.Data.Migrations
 
                     b.HasOne("IComp.Core.Entities.Software", "Software")
                         .WithMany()
-                        .HasForeignKey("SoftwareId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SoftwareId");
 
                     b.HasOne("IComp.Core.Entities.VideoCard", "VideoCard")
                         .WithMany("Products")
-                        .HasForeignKey("VideoCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VideoCardId");
                 });
 
             modelBuilder.Entity("IComp.Core.Entities.ProductComment", b =>

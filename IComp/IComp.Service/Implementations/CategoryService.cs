@@ -125,7 +125,7 @@ namespace IComp.Service.Implementations
             }
 
             existProd.Name = postDTO.Name;
-    
+            existProd.Collectable = postDTO.Collectable;
             await _unitOfWork.CommitAsync();
         }
     }

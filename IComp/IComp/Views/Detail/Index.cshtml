@@ -85,7 +85,8 @@
                             <div class="col-lg-6">
                                 <div class="product-detail-box">
                                     <div class="product-detail-desc">
-                                        <p>@product.Processor.ModelName | @product.ProdMemory.MemoryCapacity?.Capacity @product.ProdMemory.DDRType | @product.HardDisc.HDDCapacity?.Capacity @product.HardDisc.ModelName | @product.MotherBoard.ModelName | @product.Software.Name</p>
+                                            @(product.Processor?.ProcessorSerie?.Name == null ? "" : product.Processor?.ProcessorSerie?.Name + "|")  @(product.ProdMemory?.MemoryCapacity?.Capacity == null ? "" : product.ProdMemory?.MemoryCapacity?.Capacity + "|") @(product.ProdMemory?.DDRType == null ? "" : product.ProdMemory?.DDRType + "|") @(product.SSD?.SSDCapacity?.Capacity == null? "" : product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(product.HardDisc?.HDDCapacity?.Capacity == null? "" : product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(product.Processor?.ModelName == null ? "" : product.Processor?.ModelName + "|")
+                                            @(product.VideoCard?.CoreSpeed == null ? "" : product.VideoCard?.CoreSpeed + "|") @(product.VideoCard?.MemoryCapacity==null? "" : product.VideoCard?.MemoryCapacity + "|") @(product.VideoCard?.VideoCardSerie?.Name==null? "" : product.VideoCard?.VideoCardSerie?.Name + " series |")
                                     </div>
                                     <div class="product-detail-price">
                                         <p><span>@product.SalePrice</span>azn</p>
@@ -132,16 +133,19 @@
                                                     <p>@product.Destination.Name</p>
                                                 </div>
                                             </div>
-                                            <div class="detail-info">
-                                                <div class="detail-name">
-                                                    <p>
-                                                        Ana plata
-                                                    </p>
+                                                @if (@product.MotherBoard != null)
+                                                {
+                                                <div class="detail-info">
+                                                    <div class="detail-name">
+                                                        <p>
+                                                            Ana plata
+                                                        </p>
+                                                    </div>
+                                                    <div class="detail-value">
+                                                        <p>@product.MotherBoard.ModelName</p>
+                                                    </div>
                                                 </div>
-                                                <div class="detail-value">
-                                                    <p>@product.MotherBoard.ModelName</p>
-                                                </div>
-                                            </div>
+                                                }
                                         </div>
                                     </div>
                                     <div class="product-checkout">
@@ -239,125 +243,160 @@
                                                     </h5>
                                                 </div>
                                                 <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            Proqram təminatı
-                                                        </p>
-                                                    </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.Software.Name
-                                                        </p>
-                                                    </div>
+                                                        @if (product.Software != null)
+                                                        {
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Proqram təminatı
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.Software.Name
+                                                            </p>
+                                                        </div>
+                                                        }
+                                                        else
+                                                        {
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Yoxdur
+                                                            </p>
+                                                        </div>
+                                                        }
                                                 </div>
                                                 <div class="option-head">
                                                     <h5>
                                                         Texniki göstəricilər
                                                     </h5>
                                                 </div>
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            Prosessor
-                                                        </p>
+                                                    @if (@product.Processor != null)
+                                                    {
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Prosessor
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.Processor?.ModelName
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.Processor.ModelName
-                                                        </p>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Prosessor sürəti
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.Processor.Speed
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            Prosessor sürəti
-                                                        </p>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Operativ yaddaş (RAM)
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.ProdMemory?.MemoryCapacity.Capacity
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.Processor.Speed
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            Operativ yaddaş (RAM)
-                                                        </p>
-                                                    </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.ProdMemory.MemoryCapacity.Capacity
-                                                        </p>
-                                                    </div>
-                                                </div>
 
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            Operativ yaddaşın sürəti
-                                                        </p>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Operativ yaddaşın sürəti
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.ProdMemory?.DDRType @product.ProdMemory?.MemoryCapacity.Capacity @product.ProdMemory?.Speed
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.ProdMemory.DDRType @product.ProdMemory.MemoryCapacity.Capacity @product.ProdMemory.Speed
-                                                        </p>
+                                                    }
+                                                    @if (product.VideoCard != null)
+                                                    {
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Qrafik kart
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.VideoCard.ModelName
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            Qrafik kart
-                                                        </p>
-                                                    </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.VideoCard.ModelName
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            Səs
+                                                    }
+                                                    @if (@product.SoundType != null)
+                                                    {
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                Səs
 
-                                                        </p>
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.SoundType
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.SoundType
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                    }
+
                                                 <div class="option-head">
                                                     <h5>
                                                         Yaddaş həcmi
                                                     </h5>
                                                 </div>
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            SSD
-                                                        </p>
+                                                    @if (product.SSD != null || product.HardDisc != null)
+                                                    {
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                SSD
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.SSD?.SSDCapacity.Capacity
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.SSD?.SSDCapacity.Capacity
-                                                        </p>
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                HDD
+                                                            </p>
+                                                        </div>
+                                                        <div class="option-value">
+                                                            <p>
+                                                                    @product.HardDisc?.HDDCapacity.Capacity
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="option-info">
-                                                    <div class="option-name">
-                                                        <p>
-                                                            HDD
-                                                        </p>
+                                                    }
+                                                    else
+                                                    {
+                                                    <div class="option-info">
+                                                        <div class="option-name">
+                                                            <p>
+                                                                yoxdur
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                    <div class="option-value">
-                                                        <p>
-                                                                @product.HardDisc?.HDDCapacity.Capacity
-                                                        </p>
-                                                    </div>
-                                                </div>
+                                                    }
+
                                                 <div class="option-head">
                                                     <h5>
                                                         Şəbəkə
@@ -396,12 +435,12 @@
                                                 <div class="option-info">
                                                     <div class="option-name">
                                                         <p>
-                                                            Şəbəkə
+                                                            Güc
                                                         </p>
                                                     </div>
                                                     <div class="option-value">
                                                         <p>
-                                                                @product.PowerSupply
+                                                                @(product.PowerSupply == null ? "Yoxdur" : @product.PowerSupply)
                                                         </p>
                                                     </div>
                                                 </div>
@@ -452,49 +491,49 @@
                         @if (Model.CheckedProducts != null)
                         {
 
-                            <div class="content-heading">
-                                <h2>Ən son baxdıqlarınız</h2>
-                            </div>
+                        <div class="content-heading">
+                            <h2>Ən son baxdıqlarınız</h2>
+                        </div>
 
-                            <div class="new-products-inner">
-                                <div class="row">
+                        <div class="new-products-inner">
+                            <div class="row">
                                     @foreach (var item in Model.CheckedProducts)
                                     {
-                                        <div class="col-lg-3 col-md-6 col-sm-12">
-                                            <div class="new-products__item">
-                                                <div class="new-products__item-card">
-                                                    <div class="item__card-header">
-                                                        <div class="product-photo">
-                                                            <img src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
-                                                        </div>
-                                                        <div class="product-title">
-                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Product.Name</a>
-                                                        </div>
+                                    <div class="col-lg-3 col-md-6 col-sm-12">
+                                        <div class="new-products__item">
+                                            <div class="new-products__item-card">
+                                                <div class="item__card-header">
+                                                    <div class="product-photo">
+                                                        <img src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
                                                     </div>
-                                                    <div class="item__card-body">
-                                                        <div class="product-desc">
-                                                            <p>
-                                                                @item.Product.Processor?.ProcessorSerie?.Name | @item.Product.ProdMemory?.MemoryCapacity?.Capacity @item.Product.ProdMemory?.DDRType | @(item.Product.SSD?.SSDCapacity?.Capacity == null? "" : item.Product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.Product.HardDisc?.HDDCapacity?.Capacity == null? "" : item.Product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @item.Product.Processor.ModelName | 27 FHD
-                                                                IPS
-                                                            </p>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <span>@item.Product.SalePrice <sup>azn</sup></span>
-                                                        </div>
-                                                        <div class="product-checkout">
-                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.Id" class="btn btn-primary add-to-basket">Səbətə</a>
-                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item.Id" class="btn btn-danger fast-order">Tez Sifariş</a>
-                                                        </div>
+                                                    <div class="product-title">
+                                                        <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Product.Name</a>
+                                                    </div>
+                                                </div>
+                                                <div class="item__card-body">
+                                                    <div class="product-desc">
+                                                        <p>
+                                                                @(item.Product.Processor?.ProcessorSerie?.Name == null ? "" : item.Product.Processor?.ProcessorSerie?.Name + "|")  @(item.Product.ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item.Product.ProdMemory?.MemoryCapacity?.Capacity + "|") @(item.Product.ProdMemory?.DDRType == null ? "" : item.Product.ProdMemory?.DDRType + "|") @(item.Product.SSD?.SSDCapacity?.Capacity == null? "" : item.Product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.Product.HardDisc?.HDDCapacity?.Capacity == null? "" : item.Product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item.Product.Processor?.ModelName == null ? "" : item.Product.Processor?.ModelName + "|")
+                                                                @(item.Product.VideoCard?.CoreSpeed == null ? "" : item.Product.VideoCard?.CoreSpeed + "|") @(item.Product.VideoCard?.MemoryCapacity==null? "" : item.Product.VideoCard?.MemoryCapacity + "|") @(item.Product.VideoCard?.VideoCardSerie?.Name==null? "" : item.Product.VideoCard?.VideoCardSerie?.Name + " series |")
+                                                        </p>
+                                                    </div>
+                                                    <div class="product-price">
+                                                        <span>@item.Product.SalePrice <sup>azn</sup></span>
+                                                    </div>
+                                                    <div class="product-checkout">
+                                                        <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.Id" class="btn btn-primary add-to-basket">Səbətə</a>
+                                                        <a asp-action="order" asp-controller="checkout" asp-route-id="@item.Id" class="btn btn-danger fast-order">Tez Sifariş</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                     }
 
 
 
-                                </div>
                             </div>
+                        </div>
                         }
 
                 </div>

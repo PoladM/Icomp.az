@@ -98,27 +98,34 @@ using IComp.Service.DTOs.AppUserDTOs;
 #nullable disable
 #nullable restore
 #line 13 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Views\_ViewImports.cshtml"
-using IComp.Service.ViewModels;
+using IComp.Service.DTOs.ProductPartsDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 14 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Views\_ViewImports.cshtml"
-using IComp.Service.DTOs;
+using IComp.Service.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 15 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Views\_ViewImports.cshtml"
+using IComp.Service.DTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 16 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Views\_ViewImports.cshtml"
 using IComp.Core.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"99989fca82af864b4a7df29be64fdf5a6e18e72a", @"/Views/Order/GetOrderByTrackId.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"0f0b1916e23bf383ca432bf3823fc5036b2dd16b", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"8ed6c226668045b45b02f9c0ef35dde9d93ef766", @"/Views/_ViewImports.cshtml")]
     #nullable restore
     public class Views_Order_GetOrderByTrackId : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<Order>
     #nullable disable
@@ -236,7 +243,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("</span> . If you have any question about your order please ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "99989fca82af864b4a7df29be64fdf5a6e18e72a10704", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "99989fca82af864b4a7df29be64fdf5a6e18e72a10911", async() => {
                 WriteLiteral("contact with us");
             }
             );

@@ -104,21 +104,28 @@ using IComp.Service.DTOs.MotherBoardDTOs;
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
-using IComp.Areas.ViewModels;
+#line 14 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Service.DTOs.ProductPartsDTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
 #line 16 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
+using IComp.Areas.ViewModels;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 17 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\_ViewImports.cshtml"
 using IComp.Core.Entities;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"a7dc281bc119568f99461ce6f99c6de965e4c15f", @"/Areas/manage/Views/Slider/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"68941f3f3a9a58f68a8840febb0140564eb9da3e", @"/Areas/manage/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2d3f7c481520ef763b5bb46813c4be66adde922b", @"/Areas/manage/_ViewImports.cshtml")]
     #nullable restore
     public class Areas_manage_Views_Slider_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<PaginatedListDto<Slider>>
     #nullable disable
@@ -168,7 +175,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12 d-flex justify-content-between\">\r\n            <h3>Product</h3>\r\n            ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f9824", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f10038", async() => {
                 WriteLiteral("Create");
             }
             );
@@ -215,7 +222,7 @@ using IComp.Core.Entities;
 #line hidden
 #nullable disable
             WriteLiteral("</th>\r\n                            <td>\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "a7dc281bc119568f99461ce6f99c6de965e4c15f12193", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "a7dc281bc119568f99461ce6f99c6de965e4c15f12408", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -239,7 +246,7 @@ AddHtmlAttributeValue("", 1025, item.Image, 1025, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                            </td>\r\n                            <td></td>\r\n                            <td>\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f13928", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f14143", async() => {
                 WriteLiteral("Edit");
             }
             );
@@ -271,7 +278,7 @@ AddHtmlAttributeValue("", 1025, item.Image, 1025, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f16222", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f16437", async() => {
                 WriteLiteral("Delete");
             }
             );
@@ -320,7 +327,7 @@ AddHtmlAttributeValue("", 1025, item.Image, 1025, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f19272", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f19487", async() => {
 #nullable restore
 #line 46 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Slider\Index.cshtml"
                                                                                                      Write("<<");
@@ -349,7 +356,7 @@ AddHtmlAttributeValue("", 1025, item.Image, 1025, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f21328", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f21543", async() => {
 #nullable restore
 #line 47 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Slider\Index.cshtml"
                                                                                                                           Write("<");
@@ -403,7 +410,7 @@ AddHtmlAttributeValue("", 1025, item.Image, 1025, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f24465", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f24680", async() => {
 #nullable restore
 #line 51 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Slider\Index.cshtml"
                                                                                                      Write(i);
@@ -457,7 +464,7 @@ AddHtmlAttributeValue("", 1025, item.Image, 1025, 11, false);
 #line hidden
 #nullable disable
             WriteLiteral("                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f27536", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f27751", async() => {
 #nullable restore
 #line 55 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Slider\Index.cshtml"
                                                                                                                           Write(">");
@@ -495,7 +502,7 @@ AddHtmlAttributeValue("", 1025, item.Image, 1025, 11, false);
             Write(__tagHelperExecutionContext.Output);
             __tagHelperExecutionContext = __tagHelperScopeManager.End();
             WriteLiteral("</li>\r\n                        <li class=\"page-item\">");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f30179", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7dc281bc119568f99461ce6f99c6de965e4c15f30394", async() => {
 #nullable restore
 #line 56 "C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\Areas\manage\Views\Slider\Index.cshtml"
                                                                                                                     Write(">>");

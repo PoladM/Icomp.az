@@ -52,9 +52,6 @@ namespace IComp.Service.Implementations
             _userManager = userManager;
         }
 
-        public ProductService()
-        {
-        }
 
         public async Task<ProductGetDTO> CreateAsync(ProductPostDto postDTO)
         {
@@ -65,15 +62,24 @@ namespace IComp.Service.Implementations
 
             if (!await _unitOfWork.VideoCardRepository.IsExistAsync(x => x.Id == postDTO.VideoCardId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.VideoCardId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.ProcessorRepository.IsExistAsync(x => x.Id == postDTO.ProcessorId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.ProcessorId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.MotherBoardRepository.IsExistAsync(x => x.Id == postDTO.MotherBoardId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.MotherBoardId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.HardDiscRepository.IsExistAsync(x => x.Id == postDTO.HardDiscId && !x.IsDeleted))
             {
@@ -91,27 +97,45 @@ namespace IComp.Service.Implementations
             }
             if (!await _unitOfWork.ColorRepository.IsExistAsync(x => x.Id == postDTO.ColorId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.ColorId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.CategoryRepository.IsExistAsync(x => x.Id == postDTO.CategoryId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.CategoryId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.BrandRepository.IsExistAsync(x => x.Id == postDTO.BrandId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.BrandId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.DestinationRepository.IsExistAsync(x => x.Id == postDTO.DestinationId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.DestinationId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.ProdTypeRepository.IsExistAsync(x => x.Id == postDTO.ProdTypeId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.ProdTypeId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.SoftWareRepository.IsExistAsync(x => x.Id == postDTO.SoftwareId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDTO.SoftwareId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
 
             Product product = _mapper.Map<Product>(postDTO);
@@ -124,10 +148,47 @@ namespace IComp.Service.Implementations
             {
                 product.HardDiscId = default;
             }
+            if (postDTO.VideoCardId == 0)
+            {
+                product.VideoCardId = default;
+            }
+            if (postDTO.MotherBoardId == 0)
+            {
+                product.MotherBoardId = default;
+            }
+            if (postDTO.ColorId == 0)
+            {
+                product.ColorId = default;
+            }
+            if (postDTO.BrandId == 0)
+            {
+                product.BrandId = default;
+            }
+            if (postDTO.DestinationId == 0)
+            {
+                product.DestinationId = default;
+            }
+            if (postDTO.ProdTypeId == 0)
+            {
+                product.ProdTypeId = default;
+            }
+            if (postDTO.SoftwareId == 0)
+            {
+                product.SoftwareId = default;
+            }
+            if (postDTO.ProdMemoryId == 0)
+            {
+                product.ProdMemoryId = default;
+            }
+            if (postDTO.ProcessorId == 0)
+            {
+                product.ProcessorId = default;
+            }
             if (product.IsAvailable == false)
             {
                 product.IsAvailable = true;
             }
+
 
             await _unitOfWork.ProductRepository.AddAsync(product);
             await _unitOfWork.CommitAsync();
@@ -237,9 +298,38 @@ namespace IComp.Service.Implementations
             if (minprice != null && maxprice != null)
                 query = query.Where(x => x.SalePrice >= minprice && x.SalePrice <= maxprice);
 
-            var pageSize = 3;
+            var pageSize = 4;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard, SSD = x.SSD, Color = x.Color, Software = x.Software, IsAvailable = x.IsAvailable }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Count = x.Count,
+                IsDeleted = x.IsDeleted,
+                ProductImages = x.ProductImages,
+                Price = x.SalePrice,
+                Processor = x.Processor,
+                HardDisc = x.HardDisc,
+                Brand = x.Brand,
+                Category = x.Category,
+                Destination = x.Destination,
+                MotherBoard = x.MotherBoard,
+                ProdMemory = x.ProdMemory,
+                VideoCard = x.VideoCard,
+                SSD = x.SSD,
+                Color = x.Color,
+                Software = x.Software,
+                IsAvailable = x.IsAvailable,
+                GraphCard = x.GraphCard,
+                MotherBoardSound = x.MotherBoardSound,
+                RamLightning = x.RamLightning,
+                MaxResolution = x.MaxResolution,
+                Ports = x.Ports,
+                Material = x.Material,
+                Speed = x.Speed,
+                Network = x.Network,
+
+            }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -306,7 +396,7 @@ namespace IComp.Service.Implementations
 
             viewModel.Comment = new ProductComment { ProductId = id };
             viewModel.Product = productDto;
-            
+
             return viewModel;
         }
         public List<BrandGetDto> GetBrands()
@@ -319,15 +409,20 @@ namespace IComp.Service.Implementations
 
         public List<CategoryGetDto> GetCategories()
         {
-            var categories = _unitOfWork.CategoryRepository.GetAll(x => !x.IsDeleted).ToList();
+            var categories = _unitOfWork.CategoryRepository.GetAll(x => !x.IsDeleted, "Products");
 
-            var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories);
+            foreach (var item in categories)
+            {
+                item.Products = item.Products.Where(x => !x.IsDeleted).ToList();
+            }
+
+            var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories.ToList());
             return categoryGetDtos;
         }
 
         public List<HardDiscGetDto> GetHardDiscs()
         {
-            var hardDiscs = _unitOfWork.HardDiscRepository.GetAll(x => !x.IsDeleted).ToList();
+            var hardDiscs = _unitOfWork.HardDiscRepository.GetAll(x => !x.IsDeleted, "HDDCapacity").ToList();
 
             var hardDiscGetDtos = _mapper.Map<List<HardDiscGetDto>>(hardDiscs);
             return hardDiscGetDtos;
@@ -414,15 +509,24 @@ namespace IComp.Service.Implementations
             }
             if (!await _unitOfWork.VideoCardRepository.IsExistAsync(x => x.Id == postDto.VideoCardId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.VideoCardId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.ProcessorRepository.IsExistAsync(x => x.Id == postDto.ProcessorId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.ProcessorId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.MotherBoardRepository.IsExistAsync(x => x.Id == postDto.MotherBoardId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.MotherBoardId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.HardDiscRepository.IsExistAsync(x => x.Id == postDto.HardDiscId && !x.IsDeleted))
             {
@@ -440,55 +544,52 @@ namespace IComp.Service.Implementations
             }
             if (!await _unitOfWork.ColorRepository.IsExistAsync(x => x.Id == postDto.ColorId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.ColorId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.CategoryRepository.IsExistAsync(x => x.Id == postDto.CategoryId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.CategoryId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.BrandRepository.IsExistAsync(x => x.Id == postDto.BrandId && !x.IsDeleted))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.BrandId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.DestinationRepository.IsExistAsync(x => x.Id == postDto.DestinationId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.DestinationId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.ProdTypeRepository.IsExistAsync(x => x.Id == postDto.ProdTypeId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.ProdTypeId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
             if (!await _unitOfWork.SoftWareRepository.IsExistAsync(x => x.Id == postDto.SoftwareId))
             {
-                throw new ItemNotFoundException("Item not found");
+                if (postDto.SoftwareId != 0)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
             }
 
             existProduct.ProcessorId = postDto.ProcessorId;
             existProduct.CategoryId = postDto.CategoryId;
             existProduct.BrandId = postDto.BrandId;
             existProduct.DestinationId = postDto.DestinationId;
-            if (postDto.HardDiscId == 0)
-            {
-                existProduct.HardDiscId = default;
-            }
-            else
-            {
-                existProduct.HardDiscId = postDto.HardDiscId;
 
-            }
-            if (postDto.SSDId == 0)
-            {
-                existProduct.SSDId = default;
-            }
-            else
-            {
-                existProduct.SSDId = postDto.SSDId;
-            }
-            if (postDto.Count == 0)
-            {
-                existProduct.IsDeleted = true;
-                existProduct.IsAvailable = false;
-            }
             existProduct.ProdMemoryId = postDto.ProdMemoryId;
             existProduct.MotherBoardId = postDto.MotherBoardId;
             existProduct.ProdTypeId = postDto.ProdTypeId;
@@ -515,6 +616,68 @@ namespace IComp.Service.Implementations
             existProduct.Weight = postDto.Weight;
             existProduct.WarrantyPeriod = postDto.WarrantyPeriod;
             existProduct.ProductImages = postDto.ProductImages;
+
+            if (postDto.HardDiscId == 0)
+            {
+                existProduct.HardDiscId = default;
+            }
+            else
+            {
+                existProduct.HardDiscId = postDto.HardDiscId;
+            }
+            if (postDto.SSDId == 0)
+            {
+                existProduct.SSDId = default;
+            }
+            else
+            {
+                existProduct.SSDId = postDto.SSDId;
+            }
+            if (postDto.Count == 0)
+            {
+                existProduct.IsDeleted = true;
+                existProduct.IsAvailable = false;
+            }
+            if (postDto.VideoCardId == 0)
+            {
+                existProduct.VideoCardId = default;
+            }
+            if (postDto.MotherBoardId == 0)
+            {
+                existProduct.MotherBoardId = default;
+            }
+            if (postDto.ColorId == 0)
+            {
+                existProduct.ColorId = default;
+            }
+            if (postDto.BrandId == 0)
+            {
+                existProduct.BrandId = default;
+            }
+            if (postDto.DestinationId == 0)
+            {
+                existProduct.DestinationId = default;
+            }
+            if (postDto.ProdTypeId == 0)
+            {
+                existProduct.ProdTypeId = default;
+            }
+            if (postDto.SoftwareId == 0)
+            {
+                existProduct.SoftwareId = default;
+            }
+            if (postDto.ProdMemoryId == 0)
+            {
+                existProduct.ProdMemoryId = default;
+            }
+            if (postDto.ProcessorId == 0)
+            {
+                existProduct.ProcessorId = default;
+            }
+            if (existProduct.IsAvailable == false)
+            {
+                existProduct.IsAvailable = true;
+            }
 
             await _unitOfWork.CommitAsync();
         }
@@ -974,9 +1137,34 @@ namespace IComp.Service.Implementations
         {
             var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
-            var pageSize = 3;
+            var pageSize = 4;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard, IsAvailable = x.IsAvailable }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Count = x.Count,
+                IsDeleted = x.IsDeleted,
+                ProductImages = x.ProductImages,
+                Price = x.SalePrice,
+                Processor = x.Processor,
+                HardDisc = x.HardDisc,
+                Brand = x.Brand,
+                Category = x.Category,
+                Destination = x.Destination,
+                MotherBoard = x.MotherBoard,
+                ProdMemory = x.ProdMemory,
+                VideoCard = x.VideoCard,
+                IsAvailable = x.IsAvailable,
+                GraphCard = x.GraphCard,
+                MotherBoardSound = x.MotherBoardSound,
+                RamLightning = x.RamLightning,
+                MaxResolution = x.MaxResolution,
+                Ports = x.Ports,
+                Material = x.Material,
+                Speed = x.Speed,
+                Network = x.Network
+            }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -992,7 +1180,7 @@ namespace IComp.Service.Implementations
 
         public List<SSD> GetSSDs()
         {
-            var sSDs = _unitOfWork.SSDRepository.GetAll().ToList();
+            var sSDs = _unitOfWork.SSDRepository.GetAll("SSDCapacity").ToList();
 
             return sSDs;
         }

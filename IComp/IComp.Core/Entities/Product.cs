@@ -9,19 +9,21 @@ namespace IComp.Core.Entities
 {
     public class Product : BaseEntity
     {
-        public int ProcessorId { get; set; }
+        public int? ProcessorId { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
-        public int DestinationId { get; set; }
+        public int? DestinationId { get; set; }
         public int? HardDiscId { get; set; }
         public int? SSDId { get; set; }
-        public int ProdMemoryId { get; set; }
-        public int MotherBoardId { get; set; }
-        public int ProdTypeId { get; set; }
-        public int VideoCardId { get; set; }
+        public int? ProdMemoryId { get; set; }
+        public int? MotherBoardId { get; set; }
+        public int? ProdTypeId { get; set; }
+        public int? VideoCardId { get; set; }
         public int ColorId { get; set; }
-        public int SoftwareId { get; set; }
+        public int? SoftwareId { get; set; }
 
+        [Required]
+        [StringLength(maximumLength:500)]
         public string Name { get; set; }
 
         public decimal SalePrice { get; set; }
@@ -40,31 +42,32 @@ namespace IComp.Core.Entities
         public bool HasWifi { get; set; }
 
 
-        [Required]
-        [StringLength(maximumLength:100)]
         public string SoundType { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string InputPorts { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string USB { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string USBTypeC { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string Network { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string PowerSupply { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string Weight { get; set; }
-        [Required]
-        [StringLength(maximumLength: 100)]
         public string WarrantyPeriod { get; set; }
 
+
+        //motherboard
+        public string GraphCard { get; set; }
+        public string MotherBoardSound { get; set; }
+
+        //ram
+        //capacity here
+        public string RamLightning { get; set; }
+
+        //videocard
+        //videocard here
+        public string MaxResolution { get; set; }
+        public string Ports { get; set; }
+        //cooler
+        public string Material { get; set; }
+        public string Speed { get; set; }
+        //Weight here
 
         public Processor Processor { get; set; }
         public VideoCard VideoCard { get; set; }

@@ -58,7 +58,7 @@ namespace IComp.Areas.manage.Controllers
             ViewBag.SSDs = _productService.GetSSDs();
             ViewBag.MotherBoards = _productService.GetMotherBoards();
             ViewBag.VideoCards = _productService.GetVideoCards();
-            ViewBag.Destinations = _productService.GetDestinations();
+            ViewBag.Destinations = _productService.GetDestinations();   
             ViewBag.ProdTypes = _productService.GetProdTypes();
             ViewBag.Colors = _productService.GetColors();
             ViewBag.Softwares = _productService.GetSoftwares();

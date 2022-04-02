@@ -13,6 +13,7 @@ namespace IComp.Core.Entities
         [StringLength(maximumLength:100)]
         public string Name { get; set; }
         public string Image { get; set; }
+        public bool Collectable { get; set; }
         public List<Product> Products { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
