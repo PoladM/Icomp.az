@@ -22,12 +22,14 @@ using IComp.Service.DTOs.VideoCardDTOs;
 using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
 using IComp.Service.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -42,14 +44,15 @@ namespace IComp.Service.Implementations
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IWebHostEnvironment _env;
 
-
-        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager)
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor, UserManager<AppUser> userManager, IWebHostEnvironment env)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
+            _env = env;
         }
 
 
@@ -188,7 +191,10 @@ namespace IComp.Service.Implementations
             {
                 product.IsAvailable = true;
             }
-
+            if (product.Count == 0)
+            {
+                product.Count = 1;
+            }
 
             await _unitOfWork.ProductRepository.AddAsync(product);
             await _unitOfWork.CommitAsync();
@@ -1060,12 +1066,23 @@ namespace IComp.Service.Implementations
                     Count = ordercount,
                 };
 
+                string body = String.Empty;
+                var path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplate.html";
+
+                using (StreamReader streamReader = System.IO.File.OpenText(path))
+                {
+                    body = streamReader.ReadToEnd();
+                }
+
+                body = body.Replace("{fullname}", order.FullName);
+                body = body.Replace("{date}", order.CreatedAt.ToString());
+                body = body.Replace("{status}", order.Status.ToString());
+
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.To.Add(order.Email);
                 mailMessage.From = new MailAddress("poladam@code.edu.az");
                 mailMessage.Subject = "Salam hörmətli müştəri";
-
-                mailMessage.Body = order.TrackId;
+                mailMessage.Body = body;
                 mailMessage.IsBodyHtml = true;
 
                 SmtpClient smtp = new SmtpClient();
@@ -1074,10 +1091,12 @@ namespace IComp.Service.Implementations
                 smtp.Port = 587;
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
-                smtp.Send(mailMessage);
 
                 order.OrderItems.Add(orderItm);
                 order.TotalPrice += orderItm.DiscountedPrice * orderItm.Count;
+                body = body.Replace("{total}", order.TotalPrice.ToString());
+
+                smtp.Send(mailMessage);
 
                 await _unitOfWork.OrderRepository.AddAsync(order);
                 await _unitOfWork.CommitAsync();

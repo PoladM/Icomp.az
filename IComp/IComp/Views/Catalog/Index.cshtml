@@ -256,12 +256,12 @@
 
                             <div class="order-filter">
                                 <select form="filterForm" name="sort" id="orderFilter">
-                                    <option selected=" " value="default">Varsayılan olaraq</option>
-                                    <option value="price_high">Qiyməti artır</option>
-                                    <option value="price_low">Qiyməti azalır</option>
-                                    <option value="name_asc">Başlığa görə(A-Z)</option>
-                                    <option value="name_desc">Başlığa görə(Z-A)</option>
-                                    <option value="">Populyarlıq</option>
+                                    <!option @(ViewBag.Sort == "default" ? "selected" : "") value="default">Varsayılan olaraq</!option>
+                                    <!option @(ViewBag.Sort == "price_high" ? "selected" : "") value="price_high">Qiyməti artır</!option>
+                                    <!option @(ViewBag.Sort == "price_low" ? "selected" : "") value="price_low">Qiyməti azalır</!option>
+                                    <!option @(ViewBag.Sort == "name_asc" ? "selected" : "") value="name_asc">Başlığa görə(A-Z)</!option>
+                                    <!option @(ViewBag.Sort == "name_desc" ? "selected" : "") value="name_desc">Başlığa görə(Z-A)</!option>
+                                    <!option value="">Populyarlıq</!option>
                                 </select>
                             </div>
 

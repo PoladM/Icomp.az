@@ -8,8 +8,7 @@
     <div class="row">
         <div class="col-lg-12 d-flex justify-content-between">
             <h3>Product</h3>
-            <a asp-action="index" asp-controller="memorycapacity" class="btn btn-primary">RAM Capacities</a>
-            <a asp-action="create" class="btn btn-primary">Create</a>
+            <a asp-action="create" class="btn btn-primary">Create PC</a>
         </div>
         <div class="col-lg-12">
             <table class="table">
@@ -61,6 +60,16 @@
                     }
                 </ul>
             </nav>
+        </div>
+        <h3>Create Pc Parts</h3>
+        <div class="col-lg-12 d-flex justify-content-between">
+            <a asp-action="CreateProcessor" asp-controller="ProductParts" class="btn btn-secondary">Create Processor</a>
+            <a asp-action="CreateMotherBoard" asp-controller="ProductParts" class="btn btn-success">Create Motherboard</a>
+            <a asp-action="CreateRam" asp-controller="ProductParts" class="btn btn-warning">Create Ram</a>
+            <a asp-action="CreateVideoCard" asp-controller="ProductParts" class="btn btn-info">Create VideoCard</a>
+            <a asp-action="CreateCooler" asp-controller="ProductParts" class="btn btn-dark">Create Cooler</a>
+            <a asp-action="CreateSSD" asp-controller="ProductParts" class="btn btn-primary">Create SSD</a>
+            <a asp-action="CreateHDD" asp-controller="ProductParts" class="btn btn-primary">Create HDD</a>
         </div>
     </div>
 </div>

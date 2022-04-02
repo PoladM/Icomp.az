@@ -69,7 +69,7 @@ namespace IComp.Controllers
             ViewBag.FilterMaxPrice = maxprice ?? viewModel.MaxPrice;
             ViewBag.FilterMinPrice = minprice ?? viewModel.MinPrice;
 
-           
+            ViewBag.Sort = sort;
 
             return View(viewModel);
         }
