@@ -19,7 +19,7 @@ namespace IComp.Controllers
         private IProductService _productService;
         private IUnitOfWork _unitOfWork;
         private readonly UserManager<AppUser> _userManager;
-        
+
 
         public CatalogController(IProductService productService, UserManager<AppUser> userManager, IUnitOfWork unitOfWork)
         {
@@ -27,11 +27,11 @@ namespace IComp.Controllers
             _userManager = userManager;
             _unitOfWork = unitOfWork;
         }
-        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? softwareid , int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? ssdcapacityid, int? categoryid, int page = 1)
+        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? ssdcapacityid, int? categoryid, int page = 1)
         {
             ProductViewModel viewModel = null;
 
-            var products = _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid,videocardserieid, motherboardid,  prodtypeid, memorycapacityid,  brandid,  destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
+            var products = _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
             ViewBag.processorserieid = processorserieid;
             ViewBag.videocardserieid = videocardserieid;
@@ -51,20 +51,112 @@ namespace IComp.Controllers
             viewModel = new ProductViewModel
             {
                 Paginated = products,
-                processorSerieGetDtos = _productService.GetProcessirSeries(),
-                vCSerieGets = _productService.GetVideoCardSeries(),
-                motherBoardGetDtos = _productService.GetMotherBoards(),
-                prodTypeGetDtos = _productService.GetProdTypes(),
-                mCapacityGetDtos = _productService.GetMemoryCapacities(),
-                brandGetDtos = _productService.GetBrands(),
-                destinationGetDtos = _productService.GetDestinations(),
-                hardDiscCapacityGetDtos = _productService.GetHardDiscCapacities(),
-                SSDCapacities = _productService.GetSSDCapacities(),
-                categoryGetDtos = _productService.GetCategories(),
-                Softwares = _productService.GetSoftwares(),
+                processorSerieGetDtos = new List<Service.DTOs.ProcessorSerieDTOs.ProcessorSerieGetDto>(),
+                vCSerieGets = new List<Service.DTOs.VCSerieDTOs.VCSerieGetDto>(),
+                motherBoardGetDtos = new List<Service.DTOs.MotherBoardDTOs.MotherBoardGetDto>(),
+                prodTypeGetDtos = new List<Service.DTOs.ProdTypeDTOs.ProdTypeGetDto>(),
+                mCapacityGetDtos = new List<Service.DTOs.MemoryCapacityDTOs.MCapacityGetDto>(),
+                brandGetDtos = new List<Service.DTOs.BrandDTOs.BrandGetDto>(),
+                destinationGetDtos = new List<Service.DTOs.DestinationDTOs.DestinationGetDto>(),
+                hardDiscCapacityGetDtos = new List<Service.DTOs.HardDiscCapacityDTOs.HardDiscCapacityGetDto>(),
+                SSDCapacities = new List<SSDCapacity>(),
+                categoryGetDtos = new List<Service.DTOs.CategoryDTOs.CategoryGetDto>(),
+                Softwares = new List<Service.DTOs.SoftwareDTOs.SoftwareGetDto>(),
                 MaxPrice = _productService.FilterByPrice("max"),
                 MinPrice = _productService.FilterByPrice("min")
             };
+
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (!viewModel.destinationGetDtos.Any(x => x.Id == item.DestinationId))
+                {
+                    viewModel.destinationGetDtos.AddRange(_productService.GetDestinations().Where(x => x.Id == item.DestinationId).ToList()); 
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (item.Processor != null)
+                {
+                    if (!viewModel.processorSerieGetDtos.Any(x => x.Id == item.Processor.ProcessorSerieId))
+                    {
+                        viewModel.processorSerieGetDtos.AddRange(_productService.GetProcessirSeries().Where(x => x.Id == item.Processor.ProcessorSerieId).ToList());
+                    }
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (item.VideoCard != null)
+                {
+                    if (!viewModel.vCSerieGets.Any(x => x.Id == item.VideoCard.VideoCardSerieId))
+                    {
+                        viewModel.vCSerieGets.AddRange(_productService.GetVideoCardSeries().Where(x => x.Id == item.VideoCard.VideoCardSerieId).ToList());
+                    }
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (item.MotherBoard != null)
+                {
+                    if (!viewModel.motherBoardGetDtos.Any(x => x.Id == item.MotherBoardId))
+                    {
+                        viewModel.motherBoardGetDtos.AddRange(_productService.GetMotherBoards().Where(x => x.Id == item.MotherBoardId).ToList());
+                    }
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (!viewModel.prodTypeGetDtos.Any(x => x.Id == item.ProdTypeId))
+                {
+                    viewModel.prodTypeGetDtos.AddRange(_productService.GetProdTypes().Where(x => x.Id == item.ProdTypeId).ToList());
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (item.ProdMemory != null)
+                {
+                    if (!viewModel.mCapacityGetDtos.Any(x => x.Id == item.ProdMemory.MemoryCapacityId))
+                    {
+                        viewModel.mCapacityGetDtos.AddRange(_productService.GetMemoryCapacities().Where(x => x.Id == item.ProdMemory.MemoryCapacityId).ToList());
+                    }
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (!viewModel.brandGetDtos.Any(x => x.Id == item.BrandId))
+                {
+                    viewModel.brandGetDtos.AddRange(_productService.GetBrands().Where(x => x.Id == item.BrandId).ToList());
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (item.HardDisc != null)
+                {
+                    if (!viewModel.hardDiscCapacityGetDtos.Any(x => x.Id == item.HardDisc.HDDCapacityId))
+                    {
+                        viewModel.hardDiscCapacityGetDtos.AddRange(_productService.GetHardDiscCapacities().Where(x => x.Id == item.HardDisc.HDDCapacityId).ToList());
+                    }
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (item.SSD != null)
+                {
+                    if (!viewModel.SSDCapacities.Any(x => x.Id == item.SSD.SSDCapacityID))
+                    {
+                        viewModel.SSDCapacities.AddRange(_productService.GetSSDCapacities().Where(x => x.Id == item.SSD.SSDCapacityID).ToList());
+                    }
+                }
+            }
+            foreach (var item in viewModel.Paginated.Items)
+            {
+                if (item.Software != null)
+                {
+                    if (!viewModel.Softwares.Any(x => x.Id == item.SoftwareId))
+                    {
+                        viewModel.Softwares.AddRange(_productService.GetSoftwares().Where(x => x.Id == item.SoftwareId).ToList());
+                    }
+                }
+            }
 
             ViewBag.FilterMaxPrice = maxprice ?? viewModel.MaxPrice;
             ViewBag.FilterMinPrice = minprice ?? viewModel.MinPrice;
@@ -133,7 +225,7 @@ namespace IComp.Controllers
 
         public async Task<IActionResult> AddBasket(int id)
         {
-            if (! await _productService.AnyProd(id))
+            if (!await _productService.AnyProd(id))
             {
                 throw new ItemNotFoundException("item not found");
             }
@@ -185,7 +277,7 @@ namespace IComp.Controllers
             }
             else
             {
-                var basketItem = await _productService.UserBasket(id,appUser);
+                var basketItem = await _productService.UserBasket(id, appUser);
 
 
                 return PartialView("_BasketPartial", await _productService._getBasket(basketItem));
@@ -197,11 +289,11 @@ namespace IComp.Controllers
         {
             return PartialView("_BasketPartial", await _productService.DeleteBasket(id));
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Search(string searchString)
         {
-            return PartialView("_SearchProductPartial",await _productService.SearchProd(searchString));
+            return PartialView("_SearchProductPartial", await _productService.SearchProd(searchString));
         }
     }
 }

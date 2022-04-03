@@ -21,6 +21,7 @@ using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.DTOs.VideoCardDTOs;
 using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
+using IComp.Service.Utils;
 using IComp.Service.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -334,6 +335,17 @@ namespace IComp.Service.Implementations
                 Material = x.Material,
                 Speed = x.Speed,
                 Network = x.Network,
+                ProcessorId = x.ProcessorId,
+                BrandId = x.BrandId,
+                DestinationId = x.DestinationId,
+                HardDiscId = x.HardDiscId,
+                SSDId = x.SSDId,
+                ProdMemoryId = x.ProdMemoryId,
+                MotherBoardId = x.MotherBoardId,
+                ProdTypeId = x.ProdTypeId,
+                VideoCardId = x.VideoCardId,
+                ColorId = x.ColorId,
+                SoftwareId = x.SoftwareId,
 
             }).ToList();
 
@@ -1019,6 +1031,11 @@ namespace IComp.Service.Implementations
             {
                 appUser = _userManager.Users.FirstOrDefault(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
             }
+
+            Guid guid = Guid.NewGuid();
+            order.TrackId = $"{guid}";
+            var path = String.Empty;
+
             if (appUser == null)
             {
                 model = new FastCheckOutViewModel
@@ -1026,9 +1043,7 @@ namespace IComp.Service.Implementations
                     Order = order,
                     Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
                 };
-                Guid guid = Guid.NewGuid();
-
-                order.TrackId = $"{guid}";
+               
 
                 order.AppUserId = null;
                 order.CreatedAt = DateTime.UtcNow.AddHours(4);
@@ -1066,8 +1081,14 @@ namespace IComp.Service.Implementations
                     Count = ordercount,
                 };
 
+               
+
+                order.OrderItems.Add(orderItm);
+                order.TotalPrice += orderItm.DiscountedPrice * orderItm.Count;
+
+
                 string body = String.Empty;
-                var path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplate.html";
+                path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplate.html";
 
                 using (StreamReader streamReader = System.IO.File.OpenText(path))
                 {
@@ -1077,24 +1098,22 @@ namespace IComp.Service.Implementations
                 body = body.Replace("{fullname}", order.FullName);
                 body = body.Replace("{date}", order.CreatedAt.ToString());
                 body = body.Replace("{status}", order.Status.ToString());
+                body = body.Replace("{trackid}", order.TrackId.ToString());
+                body = body.Replace("{total}", order.TotalPrice.ToString());
 
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.To.Add(order.Email);
-                mailMessage.From = new MailAddress("poladam@code.edu.az");
+                mailMessage.From = new MailAddress(Constant.EmailAddress);
                 mailMessage.Subject = "Salam hörmətli müştəri";
                 mailMessage.Body = body;
                 mailMessage.IsBodyHtml = true;
 
                 SmtpClient smtp = new SmtpClient();
 
-                smtp.Credentials = new NetworkCredential("poladam@code.edu.az", "Polad20012022");
+                smtp.Credentials = new NetworkCredential(Constant.EmailAddress, Constant.Password);
                 smtp.Port = 587;
                 smtp.Host = "smtp.gmail.com";
                 smtp.EnableSsl = true;
-
-                order.OrderItems.Add(orderItm);
-                order.TotalPrice += orderItm.DiscountedPrice * orderItm.Count;
-                body = body.Replace("{total}", order.TotalPrice.ToString());
 
                 smtp.Send(mailMessage);
 
@@ -1145,8 +1164,21 @@ namespace IComp.Service.Implementations
                 Count = ordercount
             };
 
+            
+
             order.OrderItems.Add(orderItem);
             order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
+
+            path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplate.html";
+
+            Dictionary<string, string> replaces = new Dictionary<string, string>();
+            replaces.Add("{fullname}", order.FullName.ToString());
+            replaces.Add("{date}", order.CreatedAt.ToString());
+            replaces.Add("{status}", order.Status.ToString());
+            replaces.Add("{trackid}", order.TrackId.ToString());
+            replaces.Add("{total}", order.TotalPrice.ToString());
+
+            await EmailUtil.SendEmailAsync(order.Email, "Salam hörmətli müştəri", path, replaces);
 
             await _unitOfWork.OrderRepository.AddAsync(order);
             await _unitOfWork.CommitAsync();
@@ -1312,6 +1344,8 @@ namespace IComp.Service.Implementations
                     order.OrderItems.Add(orderItem);
                     order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
                 }
+
+              
 
                 await _unitOfWork.OrderRepository.AddAsync(order);
 

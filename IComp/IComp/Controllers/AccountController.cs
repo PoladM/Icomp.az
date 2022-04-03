@@ -4,10 +4,15 @@ using IComp.Service.Exceptions;
 using IComp.Service.Helpers;
 using IComp.Service.Implementations;
 using IComp.Service.Interfaces;
+using IComp.Service.Utils;
 using IComp.Service.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,11 +23,13 @@ namespace IComp.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IProductService _productService;
+        private readonly IWebHostEnvironment _env;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IProductService productService)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IProductService productService, IWebHostEnvironment env)
         {
             _signInManager = signInManager;
             _productService = productService;
+            _env = env;
             _userManager = userManager;
         }
 
@@ -232,6 +239,82 @@ namespace IComp.Controllers
             }
             TempData["Success"] = appUser.FullName + " Your Account successfully updated";
             return View(profileVM);
+        }
+
+        public IActionResult ForgotPassword()
+        {
+            return View(); 
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest();
+            }
+            var dbUser = await _userManager.FindByEmailAsync(email);
+            if (dbUser is null)
+            {
+                throw new ItemNotFoundException("User not found");
+            }
+            var token = await _userManager.GeneratePasswordResetTokenAsync(dbUser);
+
+            string path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "ResetPass.html";
+
+            var link = Url.Action("ResetPassword", "Account", new { dbUser.Id, token }, protocol: HttpContext.Request.Scheme);
+
+            Dictionary<string, string> replaces = new Dictionary<string, string>();
+            replaces.Add("{url}", link.ToString());
+
+            await EmailUtil.SendEmailAsync(email, "Reset Password",path, replaces);
+            return RedirectToAction("index", "home");
+        }
+
+        public async Task<IActionResult> ResetPassword(string id, string token)
+        {
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(token))
+                return BadRequest();
+
+            var dbUser = await _userManager.FindByIdAsync(id);
+            if (dbUser is null)
+                return NotFound();
+
+            ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel
+            {
+                Token = token
+            };
+
+            return View(resetPasswordViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(string id, ResetPasswordViewModel resetPasswordVm)
+        {
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(resetPasswordVm.Token))
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var dbUser = await _userManager.FindByIdAsync(id);
+            if (dbUser is null)
+                return NotFound();
+
+            var result = await _userManager.ResetPasswordAsync(dbUser, resetPasswordVm.Token, resetPasswordVm.NewPassword);
+            if (result.Errors == null)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            }
+
+            return RedirectToAction("index", "home");
         }
     }
 }

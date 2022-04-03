@@ -36,7 +36,7 @@ namespace IComp.Service.Helpers
 
         public async Task<List<Category>> GetCagegories()
         {
-            return await _unitOfWork.CategoryRepository.GetAll().ToListAsync();
+            return await _unitOfWork.CategoryRepository.GetAll(x => !x.IsDeleted).ToListAsync();
         }
         public AppUserLoginPostDto GetLoginPost()
         {

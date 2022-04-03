@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> userManager
+@{
+    AppUser appUser = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        appUser = userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -48,21 +58,21 @@
                     </div>
                     <li class="label">Main</li>
                     <li class=""><a asp-action="index" asp-controller="Dashboard"><i class="ti-home"></i>Home</a></li>
-                            <li class=""><a asp-action="index" asp-controller="Brand">Brand</a></li>
-                            <li class=""><a asp-action="index" asp-controller="Category">Category</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="Color">Color</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="Destination">Destination</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="Harddisc">Harddisc</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="Memory">Memory</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="MotherBoard">MotherBoard</a></li>
-                            <li class="   "><a asp-action="index" asp-controller="Processor">Processor</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="ProdType">ProdType</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="Product">Product</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="Setting">Setting</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="Software">Software</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="SSD">SSD</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="VideoCard">VideoCard</a></li>
-                            <li class=" "><a asp-action="index" asp-controller="slider">Slider</a></li>
+                    <li class=""><a asp-action="index" asp-controller="Brand">Brand</a></li>
+                    <li class=""><a asp-action="index" asp-controller="Category">Category</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Color">Color</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Destination">Destination</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Harddisc">Harddisc</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Memory">Memory</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="MotherBoard">MotherBoard</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Processor">Processor</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="ProdType">ProdType</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Product">Product</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Setting">Setting</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Software">Software</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="SSD">SSD</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="VideoCard">VideoCard</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="slider">Slider</a></li>
 
 
                     <li class="label">Apps</li>
@@ -363,11 +373,18 @@
                             </div>
                         </div>
                         <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <span class="user-avatar">
-                                    John
-                                    <i class="ti-angle-down f-s-10"></i>
-                                </span>
+                            <div class="header-icon">
+                                @if (appUser != null)
+                                {
+                                    <span class="user-avatar">
+                                        @appUser.FullName
+                                    </span>
+                                    <a asp-action="logout" asp-controller="account" asp-area="manage">
+                                        <i class="ti-power-off"></i>
+                                        Logout
+                                    </a>
+                                }
+
                                 <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
                                     <div class="dropdown-content-heading">
                                         <span class="text-left">Upgrade Now</span>
@@ -383,29 +400,7 @@
                                             </li>
 
                                             <li>
-                                                <a href="#">
-                                                    <i class="ti-email"></i>
-                                                    <span>Inbox</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-settings"></i>
-                                                    <span>Setting</span>
-                                                </a>
-                                            </li>
 
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-lock"></i>
-                                                    <span>Lock Screen</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-power-off"></i>
-                                                    <span>Logout</span>
-                                                </a>
                                             </li>
                                         </ul>
                                     </div>

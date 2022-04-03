@@ -7,6 +7,7 @@ using IComp.Service.Helpers;
 using IComp.Service.Implementations;
 using IComp.Service.Interfaces;
 using IComp.Service.Profiles;
+using IComp.Service.Utils;
 using IComp.ServiceExtentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -80,6 +81,9 @@ namespace IComp
             {
                 cnf.AddProfile(new MapProfile());
             });
+
+            Constant.EmailAddress = Configuration["Gmail:MailAddress"];
+            Constant.Password = Configuration["Gmail:Password"];
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -96,7 +100,7 @@ namespace IComp
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.ExceptionHandler();
+            //app.ExceptionHandler();
 
             app.UseRouting();
 

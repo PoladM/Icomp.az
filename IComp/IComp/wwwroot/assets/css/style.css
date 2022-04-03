@@ -265,6 +265,7 @@ div {
             padding-right: 0;
         }
 }
+
 .rwd-table {
     background: #111316;
     color: #fff;
@@ -860,26 +861,35 @@ textarea:focus, input:focus {
         margin: 5px 20px 5px 0;
         line-height: 1.4em;
     }
-    .product-desc{
-        height: 4rem;
-    }
-    .product .product-quantity input {
-        width: 40px;
-    }
 
-    .product .remove-product {
-        border: 0;
-        padding: 4px 8px;
-        background-color: #c66;
-        color: #fff;
-        font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
-        font-size: 12px;
-        border-radius: 3px;
-    }
+.text {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 4.5rem;
+    
+}
 
-        .product .remove-product:hover {
-            background-color: #a44;
-        }
+.product-desc {
+    height: 4.5rem;
+}
+
+.product .product-quantity input {
+    width: 40px;
+}
+
+.product .remove-product {
+    border: 0;
+    padding: 4px 8px;
+    background-color: #c66;
+    color: #fff;
+    font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+    font-size: 12px;
+    border-radius: 3px;
+}
+
+    .product .remove-product:hover {
+        background-color: #a44;
+    }
 
 /* Totals section */
 .totals .totals-item {
