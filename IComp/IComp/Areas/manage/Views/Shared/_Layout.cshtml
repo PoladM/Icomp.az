@@ -58,6 +58,10 @@
                     </div>
                     <li class="label">Main</li>
                     <li class=""><a asp-action="index" asp-controller="Dashboard"><i class="ti-home"></i>Home</a></li>
+                    @if (appUser.UserName == "SuperAdmin")
+                    {
+                        <li class=""><a asp-action="userlist" asp-controller="account"><i class="ti-home"></i>List of Admins</a></li>
+                    }
                     <li class=""><a asp-action="index" asp-controller="Brand">Brand</a></li>
                     <li class=""><a asp-action="index" asp-controller="Category">Category</a></li>
                     <li class=" "><a asp-action="index" asp-controller="Color">Color</a></li>

@@ -253,7 +253,7 @@ namespace IComp.Controllers
             {
                 return BadRequest();
             }
-            var dbUser = await _userManager.FindByEmailAsync(email);
+            var dbUser = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == email && !x.IsAdmin);
             if (dbUser is null)
             {
                 throw new ItemNotFoundException("User not found");

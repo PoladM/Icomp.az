@@ -2,11 +2,14 @@
 
 <ul>
     @foreach (var item in Model)
-   {
-       <li class="search-item">
-        <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
-        <p>@item.Name</p>
-        <p>@item.SalePrice</p>
-    </li>
-   }
+    {
+        <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">
+        <li class="search-item">
+            <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+            <p style="width:300px; color:black;">@item.Name</p>
+            <p style="color:black;">@item.SalePrice</p>
+        </li>
+        </a>
+
+    }
 </ul>

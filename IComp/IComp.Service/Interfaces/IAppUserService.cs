@@ -11,6 +11,8 @@ namespace IComp.Service.Interfaces
     public interface IAppUserService
     {
         Task<bool> RegisterUser(AppUserRegisterPostDto viewModel);
+        Task<List<IdentityRole>> GetRolesAsync();
+        Task DeleteAdmin(string id);
 
     }
 }

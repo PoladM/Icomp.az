@@ -1002,7 +1002,7 @@ namespace IComp.Service.Implementations
             {
                 model = new FastCheckOutViewModel
                 {
-                    Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
+                    Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id && !x.IsDeleted && x.IsAvailable, "ProductImages"),
                     Order = new Order()
                 };
                 return model;
@@ -1440,7 +1440,7 @@ namespace IComp.Service.Implementations
             foreach (var item in cookieItems)
             {
 
-                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId && !x.IsDeleted, "ProductImages");
+                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId && !x.IsDeleted && x.IsAvailable, "ProductImages");
                 if (product != null)
                 {
                     BasketProductViewModel basketProduct = new BasketProductViewModel

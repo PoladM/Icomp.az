@@ -1,6 +1,7 @@
 ﻿@model ProfileViewModel
 @{
     ViewData["Title"] = "Profile";
+    var counter = 0;
 }
 
 <div class="container">
@@ -31,8 +32,9 @@
                 </tr>
                 @foreach (var item in Model.Orders)
                 {
+                    counter++;
                     <tr>
-                        <td data-th="Movie Title"> </td>
+                        <td data-th="Movie Title">#@counter</td>
                         <td data-th="Genre">@item.CreatedAt</td>
                         <td data-th="Year">@item.Status</td>
                         <td data-th="Gross">@item.TotalPrice</td>

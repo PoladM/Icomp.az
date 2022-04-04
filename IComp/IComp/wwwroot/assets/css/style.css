@@ -362,6 +362,10 @@ textarea:focus, input:focus {
     background: #525050;
 }
 
+.header-main {
+    z-index: 999;
+}
+
 .menu-head {
     background-color: #0d7ee4;
 }
@@ -370,7 +374,7 @@ textarea:focus, input:focus {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        height: 5vh;
+        height: 3rem;
     }
 
         .menu-head ul li a {
@@ -865,12 +869,12 @@ textarea:focus, input:focus {
 .text {
     text-overflow: ellipsis;
     overflow: hidden;
-    height: 4.5rem;
+    height: 2.9rem;
     
 }
 
 .product-desc {
-    height: 4.5rem;
+    height: 2.9rem;
 }
 
 .product .product-quantity input {
@@ -1121,7 +1125,6 @@ textarea:focus, input:focus {
 }
 
     .new-products-inner .new-products__item-card {
-        height: 30rem;
         padding: 10px;
     }
 
@@ -1353,7 +1356,7 @@ textarea:focus, input:focus {
         display: inline-block;
         width: 70px;
         height: 70px;
-        border: 1px solid;
+        
     }
 
         .product-image-box li img {
@@ -1362,7 +1365,7 @@ textarea:focus, input:focus {
         }
 
 .product-detail-image {
-    width: 35%;
+    width: 60%;
 }
 
     .product-detail-image img {

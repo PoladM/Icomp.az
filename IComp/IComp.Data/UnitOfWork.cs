@@ -1,6 +1,8 @@
 ﻿using IComp.Core;
+using IComp.Core.Entities;
 using IComp.Core.Repositories;
 using IComp.Data.Repositories;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +13,7 @@ namespace IComp.Data
     public class UnitOfWork : IUnitOfWork
     {
         private readonly StoreDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
         private ProcessorRepository _processorRepository;
         private ProcessorSerieRepository _processorSerieRepository;
         private VideoCardRepository _videoCardRepository;
@@ -37,10 +40,12 @@ namespace IComp.Data
         private SSDRepository _sdRepository;
         private SliderRepository _sliderRepository;
         private CheckedProductsRepository _checkedProductsRepository;
+        private AppUserRepository _appUserRepository;
 
-        public UnitOfWork(StoreDbContext context)
+        public UnitOfWork(StoreDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IProcessorRepository ProcessorRepository => _processorRepository ?? new ProcessorRepository(_context);
@@ -94,6 +99,8 @@ namespace IComp.Data
         public ISliderRepository SliderRepository => _sliderRepository ?? new SliderRepository(_context);
 
         public ICheckedProductsRepository CheckedProductsRepository => _checkedProductsRepository ?? new CheckedProductsRepository(_context);
+
+        public IAppUserRepository AppUserRepository => _appUserRepository ?? new AppUserRepository(_context,_userManager);
 
         public int Commit()
         {

@@ -1,8 +1,19 @@
 ﻿using IComp.Areas.ViewModels;
 using IComp.Core.Entities;
+using IComp.Data;
+using IComp.Service.Exceptions;
+using IComp.Service.Interfaces;
+using IComp.Service.Utils;
+using IComp.Service.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace IComp.Areas.manage.Controllers
@@ -13,54 +24,44 @@ namespace IComp.Areas.manage.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IWebHostEnvironment _env;
+        private readonly IAppUserService _appUserService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment env, StoreDbContext context, IAppUserService appUserService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _env = env;
+            _appUserService = appUserService;
         }
-
-        //public async Task<IActionResult> Create()
-        //{
-        //    AppUser appUser = new AppUser
-        //    {
-        //        FullName = "Super Admin",
-        //        UserName = "SuperAdmin",
-        //        Email = "superadmin@gmail.com"
-        //    };
-
-        //    var result = await _userManager.CreateAsync(appUser, "Superadmin2022");
-
-        //    return Ok();
-        //}
-
-        //public async Task<IActionResult> Role()
-        //{
-        //    var result3 = await _roleManager.CreateAsync(new IdentityRole("Reader"));
-        //    if (result3.Succeeded)
-        //    {
-        //        return Ok();
-        //    }
-        //    return BadRequest();
-        //}
-
-        public IActionResult Create()
+        [Authorize(Roles = "SuperAdmin")]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var roles = await _appUserService.GetRolesAsync();
+            AdminRegisterViewModel VM = new AdminRegisterViewModel
+            {
+                Roles = roles.Select(x => x.Name).ToList(),
+            };
+
+            return View(VM);
         }
         [HttpPost]
         public async Task<IActionResult> Create(AdminRegisterViewModel admin)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                var roles = await _appUserService.GetRolesAsync();
+                admin.Roles = roles.Select(x => x.Name).ToList();
+                return View(admin);
             }
             AppUser appUser = new AppUser
             {
                 FullName = admin.FullName,
                 UserName = admin.UserName,
-                Email = admin.Email
+                Email = admin.Email,
+                IsAdmin = true
+                
             };
 
             var result = await _userManager.CreateAsync(appUser, admin.Password);
@@ -71,17 +72,25 @@ namespace IComp.Areas.manage.Controllers
                 {
                     ModelState.AddModelError("", item.Description);
                 }
-                return View();
+                var roles = await _appUserService.GetRolesAsync();
+                admin.Roles = roles.Select(x => x.Name).ToList();
+                return View(admin);
             }
-            var role = await _userManager.AddToRoleAsync(appUser, admin.AdminRoles.ToString());
 
-            if (!role.Succeeded)
+            foreach (var role in admin.Roles)
             {
-                foreach (var item in result.Errors)
+                var result2 = await _userManager.AddToRoleAsync(appUser, role.ToString());
+
+                if (!result2.Succeeded)
                 {
-                    ModelState.AddModelError("", item.Description);
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                    var roles = await _appUserService.GetRolesAsync();
+                    admin.Roles = roles.Select(x => x.Name).ToList();
+                    return View(admin);
                 }
-                return View();
             }
 
             return RedirectToAction("index", "dashboard");
@@ -120,7 +129,106 @@ namespace IComp.Areas.manage.Controllers
         {
             await _signInManager.SignOutAsync();
 
-            return RedirectToAction("login", "account","manage");
+            return RedirectToAction("login", "account", "manage");
         }
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult UserList()
+        {
+            var users = _userManager.Users.Where(x => x.IsAdmin && x.UserName != "SuperAdmin");
+            return View(users);
+        }
+        [Authorize(Roles = "SuperAdmin")]
+
+        public async Task<IActionResult> Remove(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (id == null)
+                {
+                    return BadRequest();
+                }
+                await _appUserService.DeleteAdmin(id);
+                return RedirectToAction("UserList");
+            }
+            return RedirectToAction("UserList");
+        }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel viewModel)
+        {
+            if (string.IsNullOrEmpty(viewModel.Email))
+            {
+                return BadRequest();
+            }
+            var dbUser = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == viewModel.Email && x.IsAdmin);
+
+            if (dbUser is null)
+            {
+                throw new ItemNotFoundException("User not found");
+            }
+            var token = await _userManager.GeneratePasswordResetTokenAsync(dbUser);
+
+            string path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "ResetPass.html";
+
+            var link = Url.Action("ResetPassword", "Account", new { dbUser.Id, token }, protocol: HttpContext.Request.Scheme);
+
+            Dictionary<string, string> replaces = new Dictionary<string, string>();
+            replaces.Add("{url}", link.ToString());
+
+            await EmailUtil.SendEmailAsync(viewModel.Email, "Reset Password", path, replaces);
+            return RedirectToAction("login", "account", new {area = "manage"});
+        }
+        public async Task<IActionResult> ResetPassword(string id, string token)
+        {
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(token))
+                return BadRequest();
+
+            var dbUser = await _userManager.FindByIdAsync(id);
+            if (dbUser is null)
+                return NotFound();
+
+            ResetPasswordViewModel resetPasswordViewModel = new ResetPasswordViewModel
+            {
+                Token = token
+            };
+
+            return View(resetPasswordViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(string id, ResetPasswordViewModel resetPasswordVm)
+        {
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(resetPasswordVm.Token))
+                return BadRequest();
+
+            if (!ModelState.IsValid)
+            {
+                return View(resetPasswordVm);
+            }
+
+            var dbUser = await _userManager.FindByIdAsync(id);
+            if (dbUser is null)
+                return NotFound();
+
+            var result = await _userManager.ResetPasswordAsync(dbUser, resetPasswordVm.Token, resetPasswordVm.NewPassword);
+            if (result.Errors == null)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            }
+
+            return RedirectToAction("login", "account", new { area = "manage" });
+
+        }
+
     }
 }

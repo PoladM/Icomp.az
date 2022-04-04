@@ -34,6 +34,7 @@ namespace IComp.Core
         ISSDRepository SSDRepository { get; }
         ISliderRepository SliderRepository { get; }
         ICheckedProductsRepository CheckedProductsRepository { get; }
+        IAppUserRepository AppUserRepository { get; }
 
         int Commit();
         Task<int> CommitAsync();

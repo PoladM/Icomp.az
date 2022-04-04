@@ -249,7 +249,10 @@ namespace IComp.Controllers
 
                 BasketCookieItemViewModel cookieItem = cookieItems.FirstOrDefault(x => x.ProductId == id);
                 var product = await _productService.GetByIdAsync(id);
-
+                if (product.IsAvailable == false || product.IsDeleted)
+                {
+                    throw new ItemNotFoundException("This product isn't available");
+                }
                 if (product == null)
                 {
                     throw new ItemNotFoundException("Item not found");

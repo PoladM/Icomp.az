@@ -1,6 +1,7 @@
 ﻿using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.Helpers;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -17,10 +18,12 @@ namespace IComp.Areas.manage.Controllers
             _brandService = brandService;
             _env = env;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
         public IActionResult Index(int page = 1)
         {
             return View(_brandService.GetAllProd(page));
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public IActionResult Create()
         {
             return View();
@@ -52,6 +55,7 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public async Task<IActionResult> Edit(int id)
         {
             BrandPostDto postDTO = await _brandService.GetByIdAsync(id);
@@ -94,11 +98,14 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public async Task<IActionResult> Delete(int id)
         {
             await _brandService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public async Task<IActionResult> Restore(int id)
         {
             await _brandService.RestoreAsync(id);

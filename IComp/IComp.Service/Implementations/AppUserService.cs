@@ -1,8 +1,10 @@
-﻿using IComp.Core.Entities;
+﻿using IComp.Core;
+using IComp.Core.Entities;
 using IComp.Service.DTOs.AppUserDTOs;
 using IComp.Service.Helpers;
 using IComp.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
@@ -15,10 +17,24 @@ namespace IComp.Service.Implementations
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        public AppUserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public AppUserService(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IUnitOfWork unitOfWork)
         {
             _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
+        }
+
+        public async Task DeleteAdmin(string id)
+        {
+            await _unitOfWork.AppUserRepository.DeleteAdmin(id);
+        }
+
+        public async Task<List<IdentityRole>> GetRolesAsync()
+        {
+            return await _unitOfWork.AppUserRepository.GetRolesAsync();
+            
         }
 
         public async Task<bool> RegisterUser(AppUserRegisterPostDto viewModel)

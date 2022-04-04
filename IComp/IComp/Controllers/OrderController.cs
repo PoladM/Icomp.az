@@ -40,7 +40,12 @@ namespace IComp.Controllers
         {
             var viewModel = await _productService.FastOrder(id);
 
-            return PartialView("_FastOrderPartial",viewModel);
+            if (viewModel.Product is null)
+            {
+                throw new ItemNotFoundException("This product isn't available");
+            }
+
+            return PartialView("_FastOrderPartial", viewModel);
         }
 
         [HttpPost]

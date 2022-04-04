@@ -1,6 +1,6 @@
 $(function () {
     $(document).scroll(function () {
-        var $nav = $(".main-navbar");
+        var $nav = $(".header-main");
         $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
         if ($(this).scrollTop() > $nav.height()) {
             $(".breadcrumb").addClass("expand");
@@ -11,10 +11,7 @@ $(function () {
 });
 
 $(document).ready(function () {
-    //function timeout(ms) {
-    //    return new Promise(resolve => setTimeout(resolve, ms));
-    //}
-
+    
     //toaster
     let toasterMsg = $("#toaster").val();
 
@@ -324,12 +321,19 @@ $(document).ready(function () {
                 if (response.ok) {
                     return response.text();
                 }
-                alert("Fail")
-                return;
+                else {
+                    throw response
+                }
             })
             .then(data => {
                 $("#fastOrderModal .modal-body-inner").html(data);
                 $("#fastOrderModal").modal('show');
+            })
+            .catch(err => {
+                err.json().then(json => {
+                    $("#fastOrderModal .modal-body-inner").html(json.message);
+                    $("#fastOrderModal").modal('show');
+                })
             })
     })
 
