@@ -52,6 +52,7 @@ namespace IComp.Areas.manage.Controllers
             if (!ModelState.IsValid)
             {
                 var roles = await _appUserService.GetRolesAsync();
+                roles = roles.Where(x => x.Name != "SuperAdmin" && x.Name != "Member").ToList();
                 admin.Roles = roles.Select(x => x.Name).ToList();
                 return View(admin);
             }
@@ -61,7 +62,6 @@ namespace IComp.Areas.manage.Controllers
                 UserName = admin.UserName,
                 Email = admin.Email,
                 IsAdmin = true
-                
             };
 
             var result = await _userManager.CreateAsync(appUser, admin.Password);
@@ -151,6 +151,31 @@ namespace IComp.Areas.manage.Controllers
                 return RedirectToAction("UserList");
             }
             return RedirectToAction("UserList");
+        }
+        public async Task<IActionResult> Edit()
+        {
+            var roles = await _appUserService.GetRolesAsync();
+            AdminRegisterViewModel viewModel = new AdminRegisterViewModel
+            {
+                Roles = roles.Select(x => x.Name).ToList(),
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(AdminRegisterViewModel viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                var roles = await _appUserService.GetRolesAsync();
+                AdminRegisterViewModel VM = new AdminRegisterViewModel
+                {
+                    Roles = roles.Select(x => x.Name).ToList(),
+                };
+                return View(VM);
+            }
+
+            return RedirectToAction("index", "dashboard");
         }
 
         public IActionResult ForgotPassword()

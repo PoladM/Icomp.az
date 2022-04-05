@@ -73,7 +73,7 @@
         var min_price = $('#min_price').val();
         var max_price = $('#max_price').val();
   
-        $("#searchResults").text("Here List of products will be shown which are cost between " + min_price  +" "+ "and" + " "+ max_price + ".");
+        
       });
   
     

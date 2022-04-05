@@ -19,12 +19,15 @@ namespace IComp.Service.DTOs.ProductDTOs
         public int? VideoCardId { get; set; }
         public int ColorId { get; set; }
         public int? SoftwareId { get; set; }
+        public DateTime CreatedAt { get; set; }
+
 
         public int Id { get; set; }
         public string Name { get; set; }
         public int Count { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsAvailable { get; set; }
+        public bool IsNew { get; set; }
         public string Image { get; set; }
         public decimal Price { get; set; }
         public string Network { get; set; }

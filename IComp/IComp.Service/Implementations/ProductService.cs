@@ -303,7 +303,7 @@ namespace IComp.Service.Implementations
             }
 
             if (minprice != null && maxprice != null)
-                query = query.Where(x => x.SalePrice >= minprice && x.SalePrice <= maxprice);
+                query = query.Where(x => x.DiscountPercent > 0 ? x.SalePrice * (1 - x.DiscountPercent / 100) >= minprice && x.SalePrice * (1 - x.DiscountPercent / 100) <= maxprice : x.SalePrice >= minprice && x.SalePrice <= maxprice);
 
             var pageSize = 4;
 
@@ -1190,7 +1190,7 @@ namespace IComp.Service.Implementations
 
         public PaginatedListDto<ProductListItemDto> GetAllProdWithFilter(int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsNew, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software").OrderByDescending(x => x.CreatedAt);
 
             var pageSize = 4;
 
@@ -1200,6 +1200,8 @@ namespace IComp.Service.Implementations
                 Name = x.Name,
                 Count = x.Count,
                 IsDeleted = x.IsDeleted,
+                IsNew = x.IsNew,
+                CreatedAt = x.CreatedAt,
                 ProductImages = x.ProductImages,
                 Price = x.SalePrice,
                 Processor = x.Processor,
@@ -1535,6 +1537,26 @@ namespace IComp.Service.Implementations
                 var items = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).ToList();
                 return await _getBasket(items);
             }
+        }
+
+        public List<ProductListItemDto> ProductsForFilter(int? categoryid, int? brandid)
+        {
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+
+            if (categoryid != null)
+            {
+                query = _unitOfWork.ProductRepository.Filter(query, x => x.CategoryId == categoryid);
+            }
+            if (brandid != null)
+            {
+                query = _unitOfWork.ProductRepository.Filter(query, x => x.BrandId == brandid);
+            }
+
+            var products = query.ToList();
+
+            var productDto = _mapper.Map<List<ProductListItemDto>>(products);
+
+            return productDto;
         }
     }
 }

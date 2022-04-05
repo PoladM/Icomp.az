@@ -33,6 +33,8 @@ namespace IComp.Controllers
 
             var products = _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
+            var filterProd = _productService.ProductsForFilter(categoryid, brandid);
+
             ViewBag.processorserieid = processorserieid;
             ViewBag.videocardserieid = videocardserieid;
             ViewBag.motherboardid = motherboardid;
@@ -66,14 +68,16 @@ namespace IComp.Controllers
                 MinPrice = _productService.FilterByPrice("min")
             };
 
-            foreach (var item in viewModel.Paginated.Items)
+            
+
+            foreach (var item in filterProd)
             {
                 if (!viewModel.destinationGetDtos.Any(x => x.Id == item.DestinationId))
                 {
                     viewModel.destinationGetDtos.AddRange(_productService.GetDestinations().Where(x => x.Id == item.DestinationId).ToList()); 
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (item.Processor != null)
                 {
@@ -83,7 +87,7 @@ namespace IComp.Controllers
                     }
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (item.VideoCard != null)
                 {
@@ -93,7 +97,7 @@ namespace IComp.Controllers
                     }
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (item.MotherBoard != null)
                 {
@@ -103,14 +107,14 @@ namespace IComp.Controllers
                     }
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (!viewModel.prodTypeGetDtos.Any(x => x.Id == item.ProdTypeId))
                 {
                     viewModel.prodTypeGetDtos.AddRange(_productService.GetProdTypes().Where(x => x.Id == item.ProdTypeId).ToList());
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (item.ProdMemory != null)
                 {
@@ -120,14 +124,14 @@ namespace IComp.Controllers
                     }
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (!viewModel.brandGetDtos.Any(x => x.Id == item.BrandId))
                 {
                     viewModel.brandGetDtos.AddRange(_productService.GetBrands().Where(x => x.Id == item.BrandId).ToList());
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (item.HardDisc != null)
                 {
@@ -137,7 +141,7 @@ namespace IComp.Controllers
                     }
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (item.SSD != null)
                 {
@@ -147,7 +151,7 @@ namespace IComp.Controllers
                     }
                 }
             }
-            foreach (var item in viewModel.Paginated.Items)
+            foreach (var item in filterProd)
             {
                 if (item.Software != null)
                 {

@@ -80,6 +80,7 @@ namespace IComp.Service.Profiles
             CreateMap<ProdCoolerDto, ProductPostDto>();
             CreateMap<ProdSSDDto, ProductPostDto>();
             CreateMap<ProdHddDto, ProductPostDto>();
+            CreateMap<Product, ProductListItemDto>();
         }
     }
 }

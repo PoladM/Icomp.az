@@ -31,18 +31,13 @@
                                                 </div>
 
                                                 <div style="margin:30px auto">
-                                                    <input type="number" min=@Model.MinPrice max="@Model.MaxPrice"
-                                                           oninput="validity.valid||(value='@Model.MinPrice');" name="minPrice" form="filterForm" id="min_price"
+                                                    <input type="number" min=@((int)Model.MinPrice) max="@((int)Model.MaxPrice)"
+                                                           oninput="validity.valid||(value='@((int)Model.MinPrice)');" name="minPrice" form="filterForm" id="min_price"
                                                            class="price-range-field" />
-                                                    <input type="number" min=@Model.MinPrice max="@Model.MaxPrice"
-                                                           oninput="validity.valid||(value='@Model.MaxPrice');" name="maxPrice" form="filterForm" id="max_price"
+                                                    <input type="number" min=@((int)Model.MinPrice) max="@((int)Model.MaxPrice)"
+                                                           oninput="validity.valid||(value='@((int)Model.MaxPrice)');" name="maxPrice" form="filterForm" id="max_price"
                                                            class="price-range-field" />
                                                 </div>
-
-                                                <button class="price-range-search"
-                                                        id="price-range-submit">
-                                                    Search
-                                                </button>
 
                                                 <div id="searchResults" class="search-results-block"></div>
 
@@ -227,12 +222,17 @@
                                     </div>
                                 </div>   
                                }
-                                <div class="filter-item">
+                                <div class="filter-item" style="display:flex; justify-content:space-between;" >
                                     <form id="filterForm" asp-action="Index" asp-controller="Catalog" method="get">
                                         <input type="hidden" name="page" value="@Model.Paginated.PageIndex" />
                                         <input type="hidden" name="categoryid" value="@ViewBag.categoryid" />
-
-                                        <button type="submit" class="btn btn-primary filter-btn">filter</button>
+                                        <button type="submit" class="btn btn-primary filter-btn">Filter</button>
+                                    </form>
+                                    <form id="cleanForm" asp-action="Index" asp-controller="Catalog" method="get">
+                                        <input type="hidden" name="page" value="@Model.Paginated.PageIndex" />
+                                        <input type="hidden" name="categoryid" value="@ViewBag.categoryid" />
+                                        <input type="hidden" name="brandid" value="@ViewBag.brandid" />
+                                        <button type="submit" class="btn btn-primary filter-btn">Təmizləmək</button>
                                     </form>
                                 </div>
                                 <!-- sidebar area end -->
@@ -418,9 +418,9 @@
         $("#slider-range").slider({
             range: true,
             orientation: "horizontal",
-            min: @((double)Model.MinPrice),
-            max: @((double)Model.MaxPrice),
-            values: [@((double)ViewBag.FilterMinPrice), @((double)ViewBag.FilterMaxPrice)],
+            min: @((int)Model.MinPrice),
+            max: @((int)Model.MaxPrice),
+            values: [@((int)ViewBag.FilterMinPrice), @((int)ViewBag.FilterMaxPrice)],
             //   step: 100,
 
             slide: function (event, ui) {
