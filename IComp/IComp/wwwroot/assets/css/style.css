@@ -858,6 +858,7 @@ textarea:focus, input:focus {
 
     .product .product-details .product-title {
         margin-right: 20px;
+
         font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
     }
 
@@ -1145,6 +1146,8 @@ textarea:focus, input:focus {
 
             .new-products-inner .new-products__item-card .item__card-header .product-title {
                 margin-top: 15px;
+                height: 45px;
+                overflow: hidden;
             }
 
                 .new-products-inner .new-products__item-card .item__card-header .product-title a {

@@ -11,7 +11,7 @@ $(function () {
 });
 
 $(document).ready(function () {
-    
+
     //toaster
     let toasterMsg = $("#toaster").val();
 
@@ -122,10 +122,10 @@ $(document).ready(function () {
                 $("#myModal .modal-basket-inner").html(data)
                 prodCount = $("#basket-count").val()
                 $(".basket-counter-value").html(prodCount);
-                $("#myModal").modal('show');
             })
-
     })
+
+    
 
     //update basket for quantity
     $(document).on("click", ".change-val", function (e) {

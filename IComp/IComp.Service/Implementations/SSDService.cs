@@ -55,7 +55,7 @@ namespace IComp.Service.Implementations
 
         public PaginatedListDto<SSD> GetAllProd(int page)
         {
-            var query = _unitOfWork.SSDRepository.GetAll();
+            var query = _unitOfWork.SSDRepository.GetAll("Products");
             int pageSize = 3;
 
             List<SSD> items = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();

@@ -518,7 +518,7 @@
                                                             <img src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
                                                         </div>
                                                         <div class="product-title">
-                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Product.Name</a>
+                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.ProductId">@item.Product.Name</a>
                                                         </div>
                                                     </div>
                                                     <div class="item__card-body">
@@ -532,8 +532,8 @@
                                                             <span>@item.Product.SalePrice <sup>azn</sup></span>
                                                         </div>
                                                         <div class="product-checkout">
-                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.Id" class="btn btn-primary add-to-basket">Səbətə</a>
-                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item.Id" class="btn btn-danger fast-order">Tez Sifariş</a>
+                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.ProductId" class="btn btn-primary add-to-basket">Səbətə</a>
+                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item.ProductId" class="btn btn-danger fast-order">Tez Sifariş</a>
                                                         </div>
                                                     </div>
                                                 </div>

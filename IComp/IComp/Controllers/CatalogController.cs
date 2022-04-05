@@ -166,63 +166,6 @@ namespace IComp.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> GetCookie()
-        {
-            CommonBasketViewModel basketItems = new CommonBasketViewModel
-            {
-                BasketItems = new List<BasketProductViewModel>(),
-                TotalPrice = 0
-            };
-
-            List<BasketCookieItemViewModel> cookieItems = new List<BasketCookieItemViewModel>();
-
-            AppUser appUser = null;
-
-            if (HttpContext.User.Identity.IsAuthenticated)
-            {
-                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == HttpContext.User.Identity.Name && !x.IsAdmin);
-            }
-
-            if (appUser == null)
-            {
-                string cookieItemsStr = HttpContext.Request.Cookies["basket"];
-
-                if (!string.IsNullOrWhiteSpace(cookieItemsStr))
-                {
-                    cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookieItemsStr);
-
-                }
-            }
-            else
-            {
-                cookieItems = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).Select(b => new BasketCookieItemViewModel { ProductId = b.ProductId, Count = b.Count }).ToList();
-            }
-
-            return Ok(cookieItems);
-
-            foreach (var item in cookieItems)
-            {
-                var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
-
-                if (product == null)
-                {
-                    throw new Exception("lol");
-                }
-
-                BasketProductViewModel basketProduct = new BasketProductViewModel
-                {
-                    Product = product,
-                    Count = item.Count
-                };
-
-                basketItems.BasketItems.Add(basketProduct);
-                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
-                basketItems.TotalPrice += totalPrice * item.Count;
-            }
-
-            return Ok(basketItems);
-        }
-
         public async Task<IActionResult> AddBasket(int id)
         {
             if (!await _productService.AnyProd(id))
@@ -291,6 +234,10 @@ namespace IComp.Controllers
         public async Task<IActionResult> DeleteBasket(int id)
         {
             return PartialView("_BasketPartial", await _productService.DeleteBasket(id));
+        }
+        public async Task<IActionResult> DeleteProdFromBasket(int id)
+        {
+            return PartialView("_BasketPartial", await _productService.DeleteProdFromBasket(id));
         }
 
         [HttpPost]

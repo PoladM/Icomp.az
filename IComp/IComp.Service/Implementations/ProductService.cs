@@ -59,7 +59,7 @@ namespace IComp.Service.Implementations
 
         public async Task<ProductGetDTO> CreateAsync(ProductPostDto postDTO)
         {
-            if (await _unitOfWork.MemoryRepository.IsExistAsync(x => x.ModelName.ToLower().Trim() == postDTO.Name.ToLower().Trim() && !x.IsDeleted))
+            if (await _unitOfWork.ProductRepository.IsExistAsync(x => x.Name.ToLower().Trim() == postDTO.Name.ToLower().Trim() && !x.IsDeleted))
             {
                 throw new RecordDuplicatedException("ModelName already exist with name " + postDTO.Name);
             }
@@ -838,6 +838,10 @@ namespace IComp.Service.Implementations
 
             var product = await GetByIdAsync(id);
 
+            if (product.IsAvailable == false || product.IsDeleted)
+            {
+                throw new ItemNotFoundException("This product isn't available");
+            }
             if (product == null)
             {
                 throw new ItemNotFoundException("Item not found");
@@ -1468,6 +1472,69 @@ namespace IComp.Service.Implementations
         {
             var order = await _unitOfWork.OrderRepository.GetAsync(x => x.TrackId == id, "OrderItems");
             return order;
+        }
+
+        public async Task<CommonBasketViewModel> DeleteProdFromBasket(int id)
+        {
+            if (!await AnyProd(id))
+            {
+                throw new ItemNotFoundException("Item not found");
+            }
+
+            AppUser appUser = null;
+
+            if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (appUser == null)
+            {
+                string cookie = _httpContextAccessor.HttpContext.Request.Cookies["basket"];
+                List<BasketCookieItemViewModel> cookieItems = new List<BasketCookieItemViewModel>();
+
+                if (!string.IsNullOrWhiteSpace(cookie))
+                {
+                    cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookie);
+                }
+
+                BasketCookieItemViewModel cookieItem = cookieItems.FirstOrDefault(x => x.ProductId == id);
+                var product = await GetByIdAsync(id);
+
+                if (cookieItem.Count >= 1)
+                {
+                    cookieItems.Remove(cookieItem);
+                }
+
+                cookie = JsonConvert.SerializeObject(cookieItems);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("basket", cookie);
+
+                return await _getBasket(cookieItems);
+            }
+            else
+            {
+                BasketItem item = await _unitOfWork.BasketItemRepository.GetAsync(x => x.AppUserId == appUser.Id && x.ProductId == id);
+
+                var product = await GetByIdAsync(id);
+
+                if (product == null)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+                if (product.Count < item?.Count)
+                {
+                    throw new Exception();
+                }
+
+                if (item.Count >= 1)
+                {
+                    _unitOfWork.BasketItemRepository.Remove(item);
+                }
+                await _unitOfWork.CommitAsync();
+
+                var items = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).ToList();
+                return await _getBasket(items);
+            }
         }
     }
 }
