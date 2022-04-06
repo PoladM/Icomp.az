@@ -11,6 +11,8 @@ namespace IComp.Service.DTOs.BrandDTOs
         public string Name { get; set; }    
         public string Image { get; set; }
         public int ProductsCount { get; set; }
+        public bool IsPopular { get; set; }
+
         public bool IsDeleted { get; set; }
     }
 }

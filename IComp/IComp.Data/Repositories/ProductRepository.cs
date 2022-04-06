@@ -19,7 +19,9 @@ namespace IComp.Data.Repositories
 
         public IQueryable<Product> Filter(IQueryable<Product> query, Expression<Func<Product, bool>> exp)
         {
-            return query.Where(exp);
+            query = query.Where(exp);
+
+            return query;
         }
 
         public IQueryable<Product> FilterByNameAsc(IQueryable<Product> query, string AscOrDesc)

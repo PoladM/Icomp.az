@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,6 +35,10 @@ namespace IComp.Controllers
             var products = _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
             var filterProd = _productService.ProductsForFilter(categoryid, brandid);
+
+            NumberFormatInfo nfi = new NumberFormatInfo();
+
+            nfi.NumberDecimalSeparator = ".";
 
             ViewBag.processorserieid = processorserieid;
             ViewBag.videocardserieid = videocardserieid;
@@ -222,14 +227,14 @@ namespace IComp.Controllers
                 cookie = JsonConvert.SerializeObject(cookieItems);
                 HttpContext.Response.Cookies.Append("basket", cookie);
 
-
+                TempData["Success"] = "Product added to basket";
                 return PartialView("_BasketPartial", await _productService._getBasket(cookieItems));
             }
             else
             {
                 var basketItem = await _productService.UserBasket(id, appUser);
 
-
+                TempData["Success"] = "Product added to basket";
                 return PartialView("_BasketPartial", await _productService._getBasket(basketItem));
             }
         }

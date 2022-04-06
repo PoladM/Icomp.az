@@ -101,6 +101,7 @@ namespace IComp.Service.Implementations
             }
 
             existProd.Name = postDTO.Name;
+            existProd.IsPopular = postDTO.IsPopular;
             
             await _unitOfWork.CommitAsync();
         }

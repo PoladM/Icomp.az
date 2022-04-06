@@ -46,6 +46,11 @@
 </head>
 
 <body>
+    @* Toaster Success Message *@
+    @if (TempData["Success"] != null)
+    {
+        <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
+    }
     <header>
         <link href="~/assets/js/plugin/simple-lightbox.min.css" rel="stylesheet" />
 
@@ -245,10 +250,6 @@
     @RenderBody()
 
     <footer>
-    <input id="toaster" type="hidden" value="@(TempData["Success"])" />
-    <input id="toaster-dang" type="hidden" value="@(TempData["Success"])" />
-
-
          <div class="modal fade" id="fastOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -420,6 +421,21 @@
     <script src="~/assets/js/range.js"></script>
     <script src="~/assets/js/toast/jquery.toast.min.js"></script>
     @RenderSection("Scripts",required:false)
+
+    <script>
+         $.toast({
+            text: toasterMsg,
+            hideAfter: 5000,
+            position: 'top-left',
+            bgColor: '#42ba96',
+            textColor: '#FFFFFF',
+        })
+        $(document).ready(function () {
+        if ($("#success-toaster").length) {
+            toastr["success"]($("#success-toaster").val());
+        }
+    });
+    </script>
 </body>
 
 </html>

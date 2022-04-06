@@ -1,6 +1,15 @@
 ﻿@model HomeViewModel
 @{
     ViewData["Title"] = "Index";
+    var temp = -1;
+    if (Model.Paginated.PageIndex == 1)
+    {
+        temp = 0;
+    }
+    if (temp == Model.Paginated.TotalPage)
+    {
+        temp = -2;
+    }
 }
 
 
@@ -200,9 +209,12 @@
                                             <a class="Previous" asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
                                         </li>
                                     }
-                                    @for (var i = 1; i <= Model.Paginated.TotalPage; i++)
+                                    @for (var i = 1; i <= 3; i++, temp++)
                                     {
-                                        <li class="@(Model.Paginated.PageIndex == i ? "active" : "" )"><a asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort">@i</a></li>
+                                        if ((Model.Paginated.PageIndex + temp) != 0 && (Model.Paginated.PageIndex + temp) != -1)
+                                        {
+                                            <li class="@(Model.Paginated.PageIndex + temp == Model.Paginated.PageIndex ? "active" : "" )"><a asp-action="index" asp-route-minprice="@ViewBag.FilterMinPrice" asp-route-maxprice="@ViewBag.FilterMaxPrice" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-sort="@ViewBag.sort" style="display:@((Model.Paginated.PageIndex+temp)>Model.Paginated.TotalPage?"none":"block")">@(Model.Paginated.PageIndex+temp)</a></li>
+                                        }
                                     }
                                     @if (Model.Paginated.HasNext)
                                     {

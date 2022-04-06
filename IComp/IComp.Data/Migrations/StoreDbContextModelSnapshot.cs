@@ -67,6 +67,9 @@ namespace IComp.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
+                    b.Property<bool>("IsPopular")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -694,9 +697,6 @@ namespace IComp.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Weight")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("procSpeed")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

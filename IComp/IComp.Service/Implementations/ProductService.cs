@@ -30,6 +30,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -304,6 +305,12 @@ namespace IComp.Service.Implementations
 
             if (minprice != null && maxprice != null)
                 query = query.Where(x => x.DiscountPercent > 0 ? x.SalePrice * (1 - x.DiscountPercent / 100) >= minprice && x.SalePrice * (1 - x.DiscountPercent / 100) <= maxprice : x.SalePrice >= minprice && x.SalePrice <= maxprice);
+
+            NumberFormatInfo nfi = new NumberFormatInfo();
+
+            nfi.NumberDecimalSeparator = ".";
+
+            
 
             var pageSize = 4;
 

@@ -1,4 +1,5 @@
 ﻿using IComp.Areas.ViewModels;
+using IComp.Core;
 using IComp.Core.Entities;
 using IComp.Data;
 using IComp.Service.Exceptions;
@@ -26,14 +27,16 @@ namespace IComp.Areas.manage.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IWebHostEnvironment _env;
         private readonly IAppUserService _appUserService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment env, StoreDbContext context, IAppUserService appUserService)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment env, StoreDbContext context, IAppUserService appUserService, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
             _env = env;
             _appUserService = appUserService;
+            _unitOfWork = unitOfWork;
         }
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
@@ -152,29 +155,45 @@ namespace IComp.Areas.manage.Controllers
             }
             return RedirectToAction("UserList");
         }
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(string id)
         {
-            var roles = await _appUserService.GetRolesAsync();
-            AdminRegisterViewModel viewModel = new AdminRegisterViewModel
+            AppUser appUser = await _userManager.FindByIdAsync(id);
+
+            if (appUser == null) return NotFound();
+
+            var currentRoles = await _userManager.GetRolesAsync(appUser);
+            
+            var Roles = await _appUserService.GetRolesAsync();
+            List<string> RoleStr = Roles.Select(x => x.Name).ToList();
+            AdminEditViewModel viewModel = new AdminEditViewModel
             {
-                Roles = roles.Select(x => x.Name).ToList(),
+                CurrentRoles = currentRoles.ToList(),
+                Roles = RoleStr.Where(x => x != "SuperAdmin" && x != "Member").ToList(),
             };
 
             return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(AdminRegisterViewModel viewModel)
+        public async Task<IActionResult> Edit(string id, AdminEditViewModel viewModel)
         {
+            AppUser appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (appUser is null)
+            {
+                return NotFound();
+            }
+            var roles = await _userManager.GetRolesAsync(appUser);
+
             if (!ModelState.IsValid)
             {
-                var roles = await _appUserService.GetRolesAsync();
-                AdminRegisterViewModel VM = new AdminRegisterViewModel
+                AdminEditViewModel VM = new AdminEditViewModel
                 {
-                    Roles = roles.Select(x => x.Name).ToList(),
+                    CurrentRoles = roles.ToList(),
                 };
                 return View(VM);
             }
-
+            await _userManager.RemoveFromRolesAsync(appUser, roles);
+            await _userManager.AddToRolesAsync(appUser, viewModel.Roles);
+            await _unitOfWork.CommitAsync();
             return RedirectToAction("index", "dashboard");
         }
 

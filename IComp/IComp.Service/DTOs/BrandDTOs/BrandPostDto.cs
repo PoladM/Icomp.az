@@ -9,6 +9,7 @@ namespace IComp.Service.DTOs.BrandDTOs
     {
         public string Name { get; set; }
         public string Image { get; set; }
+        public bool IsPopular { get; set; }
         public IFormFile ImageFile { get; set; }
     }
 }
