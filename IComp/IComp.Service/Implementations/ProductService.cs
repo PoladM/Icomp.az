@@ -228,7 +228,25 @@ namespace IComp.Service.Implementations
 
             var pageSize = 3;
 
-            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto { Id = x.Id, Name = x.Name, Count = x.Count, IsDeleted = x.IsDeleted, ProductImages = x.ProductImages, Price = x.SalePrice, Processor = x.Processor, HardDisc = x.HardDisc, Brand = x.Brand, Category = x.Category, Destination = x.Destination, MotherBoard = x.MotherBoard, ProdMemory = x.ProdMemory, VideoCard = x.VideoCard }).ToList();
+            List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Count = x.Count,
+                IsDeleted = x.IsDeleted,
+                ProductImages = x.ProductImages,
+                SalePrice = x.SalePrice,
+                CostPrice = x.CostPrice,
+                DiscountPercent = x.DiscountPercent,
+                Processor = x.Processor,
+                HardDisc = x.HardDisc,
+                Brand = x.Brand,
+                Category = x.Category,
+                Destination = x.Destination,
+                MotherBoard = x.MotherBoard,
+                ProdMemory = x.ProdMemory,
+                VideoCard = x.VideoCard
+            }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
 
@@ -310,7 +328,7 @@ namespace IComp.Service.Implementations
 
             nfi.NumberDecimalSeparator = ".";
 
-            
+
 
             var pageSize = 4;
 
@@ -321,7 +339,9 @@ namespace IComp.Service.Implementations
                 Count = x.Count,
                 IsDeleted = x.IsDeleted,
                 ProductImages = x.ProductImages,
-                Price = x.SalePrice,
+                SalePrice = x.SalePrice,
+                CostPrice = x.CostPrice,
+                DiscountPercent = x.DiscountPercent,
                 Processor = x.Processor,
                 HardDisc = x.HardDisc,
                 Brand = x.Brand,
@@ -1054,7 +1074,7 @@ namespace IComp.Service.Implementations
                     Order = order,
                     Product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "ProductImages"),
                 };
-               
+
 
                 order.AppUserId = null;
                 order.CreatedAt = DateTime.UtcNow.AddHours(4);
@@ -1092,7 +1112,7 @@ namespace IComp.Service.Implementations
                     Count = ordercount,
                 };
 
-               
+
 
                 order.OrderItems.Add(orderItm);
                 order.TotalPrice += orderItm.DiscountedPrice * orderItm.Count;
@@ -1175,7 +1195,7 @@ namespace IComp.Service.Implementations
                 Count = ordercount
             };
 
-            
+
 
             order.OrderItems.Add(orderItem);
             order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
@@ -1210,7 +1230,9 @@ namespace IComp.Service.Implementations
                 IsNew = x.IsNew,
                 CreatedAt = x.CreatedAt,
                 ProductImages = x.ProductImages,
-                Price = x.SalePrice,
+                SalePrice = x.SalePrice,
+                CostPrice = x.CostPrice,
+                DiscountPercent = x.DiscountPercent,
                 Processor = x.Processor,
                 HardDisc = x.HardDisc,
                 Brand = x.Brand,
@@ -1358,7 +1380,7 @@ namespace IComp.Service.Implementations
                     order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
                 }
 
-              
+
 
                 await _unitOfWork.OrderRepository.AddAsync(order);
 

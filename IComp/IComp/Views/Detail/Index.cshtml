@@ -95,7 +95,11 @@
                                             @(product.VideoCard?.CoreSpeed == null ? "" : product.VideoCard?.CoreSpeed + "|") @(product.VideoCard?.MemoryCapacity==null? "" : product.VideoCard?.MemoryCapacity + "|") @(product.VideoCard?.VideoCardSerie?.Name==null? "" : product.VideoCard?.VideoCardSerie?.Name + " series |")
                                         </div>
                                         <div class="product-detail-price">
-                                            <p><span>@product.SalePrice</span>azn</p>
+                                            <span style=" display: inline-block;">@((product.DiscountPercent > 0 ? product.SalePrice*(1- product.DiscountPercent/100) : product.SalePrice).ToString("0.00"))<sup>azn</sup></span>
+                                            @if (product.DiscountPercent > 0)
+                                            {
+                                                <span style="text-decoration: line-through; color: #bab9b9; display: inline-block;">@(product.SalePrice.ToString("0.00")) <sup>azn</sup></span>
+                                            }
                                         </div>
                                         <div class="product-detail-features">
                                             <div class="prod-detail">
@@ -529,7 +533,11 @@
                                                             </p>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>@item.Product.SalePrice <sup>azn</sup></span>
+                                                            <span style="font-size:17px; display: inline-block;">@((item.Product.DiscountPercent > 0 ? item.Product.SalePrice*(1- item.Product.DiscountPercent/100) : item.Product.SalePrice).ToString("0.00"))<sup>azn</sup></span>
+                                                            @if (item.Product.DiscountPercent > 0)
+                                                            {
+                                                                <span style="text-decoration: line-through; color: #bab9b9; font-size:17px;display: inline-block;">@(item.Product.SalePrice.ToString("0.00")) <sup>azn</sup></span>
+                                                            }
                                                         </div>
                                                         <div class="product-checkout">
                                                             <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.ProductId" class="btn btn-primary add-to-basket">Səbətə</a>

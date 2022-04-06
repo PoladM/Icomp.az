@@ -10,6 +10,8 @@ $(function () {
     });
 });
 
+
+
 $(document).ready(function () {
 
     //toaster
@@ -125,7 +127,7 @@ $(document).ready(function () {
             })
     })
 
-    
+
 
     //update basket for quantity
     $(document).on("click", ".change-val", function (e) {
@@ -451,3 +453,11 @@ loginSubmit.addEventListener("click", function (e) {
 
 })
 
+//window.addEventListener('mouseup', function (event) {
+//    var box = document.getElementById('menu');
+//    if (event.target != box && event.target.parentNode != box) {
+
+//            box.classList.remove("active");
+//            box.classList.add("deactive");
+//    }
+//});

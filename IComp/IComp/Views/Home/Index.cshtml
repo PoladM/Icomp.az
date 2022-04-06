@@ -245,7 +245,12 @@
                                                             </p>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>@item.Price <sup>azn</sup></span>
+
+                                                            <span style="font-size:17px; display: inline-block;">@((item.DiscountPercent > 0 ? item.SalePrice*(1- item.DiscountPercent/100) : item.SalePrice).ToString("0.00"))<sup>azn</sup></span>
+                                                            @if (item.DiscountPercent > 0)
+                                                            {
+                                                                <span style="text-decoration: line-through; color: #bab9b9; font-size:17px;display: inline-block;">@(item.SalePrice.ToString("0.00")) <sup>azn</sup></span>
+                                                            }
                                                             <h6>Stokda : <span class="@(item.IsAvailable == true ? "text-success" : "text-danger")">@(item.IsAvailable == true ? "Var" : "Yox")</span></h6>
 
                                                         </div>
