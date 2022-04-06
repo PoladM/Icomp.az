@@ -155,6 +155,7 @@ namespace IComp.Areas.manage.Controllers
             }
             return RedirectToAction("UserList");
         }
+        [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Edit(string id)
         {
             AppUser appUser = await _userManager.FindByIdAsync(id);
@@ -196,7 +197,7 @@ namespace IComp.Areas.manage.Controllers
             await _unitOfWork.CommitAsync();
             return RedirectToAction("index", "dashboard");
         }
-
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
         public IActionResult ForgotPassword()
         {
             return View();
@@ -227,6 +228,7 @@ namespace IComp.Areas.manage.Controllers
             await EmailUtil.SendEmailAsync(viewModel.Email, "Reset Password", path, replaces);
             return RedirectToAction("login", "account", new {area = "manage"});
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
         public async Task<IActionResult> ResetPassword(string id, string token)
         {
             if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(token))

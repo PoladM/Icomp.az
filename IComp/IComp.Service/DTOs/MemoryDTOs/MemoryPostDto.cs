@@ -22,7 +22,7 @@ namespace IComp.Service.DTOs.MemoryDTOs
     {
         public MemoryPostDtoValidator()
         {
-            RuleFor(x => x.ModelName).MaximumLength(50).NotEmpty().WithMessage("model is required");
+            RuleFor(x => x.ModelName).MaximumLength(200).NotEmpty().WithMessage("model is required");
             RuleFor(x => x.Count).NotEmpty().WithMessage("count of videocard is required");
             RuleFor(x => x.Speed).MaximumLength(50).NotEmpty().WithMessage("CoreSpeed is required");
             RuleFor(x => x.DDRType).NotEmpty().MaximumLength(100).WithMessage("DDRType is required");

@@ -4,6 +4,7 @@ using IComp.Service.DTOs.ProductDTOs;
 using IComp.Service.DTOs.ProductPartsDTOs;
 using IComp.Service.Helpers;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ using System.Threading.Tasks;
 namespace IComp.Areas.manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
     public class ProductPartsController : Controller
     {
         private readonly IProductService _productService;
@@ -25,6 +28,7 @@ namespace IComp.Areas.manage.Controllers
             _env = env;
             _mapper = mapper;
         }
+
         public IActionResult CreateProcessor()
         {
             ViewBag.Processors = _productService.GetProcessors();

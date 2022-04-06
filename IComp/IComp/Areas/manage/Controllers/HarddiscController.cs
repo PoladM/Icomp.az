@@ -1,5 +1,6 @@
 ﻿using IComp.Service.DTOs.HardDiscDTOs;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -13,11 +14,14 @@ namespace IComp.Areas.manage.Controllers
         {
             _hardDiscService = hardDiscService;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
 
         public IActionResult Index(int page = 1)
         {
             return View(_hardDiscService.GetAllProd(page));
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public IActionResult Create()
         {
             ViewBag.CapacityHDD = _hardDiscService.GetCapacitiesForHDD();
@@ -37,6 +41,8 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public async Task<IActionResult> Edit(int id)
         {
             ViewBag.CapacityHDD = _hardDiscService.GetCapacitiesForHDD();
@@ -57,11 +63,15 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public async Task<IActionResult> Delete(int id)
         {
             await _hardDiscService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public async Task<IActionResult> Restore(int id)
         {
             await _hardDiscService.RestoreAsync(id);

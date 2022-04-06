@@ -3,6 +3,7 @@ using IComp.Core.Entities;
 using IComp.Service.DTOs;
 using IComp.Service.Exceptions;
 using IComp.Service.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace IComp.Areas.manage.Controllers
             _unitOfWork = unitOfWork;
             _env = env;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
         public IActionResult Index(int page = 1)
         {
             var query = _unitOfWork.SliderRepository.GetAll();
@@ -33,7 +35,7 @@ namespace IComp.Areas.manage.Controllers
 
             return View(paginatedList);
         }
-
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public IActionResult Create()
         {
             return View();
@@ -87,7 +89,7 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
-
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public async Task<IActionResult> Edit(int id)
         {
             var slider = await _unitOfWork.SliderRepository.GetAsync(x => x.Id == id);
@@ -142,6 +144,7 @@ namespace IComp.Areas.manage.Controllers
             await _unitOfWork.CommitAsync();
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
         public async Task<IActionResult> Delete(int id)
         {
             var existSlider = await _unitOfWork.SliderRepository.GetAsync(x => x.Id == id);

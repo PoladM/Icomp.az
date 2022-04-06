@@ -3,6 +3,7 @@ using IComp.Service.DTOs.BrandDTOs;
 using IComp.Service.DTOs.ProductDTOs;
 using IComp.Service.Helpers;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -22,12 +23,15 @@ namespace IComp.Areas.manage.Controllers
             _productService = productService;
             _env = env;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
 
         public IActionResult Index(int page = 1)
         {
 
             return View(_productService.GetAllProd(page));
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public IActionResult Create()
         {
 
@@ -129,6 +133,7 @@ namespace IComp.Areas.manage.Controllers
             var getDto = await _productService.CreateAsync(postDto);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -321,6 +326,7 @@ namespace IComp.Areas.manage.Controllers
             await _productService.UpdateAsync(id, existProduct);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
 
         public async Task<IActionResult> DeleteImage(int id)
         {
@@ -332,12 +338,14 @@ namespace IComp.Areas.manage.Controllers
 
             return Ok();
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
 
         public async Task<IActionResult> Delete(int id)
         {
             await _productService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
 
         public async Task<IActionResult> Restore(int id)
         {

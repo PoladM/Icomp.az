@@ -1,5 +1,6 @@
 ﻿using IComp.Core.Entities;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -13,10 +14,12 @@ namespace IComp.Areas.manage.Controllers
         {
             _ssdCapacityService = ssdCapacityService;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
         public IActionResult Index(int page = 1)
         {
             return View(_ssdCapacityService.GetAllProd(page));
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
         public IActionResult Create()
         {
             return View();
@@ -32,11 +35,13 @@ namespace IComp.Areas.manage.Controllers
             await _ssdCapacityService.CreateAsync(postDto);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
         public async Task<IActionResult> Delete(int id)
         {
             await _ssdCapacityService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
         public async Task<IActionResult> Edit(int id)
         {
             SSDCapacity postDto = await _ssdCapacityService.GetByIdAsync(id);

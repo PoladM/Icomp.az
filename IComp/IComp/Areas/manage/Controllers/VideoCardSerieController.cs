@@ -1,5 +1,6 @@
 ﻿using IComp.Service.DTOs.VCSerieDTOs;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -13,10 +14,13 @@ namespace IComp.Areas.manage.Controllers
         {
             _vcSerieService = procSerieService;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
+
         public IActionResult Index(int page = 1)
         {
             return View(_vcSerieService.GetAllProd(page));
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
 
         public IActionResult Create()
         {
@@ -33,11 +37,14 @@ namespace IComp.Areas.manage.Controllers
             await _vcSerieService.CreateAsync(postDto);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
+
         public async Task<IActionResult> Delete(int id)
         {
             await _vcSerieService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
 
         public async Task<IActionResult> Edit(int id)
         {

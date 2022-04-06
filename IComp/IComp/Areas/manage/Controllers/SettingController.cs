@@ -1,5 +1,6 @@
 ﻿using IComp.Core.Entities;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -14,10 +15,14 @@ namespace IComp.Areas.manage.Controllers
         {
             _settingService = settingService;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
+
         public IActionResult Index(int page = 1)
         {
             return View(_settingService.GetAllProd(page));
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
+
         public IActionResult Create()
         {
             return View();
@@ -49,6 +54,7 @@ namespace IComp.Areas.manage.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin, Reader")]
 
         public async Task<IActionResult> Edit(int id)
         {

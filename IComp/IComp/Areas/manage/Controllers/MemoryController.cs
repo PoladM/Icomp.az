@@ -1,5 +1,6 @@
 ﻿using IComp.Service.DTOs.MemoryDTOs;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -13,10 +14,14 @@ namespace IComp.Areas.manage.Controllers
         {
             _memoryService = memoryService;
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
+
         public IActionResult Index(int page = 1)
         {
             return View(_memoryService.GetAllProd(page));
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public IActionResult Create()
         {
             ViewBag.Capacities = _memoryService.GetCapacities();
@@ -35,6 +40,8 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public async Task<IActionResult> Edit(int id)
         {
             ViewBag.Capacities = _memoryService.GetCapacities();
@@ -54,11 +61,15 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public async Task<IActionResult> Delete(int id)
         {
             await _memoryService.DeleteAsync(id);
             return RedirectToAction("Index");
         }
+        [Authorize(Roles = "SuperAdmin, Admin, Editor")]
+
         public async Task<IActionResult> Restore(int id)
         {
             await _memoryService.RestoreAsync(id);
