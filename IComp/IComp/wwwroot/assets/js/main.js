@@ -75,6 +75,22 @@ $(document).ready(function () {
     let prodcount = $("#basket-count").val();
     $(".basket-counter-value").html(prodcount)
 
+    //get basket items
+    $(document).on("click", "#basket-icon", function (e) {
+        e.preventDefault();
+        let path = $(this).attr("href")
+
+        fetch(path).then(response => {
+            if (response.ok) {
+                return response.text();
+            }
+            throw response;
+        }).then(data => {
+            $("#myModal .modal-basket-inner").html(data)
+            $("#myModal").modal('show');
+        })
+    })
+
 
     //add to basket 
     $(document).on("click", ".add-to-basket", function (e) {

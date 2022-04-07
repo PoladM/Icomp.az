@@ -52,7 +52,8 @@ namespace IComp.Controllers
             ViewBag.ssdcapacityid = ssdcapacityid;
             ViewBag.softwareid = softwareid;
             ViewBag.sort = sort;
-
+            ViewBag.CategoryName = _productService.GetCategories().FirstOrDefault(x => x.Id == categoryid).Name;
+            
 
 
             viewModel = new ProductViewModel
@@ -239,6 +240,16 @@ namespace IComp.Controllers
             }
         }
 
+        public async Task<IActionResult> GetBasketItems()
+        {
+            AppUser appUser = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
+            }
+            var basketItems = await _productService.GetBasketItems(appUser);
+            return PartialView("_BasketPartial", basketItems);
+        }
 
         public async Task<IActionResult> DeleteBasket(int id)
         {

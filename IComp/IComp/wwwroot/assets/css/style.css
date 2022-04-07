@@ -1043,6 +1043,8 @@ textarea:focus, input:focus {
 
 .home-slider {
     padding-bottom: 40px;
+    width: 78%;
+    margin: 0 auto;
 }
 
 .popular-brands {

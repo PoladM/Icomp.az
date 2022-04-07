@@ -28,6 +28,7 @@ namespace IComp.Controllers
             var products = _productService.GetAllProdWithFilter(page);
             
             var brands = _productService.GetBrands();
+            brands = brands.Where(x => x.IsPopular).ToList();
             var settings = _productService.GetSettings();
             var categories = _productService.GetCategories();
             var sliders = _productService.GetSlider();

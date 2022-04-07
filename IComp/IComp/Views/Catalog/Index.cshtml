@@ -21,6 +21,8 @@
     {
         temp = -2;
     }
+
+
 }
 
 <main>
@@ -30,8 +32,8 @@
             <div class="container">
                 <div class="breadcrumb">
                     <ul class="breadcrumb-nav">
-                        <li class="nav-item"><a href="#">Kompüter mağazası "iComp"</a></li>
-                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a href="#">Kompüterlər</a></li>
+                        <li class="nav-item"><a asp-action="index" asp-controller="home">Kompüter mağazası "iComp"</a></li>
+                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a asp-action="index" asp-controller="catalog" asp-route-categoryid="@ViewBag.categoryid">@ViewBag.CategoryName</a></li>
                     </ul>
                 </div>
 
@@ -355,8 +357,8 @@
                                                             </p>
                                                         </div>
                                                         <div class="product-price">
-                                                           
-                                                           <span style="font-size:17px; display: inline-block;">@((item.DiscountPercent > 0 ? item.SalePrice*(1- item.DiscountPercent/100) : item.SalePrice).ToString("0.00"))<sup>azn</sup></span>
+
+                                                            <span style="font-size:17px; display: inline-block;">@((item.DiscountPercent > 0 ? item.SalePrice*(1- item.DiscountPercent/100) : item.SalePrice).ToString("0.00"))<sup>azn</sup></span>
                                                             @if (item.DiscountPercent > 0)
                                                             {
                                                                 <span style="text-decoration: line-through; color: #bab9b9; font-size:17px;display: inline-block;">@(item.SalePrice.ToString("0.00")) <sup>azn</sup></span>
