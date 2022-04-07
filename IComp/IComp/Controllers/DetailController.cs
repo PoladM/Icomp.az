@@ -1,5 +1,7 @@
 ﻿using IComp.Core.Entities;
+using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
+using IComp.Service.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -14,7 +16,18 @@ namespace IComp.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
-            return View(await _productService.FindByIdAsync(id));
+            DetailViewModel products ;
+
+            try
+            {
+                products = await _productService.FindByIdAsync(id);
+            }
+            catch (ItemNotFoundException)
+            {
+                return PartialView("_Error");
+            }
+
+            return View(products);
         }
         [HttpPost]
         public async Task<IActionResult> Comment(ProductComment comment)

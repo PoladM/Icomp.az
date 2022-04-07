@@ -167,7 +167,6 @@ C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Processor\Edit.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ProcessorSerie\Index.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Processorserie\Create.cshtml.g.cs
@@ -269,3 +268,4 @@ C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Account\ForgotPassword.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Account\ResetPassword.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Account\Edit.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Error.cshtml.g.cs

@@ -3,6 +3,7 @@ using IComp.Core.Entities;
 using IComp.Service.DTOs;
 using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace IComp.Service.Implementations
     public class OrderService : IOrderService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<AppUser> _userManager;
 
-        public OrderService(IUnitOfWork unitOfWork)
+        public OrderService(IUnitOfWork unitOfWork, UserManager<AppUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
         public async Task<PaginatedListDto<Order>> GetAll(int page)
         {
@@ -32,11 +35,36 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
+        public async Task<List<Order>> GetAllOrder()
+        {
+            var orders = _unitOfWork.OrderRepository.GetAll("OrderItems");
+            return await orders.ToListAsync();
+        }
+
         public async Task<Order> GetByIdAsync(int id)
         {
             var existOrder = await _unitOfWork.OrderRepository.GetAsync(x => x.Id == id);
-            if(existOrder == null) { throw new ItemNotFoundException("Item not found"); }
+            if (existOrder == null) { throw new ItemNotFoundException("Item not found"); }
             return existOrder;
+        }
+
+        public async Task<decimal> GetTotalProfit()
+        {
+            var orderItems = _unitOfWork.OrderItemRepository.GetAll("Order");
+            orderItems = orderItems.Where(x => ((int)x.Order.Status) != 1 && ((int)x.Order.Status) != 3 && ((int)x.Order.Status) != 4);
+            var totalSale = await orderItems.SumAsync(x => x.SalePrice);
+            var totalCost = await orderItems.SumAsync(x => x.CostPrice);
+
+            var totalProfit = totalSale - totalCost;
+            return totalProfit;
+        }
+
+        public async Task<decimal> GetTotalSales()
+        {
+            var orderItems = _unitOfWork.OrderItemRepository.GetAll("Order");
+            orderItems = orderItems.Where(x => ((int)x.Order.Status) != 1 && ((int)x.Order.Status) != 3 && ((int)x.Order.Status) != 4);
+            var totalSale = await orderItems.SumAsync(x => x.SalePrice);
+            return totalSale;
         }
 
         public async Task UpdateAsync(Order order)

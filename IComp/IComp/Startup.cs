@@ -97,13 +97,24 @@ namespace IComp
                 //app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            app.ExceptionHandler();
+
+
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home/Error";
+                    await next();
+                }
+            });
+
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.ExceptionHandler();
-
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseAuthorization();
 

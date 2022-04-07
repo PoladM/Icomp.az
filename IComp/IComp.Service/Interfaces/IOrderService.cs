@@ -12,5 +12,8 @@ namespace IComp.Service.Interfaces
         Task<PaginatedListDto<Order>> GetAll(int page);
         Task UpdateAsync(Order order);
         Task<Order> GetByIdAsync(int id);
+        Task<decimal> GetTotalProfit();
+        Task<decimal> GetTotalSales();
+        Task<List<Order>> GetAllOrder();
     }
 }
