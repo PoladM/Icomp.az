@@ -12,7 +12,7 @@ namespace IComp.Service.ViewModels
         public PaginatedListDto<ProductListItemDto> Paginated { get; set; }
         public List<BrandGetDto> Brands { get; set; }
         public List<CategoryGetDto> Categories { get; set; }
-
+        public List<CategoryGetDto> PopularCategories { get; set; }
         public Dictionary<string,string> Settings { get; set; }
         public List<Slider> Sliders { get; set; }
     }

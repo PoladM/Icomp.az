@@ -407,6 +407,7 @@ namespace IComp.Service.Implementations
 
             AppUser appUser = null;
             DetailViewModel viewModel = new DetailViewModel();
+            viewModel.CheckedProducts = new List<ProductGetDTO>();
 
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {
@@ -429,12 +430,78 @@ namespace IComp.Service.Implementations
                     };
                     await _unitOfWork.CheckedProductsRepository.AddAsync(item);
                     await _unitOfWork.CommitAsync();
-                    viewModel.CheckedProducts = _unitOfWork.CheckedProductsRepository.GetAll(x => x.AppUserId == appUser.Id, "Product.ProductImages").ToList();
+
+                    foreach (var item2 in checkedProds)
+                    {
+                        var products = _unitOfWork.ProductRepository.GetAll(x => x.Id == item2.ProductId, "Product.ProductImages").ToList();
+                        var dto = _mapper.Map<List<ProductGetDTO>>(products);
+                        viewModel.CheckedProducts.AddRange(dto);
+                    }
+
                 }
                 else
                 {
-                    viewModel.CheckedProducts = _unitOfWork.CheckedProductsRepository.GetAll(x => x.AppUserId == appUser.Id, "Product.ProductImages").ToList();
+                    foreach (var item2 in checkedProds)
+                    {
+                        var products = _unitOfWork.ProductRepository.GetAll(x => x.Id == item2.ProductId, "Product.ProductImages").ToList();
+                        var dto = _mapper.Map<List<ProductGetDTO>>(products);
+                        viewModel.CheckedProducts.AddRange(dto);
+                    }
                 }
+            }
+            else
+            {
+                string cookie = _httpContextAccessor.HttpContext.Request.Cookies["lastchecks"];
+                List<BasketCookieItemViewModel> cookieItems = new List<BasketCookieItemViewModel>();
+
+                if (!string.IsNullOrWhiteSpace(cookie))
+                {
+                    cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookie);
+                }
+
+                BasketCookieItemViewModel cookieItem = cookieItems.FirstOrDefault(x => x.ProductId == id);
+                var product = await GetByIdAsync(id);
+                if (product.IsDeleted)
+                {
+                    throw new ItemNotFoundException("This product isn't available");
+                }
+                if (product == null)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+
+                if (cookieItem == null)
+                {
+                    cookieItem = new BasketCookieItemViewModel { ProductId = id, Count = 1 };
+                    cookieItems.Add(cookieItem);
+                }
+                else
+                {
+                    cookieItem.Count++;
+                }
+
+                cookie = JsonConvert.SerializeObject(cookieItems);
+                _httpContextAccessor.HttpContext.Response.Cookies.Append("lastchecks", cookie);
+
+                if (appUser == null)
+                {
+                    string cookieItemsStr = _httpContextAccessor.HttpContext.Request.Cookies["lastchecks"];
+
+                    if (!string.IsNullOrWhiteSpace(cookieItemsStr))
+                    {
+                        cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookieItemsStr);
+                    }
+
+                    foreach (var item in cookieItems)
+                    {
+                        var checkedProds = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+
+                        var dto = _mapper.Map<ProductGetDTO>(checkedProds); 
+
+                        viewModel.CheckedProducts.Add(dto);
+                    }
+                }
+
             }
 
             var productDto = _mapper.Map<ProductGetDTO>(existProduct);
@@ -1329,6 +1396,10 @@ namespace IComp.Service.Implementations
                 member = _userManager.Users.FirstOrDefault(x => x.UserName == _httpContextAccessor.HttpContext.User.Identity.Name && !x.IsAdmin);
             }
 
+            Guid guid = Guid.NewGuid();
+            order.TrackId = $"{guid}";
+            var path = String.Empty;
+
             if (member == null)
             {
                 checkoutVM = new CheckOutViewModel
@@ -1378,6 +1449,17 @@ namespace IComp.Service.Implementations
 
                     order.OrderItems.Add(orderItem);
                     order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
+
+                    path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplate.html";
+
+                    Dictionary<string, string> Replaces = new Dictionary<string, string>();
+                    Replaces.Add("{fullname}", order.FullName.ToString());
+                    Replaces.Add("{date}", order.CreatedAt.ToString());
+                    Replaces.Add("{status}", order.Status.ToString());
+                    Replaces.Add("{trackid}", order.TrackId.ToString());
+                    Replaces.Add("{total}", order.TotalPrice.ToString());
+
+                    await EmailUtil.SendEmailAsync(order.Email, "Salam hörmətli müştəri", path, Replaces);
                 }
 
 
@@ -1434,6 +1516,17 @@ namespace IComp.Service.Implementations
                 order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
             }
 
+            path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplate.html";
+
+            Dictionary<string, string> replaces = new Dictionary<string, string>();
+            replaces.Add("{fullname}", order.FullName.ToString());
+            replaces.Add("{date}", order.CreatedAt.ToString());
+            replaces.Add("{status}", order.Status.ToString());
+            replaces.Add("{trackid}", order.TrackId.ToString());
+            replaces.Add("{total}", order.TotalPrice.ToString());
+
+            await EmailUtil.SendEmailAsync(order.Email, "Salam hörmətli müştəri", path, replaces);
+
             await _unitOfWork.OrderRepository.AddAsync(order);
 
             if (member == null)
@@ -1470,11 +1563,8 @@ namespace IComp.Service.Implementations
                 cookieItems = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).Select(b => new BasketCookieItemViewModel { ProductId = b.ProductId, Count = b.Count }).ToList();
             }
 
-
-
             foreach (var item in cookieItems)
             {
-
                 var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId && !x.IsDeleted && x.IsAvailable, "ProductImages");
                 if (product != null)
                 {

@@ -52,8 +52,14 @@ namespace IComp.Controllers
             ViewBag.ssdcapacityid = ssdcapacityid;
             ViewBag.softwareid = softwareid;
             ViewBag.sort = sort;
-            ViewBag.CategoryName = _productService.GetCategories().FirstOrDefault(x => x.Id == categoryid).Name;
-            
+            if (categoryid != null)
+            {
+                ViewBag.CategoryName = _productService.GetCategories().FirstOrDefault(x => x.Id == categoryid).Name;
+            }
+            if (brandid != null)
+            {
+                ViewBag.BrandName = _productService.GetBrands().FirstOrDefault(x => x.Id == brandid).Name;
+            }
 
 
             viewModel = new ProductViewModel
@@ -74,13 +80,13 @@ namespace IComp.Controllers
                 MinPrice = _productService.FilterByPrice("min")
             };
 
-            
+
 
             foreach (var item in filterProd)
             {
                 if (!viewModel.destinationGetDtos.Any(x => x.Id == item.DestinationId))
                 {
-                    viewModel.destinationGetDtos.AddRange(_productService.GetDestinations().Where(x => x.Id == item.DestinationId).ToList()); 
+                    viewModel.destinationGetDtos.AddRange(_productService.GetDestinations().Where(x => x.Id == item.DestinationId).ToList());
                 }
             }
             foreach (var item in filterProd)

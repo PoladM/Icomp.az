@@ -33,7 +33,14 @@
                 <div class="breadcrumb">
                     <ul class="breadcrumb-nav">
                         <li class="nav-item"><a asp-action="index" asp-controller="home">Kompüter mağazası "iComp"</a></li>
-                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a asp-action="index" asp-controller="catalog" asp-route-categoryid="@ViewBag.categoryid">@ViewBag.CategoryName</a></li>
+                        @if (ViewBag.categoryid != null)
+                        {
+                            <li class="nav-item"><span class="breadcrumb-arrow">></span><a asp-action="index" asp-controller="catalog" asp-route-categoryid="@ViewBag.categoryid" asp-route-brandid="">@ViewBag.CategoryName</a></li>
+                        }
+                        @if (ViewBag.brandid != null)
+                        {
+                            <li class="nav-item"><span class="breadcrumb-arrow">></span><a asp-action="index" asp-controller="catalog" asp-route-brandid="@ViewBag.brandid">@ViewBag.BrandName</a></li>
+                        }
                     </ul>
                 </div>
 

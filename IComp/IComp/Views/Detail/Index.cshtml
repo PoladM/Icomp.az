@@ -520,29 +520,29 @@
                                                 <div class="new-products__item-card">
                                                     <div class="item__card-header">
                                                         <div class="product-photo">
-                                                            <img src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+                                                            <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
                                                         </div>
                                                         <div class="product-title">
-                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.ProductId">@item.Product.Name</a>
+                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Name</a>
                                                         </div>
                                                     </div>
                                                     <div class="item__card-body">
                                                         <div class="product-desc">
                                                             <p>
-                                                                @(item.Product.Processor?.ProcessorSerie?.Name == null ? "" : item.Product.Processor?.ProcessorSerie?.Name + "|")  @(item.Product.ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item.Product.ProdMemory?.MemoryCapacity?.Capacity + "|") @(item.Product.ProdMemory?.DDRType == null ? "" : item.Product.ProdMemory?.DDRType + "|") @(item.Product.SSD?.SSDCapacity?.Capacity == null? "" : item.Product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.Product.HardDisc?.HDDCapacity?.Capacity == null? "" : item.Product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item.Product.Processor?.ModelName == null ? "" : item.Product.Processor?.ModelName + "|")
-                                                                @(item.Product.VideoCard?.CoreSpeed == null ? "" : item.Product.VideoCard?.CoreSpeed + "|") @(item.Product.VideoCard?.MemoryCapacity==null? "" : item.Product.VideoCard?.MemoryCapacity + "|") @(item.Product.VideoCard?.VideoCardSerie?.Name==null? "" : item.Product.VideoCard?.VideoCardSerie?.Name + " series |")
+                                                                @(item.Processor?.ProcessorSerie?.Name == null ? "" : item.Processor?.ProcessorSerie?.Name + "|")  @(item .ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item .ProdMemory?.MemoryCapacity?.Capacity + "|") @(item .ProdMemory?.DDRType == null ? "" : item .ProdMemory?.DDRType + "|") @(item .SSD?.SSDCapacity?.Capacity == null? "" : item .SSD?.SSDCapacity?.Capacity + "SSD |")  @(item .HardDisc?.HDDCapacity?.Capacity == null? "" : item .HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item .Processor?.ModelName == null ? "" : item .Processor?.ModelName + "|")
+                                                                @(item.VideoCard?.CoreSpeed == null ? "" : item.VideoCard?.CoreSpeed + "|") @(item.VideoCard?.MemoryCapacity==null? "" : item .VideoCard?.MemoryCapacity + "|") @(item .VideoCard?.VideoCardSerie?.Name==null? "" : item .VideoCard?.VideoCardSerie?.Name + " series |")
                                                             </p>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span style="font-size:17px; display: inline-block;">@((item.Product.DiscountPercent > 0 ? item.Product.SalePrice*(1- item.Product.DiscountPercent/100) : item.Product.SalePrice).ToString("0.00"))<sup>azn</sup></span>
-                                                            @if (item.Product.DiscountPercent > 0)
+                                                            <span style="font-size:17px; display: inline-block;">@((item .DiscountPercent > 0 ? item .SalePrice*(1- item .DiscountPercent/100) : item .SalePrice).ToString("0.00"))<sup>azn</sup></span>
+                                                            @if (item .DiscountPercent > 0)
                                                             {
-                                                                <span style="text-decoration: line-through; color: #bab9b9; font-size:17px;display: inline-block;">@(item.Product.SalePrice.ToString("0.00")) <sup>azn</sup></span>
+                                                                <span style="text-decoration: line-through; color: #bab9b9; font-size:17px;display: inline-block;">@(item .SalePrice.ToString("0.00")) <sup>azn</sup></span>
                                                             }
                                                         </div>
                                                         <div class="product-checkout">
-                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item.ProductId" class="btn btn-primary add-to-basket">Səbətə</a>
-                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item.ProductId" class="btn btn-danger fast-order">Tez Sifariş</a>
+                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item Id" class="btn btn-primary add-to-basket">Səbətə</a>
+                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item Id" class="btn btn-danger fast-order">Tez Sifariş</a>
                                                         </div>
                                                     </div>
                                                 </div>

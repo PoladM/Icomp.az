@@ -109,79 +109,21 @@
                                 <div class="content-body">
                                     <div class="popular-categories__list">
                                         <div class="row">
-                                            <div class="col-lg-2 col-md-6 col-sm-12">
-                                                <!-- Category Item -->
+                                            @foreach (var item in Model.PopularCategories)
+                                            {
+                                                <div class="col-lg-2 col-md-6 col-sm-12">
+                                                    <!-- Category Item -->
                                                 <div class="popular-categories-item">
-                                                    <a href="">
-                                                        <img src="~/assets/img/Categories/chip_1.svg" alt="">
-                                                        <div class="category-name">
-                                                            <p>Prosessorlar</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <!-- Category Item -->
+                                                        <a asp-action="index" asp-controller="catalog" asp-route-categoryid="@item.Id">
+                                                            <img src="~/uploads/categories/@item.Image" alt="">
+                                                            <div class="category-name">
+                                                                <p>@item.Name</p>
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <!-- Category Item -->
                                             </div>
-                                            <div class="col-lg-2 col-md-6 col-sm-12">
-                                                <!-- Category Item -->
-                                                <div class="popular-categories-item">
-                                                    <a href="">
-                                                        <img src="~/assets/img/Categories/cloud-computing_1.svg"
-                                                             alt="">
-                                                        <div class="category-name">
-                                                            <p>Periferiya</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <!-- Category Item -->
-                                            </div>
-                                            <div class="col-lg-2 col-md-6 col-sm-12">
-                                                <!-- Category Item -->
-                                                <div class="popular-categories-item">
-                                                    <a href="">
-                                                        <img src="~/assets/img/Categories/console_1.svg" alt="">
-                                                        <div class="category-name">
-                                                            <p>Gaming Zone</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <!-- Category Item -->
-                                            </div>
-                                            <div class="col-lg-2 col-md-6 col-sm-12">
-                                                <!-- Category Item -->
-                                                <div class="popular-categories-item">
-                                                    <a href="">
-                                                        <img src="~/assets/img/Categories/laptop.svg" alt="">
-                                                        <div class="category-name">
-                                                            <p>Noutbuklar</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <!-- Category Item -->
-                                            </div>
-                                            <div class="col-lg-2 col-md-6 col-sm-12">
-                                                <!-- Category Item -->
-                                                <div class="popular-categories-item">
-                                                    <a href="">
-                                                        <img src="~/assets/img/Categories/planset.svg" alt="">
-                                                        <div class="category-name">
-                                                            <p>Planşetlər</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <!-- Category Item -->
-                                            </div>
-                                            <div class="col-lg-2 col-md-6 col-sm-12">
-                                                <!-- Category Item -->
-                                                <div class="popular-categories-item">
-                                                    <a href="">
-                                                        <img src="~/assets/img/Categories/server.svg" alt="">
-                                                        <div class="category-name">
-                                                            <p>Serverlər</p>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <!-- Category Item -->
-                                            </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>

@@ -363,6 +363,7 @@ textarea:focus, input:focus {
 }
 
 .header-main {
+    width : 100%;
     z-index: 999;
 }
 
@@ -1117,7 +1118,7 @@ textarea:focus, input:focus {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 130px;
+            width: 194px;
             height: 40px;
             color: white;
             margin-top: 20px;

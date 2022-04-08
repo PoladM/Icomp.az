@@ -24,9 +24,8 @@
                 <div class="product-details">
                     <div class="product-title">@item.Product.Name</div>
                     <p class="product-description">
-                        The best dog bones of all time. Holy crap. Your dog
-                        will be begging for these things! I got curious once and ate one myself. I'm a
-                        fan.
+                        @(item.Product.Processor?.ProcessorSerie?.Name == null ? "" : item.Product.Processor?.ProcessorSerie?.Name + "|")  @(item.Product.ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item.Product.ProdMemory?.MemoryCapacity?.Capacity + "|") @(item.Product.ProdMemory?.DDRType == null ? "" : item.Product.ProdMemory?.DDRType + "|") @(item.Product.SSD?.SSDCapacity?.Capacity == null? "" : item.Product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.Product.HardDisc?.HDDCapacity?.Capacity == null? "" : item.Product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item.Product.Processor?.ModelName == null ? "" : item.Product.Processor?.ModelName + "|")
+                        @(item.Product.VideoCard?.CoreSpeed == null ? "" : item.Product.VideoCard?.CoreSpeed + "|") @(item.Product.VideoCard?.MemoryCapacity==null? "" : item.Product.VideoCard?.MemoryCapacity + "|") @(item.Product.VideoCard?.VideoCardSerie?.Name==null? "" : item.Product.VideoCard?.VideoCardSerie?.Name + " series |")  @(item.Product.GraphCard == null ? "" : item.Product.GraphCard + "|") @(item.Product.MotherBoardSound == null ? "" : item.Product.MotherBoardSound+ "|") @(item.Product.Network == null ? "" : item.Product.Network + "|")
                     </p>
                 </div>
                 <div class="product-price-basket">price:  $@((item.Product.DiscountPercent > 0 ?item.Product.SalePrice*(1-item.Product.DiscountPercent/100):item.Product.SalePrice).ToString("0.00"))</div>
@@ -56,13 +55,21 @@
 
     <input type="hidden" value="@counter" id="basket-count" />
 
-
-    <div class="totals">
-        <div class="totals-item totals-item-total">
-            <label>Total</label>
-            <div class="totals-value" id="cart-total">@(Model.TotalPrice.ToString("0.00"))</div>
+    @if (Model.BasketItems.Count != 0)
+    {
+        <div class="totals">
+            <div class="totals-item totals-item-total">
+                <label>Total</label>
+                <div class="totals-value" id="cart-total">@(Model.TotalPrice.ToString("0.00"))</div>
+            </div>
         </div>
-    </div>
 
-    <a asp-action="basketcheckout" asp-controller="order" class="checkout">Checkout</a>
+        <a asp-action="basketcheckout" asp-controller="order" class="checkout">Checkout</a>
+    }
+    else
+    {
+        <span class="text-danger">Səbətiniz boşdur!</span>
+    }
+
+
 </div>

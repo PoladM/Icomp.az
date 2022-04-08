@@ -10,6 +10,7 @@ namespace IComp.Service.DTOs.CategoryDTOs
         public string Name { get; set; }
         public bool Collectable { get; set; }
         public bool IsDeleted { get; set; }
+        public bool IsPopular { get; set; }
         public string Image { get; set; }
         public IFormFile ImageFile { get; set; }
     }

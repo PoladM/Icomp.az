@@ -31,6 +31,7 @@ namespace IComp.Controllers
             brands = brands.Where(x => x.IsPopular).ToList();
             var settings = _productService.GetSettings();
             var categories = _productService.GetCategories();
+            var popularCategories = categories.Where(x => x.IsPopular).ToList();
             var sliders = _productService.GetSlider();
 
             viewModel = new HomeViewModel
@@ -40,6 +41,7 @@ namespace IComp.Controllers
                 Settings = settings,
                 Categories = categories,
                 Sliders = sliders,
+                PopularCategories = popularCategories,
             };
 
             return View(viewModel);

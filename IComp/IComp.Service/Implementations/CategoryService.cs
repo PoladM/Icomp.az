@@ -126,6 +126,7 @@ namespace IComp.Service.Implementations
 
             existProd.Name = postDTO.Name;
             existProd.Collectable = postDTO.Collectable;
+            existProd.IsPopular = postDTO.IsPopular;
             await _unitOfWork.CommitAsync();
         }
     }
