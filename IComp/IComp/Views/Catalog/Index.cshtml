@@ -314,7 +314,7 @@
                                     <!option @(ViewBag.Sort == "price_low" ? "selected" : "") value="price_low">Qiyməti azalır</!option>
                                     <!option @(ViewBag.Sort == "name_asc" ? "selected" : "") value="name_asc">Başlığa görə(A-Z)</!option>
                                     <!option @(ViewBag.Sort == "name_desc" ? "selected" : "") value="name_desc">Başlığa görə(Z-A)</!option>
-                                    <!option value="">Populyarlıq</!option>
+                                    <!option @(ViewBag.Sort == "popular" ? "selected" : "") value="popular">Populyarlıq</!option>
                                 </select>
                             </div>
 

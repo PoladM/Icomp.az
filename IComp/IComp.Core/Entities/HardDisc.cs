@@ -12,9 +12,6 @@ namespace IComp.Core.Entities
         [StringLength(maximumLength:100)]
         public string ModelName { get; set; }
         public bool IsAvailable { get; set; }
-        public double? Price { get; set; }
-        [Required]
-        public int Count { get; set; }
         public HDDCapacity HDDCapacity { get; set; }
         public List<Product> Products { get; set; }
     }

@@ -354,7 +354,6 @@ $(document).ready(function () {
                 })
             })
     })
-
 });
 
 let hamburger = document.querySelector(".main-navbar__hamburger");

@@ -138,7 +138,7 @@ namespace IComp.Controllers
                 appUser = await _userManager.FindByNameAsync(User.Identity.Name);
             }
 
-            if (appUser == null)
+            if (appUser == null || appUser.IsAdmin)
             {
                 return BadRequest("user not found");
             }
@@ -164,7 +164,7 @@ namespace IComp.Controllers
         {
             AppUser appUser = await _userManager.FindByNameAsync(User.Identity.Name);
 
-            if (appUser == null)
+            if (appUser == null || appUser.IsAdmin)
             {
                 throw new ItemNotFoundException("User not found");
             }

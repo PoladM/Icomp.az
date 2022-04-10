@@ -119,5 +119,10 @@ namespace IComp.Controllers
 
             return RedirectToAction("basketcheckout", "order");
         }
+
+        public IActionResult Error()
+        {
+            return View();
+        }
     }
 }

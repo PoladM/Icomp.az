@@ -6,6 +6,7 @@ using IComp.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,16 +26,19 @@ namespace IComp.Areas.manage.Controllers
         }
         [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(int? value, int page = 1)
         {
+            var paginated = _productService.GetAllProd(value, page);
 
-            return View(_productService.GetAllProd(page));
+            ViewBag.Categories = _productService.GetCategories();
+            ViewBag.CategoryId = value;
+
+            return View(paginated);
         }
         [Authorize(Roles = "SuperAdmin, Admin, Editor")]
 
         public IActionResult Create()
         {
-
             ViewBag.Processors = _productService.GetProcessors();
             ViewBag.Brands = _productService.GetBrands();
             ViewBag.Memories = _productService.GetMemories();

@@ -24,16 +24,7 @@
                     <input class="form-control" asp-for="CoreSpeed" placeholder="Enter CoreSpeed">
                     <span class="text-danger" asp-validation-for="CoreSpeed"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Count">Count</label>
-                    <input class="form-control" asp-for="Count" placeholder="Enter SubTitle">
-                    <span class="text-danger" asp-validation-for="Count"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Price">Price</label>
-                    <input class="form-control" asp-for="Price" placeholder="Enter SubTitle">
-                    <span class="text-danger" asp-validation-for="Price"></span>
-                </div>
+               
                 <div class="form-group">
                     <label asp-for="VideoCardSerieId">VCSeries</label>
                     <select class="form-control" asp-for="VideoCardSerieId" asp-items="@(new SelectList(ViewBag.VCSeries,"Id","Name"))">

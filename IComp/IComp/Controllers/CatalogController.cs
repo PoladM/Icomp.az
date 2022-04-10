@@ -34,6 +34,20 @@ namespace IComp.Controllers
 
             var products = _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
+            
+
+            try
+            {
+                if (products.Items == null)
+                {
+                    throw new ItemNotFoundException("Item Not Found");
+                }
+            }
+            catch (ItemNotFoundException)
+            {
+                return PartialView("_Error");
+            }
+
             var filterProd = _productService.ProductsForFilter(categoryid, brandid);
 
             NumberFormatInfo nfi = new NumberFormatInfo();

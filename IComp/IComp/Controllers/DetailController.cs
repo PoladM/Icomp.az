@@ -16,7 +16,7 @@ namespace IComp.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
-            DetailViewModel products ;
+            DetailViewModel products = new DetailViewModel();
 
             try
             {

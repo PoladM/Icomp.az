@@ -504,7 +504,60 @@
                             </div>
                         </div>
                         <!-- Detail end -->
-                        @if (Model.CheckedProducts != null)
+                        @if (Model.RelatedProducts.Count != 0)
+                        {
+
+                            <div class="content-heading">
+                                <h2>Maraqlandıra bilər</h2>
+                            </div>
+
+                            <div class="new-products-inner">
+                                <div class="row">
+                                    @foreach (var item in Model.RelatedProducts)
+                                    {
+                                        <div class="col-lg-3 col-md-6 col-sm-12">
+                                            <div class="new-products__item">
+                                                <div class="new-products__item-card">
+                                                    <div class="item__card-header">
+                                                        <div class="product-photo">
+                                                            <img src="~/uploads/products/@item.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image" alt="">
+                                                        </div>
+                                                        <div class="product-title">
+                                                            <a asp-action="index" asp-controller="detail" asp-route-id="@item.Id">@item.Name</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item__card-body">
+                                                        <div class="product-desc">
+                                                            <p>
+                                                                @(item.Processor?.ProcessorSerie?.Name == null ? "" : item.Processor?.ProcessorSerie?.Name + "|")  @(item .ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item .ProdMemory?.MemoryCapacity?.Capacity + "|") @(item .ProdMemory?.DDRType == null ? "" : item .ProdMemory?.DDRType + "|") @(item .SSD?.SSDCapacity?.Capacity == null? "" : item .SSD?.SSDCapacity?.Capacity + "SSD |")  @(item .HardDisc?.HDDCapacity?.Capacity == null? "" : item .HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item .Processor?.ModelName == null ? "" : item .Processor?.ModelName + "|")
+                                                                @(item.VideoCard?.CoreSpeed == null ? "" : item.VideoCard?.CoreSpeed + "|") @(item.VideoCard?.MemoryCapacity==null? "" : item .VideoCard?.MemoryCapacity + "|") @(item .VideoCard?.VideoCardSerie?.Name==null? "" : item .VideoCard?.VideoCardSerie?.Name + " series |")
+                                                            </p>
+                                                        </div>
+                                                        <div class="product-price">
+                                                            <span style="font-size:17px; display: inline-block;">@((item .DiscountPercent > 0 ? item .SalePrice*(1- item .DiscountPercent/100) : item .SalePrice).ToString("0.00"))<sup>azn</sup></span>
+                                                            @if (item.DiscountPercent > 0)
+                                                            {
+                                                                <span style="text-decoration: line-through; color: #bab9b9; font-size:17px;display: inline-block;">@(item .SalePrice.ToString("0.00")) <sup>azn</sup></span>
+                                                            }
+                                                        </div>
+                                                        <div class="product-checkout">
+                                                            <a asp-action="addbasket" asp-controller="catalog" asp-route-id="@item Id" class="btn btn-primary add-to-basket">Səbətə</a>
+                                                            <a asp-action="order" asp-controller="checkout" asp-route-id="@item Id" class="btn btn-danger fast-order">Tez Sifariş</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+
+                                </div>
+                            </div>
+                        }
+
+
+                        @if (Model.CheckedProducts.Count != 0)
                         {
 
                             <div class="content-heading">
@@ -535,7 +588,7 @@
                                                         </div>
                                                         <div class="product-price">
                                                             <span style="font-size:17px; display: inline-block;">@((item .DiscountPercent > 0 ? item .SalePrice*(1- item .DiscountPercent/100) : item .SalePrice).ToString("0.00"))<sup>azn</sup></span>
-                                                            @if (item .DiscountPercent > 0)
+                                                            @if (item.DiscountPercent > 0)
                                                             {
                                                                 <span style="text-decoration: line-through; color: #bab9b9; font-size:17px;display: inline-block;">@(item .SalePrice.ToString("0.00")) <sup>azn</sup></span>
                                                             }

@@ -11,6 +11,7 @@ using IComp.Service.Utils;
 using IComp.ServiceExtentions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -22,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace IComp
 {
@@ -94,22 +96,37 @@ namespace IComp
             }
             else
             {
-                //app.UseExceptionHandler("/Error");
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 
             app.ExceptionHandler();
 
 
-            app.Use(async (context, next) =>
-            {
-                await next();
-                if (context.Response.StatusCode == 404)
-                {
-                    context.Request.Path = "/Home/Error";
-                    await next();
-                }
-            });
+            //app.UseStatusCodePages(async context =>
+            //{
+            //    if (context.HttpContext.Response.StatusCode == 400)
+            //    {
+            //        context.HttpContext.Response.Redirect("~/Views/Shared/_Error.cshtml");
+            //    }
+            //    else if (context.HttpContext.Response.StatusCode == 404)
+            //    {
+            //        context.HttpContext.Response.Redirect("~/Views/Shared/_Error.cshtml");
+            //    }
+            //});
+
+
+
+            //app.Use(async (context, next) =>
+            //{
+            //    await next.Invoke();
+            //    if (context.Response.StatusCode == 404)
+            //    {
+            //        context.Request.Path = "/Home/Error";
+            //    }
+            //    await next.Invoke();
+            //});
+
 
             app.UseHttpsRedirection();
             app.UseDefaultFiles();

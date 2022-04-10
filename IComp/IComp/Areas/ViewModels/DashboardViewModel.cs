@@ -9,5 +9,9 @@ namespace IComp.Areas.ViewModels
         public decimal TotalSales { get; set; }
         public int NewCostumer { get; set; }
         public int OrderCount { get; set; }
+        public int AcceptedOrders { get; set; }
+        public int PendingOrders { get; set; }
+        public int RejectedOrders { get; set; }
+        public int CanceledOrders { get; set; }
     }
 }

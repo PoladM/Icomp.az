@@ -38,6 +38,10 @@ namespace IComp.Areas.manage.Controllers
                 NewCostumer = customers.Count(),
                 OrderCount = orders.Count(),
                 TotalSales = totalSales,
+                AcceptedOrders = orders.Where(x => (int)x.Status == 2).Count(),
+                CanceledOrders = orders.Where(x => (int)x.Status == 4).Count(),
+                PendingOrders = orders.Where(x => (int)x.Status == 1).Count(),
+                RejectedOrders = orders.Where(x => (int)x.Status == 3).Count(),
             };
             
             return View(viewModel);

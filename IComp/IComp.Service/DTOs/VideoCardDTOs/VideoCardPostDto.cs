@@ -10,9 +10,7 @@ namespace IComp.Service.DTOs.VideoCardDTOs
     {
         public string ModelName { get; set; }
         public int VideoCardSerieId { get; set; }
-        public int Count { get; set; }
         public bool IsAvailable { get; set; }
-        public double? Price { get; set; }
         public string MemoryCapacity { get; set; }
         public string CoreSpeed { get; set; }
         public VideoCardSerie VideoCardSerie { get; set; }
@@ -24,7 +22,6 @@ namespace IComp.Service.DTOs.VideoCardDTOs
         public VideoCardPostDtoValidator()
         {
             RuleFor(x => x.ModelName).MaximumLength(50).NotEmpty().WithMessage("model is required");
-            RuleFor(x => x.Count).NotEmpty().WithMessage("count of videocard is required");
             RuleFor(x => x.CoreSpeed).MaximumLength(50).NotEmpty().WithMessage("CoreSpeed is required");
             RuleFor(x => x.MemoryCapacity).NotEmpty().WithMessage("memorycapacity is required");
         }

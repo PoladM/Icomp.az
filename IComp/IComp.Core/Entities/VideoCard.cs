@@ -9,10 +9,8 @@ namespace IComp.Core.Entities
         public int VideoCardSerieId { get; set; }
         public string ModelName { get; set; }
         public bool IsAvailable { get; set; }
-        public double? Price { get; set; }
         public string MemoryCapacity { get; set; }
         public string CoreSpeed { get; set; }
-        public int Count { get; set; }
         public VideoCardSerie VideoCardSerie { get; set; }
         public List<Product> Products { get; set; }
     }

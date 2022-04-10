@@ -813,14 +813,18 @@
       labels: ['Value']
     });
 </script>
+@section Scripts{
+
 <script>
         Morris.Donut({
       element: 'donut-example',
       data: [
-        {label: "Download Sales", value: 12},
-        {label: "In-Store Sales", value: 30},
-        {label: "Mail-Order Sales", value: 20}
+        {label: "Accepted Orders", value: @Model.AcceptedOrders},
+        {label: "RejectedOrders", value: @Model.RejectedOrders},
+        {label: "Pending Orders", value: @Model.PendingOrders},
+        {label: "Canceled Orders", value: @Model.CanceledOrders}
       ]
     });
 
 </script>
+}

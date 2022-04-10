@@ -115,9 +115,7 @@ namespace IComp.Service.Implementations
             }
 
             existProd.ModelName = postDTO.ModelName;
-            existProd.Price = postDTO.Price;
             existProd.SSDCapacityID = postDTO.SSDCapacityID;
-            existProd.Count = postDTO.Count;
             existProd.IsAvailable = postDTO.IsAvailable;
 
             await _unitOfWork.CommitAsync();

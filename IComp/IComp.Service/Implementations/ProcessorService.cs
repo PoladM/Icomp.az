@@ -124,10 +124,8 @@ namespace IComp.Service.Implementations
             }
 
             existProcessor.ModelName = postDTO.ModelName;
-            existProcessor.Price = postDTO.Price;
             existProcessor.ProcessorSerieId = postDTO.ProcessorSerieId;
             existProcessor.CoreCount = postDTO.CoreCount;
-            existProcessor.Count = postDTO.Count;
             existProcessor.IsAvailable = postDTO.IsAvailable;
             existProcessor.Speed = postDTO.Speed;
             

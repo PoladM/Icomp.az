@@ -69,7 +69,7 @@ namespace IComp.Service.Implementations
             {
                 if (postDTO.VideoCardId != 0)
                 {
-                    throw new ItemNotFoundException("Item not found");
+                    
                 }
             }
             if (!await _unitOfWork.ProcessorRepository.IsExistAsync(x => x.Id == postDTO.ProcessorId && !x.IsDeleted))
@@ -222,9 +222,14 @@ namespace IComp.Service.Implementations
             await _unitOfWork.CommitAsync();
         }
 
-        public PaginatedListDto<ProductListItemDto> GetAllProd(int page)
+        public PaginatedListDto<ProductListItemDto> GetAllProd(int? value, int page)
         {
             var query = _unitOfWork.ProductRepository.GetAll();
+
+            if (value != null)
+            {
+                query = query.Where(x => x.CategoryId == value);
+            }
 
             var pageSize = 3;
 
@@ -252,6 +257,8 @@ namespace IComp.Service.Implementations
 
             return listDto;
         }
+
+        
 
         public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
         {
@@ -316,6 +323,9 @@ namespace IComp.Service.Implementations
                     break;
                 case "name_desc":
                     query = _unitOfWork.ProductRepository.FilterByNameAsc(query, sort);
+                    break;
+                case "popular":
+                    query = query.OrderByDescending(x => x.IsPopular);
                     break;
                 default:
                     break;
@@ -431,21 +441,25 @@ namespace IComp.Service.Implementations
                     await _unitOfWork.CheckedProductsRepository.AddAsync(item);
                     await _unitOfWork.CommitAsync();
 
-                    foreach (var item2 in checkedProds)
+                    var cProdsList = await checkedProds.ToListAsync();
+
+                    foreach (var item2 in cProdsList)
                     {
-                        var products = _unitOfWork.ProductRepository.GetAll(x => x.Id == item2.ProductId, "Product.ProductImages").ToList();
-                        var dto = _mapper.Map<List<ProductGetDTO>>(products);
-                        viewModel.CheckedProducts.AddRange(dto);
+                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages");
+                        var dto = _mapper.Map<ProductGetDTO>(product);
+                        viewModel.CheckedProducts.Add(dto);
                     }
 
                 }
                 else
                 {
-                    foreach (var item2 in checkedProds)
+                    var cProdsList = await checkedProds.ToListAsync();
+
+                    foreach (var item2 in cProdsList)
                     {
-                        var products = _unitOfWork.ProductRepository.GetAll(x => x.Id == item2.ProductId, "Product.ProductImages").ToList();
-                        var dto = _mapper.Map<List<ProductGetDTO>>(products);
-                        viewModel.CheckedProducts.AddRange(dto);
+                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages");
+                        var dto = _mapper.Map<ProductGetDTO>(product);
+                        viewModel.CheckedProducts.Add(dto);
                     }
                 }
             }
@@ -504,8 +518,17 @@ namespace IComp.Service.Implementations
 
             }
 
-            var productDto = _mapper.Map<ProductGetDTO>(existProduct);
+            Random random = new Random();
+            int number = random.Next(1, 8);
 
+            var productDto = _mapper.Map<ProductGetDTO>(existProduct);
+            var relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.DestinationId == existProduct.DestinationId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id, "ProductImages").Skip(number).Take(4).ToListAsync();
+            if (relatedProds.Count == 0)
+            {
+                relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.DestinationId == existProduct.DestinationId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id, "ProductImages").Take(4).ToListAsync();
+            }
+            var dto2 = _mapper.Map<List<ProductGetDTO>>(relatedProds);
+            viewModel.RelatedProducts = dto2;
             viewModel.Comment = new ProductComment { ProductId = id };
             viewModel.Product = productDto;
 

@@ -124,9 +124,7 @@ namespace IComp.Service.Implementations
             }
 
             existVC.ModelName = postDTO.ModelName;
-            existVC.Price = postDTO.Price;
             existVC.VideoCardSerieId = postDTO.VideoCardSerieId;
-            existVC.Count = postDTO.Count;
             existVC.IsAvailable = postDTO.IsAvailable;
             existVC.CoreSpeed = postDTO.CoreSpeed;
             existVC.MemoryCapacity = postDTO.MemoryCapacity;

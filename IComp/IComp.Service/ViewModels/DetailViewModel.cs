@@ -10,6 +10,7 @@ namespace IComp.Service.ViewModels
     {
         public ProductGetDTO Product { get; set; }
         public ProductComment Comment { get; set; }
+        public List<ProductGetDTO> RelatedProducts { get; set; }
         public List<ProductGetDTO> CheckedProducts { get; set; }
     }
 }

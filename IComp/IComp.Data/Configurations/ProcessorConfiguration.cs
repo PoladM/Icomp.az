@@ -19,7 +19,6 @@ namespace IComp.Data.Configurations
             builder.Property(x => x.IsAvailable).HasDefaultValue(false);
             builder.Property(x => x.Speed).HasMaxLength(50).IsRequired();
             builder.Property(x => x.CoreCount).IsRequired();
-            builder.Property(x => x.Price).HasColumnType("decimal(18,2)").IsRequired(false);
         }
     }
 }

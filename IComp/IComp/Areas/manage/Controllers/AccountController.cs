@@ -28,8 +28,9 @@ namespace IComp.Areas.manage.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly IAppUserService _appUserService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IProductService _productService;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment env, StoreDbContext context, IAppUserService appUserService, IUnitOfWork unitOfWork)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, RoleManager<IdentityRole> roleManager, IWebHostEnvironment env, StoreDbContext context, IAppUserService appUserService, IUnitOfWork unitOfWork, IProductService productService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -37,6 +38,7 @@ namespace IComp.Areas.manage.Controllers
             _env = env;
             _appUserService = appUserService;
             _unitOfWork = unitOfWork;
+            productService = productService;
         }
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()
@@ -134,6 +136,33 @@ namespace IComp.Areas.manage.Controllers
 
             return RedirectToAction("login", "account", "manage");
         }
+
+        public async Task<IActionResult> Profile()
+        {
+            AppUser appUser = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            }
+
+            if (appUser == null || !appUser.IsAdmin)
+            {
+                return BadRequest("user not found");
+            }
+
+            var profileVM = new ProfileViewModel
+            {
+                UserUpdate = new UserUpdateViewModel
+                {
+                    FullName = appUser.FullName,
+                    UserName = appUser.UserName,
+                    Email = appUser.Email,
+                },
+            };
+
+            return View(profileVM);
+        }
+
         [Authorize(Roles = "SuperAdmin")]
         public IActionResult UserList()
         {
