@@ -41,6 +41,7 @@ namespace IComp.Data
         private SliderRepository _sliderRepository;
         private CheckedProductsRepository _checkedProductsRepository;
         private AppUserRepository _appUserRepository;
+        private FeedBackRepository _feedbackRepository;
 
         public UnitOfWork(StoreDbContext context, UserManager<AppUser> userManager)
         {
@@ -101,6 +102,8 @@ namespace IComp.Data
         public ICheckedProductsRepository CheckedProductsRepository => _checkedProductsRepository ?? new CheckedProductsRepository(_context);
 
         public IAppUserRepository AppUserRepository => _appUserRepository ?? new AppUserRepository(_context,_userManager);
+
+        public IFeedBackRepository FeedBackRepository => _feedbackRepository ?? new FeedBackRepository(_context);
 
         public int Commit()
         {

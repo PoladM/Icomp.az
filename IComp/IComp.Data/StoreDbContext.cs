@@ -41,6 +41,7 @@ namespace IComp.Data
         public DbSet<SSDCapacity> SSDCapacities { get; set; }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<CheckedProducts> CheckedProducts { get; set; }
+        public DbSet<FeedBack> FeedBa{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

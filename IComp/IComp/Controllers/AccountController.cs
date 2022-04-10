@@ -1,4 +1,5 @@
-﻿using IComp.Core.Entities;
+﻿using IComp.Core;
+using IComp.Core.Entities;
 using IComp.Service.DTOs.AppUserDTOs;
 using IComp.Service.Exceptions;
 using IComp.Service.Helpers;
@@ -24,12 +25,14 @@ namespace IComp.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IProductService _productService;
         private readonly IWebHostEnvironment _env;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IProductService productService, IWebHostEnvironment env)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IProductService productService, IWebHostEnvironment env, IUnitOfWork unitOfWork)
         {
             _signInManager = signInManager;
             _productService = productService;
             _env = env;
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
 
@@ -47,7 +50,7 @@ namespace IComp.Controllers
             }
             var appUser = await _userManager.FindByNameAsync(postDto.UserName);
 
-            if(appUser != null)
+            if (appUser != null)
             {
                 ModelState.AddModelError("UserName", "The user has already logged in");
                 return View();
@@ -92,7 +95,7 @@ namespace IComp.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(AppUserLoginPostDto postDto)
         {
-            
+
 
             if (!ModelState.IsValid)
             {
@@ -243,7 +246,7 @@ namespace IComp.Controllers
 
         public IActionResult ForgotPassword()
         {
-            return View(); 
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -267,7 +270,7 @@ namespace IComp.Controllers
             Dictionary<string, string> replaces = new Dictionary<string, string>();
             replaces.Add("{url}", link.ToString());
 
-            await EmailUtil.SendEmailAsync(email, "Reset Password",path, replaces);
+            await EmailUtil.SendEmailAsync(email, "Reset Password", path, replaces);
             return RedirectToAction("index", "home");
         }
 
@@ -315,6 +318,67 @@ namespace IComp.Controllers
             }
 
             return RedirectToAction("index", "home");
+        }
+
+        public async Task<IActionResult> ContactUs()
+        {
+            AppUser appUser = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && !x.IsAdmin);
+            }
+
+            ContactUsViewModel contactUsViewModel = new ContactUsViewModel
+            {
+                Name = appUser?.UserName,
+                Email = appUser?.Email,
+            };
+
+            return View(contactUsViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ContactUs(ContactUsViewModel contactUsViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            AppUser appUser = new AppUser();
+            if (User.Identity.IsAuthenticated)
+            {
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.FullName == User.Identity.Name && !x.IsAdmin);
+            }
+
+            FeedBack feedBack = new FeedBack();
+            if (appUser != null)
+            {
+                feedBack = new FeedBack
+                {
+                    AppUserId = appUser.Id,
+                    CreatedAt = DateTime.UtcNow.AddHours(4),
+                    ModifiedAt = DateTime.UtcNow.AddHours(4),
+                    Name = contactUsViewModel.Name,
+                    Email = contactUsViewModel.Email,
+                    Text = contactUsViewModel.Name,
+                    IsDeleted = false,
+                };
+            }
+            feedBack = new FeedBack
+            {
+                    
+                CreatedAt = DateTime.UtcNow.AddHours(4),
+                ModifiedAt = DateTime.UtcNow.AddHours(4),
+                Name = contactUsViewModel.Name,
+                Email = contactUsViewModel.Email,
+                Text = contactUsViewModel.Name,
+                IsDeleted = false,
+            };
+
+            await _unitOfWork.FeedBackRepository.AddAsync(feedBack);
+            await _unitOfWork.CommitAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
