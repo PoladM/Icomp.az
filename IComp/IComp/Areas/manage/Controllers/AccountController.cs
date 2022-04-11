@@ -38,7 +38,7 @@ namespace IComp.Areas.manage.Controllers
             _env = env;
             _appUserService = appUserService;
             _unitOfWork = unitOfWork;
-            productService = productService;
+            _productService = productService;
         }
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> Create()

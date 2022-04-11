@@ -79,11 +79,10 @@
                     <li><a asp-action="make" asp-controller="home" style="font-weight: 700;">Kompüter yığılması</a></li>
                     @if (appUser != null)
                    {
-                       @if (User.IsInRole("SuperAdmin"))
+                       @if (!User.IsInRole("SuperAdmin"))
                       {
-                          
-                      }
                         <li><img src="~/assets/img/Icons/user.svg" alt=""> <a asp-action="profile" asp-controller="account" style="font-weight: 700;">@appUser.FullName</a> <a asp-action="logout" asp-controller="account" style="font-weight: 700;" >Çıxış</a></li>
+                      }
                    }
                     else
                     {

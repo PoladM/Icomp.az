@@ -273,3 +273,5 @@ C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\Account\Profile.cshtml.g.cs
 C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Views\Account\ContactUs.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ContactUs\Index.cshtml.g.cs
+C:\Users\memme\OneDrive\Masaüstü\Final-Back\IComp\IComp\obj\Debug\netcoreapp3.1\Razor\Areas\manage\Views\ContactUs\Edit.cshtml.g.cs
