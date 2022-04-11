@@ -80,23 +80,24 @@
                     <li class=""><a asp-action="index" asp-controller="Dashboard"><i class="ti-home"></i>Home</a></li>
                     @if (appUser.UserName == "SuperAdmin")
                     {
-                        <li class=""><a asp-action="userlist" asp-controller="account"><i class="ti-home"></i>List of Admins</a></li>
+                        <li class=""><a asp-action="userlist" asp-controller="account"><i class="ti-angle-right"></i>List of Admins</a></li>
                     }
-                    <li class=""><a asp-action="index" asp-controller="Brand">Brand</a></li>
-                    <li class=""><a asp-action="index" asp-controller="Category">Category</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Color">Color</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Destination">Destination</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Harddisc">Harddisc</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Memory">Memory</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="MotherBoard">MotherBoard</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Processor">Processor</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="ProdType">ProdType</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Product">Product</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Setting">Setting</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="Software">Software</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="SSD">SSD</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="VideoCard">VideoCard</a></li>
-                    <li class=" "><a asp-action="index" asp-controller="slider">Slider</a></li>
+                    <li class=""><a asp-action="index" asp-controller="Order"><i class="ti-angle-right"></i>Orders</a></li>
+                    <li class=""><a asp-action="index" asp-controller="Brand"><i class="ti-angle-right"></i>Brand</a></li>
+                    <li class=""><a asp-action="index" asp-controller="Category"><i class="ti-angle-right"></i>Category</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Color"><i class="ti-angle-right"></i>Color</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Destination"><i class="ti-angle-right"></i>Destination</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Harddisc"><i class="ti-angle-right"></i>Harddisc</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Memory"><i class="ti-angle-right"></i>Memory</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="MotherBoard"><i class="ti-angle-right"></i>MotherBoard</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Processor"><i class="ti-angle-right"></i>Processor</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="ProdType"><i class="ti-angle-right"></i>ProdType</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Product"><i class="ti-angle-right"></i>Product</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Setting"><i class="ti-angle-right"></i>Setting</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="Software"><i class="ti-angle-right"></i>Software</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="SSD"><i class="ti-angle-right"></i>SSD</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="VideoCard"><i class="ti-angle-right"></i>VideoCard</a></li>
+                    <li class=" "><a asp-action="index" asp-controller="slider"><i class="ti-angle-right"></i>Slider</a></li>
 
 
                     <li class="label">Apps</li>
@@ -400,9 +401,11 @@
                             <div class="header-icon">
                                 @if (appUser != null)
                                 {
-                                    <span class="user-avatar">
-                                        @appUser.FullName
-                                    </span>
+                                    <a asp-action="profile" asp-controller="account" asp-area="manage">
+                                        <span class="user-avatar">
+                                            @appUser.FullName
+                                        </span>
+                                    </a>
                                     <a asp-action="logout" asp-controller="account" asp-area="manage">
                                         <i class="ti-power-off"></i>
                                         Logout

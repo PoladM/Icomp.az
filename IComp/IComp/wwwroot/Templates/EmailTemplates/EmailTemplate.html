@@ -4,8 +4,162 @@
     <meta charset="utf-8" />
     <title></title>
 
-   
-    <link rel="stylesheet" href="~/assets/css/style.css" />
+
+    <style>
+        * {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .rwd-table {
+            margin: auto;
+            min-width: 300px;
+            max-width: 100%;
+            border-collapse: collapse;
+        }
+
+            .rwd-table tr:first-child {
+                border-top: none;
+                background: #428bca;
+                color: #fff;
+            }
+
+            .rwd-table tr {
+                border-top: 1px solid #ddd;
+                border-bottom: 1px solid #ddd;
+                background-color: #f5f9fc;
+            }
+
+                .rwd-table tr:nth-child(odd):not(:first-child) {
+                    background-color: #ebf3f9;
+                }
+
+            .rwd-table th {
+                display: none;
+            }
+
+            .rwd-table td {
+                display: block;
+            }
+
+                .rwd-table td:first-child {
+                    margin-top: .5em;
+                }
+
+                .rwd-table td:last-child {
+                    margin-bottom: .5em;
+                }
+
+                .rwd-table td:before {
+                    content: attr(data-th) ": ";
+                    font-weight: bold;
+                    width: 120px;
+                    display: inline-block;
+                    color: #000;
+                }
+
+            .rwd-table th,
+            .rwd-table td {
+                text-align: left;
+            }
+
+        .rwd-table {
+            color: #333;
+            border-radius: .4em;
+            overflow: hidden;
+        }
+
+            .rwd-table tr {
+                border-color: #bfbfbf;
+            }
+
+            .rwd-table th,
+            .rwd-table td {
+                padding: .5em 1em;
+            }
+
+        @media screen and (max-width: 601px) {
+            .rwd-table tr:nth-child(2) {
+                border-top: none;
+            }
+        }
+
+        @media screen and (min-width: 600px) {
+            .rwd-table tr:hover:not(:first-child) {
+                background-color: #d8e7f3;
+            }
+
+            .rwd-table td:before {
+                display: none;
+            }
+
+            .rwd-table th,
+            .rwd-table td {
+                display: table-cell;
+                padding: .25em .5em;
+            }
+
+                .rwd-table th:first-child,
+                .rwd-table td:first-child {
+                    padding-left: 0;
+                }
+
+                .rwd-table th:last-child,
+                .rwd-table td:last-child {
+                    padding-right: 0;
+                }
+
+            .rwd-table th,
+            .rwd-table td {
+                padding: 1em !important;
+            }
+        }
+
+
+        /* THE END OF THE IMPORTANT STUFF */
+
+        /* Basic Styling */
+        body {
+            background: #4B79A1;
+            background: -webkit-linear-gradient(to left, #4B79A1, #283E51);
+            background: linear-gradient(to left, #4B79A1, #283E51);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.4em;
+            color: #f2f2f2;
+        }
+
+        .container {
+            display: block;
+            text-align: center;
+        }
+
+        h3 {
+            display: inline-block;
+            position: relative;
+            text-align: center;
+            font-size: 1.5em;
+            color: #cecece;
+        }
+
+            h3:before {
+                content: "\25C0";
+                position: absolute;
+                left: -50px;
+                -webkit-animation: leftRight 2s linear infinite;
+                animation: leftRight 2s linear infinite;
+            }
+
+            h3:after {
+                content: "\25b6";
+                position: absolute;
+                right: -50px;
+                -webkit-animation: leftRight 2s linear infinite reverse;
+                animation: leftRight 2s linear infinite reverse;
+            }
+    </style>
+
 </head>
 <body>
 
@@ -71,35 +225,35 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                <div class="container">
                                                     <table class="rwd-table">
-                                                        <tr>
-                                                            <th>Order</th>
-                                                            <th>Date</th>
-                                                            <th>Status</th>
-                                                            <th>Total</th>
-                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Date</th>
+                                                                <th>Status</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td data-th="Supplier Code">
+                                                                </td>
+                                                                <td data-th="Supplier Name">
+                                                                    {date}
+                                                                </td>
+                                                                <td data-th="Invoice Number">
+                                                                    {status}
+                                                                </td>
+                                                                <td data-th="Invoice Date">
+                                                                    ₼ {total}
+                                                                </td>
+                                                            </tr>
 
-                                                        <tr>
-                                                            <td data-th="Movie Title"> </td>
-                                                            <td data-th="Genre">{date}</td>
-                                                            <td data-th="Year">{status}</td>
-                                                            <td data-th="Gross">{total}</td>
-                                                        </tr>
+                                                        </tbody>
                                                     </table>
                                                 </div>
                                             </tr>
                                             <tr>
                                                 <td style="font-size:1px;line-height:1px" height="20">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" valign="middle" style="padding-bottom: 40px;" class="emailRegards">
-                                                    <!-- Image and Link // -->
-                                                    <a href="#" target="_blank" style="text-decoration:none;">
-                                                        <img mc:edit="signature" src="http://email.aumfusion.com/vespro/img//other/signature.png" alt="" width="150" border="0" style="width:100%;
-    max-width:150px; height:auto; display:block;">
-                                                    </a>
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -114,73 +268,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="wrapperFooter" style="max-width:600px">
-                        <tbody>
-                            <tr>
-                                <td align="center" valign="top">
-                                    <table border="0" cellpadding="0" cellspacing="0" width="100%" class="footer">
-                                        <tbody>
-                                            <tr>
-                                                <td style="padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:10px" align="center" valign="top" class="socialLinks">
-                                                    <a href="#facebook-link" style="display:inline-block" target="_blank" class="facebook">
-                                                        <img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/facebook.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                    </a>
-                                                    <a href="#twitter-link" style="display: inline-block;" target="_blank" class="twitter">
-                                                        <img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/twitter.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                    </a>
-                                                    <a href="#pintrest-link" style="display: inline-block;" target="_blank" class="pintrest">
-                                                        <img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/pintrest.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                    </a>
-                                                    <a href="#instagram-link" style="display: inline-block;" target="_blank" class="instagram">
-                                                        <img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/instagram.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                    </a>
-                                                    <a href="#linkdin-link" style="display: inline-block;" target="_blank" class="linkdin">
-                                                        <img alt="" border="0" src="http://email.aumfusion.com/vespro/img/social/light/linkdin.png" style="height:auto;width:100%;max-width:40px;margin-left:2px;margin-right:2px" width="40">
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 10px 10px 5px;" align="center" valign="top" class="brandInfo">
-                                                    <p class="text" style="color:#bbb;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:20px;text-transform:none;text-align:center;padding:0;margin:0">©&nbsp;Vespro Inc. | 800 Broadway, Suite 1500 | New York, NY 000123, USA.</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 0px 10px 20px;" align="center" valign="top" class="footerLinks">
-                                                    <p class="text" style="color:#bbb;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:20px;text-transform:none;text-align:center;padding:0;margin:0">
-                                                        <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">View Web Version </a>&nbsp;|&nbsp; <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">Email Preferences </a>&nbsp;|&nbsp; <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">Privacy Policy</a>
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 0px 10px 10px;" align="center" valign="top" class="footerEmailInfo">
-                                                    <p class="text" style="color:#bbb;font-family:'Open Sans',Helvetica,Arial,sans-serif;font-size:12px;font-weight:400;font-style:normal;letter-spacing:normal;line-height:20px;text-transform:none;text-align:center;padding:0;margin:0">
-                                                        If you have any quetions please contact us <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">support@mail.com.</a>
-                                                        <br> <a href="#" style="color:#bbb;text-decoration:underline" target="_blank">Unsubscribe</a> from our mailing lists
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:10px" align="center" valign="top" class="appLinks">
-                                                    <a href="#Play-Store-Link" style="display: inline-block;" target="_blank" class="play-store">
-                                                        <img alt="" border="0" src="http://email.aumfusion.com/vespro/img/app/play-store.png" style="height:auto;margin:5px;width:100%;max-width:120px" width="120">
-                                                    </a>
-                                                    <a href="#App-Store-Link" style="display: inline-block;" target="_blank" class="app-store">
-                                                        <img alt="" border="0" src="http://email.aumfusion.com/vespro/img/app/app-store.png" style="height:auto;margin:5px;width:100%;max-width:120px" width="120">
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size:1px;line-height:1px" height="30">&nbsp;</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="font-size:1px;line-height:1px" height="30">&nbsp;</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    
                 </td>
             </tr>
         </tbody>

@@ -2,6 +2,7 @@
 using IComp.Service.Exceptions;
 using IComp.Service.Interfaces;
 using IComp.Service.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace IComp.Areas.manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin, Admin, Reader, Editor")]
     public class ContactUsController : Controller
     {
         private readonly IFeedBackService _feedBackService;
