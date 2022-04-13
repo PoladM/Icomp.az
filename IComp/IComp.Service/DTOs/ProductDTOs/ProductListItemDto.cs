@@ -17,7 +17,7 @@ namespace IComp.Service.DTOs.ProductDTOs
         public int? MotherBoardId { get; set; }
         public int? ProdTypeId { get; set; }
         public int? VideoCardId { get; set; }
-        public int ColorId { get; set; }
+        public int? ColorId { get; set; }
         public int? SoftwareId { get; set; }
         public DateTime CreatedAt { get; set; }
 

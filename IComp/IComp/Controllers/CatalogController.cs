@@ -265,9 +265,10 @@ namespace IComp.Controllers
             AppUser appUser = null;
             if (User.Identity.IsAuthenticated)
             {
-                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name);
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && !x.IsAdmin);
             }
             var basketItems = await _productService.GetBasketItems(appUser);
+
             return PartialView("_BasketPartial", basketItems);
         }
 

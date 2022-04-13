@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace IComp.Service.DTOs.ProductPartsDTOs
@@ -14,17 +15,38 @@ namespace IComp.Service.DTOs.ProductPartsDTOs
         public int CategoryId { get; set; }
         public int ColorId { get; set; }
 
-
+        [Required]
+        [StringLength(maximumLength:500)]
         public string Name { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public string GraphCard { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public string MotherBoardSound { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public string Network { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public string WarrantyPeriod { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public int Count { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public decimal SalePrice { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public decimal CostPrice { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public decimal DiscountPercent { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public string Material { get; set; }
+        [Required]
+        [StringLength(maximumLength: 500)]
         public string Speed { get; set; }
 
         public Color Color { get; set; }

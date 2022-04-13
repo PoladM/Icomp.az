@@ -12,14 +12,14 @@ namespace IComp.Core.Entities
         public int? ProcessorId { get; set; }
         public int CategoryId { get; set; }
         public int BrandId { get; set; }
-        public int? DestinationId { get; set; }
+        public int DestinationId { get; set; }
         public int? HardDiscId { get; set; }
         public int? SSDId { get; set; }
         public int? ProdMemoryId { get; set; }
         public int? MotherBoardId { get; set; }
-        public int? ProdTypeId { get; set; }
+        public int ProdTypeId { get; set; }
         public int? VideoCardId { get; set; }
-        public int ColorId { get; set; }
+        public int? ColorId { get; set; }
         public int? SoftwareId { get; set; }
 
         [Required]
@@ -41,33 +41,52 @@ namespace IComp.Core.Entities
         public bool HasBluetooth { get; set; }
         public bool HasWifi { get; set; }
 
-
+        [StringLength(maximumLength:500)]
         public string SoundType { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string InputPorts { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string USB { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string USBTypeC { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string Network { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string PowerSupply { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string Weight { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string WarrantyPeriod { get; set; }
 
 
-        //motherboard
-        public string GraphCard { get; set; }
-        public string MotherBoardSound { get; set; }
+        [StringLength(maximumLength: 500)]
 
-        //ram
-        //capacity here
+        public string GraphCard { get; set; }
+        [StringLength(maximumLength: 500)]
+
+        public string MotherBoardSound { get; set; }
+        [StringLength(maximumLength: 500)]
         public string RamLightning { get; set; }
 
-        //videocard
-        //videocard here
+        [StringLength(maximumLength: 500)]
         public string MaxResolution { get; set; }
+
+        [StringLength(maximumLength: 500)]
+
         public string Ports { get; set; }
-        //cooler
+        [StringLength(maximumLength: 500)]
+
         public string Material { get; set; }
+        [StringLength(maximumLength: 500)]
+
         public string Speed { get; set; }
-        //Weight here
 
         public Processor Processor { get; set; }
         public VideoCard VideoCard { get; set; }

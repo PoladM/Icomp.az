@@ -332,6 +332,7 @@ namespace IComp.Controllers
             {
                 Name = appUser?.UserName,
                 Email = appUser?.Email,
+
             };
 
             return View(contactUsViewModel);
@@ -344,10 +345,10 @@ namespace IComp.Controllers
                 return View();
             }
 
-            AppUser appUser = new AppUser();
+            AppUser appUser = null;
             if (User.Identity.IsAuthenticated)
             {
-                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.FullName == User.Identity.Name && !x.IsAdmin);
+                appUser = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == User.Identity.Name && !x.IsAdmin);
             }
 
             FeedBack feedBack = new FeedBack();
@@ -360,18 +361,22 @@ namespace IComp.Controllers
                     ModifiedAt = DateTime.UtcNow.AddHours(4),
                     Name = contactUsViewModel.Name,
                     Email = contactUsViewModel.Email,
-                    Text = contactUsViewModel.Name,
+                    Text = contactUsViewModel.Text,
                     IsDeleted = false,
                 };
+
+                await _unitOfWork.FeedBackRepository.AddAsync(feedBack);
+                await _unitOfWork.CommitAsync();
+
+                return RedirectToAction("Index", "Home");
             }
             feedBack = new FeedBack
             {
-                    
                 CreatedAt = DateTime.UtcNow.AddHours(4),
                 ModifiedAt = DateTime.UtcNow.AddHours(4),
                 Name = contactUsViewModel.Name,
                 Email = contactUsViewModel.Email,
-                Text = contactUsViewModel.Name,
+                Text = contactUsViewModel.Text,
                 IsDeleted = false,
             };
 

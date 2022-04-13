@@ -69,7 +69,7 @@ namespace IComp.Service.Implementations
             {
                 if (postDTO.VideoCardId != 0)
                 {
-                    
+
                 }
             }
             if (!await _unitOfWork.ProcessorRepository.IsExistAsync(x => x.Id == postDTO.ProcessorId && !x.IsDeleted))
@@ -258,7 +258,7 @@ namespace IComp.Service.Implementations
             return listDto;
         }
 
-        
+
 
         public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
         {
@@ -332,7 +332,23 @@ namespace IComp.Service.Implementations
             }
 
             if (minprice != null && maxprice != null)
-                query = query.Where(x => x.DiscountPercent > 0 ? x.SalePrice * (1 - x.DiscountPercent / 100) >= minprice && x.SalePrice * (1 - x.DiscountPercent / 100) <= maxprice : x.SalePrice >= minprice && x.SalePrice <= maxprice);
+            {
+                foreach (var item in query)
+                {
+                    if (item.SalePrice * (1 - item.DiscountPercent / 100) >= minprice && (item.SalePrice * (1 - item.DiscountPercent / 100)) <= maxprice && item.DiscountPercent > 0)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+
+                query = query.Where(x => x.DiscountPercent > 0 ? (Math.Floor(x.SalePrice * (1 - x.DiscountPercent / 100)) >= minprice && Math.Floor(x.SalePrice * (1 - x.DiscountPercent / 100)) <= maxprice) : (x.SalePrice >= minprice && x.SalePrice <= maxprice));
+            }
+
+
 
             NumberFormatInfo nfi = new NumberFormatInfo();
 
@@ -383,7 +399,7 @@ namespace IComp.Service.Implementations
                 VideoCardId = x.VideoCardId,
                 ColorId = x.ColorId,
                 SoftwareId = x.SoftwareId,
-
+                CategoryId = x.CategoryId,
             }).ToList();
 
             var listDto = new PaginatedListDto<ProductListItemDto>(items, query.Count(), page, pageSize);
@@ -510,7 +526,7 @@ namespace IComp.Service.Implementations
                     {
                         var checkedProds = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
 
-                        var dto = _mapper.Map<ProductGetDTO>(checkedProds); 
+                        var dto = _mapper.Map<ProductGetDTO>(checkedProds);
 
                         viewModel.CheckedProducts.Add(dto);
                     }
@@ -1309,7 +1325,9 @@ namespace IComp.Service.Implementations
         {
             var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted && x.IsNew, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software").OrderByDescending(x => x.CreatedAt);
 
-            var pageSize = 4;
+            var setting = _unitOfWork.SettingRepository.GetAll().ToDictionary(x => x.Key, x => x.Value);
+
+            var pageSize = int.Parse(setting.FirstOrDefault(x => x.Key == "HomePageSize").Value);
 
             List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto
             {

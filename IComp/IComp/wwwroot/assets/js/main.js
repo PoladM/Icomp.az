@@ -84,6 +84,7 @@ $(document).ready(function () {
             if (response.ok) {
                 return response.text();
             }
+            alert("not found")
             throw response;
         }).then(data => {
             $("#myModal .modal-basket-inner").html(data)

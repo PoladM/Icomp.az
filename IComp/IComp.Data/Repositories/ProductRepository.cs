@@ -47,16 +47,20 @@ namespace IComp.Data.Repositories
 
         public decimal FilterByPriceRange(string val)
         {
-            var products = _context.Products;
+            var products = _context.Products.AsQueryable();
             if (products.Any())
             {
                 if (val == "max")
                 {
-                    return products.Max(x => x.SalePrice);
+                    var prodPrices = products.Select(x => x.DiscountPercent > 0 ? x.SalePrice * (1 - x.DiscountPercent/100) : x.SalePrice);
+                    var maxPrice = prodPrices.Max();
+                    return maxPrice;
                 }
                 else if (val == "min")
                 {
-                    return products.Min(x => x.SalePrice);
+                    var prodPrices = products.Select(x => x.DiscountPercent > 0 ? x.SalePrice * (1 - x.DiscountPercent / 100) : x.SalePrice);
+                    var minPrice = prodPrices.Min();
+                    return minPrice;
                 }
             }
             return 0;
