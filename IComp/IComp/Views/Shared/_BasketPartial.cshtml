@@ -53,6 +53,10 @@
     }
 
     <input type="hidden" value="@counter" id="basket-count" />
+    @if (TempData["Success"] != null)
+    {
+        <input type="hidden" id="basket-success-toaster" value="@TempData["Success"]" />
+    }
 
     @if (Model.BasketItems.Count != 0)
     {

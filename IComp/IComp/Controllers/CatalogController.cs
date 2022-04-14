@@ -34,18 +34,9 @@ namespace IComp.Controllers
 
             var products = _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
-            
-
-            try
+            if (products.Items.Count == 0)
             {
-                if (products.Items == null)
-                {
-                    throw new ItemNotFoundException("Item Not Found");
-                }
-            }
-            catch (ItemNotFoundException)
-            {
-                return PartialView("_Error");
+                throw new ItemNotFoundException("Item Not Found");
             }
 
             var filterProd = _productService.ProductsForFilter(categoryid, brandid);
@@ -200,7 +191,7 @@ namespace IComp.Controllers
         {
             if (!await _productService.AnyProd(id))
             {
-                throw new ItemNotFoundException("item not found");
+                throw new ItemNotFoundException("Item not found");
             }
 
             AppUser appUser = null;

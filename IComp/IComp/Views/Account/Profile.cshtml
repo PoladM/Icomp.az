@@ -23,25 +23,51 @@
             </div>
         </div>
         <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <table class="rwd-table">
-                <tr>
-                    <th>Order</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Total</th>
-                </tr>
-                @foreach (var item in Model.Orders)
-                {
-                    counter++;
-                    <tr>
-                        <td data-th="Movie Title">#@counter</td>
-                        <td data-th="Genre">@item.CreatedAt</td>
-                        <td data-th="Year">@item.Status</td>
-                        <td data-th="Gross">@item.TotalPrice</td>
-                    </tr>
-                }
 
-            </table>
+            @foreach (var item in Model.Orders)
+            {
+                <table class="rwd-table main-product-table">
+                    <tr>
+                        <th>Order</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                    </tr>
+                    @{
+                        counter++;
+                    }
+                    <tr>
+                        <td data-th="Order">#@counter</td>
+                        <td data-th="Date">@item.CreatedAt</td>
+                        <td data-th="Status">@item.Status</td>
+                        <td data-th="Total">@item.TotalPrice</td>
+                    </tr>
+
+                </table>
+                <div class="product-details-table" style="display:none; margin:0 auto; width:85%;">
+
+                    <table class="rwd-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Count</th>
+                            <th>Brand</th>
+                            <th>Category</th>
+                        </tr>
+                        @foreach (var product in item.OrderItems)
+                        {
+                            <tr>
+
+                                <td data-th="Name">@product.Product.Name</td>
+                                <td data-th="Count">@product.Count</td>
+                                <td data-th="Brand">@product.Product.Brand.Name</td>
+                                <td data-th="Category">@product.Product.Category.Name</td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            }
+
         </div>
     </div>
 </div>

@@ -333,17 +333,6 @@ namespace IComp.Service.Implementations
 
             if (minprice != null && maxprice != null)
             {
-                foreach (var item in query)
-                {
-                    if (item.SalePrice * (1 - item.DiscountPercent / 100) >= minprice && (item.SalePrice * (1 - item.DiscountPercent / 100)) <= maxprice && item.DiscountPercent > 0)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
 
                 query = query.Where(x => x.DiscountPercent > 0 ? (Math.Floor(x.SalePrice * (1 - x.DiscountPercent / 100)) >= minprice && Math.Floor(x.SalePrice * (1 - x.DiscountPercent / 100)) <= maxprice) : (x.SalePrice >= minprice && x.SalePrice <= maxprice));
             }
@@ -1626,7 +1615,7 @@ namespace IComp.Service.Implementations
 
         public async Task<List<Order>> GetOrdersAsync(AppUser appUser)
         {
-            var orders = await _unitOfWork.OrderRepository.GetAll(x => x.AppUserId == appUser.Id).ToListAsync();
+            var orders = await _unitOfWork.OrderRepository.GetAll(x => x.AppUserId == appUser.Id, "OrderItems.Product.Brand", "OrderItems.Product.Category").ToListAsync();
             return orders;
         }
 

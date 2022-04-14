@@ -113,11 +113,13 @@ $(document).ready(function () {
                 prodCount = $("#basket-count").val()
                 $(".basket-counter-value").html(prodCount);
                 $("#myModal").modal('show');
+                if ($("#basket-success-toaster").length) {
+                    toastr["success"]($("#basket-success-toaster").val());
+                }
             })
             .catch(err => {
                 err.json().then(json => {
-                    $("#myModal .modal-basket-inner").html(json.message)
-                    $("#myModal").modal("show");
+                    toastr["error"](json.message);
                 })
             })
     })
@@ -350,10 +352,15 @@ $(document).ready(function () {
             })
             .catch(err => {
                 err.json().then(json => {
-                    $("#fastOrderModal .modal-body-inner").html(json.message);
-                    $("#fastOrderModal").modal('show');
+                    toastr["error"](json.message);
                 })
             })
+    })
+
+    $(".main-product-table").on("click", function (e) {
+        
+
+        $(this).next().slideToggle();
     })
 });
 

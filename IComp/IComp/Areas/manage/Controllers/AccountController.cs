@@ -44,6 +44,7 @@ namespace IComp.Areas.manage.Controllers
         public async Task<IActionResult> Create()
         {
             var roles = await _appUserService.GetRolesAsync();
+            roles = roles.Where(x => x.Name != "SuperAdmin" && x.Name != "Member").ToList();
             AdminRegisterViewModel VM = new AdminRegisterViewModel
             {
                 Roles = roles.Select(x => x.Name).ToList(),
@@ -78,6 +79,7 @@ namespace IComp.Areas.manage.Controllers
                     ModelState.AddModelError("", item.Description);
                 }
                 var roles = await _appUserService.GetRolesAsync();
+                roles = roles.Where(x => x.Name != "SuperAdmin" && x.Name != "Member").ToList();
                 admin.Roles = roles.Select(x => x.Name).ToList();
                 return View(admin);
             }

@@ -2,7 +2,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Routing.Patterns;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
 
 namespace IComp.ServiceExtentions
 {
@@ -30,10 +38,11 @@ namespace IComp.ServiceExtentions
                         else if (contextFeatures.Error is RecordDuplicatedException)
                         {
                             statusCode = 409;
-                        }
+                        }   
                     }
 
                     context.Response.StatusCode = statusCode;
+
 
                     string responseStr = JsonConvert.SerializeObject(new
                     {
@@ -42,8 +51,11 @@ namespace IComp.ServiceExtentions
                     });
 
                     await context.Response.WriteAsync(responseStr);
+
                 });
             });
         }
+
+        
     }
 }
