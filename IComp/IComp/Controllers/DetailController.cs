@@ -21,6 +21,7 @@ namespace IComp.Controllers
             try
             {
                 products = await _productService.FindByIdAsync(id);
+                products.Settings = _productService.GetSettings();
             }
             catch (ItemNotFoundException)
             {

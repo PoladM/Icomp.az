@@ -26,14 +26,34 @@ namespace IComp.Controllers
 
         public async Task<IActionResult> BasketCheckOut()
         {
-            return View(await _productService.CheckOut());
+            try
+            {
+                var checkout = await _productService.CheckOut();
+
+                return View(checkout);
+            }
+            catch (ItemNotFoundException)
+            {
+                TempData["Warning"] = "Product not found in basket";
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateBasketOrder(Order order)
         {
-            await _productService.CreateOrder(order);
-            return RedirectToAction("Index", "Home");
+
+            try
+            {
+                await _productService.CreateOrder(order);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (ItemNotFoundException)
+            {
+                TempData["Warning"] = "Product Not Found";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public async Task<IActionResult> CheckOut(int id)

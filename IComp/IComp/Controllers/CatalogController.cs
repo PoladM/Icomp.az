@@ -28,11 +28,11 @@ namespace IComp.Controllers
             _userManager = userManager;
             _unitOfWork = unitOfWork;
         }
-        public IActionResult Index(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? ssdcapacityid, int? categoryid, int page = 1)
+        public async Task<IActionResult> Index(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? memorycapacityid, int? brandid, int? destinationid, int? hddcapacityid, int? ssdcapacityid, int? categoryid, int page = 1)
         {
             ProductViewModel viewModel = null;
 
-            var products = _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
+            var products = await _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
             if (products.Items.Count == 0)
             {
@@ -81,8 +81,9 @@ namespace IComp.Controllers
                 SSDCapacities = new List<SSDCapacity>(),
                 categoryGetDtos = new List<Service.DTOs.CategoryDTOs.CategoryGetDto>(),
                 Softwares = new List<Service.DTOs.SoftwareDTOs.SoftwareGetDto>(),
+                Settings = _productService.GetSettings(),
                 MaxPrice = _productService.FilterByPrice("max"),
-                MinPrice = _productService.FilterByPrice("min")
+                MinPrice = _productService.FilterByPrice("min"),
             };
 
 
@@ -270,6 +271,10 @@ namespace IComp.Controllers
         public async Task<IActionResult> DeleteProdFromBasket(int id)
         {
             return PartialView("_BasketPartial", await _productService.DeleteProdFromBasket(id));
+        }
+        public async Task<IActionResult> DeleteProdFromCheckout(int id)
+        {
+            return PartialView("_OrderBasketPartial", await _productService.DeleteProdFromBasket(id));
         }
 
         [HttpPost]

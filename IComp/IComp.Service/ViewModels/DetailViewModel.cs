@@ -12,5 +12,6 @@ namespace IComp.Service.ViewModels
         public ProductComment Comment { get; set; }
         public List<ProductGetDTO> RelatedProducts { get; set; }
         public List<ProductGetDTO> CheckedProducts { get; set; }
+        public Dictionary<string,string> Settings { get; set; }
     }
 }

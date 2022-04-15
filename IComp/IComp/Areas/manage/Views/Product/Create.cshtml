@@ -121,6 +121,7 @@
                     <div class="form-group col-lg-4">
                         <label asp-for="ProcessorId">Processors</label>
                         <select class="form-control" asp-for="ProcessorId" asp-items="@new SelectList(ViewBag.Processors,nameof(Processor.Id),nameof(Processor.ModelName))">
+                            <option value="0">none</option>
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
@@ -159,6 +160,7 @@
                     <div class="form-group col-lg-4">
                         <label asp-for="MotherBoardId">MotherBoards</label>
                         <select class="form-control" asp-for="MotherBoardId" asp-items="@new SelectList(ViewBag.MotherBoards,nameof(MotherBoard.Id),nameof(MotherBoard.ModelName))">
+                            <option value="0">none</option>
                         </select>
                         <span class="text-danger" asp-validation-for="MotherBoardId"></span>
 

@@ -27,30 +27,26 @@ namespace IComp.Service.DTOs.ProductDTOs
         public bool HasBluetooth { get; set; }
         public bool HasWifi { get; set; }
 
-        [Required]
         [StringLength(maximumLength: 100)]
         public string SoundType { get; set; }
-        [Required]
         [StringLength(maximumLength: 100)]
         public string InputPorts { get; set; }
-        [Required]
         [StringLength(maximumLength: 100)]
         public string USB { get; set; }
-        [Required]
         [StringLength(maximumLength: 100)]
         public string USBTypeC { get; set; }
-        [Required]
         [StringLength(maximumLength: 100)]
         public string Network { get; set; }
-        [Required]
         [StringLength(maximumLength: 100)]
         public string PowerSupply { get; set; }
-        [Required]
         [StringLength(maximumLength: 100)]
         public string Weight { get; set; }
-        [Required]
         [StringLength(maximumLength: 100)]
         public string WarrantyPeriod { get; set; }
+        [StringLength(maximumLength: 100)]
+        public string GraphCard { get; set; }
+        [StringLength(maximumLength: 100)]
+        public string MotherBoardSound { get; set; }
 
 
         public Processor Processor { get; set; }

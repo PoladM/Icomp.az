@@ -29,6 +29,7 @@ namespace IComp.Service.ViewModels
         public List<CategoryGetDto> categoryGetDtos { get; set; }
         public List<SSDCapacity> SSDCapacities { get; set; }
         public List<SoftwareGetDto> Softwares { get; set; }
+        public Dictionary<string,string> Settings { get; set; }
         public decimal MaxPrice { get; set; }
         public decimal MinPrice { get; set; }
     }

@@ -527,10 +527,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="item__card-body">
-                                                        <div class="product-desc">
+                                                        <div class="product-desc text">
                                                             <p>
-                                                                @(item.Processor?.ProcessorSerie?.Name == null ? "" : item.Processor?.ProcessorSerie?.Name + "|")  @(item .ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item .ProdMemory?.MemoryCapacity?.Capacity + "|") @(item .ProdMemory?.DDRType == null ? "" : item .ProdMemory?.DDRType + "|") @(item .SSD?.SSDCapacity?.Capacity == null? "" : item .SSD?.SSDCapacity?.Capacity + "SSD |")  @(item .HardDisc?.HDDCapacity?.Capacity == null? "" : item .HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item .Processor?.ModelName == null ? "" : item .Processor?.ModelName + "|")
-                                                                @(item.VideoCard?.CoreSpeed == null ? "" : item.VideoCard?.CoreSpeed + "|") @(item.VideoCard?.MemoryCapacity==null? "" : item .VideoCard?.MemoryCapacity + "|") @(item .VideoCard?.VideoCardSerie?.Name==null? "" : item .VideoCard?.VideoCardSerie?.Name + " series |")
+                                                                @(item.Processor?.ProcessorSerie?.Name == null ? "" : item.Processor?.ProcessorSerie?.Name + "|")  @(item.ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item.ProdMemory?.MemoryCapacity?.Capacity + "|") @(item.ProdMemory?.DDRType == null ? "" : item.ProdMemory?.DDRType + "|") @(item.SSD?.SSDCapacity?.Capacity == null? "" : item.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.HardDisc?.HDDCapacity?.Capacity == null? "" : item.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item.Processor?.ModelName == null ? "" : item.Processor?.ModelName + "|")
+                                                                @(item.VideoCard?.CoreSpeed == null ? "" : item.VideoCard?.CoreSpeed + "|") @(item.VideoCard?.MemoryCapacity==null? "" : item.VideoCard?.MemoryCapacity + "|") @(item.VideoCard?.VideoCardSerie?.Name==null? "" : item.VideoCard?.VideoCardSerie?.Name + " series |")  @(item.GraphCard == null ? "" : item.GraphCard + "|") @(item.MotherBoardSound == null ? "" : item.MotherBoardSound+ "|") @(item.Network == null ? "" : item.Network + "|")
                                                             </p>
                                                         </div>
                                                         <div class="product-price">
@@ -580,10 +580,10 @@
                                                         </div>
                                                     </div>
                                                     <div class="item__card-body">
-                                                        <div class="product-desc">
+                                                        <div class="product-desc text">
                                                             <p>
-                                                                @(item.Processor?.ProcessorSerie?.Name == null ? "" : item.Processor?.ProcessorSerie?.Name + "|")  @(item .ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item .ProdMemory?.MemoryCapacity?.Capacity + "|") @(item .ProdMemory?.DDRType == null ? "" : item .ProdMemory?.DDRType + "|") @(item .SSD?.SSDCapacity?.Capacity == null? "" : item .SSD?.SSDCapacity?.Capacity + "SSD |")  @(item .HardDisc?.HDDCapacity?.Capacity == null? "" : item .HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item .Processor?.ModelName == null ? "" : item .Processor?.ModelName + "|")
-                                                                @(item.VideoCard?.CoreSpeed == null ? "" : item.VideoCard?.CoreSpeed + "|") @(item.VideoCard?.MemoryCapacity==null? "" : item .VideoCard?.MemoryCapacity + "|") @(item .VideoCard?.VideoCardSerie?.Name==null? "" : item .VideoCard?.VideoCardSerie?.Name + " series |")
+                                                                @(item.Processor?.ProcessorSerie?.Name == null ? "" : item.Processor?.ProcessorSerie?.Name + "|")  @(item.ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item.ProdMemory?.MemoryCapacity?.Capacity + "|") @(item.ProdMemory?.DDRType == null ? "" : item.ProdMemory?.DDRType + "|") @(item.SSD?.SSDCapacity?.Capacity == null? "" : item.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.HardDisc?.HDDCapacity?.Capacity == null? "" : item.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item.Processor?.ModelName == null ? "" : item.Processor?.ModelName + "|")
+                                                                @(item.VideoCard?.CoreSpeed == null ? "" : item.VideoCard?.CoreSpeed + "|") @(item.VideoCard?.MemoryCapacity==null? "" : item.VideoCard?.MemoryCapacity + "|") @(item.VideoCard?.VideoCardSerie?.Name==null? "" : item.VideoCard?.VideoCardSerie?.Name + " series |")  @(item.GraphCard == null ? "" : item.GraphCard + "|") @(item.MotherBoardSound == null ? "" : item.MotherBoardSound+ "|") @(item.Network == null ? "" : item.Network + "|")
                                                             </p>
                                                         </div>
                                                         <div class="product-price">
@@ -624,10 +624,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="~/assets/img/Services/s1.png" alt="">
+                                <img src="~/uploads/settings/@Model.Settings["serviceIcon1"]" alt="">
                             </div>
                             <div class="services__title">
-                                <h6>Sürətli çatdırılma</h6>
+                                <h6>@Model.Settings["serviceTitle1"]</h6>
                             </div>
                             <div class="line"></div>
                         </div>
@@ -635,22 +635,10 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="~/assets/img/Services/s2.png" alt="">
+                                <img src="~/uploads/settings/@Model.Settings["serviceIcon2"]" alt="">
                             </div>
                             <div class="services__title">
-                                <h6>RƏSMİ ZƏMANƏT</h6>
-                            </div>
-                            <div class="line"></div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="services-box">
-                            <div class="services__icon">
-                                <img src="~/assets/img/Services/s3.png" alt="">
-                            </div>
-                            <div class="services__title">
-                                <h6>KREDİTLƏ SATIŞ</h6>
+                                <h6>@Model.Settings["serviceTitle2"]</h6>
                             </div>
                             <div class="line"></div>
 
@@ -659,10 +647,22 @@
                     <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="services-box">
                             <div class="services__icon">
-                                <img src="~/assets/img/Services/s4.png" alt="">
+                                <img src="~/uploads/settings/@Model.Settings["serviceIcon3"]" alt="">
                             </div>
                             <div class="services__title">
-                                <h6>YÜKSƏK KEYFİYYƏT</h6>
+                                <h6>@Model.Settings["serviceTitle3"]</h6>
+                            </div>
+                            <div class="line"></div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="services-box">
+                            <div class="services__icon">
+                                <img src="~/uploads/settings/@Model.Settings["serviceIcon4"]" alt="">
+                            </div>
+                            <div class="services__title">
+                                <h6>@Model.Settings["serviceTitle4"]</h6>
                             </div>
                         </div>
                     </div>

@@ -260,7 +260,7 @@ namespace IComp.Service.Implementations
 
 
 
-        public PaginatedListDto<ProductListItemDto> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
+        public async Task<PaginatedListDto<ProductListItemDto>> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
         {
             var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
@@ -333,7 +333,6 @@ namespace IComp.Service.Implementations
 
             if (minprice != null && maxprice != null)
             {
-
                 query = query.Where(x => x.DiscountPercent > 0 ? (Math.Floor(x.SalePrice * (1 - x.DiscountPercent / 100)) >= minprice && Math.Floor(x.SalePrice * (1 - x.DiscountPercent / 100)) <= maxprice) : (x.SalePrice >= minprice && x.SalePrice <= maxprice));
             }
 
@@ -344,8 +343,8 @@ namespace IComp.Service.Implementations
             nfi.NumberDecimalSeparator = ".";
 
 
-
-            var pageSize = 4;
+            var key = await _unitOfWork.SettingRepository.GetAsync(x => x.Key == "CatalogPageSize");
+            var pageSize = int.Parse(key.Value);
 
             List<ProductListItemDto> items = query.Skip((page - 1) * pageSize).Take(pageSize).Select(x => new ProductListItemDto
             {
@@ -418,7 +417,7 @@ namespace IComp.Service.Implementations
         }
         public async Task<DetailViewModel> FindByIdAsync(int id)
         {
-            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
+            var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id && !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
 
             AppUser appUser = null;
             DetailViewModel viewModel = new DetailViewModel();
@@ -434,7 +433,7 @@ namespace IComp.Service.Implementations
             }
             if (appUser != null)
             {
-                var checkedProds = _unitOfWork.CheckedProductsRepository.GetAll(x => x.AppUserId == appUser.Id);
+                var checkedProds = _unitOfWork.CheckedProductsRepository.GetAll(x => x.AppUserId == appUser.Id).Take(12);
 
                 if (!checkedProds.Any(x => x.ProductId == existProduct.Id))
                 {
@@ -450,7 +449,7 @@ namespace IComp.Service.Implementations
 
                     foreach (var item2 in cProdsList)
                     {
-                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages");
+                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
                         var dto = _mapper.Map<ProductGetDTO>(product);
                         viewModel.CheckedProducts.Add(dto);
                     }
@@ -462,7 +461,7 @@ namespace IComp.Service.Implementations
 
                     foreach (var item2 in cProdsList)
                     {
-                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages");
+                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
                         var dto = _mapper.Map<ProductGetDTO>(product);
                         viewModel.CheckedProducts.Add(dto);
                     }
@@ -513,12 +512,14 @@ namespace IComp.Service.Implementations
 
                     foreach (var item in cookieItems)
                     {
-                        var checkedProds = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages");
+                        var checkedProds = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+                        
 
                         var dto = _mapper.Map<ProductGetDTO>(checkedProds);
 
                         viewModel.CheckedProducts.Add(dto);
                     }
+                    viewModel.CheckedProducts.Take(12);
                 }
 
             }
@@ -527,10 +528,10 @@ namespace IComp.Service.Implementations
             int number = random.Next(1, 8);
 
             var productDto = _mapper.Map<ProductGetDTO>(existProduct);
-            var relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.DestinationId == existProduct.DestinationId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id, "ProductImages").Skip(number).Take(4).ToListAsync();
-            if (relatedProds.Count == 0)
+            var relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.DestinationId == existProduct.DestinationId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id && !x.IsDeleted && x.IsAvailable , "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software").Skip(number).Take(4).ToListAsync();
+            if (relatedProds.Count < 4)
             {
-                relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.DestinationId == existProduct.DestinationId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id, "ProductImages").Take(4).ToListAsync();
+                relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software").Take(4).ToListAsync();
             }
             var dto2 = _mapper.Map<List<ProductGetDTO>>(relatedProds);
             viewModel.RelatedProducts = dto2;
@@ -1430,11 +1431,15 @@ namespace IComp.Service.Implementations
             order.TrackId = $"{guid}";
             var path = String.Empty;
 
+            var basket = await GetBasketItems(member);
+
             if (member == null)
             {
+                if (basket.BasketItems.Count == 0)
+                    throw new ItemNotFoundException("");
                 checkoutVM = new CheckOutViewModel
                 {
-                    Basket = await GetBasketItems(member),
+                    Basket = basket,
                     Order = order
                 };
 
@@ -1503,9 +1508,11 @@ namespace IComp.Service.Implementations
                 return;
             }
 
+            if (basket.BasketItems.Count == 0)
+                throw new ItemNotFoundException("");
             checkoutVM = new CheckOutViewModel
             {
-                Basket = await GetBasketItems(member),
+                Basket = basket,
                 Order = order
             };
 
@@ -1609,6 +1616,7 @@ namespace IComp.Service.Implementations
                     basketItems.TotalPrice += totalPrice * item.Count;
                 }
             }
+
 
             return basketItems;
         }

@@ -5,7 +5,15 @@
 
 <section id="contact-us">
     <div class="container">
-        <h1>Ünvan Əlaqə</h1>
+        <div class="breadcrumb">
+                    <ul class="breadcrumb-nav">
+                        <li class="nav-item"><a asp-action="index" asp-controller="home">Kompüter mağazası "iComp"</a></li>
+                        <li class="nav-item"><span class="breadcrumb-arrow">></span><a asp-action="contactus" asp-controller="account">Əlaqə</a></li>
+                        
+                    </ul>
+                </div>
+
+        <h1>Ünvan və Əlaqə</h1>
         <div class="contact-us-content">
             <form asp-action="contactus" asp-controller="account" method="post">
                 <div class="form-group">

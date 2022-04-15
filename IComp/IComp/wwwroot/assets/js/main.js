@@ -147,6 +147,29 @@ $(document).ready(function () {
     })
 
 
+    // remove from checkout
+    $(document).on("click", ".remove-checkout", function (e) {
+        e.preventDefault();
+
+        let path = $(this).attr("href");
+
+        fetch(path)
+            .then(response => {
+                if (response.ok) {
+                    return response.text()
+                }
+                else {
+                    alert("Failed:(")
+                    return;
+                }
+
+            }).then(data => {
+                $(".order-content").html(data)
+                prodCount = $("#basket-count").val()
+                $(".basket-counter-value").html(prodCount);
+            })
+    })
+
 
     //update basket for quantity
     $(document).on("click", ".change-val", function (e) {

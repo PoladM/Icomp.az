@@ -34,25 +34,17 @@ namespace IComp.Service.DTOs.ProductDTOs
         public decimal DiscountPercent { get; set; }
         public string Network { get; set; }
 
-        //processor
         public string procSpeed { get; set; }
 
-        //motherboard
         public string GraphCard { get; set; }
         public string MotherBoardSound { get; set; }
 
-        //ram
-        //capacity here
         public string RamLightning { get; set; }
 
-        //videocard
-        //videocard here
         public string MaxResolution { get; set; }
         public string Ports { get; set; }
-        //cooler
         public string Material { get; set; }
         public string Speed { get; set; }
-        //Weight here
 
         public List<ProductImage> ProductImages { get; set; }
 
