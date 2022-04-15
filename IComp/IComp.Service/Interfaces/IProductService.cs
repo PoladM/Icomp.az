@@ -67,7 +67,9 @@ namespace IComp.Service.Interfaces
         Task<CommonBasketViewModel> DeleteBasket(int id);
         Task<CommonBasketViewModel> DeleteProdFromBasket(int id);
 
-        Task<List<Product>> SearchProd(string searchString);
+        Task<List<Product>> SearchProd(string searchString, int? maxProdCount);
+        Task<PaginatedListDto<ProductGetDTO>> SearchProdAll(string searchString, int page);
+
         Task<int> Comment(ProductComment comment);
         Task<FastCheckOutViewModel> FastOrder(int id);
         Task CreateOrder(int id, Order order, int prodcount, int ordercount);

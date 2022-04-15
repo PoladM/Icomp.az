@@ -215,11 +215,13 @@
                             <form asp-action="search" asp-controller="catalog" method="get" id="searchProd">
                                 <div class="searchElements">
                                     <input type="text" class="navbar__input" placeholder="Məhsul axtarışı"
-                                        id="searchString" name="searchString" role="textbox">
-                                    <button class="search-button" type="submit">
+                                        id="searchString" form="search-all-prod" name="searchString" role="textbox">
+                                    <button form="search-all-prod" class="search-button" type="submit">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
                                 </div>
+                            </form>
+                            <form asp-action="searchall" asp-controller="catalog" id="search-all-prod">
                             </form>
                             
                         </div>

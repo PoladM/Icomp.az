@@ -120,30 +120,30 @@
                 <div class="form-row">
                     <div class="form-group col-lg-4">
                         <label asp-for="ProcessorId">Processors</label>
-                        <select class="form-control" asp-for="ProcessorId" asp-items="@new SelectList(ViewBag.Processors,nameof(Processor.Id),nameof(Processor.ModelName))">
+                        <select class="form-control" asp-for="ProcessorId" asp-items="@(new SelectList(ViewBag.Processors,nameof(Processor.Id),nameof(Processor.ModelName)))">
                             <option value="0">none</option>
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="BrandId">Brands</label>
-                        <select class="form-control" asp-for="BrandId" asp-items="@new SelectList(ViewBag.Brands,nameof(Brand.Id),nameof(Brand.Name))">
+                        <select class="form-control" asp-for="BrandId" asp-items="@(new SelectList(ViewBag.Brands,nameof(Brand.Id),nameof(Brand.Name)))">
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="ProdMemoryId">RAMs</label>
-                        <select class="form-control" asp-for="ProdMemoryId" asp-items="@new SelectList(ViewBag.Memories,nameof(ProdMemory.Id),nameof(ProdMemory.ModelName))">
+                        <select class="form-control" asp-for="ProdMemoryId" asp-items="@(new SelectList(ViewBag.Memories,nameof(ProdMemory.Id),nameof(ProdMemory.ModelName)))">
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-lg-4">
                         <label asp-for="CategoryId">Categories</label>
-                        <select class="form-control" asp-for="CategoryId" asp-items="@new SelectList(ViewBag.Categories,nameof(Category.Id),nameof(Category.Name))">
+                        <select class="form-control" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories,nameof(Category.Id),nameof(Category.Name)))">
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="HardDiscId">HardDiscs</label>
-                        <select class="form-control" asp-for="HardDiscId" asp-items="@new SelectList(ViewBag.HardDiscs,nameof(HardDisc.Id),nameof(HardDisc.ModelName))">
+                        <select class="form-control" asp-for="HardDiscId" asp-items="@(new SelectList(ViewBag.HardDiscs,nameof(HardDisc.Id),nameof(HardDisc.ModelName)))">
                             <option value="0">none</option>
                         </select>
                         <span class="text-danger" asp-validation-for="HardDiscId"></span>
@@ -151,7 +151,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="SSDId">SSDs</label>
-                        <select class="form-control" asp-for="SSDId" asp-items="@new SelectList(ViewBag.SSDs,nameof(SSD.Id),nameof(SSD.ModelName))">
+                        <select class="form-control" asp-for="SSDId" asp-items="@(new SelectList(ViewBag.SSDs,nameof(SSD.Id),nameof(SSD.ModelName)))">
                             <option value="0">none</option>
                         </select>
                         <span class="text-danger" asp-validation-for="SSDId"></span>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="MotherBoardId">MotherBoards</label>
-                        <select class="form-control" asp-for="MotherBoardId" asp-items="@new SelectList(ViewBag.MotherBoards,nameof(MotherBoard.Id),nameof(MotherBoard.ModelName))">
+                        <select class="form-control" asp-for="MotherBoardId" asp-items="@(new SelectList(ViewBag.MotherBoards,nameof(MotherBoard.Id),nameof(MotherBoard.ModelName)))">
                             <option value="0">none</option>
                         </select>
                         <span class="text-danger" asp-validation-for="MotherBoardId"></span>
@@ -169,12 +169,12 @@
                 <div class="form-row">
                     <div class="form-group col-lg-6">
                         <label asp-for="ColorId">Color</label>
-                        <select class="form-control" asp-for="ColorId" asp-items="@new SelectList(ViewBag.Colors,nameof(Color.Id),nameof(Color.Name))">
+                        <select class="form-control" asp-for="ColorId" asp-items="@(new SelectList(ViewBag.Colors,nameof(Color.Id),nameof(Color.Name)))">
                         </select>
                     </div>
                     <div class="form-group col-lg-6">
                         <label asp-for="SoftwareId">Software</label>
-                        <select class="form-control" asp-for="SoftwareId" asp-items="@new SelectList(ViewBag.Softwares,nameof(Software.Id),nameof(Software.Name))">
+                        <select class="form-control" asp-for="SoftwareId" asp-items="@(new SelectList(ViewBag.Softwares,nameof(Software.Id),nameof(Software.Name)))">
                         </select>
                     </div>
                 </div>
@@ -182,17 +182,17 @@
                 <div class="form-row">
                     <div class="form-group col-lg-4">
                         <label asp-for="VideoCardId">VideoCards</label>
-                        <select class="form-control" asp-for="VideoCardId" asp-items="@new SelectList(ViewBag.VideoCards,nameof(VideoCard.Id),nameof(VideoCard.ModelName))">
+                        <select class="form-control" asp-for="VideoCardId" asp-items="@(new SelectList(ViewBag.VideoCards,nameof(VideoCard.Id),nameof(VideoCard.ModelName)))">
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="ProdTypeId">Product Types</label>
-                        <select class="form-control" asp-for="ProdTypeId" asp-items="@new SelectList(ViewBag.ProdTypes,nameof(ProdType.Id),nameof(ProdType.Name))">
+                        <select class="form-control" asp-for="ProdTypeId" asp-items="@(new SelectList(ViewBag.ProdTypes,nameof(ProdType.Id),nameof(ProdType.Name)))">
                         </select>
                     </div>
                     <div class="form-group col-lg-4">
                         <label asp-for="DestinationId">Destionations</label>
-                        <select class="form-control" asp-for="DestinationId" asp-items="@new SelectList(ViewBag.Destinations,nameof(Destination.Id),nameof(Destination.Name))">
+                        <select class="form-control" asp-for="DestinationId" asp-items="@(new SelectList(ViewBag.Destinations,nameof(Destination.Id),nameof(Destination.Name)))">
                         </select>
                     </div>
                 </div>

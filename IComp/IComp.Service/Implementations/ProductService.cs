@@ -262,7 +262,7 @@ namespace IComp.Service.Implementations
 
         public async Task<PaginatedListDto<ProductListItemDto>> FilterProd(decimal? minprice, decimal? maxprice, string sort, int? softwareid, int? processorserieid, int? videocardserieid, int? motherboardid, int? prodtypeid, int? prodmemorycapacityid, int? brandid, int? destinationid, int? harddiscapacitycid, int? ssdcapacityid, int? categoryid, int page)
         {
-            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+            var query = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
             if (processorserieid != null)
             {
@@ -449,7 +449,7 @@ namespace IComp.Service.Implementations
 
                     foreach (var item2 in cProdsList)
                     {
-                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId && !x.IsDeleted, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
                         var dto = _mapper.Map<ProductGetDTO>(product);
                         viewModel.CheckedProducts.Add(dto);
                     }
@@ -461,7 +461,7 @@ namespace IComp.Service.Implementations
 
                     foreach (var item2 in cProdsList)
                     {
-                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+                        var product = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item2.ProductId && !x.IsDeleted, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
                         var dto = _mapper.Map<ProductGetDTO>(product);
                         viewModel.CheckedProducts.Add(dto);
                     }
@@ -512,8 +512,8 @@ namespace IComp.Service.Implementations
 
                     foreach (var item in cookieItems)
                     {
-                        var checkedProds = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
-                        
+                        var checkedProds = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == item.ProductId && !x.IsDeleted, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+
 
                         var dto = _mapper.Map<ProductGetDTO>(checkedProds);
 
@@ -528,7 +528,7 @@ namespace IComp.Service.Implementations
             int number = random.Next(1, 8);
 
             var productDto = _mapper.Map<ProductGetDTO>(existProduct);
-            var relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.DestinationId == existProduct.DestinationId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id && !x.IsDeleted && x.IsAvailable , "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software").Skip(number).Take(4).ToListAsync();
+            var relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.DestinationId == existProduct.DestinationId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id && !x.IsDeleted && x.IsAvailable, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software").Skip(number).Take(4).ToListAsync();
             if (relatedProds.Count < 4)
             {
                 relatedProds = await _unitOfWork.ProductRepository.GetAll(x => (x.CategoryId == existProduct.CategoryId || x.BrandId == existProduct.BrandId) && x.Id != existProduct.Id, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software").Take(4).ToListAsync();
@@ -1066,13 +1066,20 @@ namespace IComp.Service.Implementations
             }
         }
 
-        public async Task<List<Product>> SearchProd(string searchString)
+        public async Task<List<Product>> SearchProd(string searchString, int? maxProdCount)
         {
-            var products = _unitOfWork.ProductRepository.GetAll("ProductImages");
+            var products = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                products = products.Where(s => s.Name.Trim().ToLower().Contains(searchString));
+                if (maxProdCount == null)
+                {
+                    products = products.Where(s => s.Name.Trim().ToLower().Contains(searchString.Trim().ToLower()));
+                }
+                else
+                {
+                    products = products.Where(s => s.Name.Trim().ToLower().Contains(searchString.Trim().ToLower())).Take(maxProdCount ?? 10);
+                }
             }
             else
             {
@@ -1081,6 +1088,24 @@ namespace IComp.Service.Implementations
 
 
             return await products.ToListAsync();
+        }
+
+        public async Task<PaginatedListDto<ProductGetDTO>> SearchProdAll(string searchString,int page)
+        {
+            var products = _unitOfWork.ProductRepository.GetAll(x => !x.IsDeleted, "ProductImages", "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Color", "Software");
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Trim().ToLower().Contains(searchString.Trim().ToLower()));
+            }
+            else
+            {
+                products = null;
+            }
+            var dto = _mapper.Map<List<ProductGetDTO>>(products);
+            PaginatedListDto<ProductGetDTO> listDto = new PaginatedListDto<ProductGetDTO>(dto, dto.Count(), page, 8);
+
+            return listDto;
         }
 
         public async Task<int> Comment(ProductComment comment)

@@ -8996,19 +8996,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\memme\\.nuget\\packages\\": {}
+    "C:\\Users\\USER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\IComp.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\IComp.csproj",
       "projectName": "IComp",
-      "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\IComp.csproj",
-      "packagesPath": "C:\\Users\\memme\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\obj\\",
+      "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\IComp.csproj",
+      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\memme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9022,8 +9022,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj": {
-              "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj"
+            "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\IComp.Service.csproj": {
+              "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\IComp.Service.csproj"
             }
           }
         }
@@ -9071,7 +9071,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

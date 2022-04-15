@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\IComp.csproj": {}
+    "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\IComp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj": {
+    "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Core\\IComp.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Core\\IComp.Core.csproj",
         "projectName": "IComp.Core",
-        "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj",
-        "packagesPath": "C:\\Users\\memme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Core\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Core\\IComp.Core.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\memme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -59,26 +59,40 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj": {
+    "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Data\\IComp.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Data\\IComp.Data.csproj",
         "projectName": "IComp.Data",
-        "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj",
-        "packagesPath": "C:\\Users\\memme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Data\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Data\\IComp.Data.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\memme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -92,8 +106,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj": {
-                "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj"
+              "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Core\\IComp.Core.csproj": {
+                "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Core\\IComp.Core.csproj"
               }
             }
           }
@@ -146,21 +160,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj": {
+    "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\IComp.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\IComp.Service.csproj",
         "projectName": "IComp.Service",
-        "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj",
-        "packagesPath": "C:\\Users\\memme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\IComp.Service.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\memme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -174,8 +188,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj": {
-                "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj"
+              "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Data\\IComp.Data.csproj": {
+                "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Data\\IComp.Data.csproj"
               }
             }
           }
@@ -218,21 +232,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\IComp.csproj": {
+    "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\IComp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\IComp.csproj",
+        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\IComp.csproj",
         "projectName": "IComp",
-        "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\IComp.csproj",
-        "packagesPath": "C:\\Users\\memme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp\\obj\\",
+        "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\IComp.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\memme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -246,8 +260,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj": {
-                "projectPath": "C:\\Users\\memme\\OneDrive\\Masaüstü\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj"
+              "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\IComp.Service.csproj": {
+                "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Service\\IComp.Service.csproj"
               }
             }
           }
@@ -295,7 +309,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
