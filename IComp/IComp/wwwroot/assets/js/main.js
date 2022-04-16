@@ -381,7 +381,7 @@ $(document).ready(function () {
     })
 
     $(".main-product-table").on("click", function (e) {
-        
+
 
         $(this).next().slideToggle();
     })
@@ -499,11 +499,48 @@ loginSubmit.addEventListener("click", function (e) {
 
 })
 
-//window.addEventListener('mouseup', function (event) {
-//    var box = document.getElementById('menu');
-//    if (event.target != box && event.target.parentNode != box) {
+//create fast order
+//$(document).ready(function () {
+//    let orderBtn = $(".order-button");
+//    console.log(orderBtn);
+//    orderBtn.addEventListener("click", function (e) {
+//        e.preventDefault();
+//        console.log("wow");
+//        return;
+//        let orderForm = document.getElementById("fastOrder");
+//        let fullName = document.getElementById("fast-order-fullname");
+//        let email = document.getElementById("fast-order-mail");
+//        let phone = document.getElementById("fast-order-phone");
+//        let address = document.getElementById("fast-order-adress");
+//        let errMsg = document.getElementsByClassName("err-msg-box")[0];
 
-//            box.classList.remove("active");
-//            box.classList.add("deactive");
-//    }
-//});
+
+//        const formdata = new FormData();
+
+//        formdata.append("FullName", fullName.value);
+//        formdata.append("Email", email.value);
+//        formdata.append("Phone", phone.value);
+//        formdata.append("Address", address.value);
+
+//        var url = orderForm.action;
+
+//        fetch(url, {
+//            method: "POST",
+//            body: formdata,
+//            headers: {
+//                'Accept': 'application/json'
+//            }
+//        })
+//            .then(response => {
+//                if (!response.ok) {
+//                    throw response
+//                }
+//            })
+//            .catch(err => {
+//                err.text().then(errorMessage => {
+//                    errMsg.innerHTML = errorMessage
+//                })
+//            })
+//    })
+//})
+

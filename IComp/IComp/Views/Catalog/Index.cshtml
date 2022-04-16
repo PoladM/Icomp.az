@@ -5,12 +5,12 @@
     NumberFormatInfo nfi = new NumberFormatInfo();
 
     nfi.NumberDecimalSeparator = ".";
-
+    nfi.CurrencyDecimalDigits = 2;
     var filterMin = ViewBag.FilterMinPrice;
     var filterMax = ViewBag.FilterMaxPrice;
 
-    filterMin = filterMin.ToString(nfi);
-    filterMax = filterMax.ToString(nfi);
+    filterMin = filterMin.ToString("0.00", nfi);
+    filterMax = filterMax.ToString("0.00", nfi);
 
     var temp = -1;
     if (Model.Paginated.PageIndex == 1)
@@ -60,11 +60,11 @@
                                                 </div>
 
                                                 <div style="margin:30px auto">
-                                                    <input type="number" min=@(Model.MinPrice.ToString(nfi)) max="@((int)Model.MaxPrice)"
-                                                           oninput="validity.valid||(value='@(Model.MinPrice.ToString(nfi))');" name="minPrice" form="filterForm" id="min_price"
+                                                    <input type="number" min=@(Model.MinPrice.ToString("0.00", nfi)) max="@(Model.MaxPrice.ToString("0.00", nfi))"
+                                                           oninput="validity.valid||(value='@(Model.MinPrice.ToString("0.00", nfi))');" name="minPrice" form="filterForm" id="min_price"
                                                            class="price-range-field" />
-                                                    <input type="number" min=@(Model.MinPrice.ToString(nfi)) max="@((int)Model.MaxPrice)"
-                                                           oninput="validity.valid||(value='@(Model.MaxPrice.ToString(nfi))');" name="maxPrice" form="filterForm" id="max_price"
+                                                    <input type="number" min=@(Model.MinPrice.ToString("0.00", nfi)) max="@(Model.MaxPrice.ToString("0.00", nfi))"
+                                                           oninput="validity.valid||(value='@(Model.MaxPrice.ToString("0.00", nfi))');" name="maxPrice" form="filterForm" id="max_price"
                                                            class="price-range-field" />
                                                 </div>
 
@@ -294,19 +294,6 @@
                                 <h2>Kompüterlər</h2>
                             </div>
 
-                            <div class="sub-categories">
-                                <div class="blog-tags">
-                                    <div class="line">
-                                        <a href="">Acer kompüterləri</a>
-                                        <a href="">Asus Mini kompüterləri</a>
-                                        <a href="">Gigabyte kompüterləri</a>
-                                        <a href="">HP Kompüterləri</a>
-                                        <a href=""> iComp Kompüterləri</a>
-                                        <a href="">Lenovo Kompüterləri</a>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="order-filter">
                                 <select form="filterForm" name="sort" id="orderFilter">
                                     <!option @(ViewBag.Sort == "default" ? "selected" : "") value="default">Varsayılan olaraq</!option>
@@ -455,8 +442,8 @@
         $("#slider-range").slider({
             range: true,
             orientation: "horizontal",
-            min: @(Model.MinPrice.ToString(nfi)),
-            max: @(Model.MaxPrice.ToString(nfi)),
+            min: @(Model.MinPrice.ToString("0.00", nfi)),
+            max: @(Model.MaxPrice.ToString("0.00", nfi)),
             values: [@(filterMin), @(filterMax)],
             //   step: 100,
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Cwv5mRd8xn7Ocwso1H+LiU6r7ztFdGd14NxuOSdNg1V2JmXZEVKEgGp62jjmNyl0xNDHAp7tGNdRi28VflpnGA==",
+  "dgSpecHash": "VrDhICpDc8tf/8TJ4X+IXpT/srChu720xrCUcX29v29pOXY7TdfpQoQZlc3Y0LXe1l93ZWCbwMpW2L589LdD3w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Core\\IComp.Core.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.23\\microsoft.aspnetcore.http.features.3.1.23.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.23\\microsoft.aspnetcore.jsonpatch.3.1.23.nupkg.sha512",
@@ -11,10 +11,7 @@
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.23\\microsoft.extensions.primitives.3.1.23.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\system.io.pipelines\\4.7.5\\system.io.pipelines.4.7.5.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+    "C:\\Users\\USER\\.nuget\\packages\\system.io.pipelines\\4.7.5\\system.io.pipelines.4.7.5.nupkg.sha512"
   ],
   "logs": []
 }

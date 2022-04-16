@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1r9RfPV7tJdv2KZIc9y4Eh3UaVsn0EhKcBhR9ZCv20qCs+qcafBGXc8IoyRdTwPsLfErBDYK3QN5eCp3FciYDA==",
+  "dgSpecHash": "L+S+164RWZWn5Vu4zanRN5D1zLL7t7sdHqPF0sQhaA5c2BKa2fwKDjKJANksBXpeSYyiIddabAEL+iDR0c9mbA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Icomp.az-master\\IComp\\IComp.Data\\IComp.Data.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.23\\microsoft.aspnetcore.cryptography.internal.3.1.23.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.23\\microsoft.aspnetcore.cryptography.keyderivation.3.1.23.nupkg.sha512",

@@ -1256,7 +1256,7 @@ namespace IComp.Service.Implementations
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.To.Add(order.Email);
                 mailMessage.From = new MailAddress(Constant.EmailAddress);
-                mailMessage.Subject = "Salam hörmətli müştəri";
+                mailMessage.Subject = "Sifarişiniz üçün təşəkkürlər";
                 mailMessage.Body = body;
                 mailMessage.IsBodyHtml = true;
 
@@ -1519,7 +1519,7 @@ namespace IComp.Service.Implementations
                     Replaces.Add("{trackid}", order.TrackId.ToString());
                     Replaces.Add("{total}", order.TotalPrice.ToString());
 
-                    await EmailUtil.SendEmailAsync(order.Email, "Salam hörmətli müştəri", path, Replaces);
+                    await EmailUtil.SendEmailAsync(order.Email, "Sifarişiniz üçün təşəkkürlər", path, Replaces);
                 }
 
 
@@ -1587,7 +1587,7 @@ namespace IComp.Service.Implementations
             replaces.Add("{trackid}", order.TrackId.ToString());
             replaces.Add("{total}", order.TotalPrice.ToString());
 
-            await EmailUtil.SendEmailAsync(order.Email, "Salam hörmətli müştəri", path, replaces);
+            await EmailUtil.SendEmailAsync(order.Email, "Sifarişiniz üçün təşəkkürlər", path, replaces);
 
             await _unitOfWork.OrderRepository.AddAsync(order);
 

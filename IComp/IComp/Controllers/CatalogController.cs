@@ -34,10 +34,7 @@ namespace IComp.Controllers
 
             var products = await _productService.FilterProd(minprice, maxprice, sort, softwareid, processorserieid, videocardserieid, motherboardid, prodtypeid, memorycapacityid, brandid, destinationid, hddcapacityid, ssdcapacityid, categoryid, page);
 
-            if (products.Items.Count == 0)
-            {
-                throw new ItemNotFoundException("Item Not Found");
-            }
+            
 
             var filterProd = _productService.ProductsForFilter(categoryid, brandid);
 
@@ -185,6 +182,11 @@ namespace IComp.Controllers
 
             ViewBag.Sort = sort;
 
+            if (products.Items.Count == 0)
+            {
+                TempData["Warning"] = "0 item found";
+            }
+
             return View(viewModel);
         }
 
@@ -216,15 +218,15 @@ namespace IComp.Controllers
                 var product = await _productService.GetByIdAsync(id);
                 if (product.IsAvailable == false || product.IsDeleted)
                 {
-                    throw new ItemNotFoundException("This product isn't available");
+                    throw new ItemNotFoundException("Məhsul stokda mövcud deyil");
                 }
                 if (product == null)
                 {
-                    throw new ItemNotFoundException("Item not found");
+                    throw new ItemNotFoundException("Məhsul tapılmadı");
                 }
                 if (product.Count <= cookieItem?.Count)
                 {
-                    throw new ItemNotFoundException("There are only " + product.Count + " products in stock");
+                    throw new ItemNotFoundException("Stokda sadəcə " + product.Count + " məhsul var.");
                 }
 
                 if (cookieItem == null)

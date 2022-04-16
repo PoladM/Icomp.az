@@ -34,7 +34,7 @@ namespace IComp.Controllers
             }
             catch (ItemNotFoundException)
             {
-                TempData["Warning"] = "Product not found in basket";
+                TempData["Warning"] = "Səbətdə məhsul tapılmadı";
                 return RedirectToAction("Index", "Home");
             }
 
@@ -43,15 +43,21 @@ namespace IComp.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBasketOrder(Order order)
         {
-
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    var checkout = await _productService.CheckOut();
+                    checkout.Order = order;
+                    return View("BasketCheckout", checkout);
+                }
                 await _productService.CreateOrder(order);
+                TempData["Success"] = "Mailinizə izləmə kodu göndərildi. Kodu izləmə böməsinə yazıb sifarişinizə baxa bilərsiniz";
                 return RedirectToAction("Index", "Home");
             }
             catch (ItemNotFoundException)
             {
-                TempData["Warning"] = "Product Not Found";
+                TempData["Warning"] = "Məhsul Tapıladı";
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -62,7 +68,7 @@ namespace IComp.Controllers
 
             if (viewModel.Product is null)
             {
-                throw new ItemNotFoundException("This product isn't available");
+                throw new ItemNotFoundException("Bu məhsul stokda yoxdur");
             }
 
             return PartialView("_FastOrderPartial", viewModel);
@@ -73,11 +79,16 @@ namespace IComp.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return Ok();
+                var message = string.Join(" | ", ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage));
+
+                TempData["Warning"] = message;
+                return RedirectToAction("Index", "Home");
             }
 
             await _productService.CreateOrder(productid, order, prodcount, ordercount);
-            TempData["Success"] = "Product order pending. Our manager will contact you";
+            TempData["Success"] = "Mailinizə izləmə kodu göndərildi. Kodu izləmə böməsinə yazıb sifarişinizə baxa bilərsiniz";
             return RedirectToAction("Index", "Home");
         }
 
@@ -88,12 +99,21 @@ namespace IComp.Controllers
         [HttpPost]
         public async Task<IActionResult> TrackOrder(string trackid)
         {
-            var order = await _productService.GetOrderByIdAsync(trackid);
-            if (order == null)
+            
+            try
             {
-                throw new ItemNotFoundException("Item not found");
+                var order = await _productService.GetOrderByIdAsync(trackid);
+                if (order == null)
+                {
+                    throw new ItemNotFoundException("Məhsul tapılmadı");
+                }
+                return RedirectToAction("GetOrderByTrackId", order);
             }
-            return RedirectToAction("GetOrderByTrackId", order);
+            catch (ItemNotFoundException)
+            {
+                TempData["Warning"] = "Məhsul tapılmadı";
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public IActionResult GetOrderByTrackId(Order order)
@@ -134,7 +154,7 @@ namespace IComp.Controllers
                 }
                 if (product.Count <= cookieItem?.Count)
                 {
-                    throw new ItemNotFoundException("There are only " + product.Count + " products in stock");
+                    throw new ItemNotFoundException("Stokda sadəcə " + product.Count + " məhsul var");
 
                 }
                 if (cookieItem == null)
