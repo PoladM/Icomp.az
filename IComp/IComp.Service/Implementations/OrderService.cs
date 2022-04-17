@@ -56,6 +56,7 @@ namespace IComp.Service.Implementations
             var totalCost = await orderItems.SumAsync(x => x.CostPrice);
 
             var totalProfit = totalSale - totalCost;
+            totalProfit = totalProfit * 0.59m;
             return totalProfit;
         }
 
@@ -64,6 +65,8 @@ namespace IComp.Service.Implementations
             var orderItems = _unitOfWork.OrderItemRepository.GetAll("Order");
             orderItems = orderItems.Where(x => ((int)x.Order.Status) != 1 && ((int)x.Order.Status) != 3 && ((int)x.Order.Status) != 4);
             var totalSale = await orderItems.SumAsync(x => x.SalePrice);
+
+            totalSale = totalSale * 0.59m;
             return totalSale;
         }
 
