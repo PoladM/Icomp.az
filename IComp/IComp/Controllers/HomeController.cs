@@ -50,6 +50,7 @@ namespace IComp.Controllers
         public IActionResult Make()
         {
             var categories = _productService.GetCategories();
+
             return View(categories);
         }
 
@@ -61,6 +62,11 @@ namespace IComp.Controllers
             string cookie = HttpContext.Request.Cookies["basket"];
             foreach (var id in productsId)
             {
+                if (id == 0)
+                {
+                    continue;
+                }
+
                 if (!await _productService.AnyProd(id))
                 {
                     throw new ItemNotFoundException("item not found");

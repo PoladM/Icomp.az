@@ -9,16 +9,18 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="~/assets/img/Icons/icompico.ico">
 
     <title>Focus Admin: Creative Admin Dashboard</title>
 
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
@@ -75,8 +77,8 @@
             <div class="nano-content">
                 <ul>
                     <div class="logo">
-                        <a href="index.html">
-                            <!-- <img src="~/manage/assets/images/logo.png" alt="" /> --><span>Focus</span>
+                        <a asp-action="index" asp-controller="dashboard" asp-area="manage">
+                            <span>iComp</span>
                         </a>
                     </div>
                     <li class="label">Main</li>
@@ -103,7 +105,7 @@
                     <li class=" "><a asp-action="index" asp-controller="VideoCard"><i class="ti-angle-right"></i>VideoCard</a></li>
                     <li class=" "><a asp-action="index" asp-controller="slider"><i class="ti-angle-right"></i>Slider</a></li>
 
-                    <li><a><i class="ti-close"></i> Logout</a></li>
+                    <li><a asp-action="logout" asp-controller="account" asp-area="manage"><i class="ti-close"></i> Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -122,173 +124,7 @@
                         </div>
                     </div>
                     <div class="float-right">
-                        <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <i class="ti-bell"></i>
-                                <div class="drop-down dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">Recent Notifications</span>
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Mr. John</div>
-                                                        <div class="notification-text">5 members joined today </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Mariam</div>
-                                                        <div class="notification-text">likes a photo of you</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Tasnim</div>
-                                                        <div class="notification-text">
-                                                            Hi Teddy, Just wanted to let you
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Mr. John</div>
-                                                        <div class="notification-text">
-                                                            Hi Teddy, Just wanted to let you
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="text-center">
-                                                <a href="#" class="more-link">See All</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <i class="ti-email"></i>
-                                <div class="drop-down dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">2 New Messages</span>
-                                        <a href="email.html">
-                                            <i class="ti-pencil-alt pull-right"></i>
-                                        </a>
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li class="notification-unread">
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/1.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Michael Qin</div>
-                                                        <div class="notification-text">
-                                                            Hi Teddy, Just wanted to let you
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-unread">
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/2.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Mr. John</div>
-                                                        <div class="notification-text">
-                                                            Hi Teddy, Just wanted to let you
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Michael Qin</div>
-                                                        <div class="notification-text">
-                                                            Hi Teddy, Just wanted to let you
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img"
-                                                         src="~/manage/assets/images/avatar/2.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">
-                                                            02:34
-                                                            PM
-                                                        </small>
-                                                        <div class="notification-heading">Mr. John</div>
-                                                        <div class="notification-text">
-                                                            Hi Teddy, Just wanted to let you
-                                                            ...
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="text-center">
-                                                <a href="#" class="more-link">See All</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="dropdown dib">
                             <div class="header-icon">
                                 @if (appUser != null)

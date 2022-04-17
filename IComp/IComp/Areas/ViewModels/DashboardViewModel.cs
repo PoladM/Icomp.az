@@ -1,4 +1,5 @@
 ﻿using IComp.Core.Entities;
+using IComp.Service.DTOs.CategoryDTOs;
 using System.Collections.Generic;
 
 namespace IComp.Areas.ViewModels
@@ -13,5 +14,7 @@ namespace IComp.Areas.ViewModels
         public int PendingOrders { get; set; }
         public int RejectedOrders { get; set; }
         public int CanceledOrders { get; set; }
+        public List<Order> Orders { get; set; }
+        public List<CategoryGetDto> Categories { get; set; }
     }
 }

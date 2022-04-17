@@ -15,11 +15,13 @@ namespace IComp.Areas.manage.Controllers
     public class DashboardController : Controller
     {
         private readonly IOrderService _orderService;
+        private readonly IProductService _productService;
         private readonly UserManager<AppUser> _userManager;
 
-        public DashboardController(IOrderService orderService, UserManager<AppUser> userManager)
+        public DashboardController(IOrderService orderService, IProductService productService, UserManager<AppUser> userManager)
         {
             _orderService = orderService;
+            _productService = productService;
             _userManager = userManager;
         }
         public async Task<IActionResult> Index()
@@ -29,6 +31,8 @@ namespace IComp.Areas.manage.Controllers
             var orders = await _orderService.GetAllOrder();
 
             var totalSales = await _orderService.GetTotalSales();
+
+            var categories = _productService.GetCategories();
 
             var customers = _userManager.Users.Where(x => !x.IsAdmin);
 
@@ -42,6 +46,8 @@ namespace IComp.Areas.manage.Controllers
                 CanceledOrders = orders.Where(x => (int)x.Status == 4).Count(),
                 PendingOrders = orders.Where(x => (int)x.Status == 1).Count(),
                 RejectedOrders = orders.Where(x => (int)x.Status == 3).Count(),
+                Orders = orders,
+                Categories = categories,
             };
             
             return View(viewModel);

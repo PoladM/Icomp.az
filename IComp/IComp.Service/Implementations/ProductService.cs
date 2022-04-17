@@ -415,6 +415,7 @@ namespace IComp.Service.Implementations
 
             return _mapper.Map<ProductPostDto>(product);
         }
+
         public async Task<DetailViewModel> FindByIdAsync(int id)
         {
             var existProduct = await _unitOfWork.ProductRepository.GetAsync(x => x.Id == id && !x.IsDeleted, "Processor.ProcessorSerie", "VideoCard.VideoCardSerie", "MotherBoard", "ProdType", "ProdMemory.MemoryCapacity", "Brand", "Destination", "HardDisc.HDDCapacity", "SSD.SSDCapacity", "Category", "Color", "Software", "ProductImages", "ProductComments.AppUser", "ProductComments.Product");
@@ -554,7 +555,7 @@ namespace IComp.Service.Implementations
 
             foreach (var item in categories)
             {
-                item.Products = item.Products.Where(x => !x.IsDeleted).ToList();
+                item.Products = item.Products.Where(x => !x.IsDeleted && x.IsAvailable).ToList();
             }
 
             var categoryGetDtos = _mapper.Map<List<CategoryGetDto>>(categories.ToList());
