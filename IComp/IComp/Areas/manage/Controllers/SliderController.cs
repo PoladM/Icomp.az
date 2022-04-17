@@ -84,6 +84,7 @@ namespace IComp.Areas.manage.Controllers
             slider.Order = lastSlider.Order;
             slider.Order++;
 
+
             await _unitOfWork.SliderRepository.AddAsync(slider);
             await _unitOfWork.CommitAsync();
 
@@ -139,8 +140,12 @@ namespace IComp.Areas.manage.Controllers
                 FileManager.Delete(_env.WebRootPath, "uploads/sliders", existSlider.Image);
                 
                 existSlider.Image = slider.Image;
+                
             }
 
+            existSlider.Url = slider.Url;
+            existSlider.IsFirst = slider.IsFirst;
+            existSlider.IsSecond = slider.IsSecond;
             await _unitOfWork.CommitAsync();
             return RedirectToAction("Index");
         }

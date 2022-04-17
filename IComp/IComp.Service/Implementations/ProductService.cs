@@ -1110,6 +1110,15 @@ namespace IComp.Service.Implementations
 
         public async Task<int> Comment(ProductComment comment)
         {
+            if (comment.Text.Length < 3)
+            {
+                throw new Exception("Short message");
+            }
+            if (String.IsNullOrEmpty(comment.Name))
+            {
+                comment.Name = "Anonymous";
+            }
+
             AppUser appUser = null;
             if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
             {

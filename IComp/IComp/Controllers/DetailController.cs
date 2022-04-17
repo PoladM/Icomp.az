@@ -31,10 +31,19 @@ namespace IComp.Controllers
             return View(products);
         }
         [HttpPost]
-        public async Task<IActionResult> Comment(ProductComment comment)
+        public async Task<IActionResult> Comment(int productid, ProductComment comment)
         {
-            var Id = await _productService.Comment(comment);
-            return RedirectToAction("index", new { id = Id });
+            try
+            {
+                var Id = await _productService.Comment(comment);
+                return RedirectToAction("index", new { id = Id });
+
+            }
+            catch (System.Exception)
+            {
+                TempData["Warning"] = "Short message";
+                return RedirectToAction("index", new {id = productid});
+            }
         }
     }
 }

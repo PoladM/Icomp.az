@@ -24,7 +24,7 @@
                 fan.
             </p>
         </div>
-        <div class="product-price-basket">price:  $@((item.DiscountPercent > 0 ?item.SalePrice*(1-item.DiscountPercent/100):item.SalePrice).ToString("0.00"))</div>
+        <div class="product-price-basket">price:  ₼@((item.DiscountPercent > 0 ?item.SalePrice*(1-item.DiscountPercent/100):item.SalePrice).ToString("0.00"))</div>
         <div class="product-quantity">
             <input type="number" form="fastOrder" name="ordercount" value="1" min="1" max="@item.Count">
             <input type="hidden" form="fastOrder" name="prodcount" value="@item.Count">
@@ -32,7 +32,7 @@
 
         </div>
         
-        <div class="product-line-price">@productTotalPrice.ToString("0.00")</div>
+        <div class="product-line-price">@((item.DiscountPercent > 0 ?item.SalePrice*(1-item.DiscountPercent/100):item.SalePrice).ToString("0.00"))</div>
     </div>
     <input type="hidden" value="@counter" id="basket-count" />
 
@@ -40,7 +40,7 @@
     <div class="totals">
         <div class="totals-item totals-item-total">
             <label>Total</label>
-            <div class="totals-value" id="cart-total">@(productTotalPrice.ToString("0.00"))</div>
+            <div class="totals-value" id="cart-total">@((item.DiscountPercent > 0 ?item.SalePrice*(1-item.DiscountPercent/100):item.SalePrice).ToString("0.00"))</div>
         </div>
     </div>
 

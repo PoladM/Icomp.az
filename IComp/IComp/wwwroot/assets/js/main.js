@@ -405,6 +405,9 @@ hamburger.addEventListener("click", function () {
 let hamburgerItem = document.querySelectorAll(".mobile-menu-item");
 
 hamburgerItem.forEach((x) => {
+    if (x.classList.contains("mobile-menu-item") && x.classList.contains("home-nav")) {
+        return;
+    }
     x.addEventListener("click", function (e) {
         e.preventDefault();
         let sub = x.nextElementSibling;

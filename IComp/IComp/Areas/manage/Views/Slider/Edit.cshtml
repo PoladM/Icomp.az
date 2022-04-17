@@ -6,12 +6,17 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 mx-auto">
-            <h1>Create</h1>
-            <form method="post" asp-action="Create" enctype="multipart/form-data">
+            <h1>Edit</h1>
+            <form method="post" asp-action="Edit" enctype="multipart/form-data">
                 <div class="form-group">
                     <label asp-for="ImageFile">ImageFile</label>
                     <input class="form-control" asp-for="ImageFile" placeholder="Enter ImageFile">
                     <span class="text-danger" asp-validation-for="ImageFile"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Url">Url</label>
+                    <input class="form-control" asp-for="Url" placeholder="Enter Url">
+                    <span class="text-danger" asp-validation-for="Url"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="IsFirst">IsFirst</label>
@@ -19,7 +24,7 @@
                     <span class="text-danger" asp-validation-for="IsFirst"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="IsSecond">ImageFile</label>
+                    <label asp-for="IsSecond">IsSecond</label>
                     <input class="form-control" asp-for="IsSecond">
                     <span class="text-danger" asp-validation-for="IsSecond"></span>
                 </div>

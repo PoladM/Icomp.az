@@ -44,11 +44,20 @@ namespace IComp.Areas.manage.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(FeedBack feedBackPost)
         {
+
             var feedBack = await _feedBackService.GetByIdAsync(feedBackPost.Id);
 
-            if (feedBack.Name != feedBackPost.Name || feedBack.Email != feedBackPost.Email || feedBack.Text != feedBackPost.Text)
+            try
             {
-                throw new ItemNotFoundException("Item not found");
+                if (feedBack.Name != feedBackPost.Name || feedBack.Email != feedBackPost.Email || feedBack.Text != feedBackPost.Text)
+                {
+                    throw new ItemNotFoundException("Item not found");
+                }
+            }
+            catch (ItemNotFoundException)
+            {
+                TempData["Warning"] = "you can just answer the question";
+                return RedirectToAction("Index");
             }
             await _feedBackService.UpdateAsync(feedBackPost);
 

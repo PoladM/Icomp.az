@@ -682,7 +682,7 @@ textarea:focus, input:focus {
                 position: absolute;
                 transform: translateX(-1000px);
                 width: 80%;
-                height: 38rem;
+                height: 78vh;
                 left: 0;
                 top: 66px;
                 border: 1px solid;
@@ -1553,7 +1553,7 @@ textarea:focus, input:focus {
     max-width: 100%;
     box-sizing: border-box;
     padding: 25px;
-    margin: 8% auto 0;
+    margin: 8% auto 8% auto;
     position: relative;
     z-index: 1;
     border-top: 5px solid #4084F1;

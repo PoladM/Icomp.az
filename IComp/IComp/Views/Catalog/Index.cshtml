@@ -1,7 +1,7 @@
 ﻿@using System.Globalization
 @model ProductViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Azərbaycanda kompüterlərin satışı. Bakıda ən ucuz kompüter satışı «iComp» internet-maqazinində.";
     NumberFormatInfo nfi = new NumberFormatInfo();
 
     nfi.NumberDecimalSeparator = ".";
@@ -291,7 +291,14 @@
                         <!-- New Products start here  -->
                         <div class="new-products">
                             <div class="content-heading">
-                                <h2>Kompüterlər</h2>
+                                @if (@ViewBag.CategoryName != null)
+                                {
+                                    <h2>@ViewBag.CategoryName</h2>
+                                }
+                                else if (@ViewBag.BrandName != null)
+                                {
+                                    <h2>@ViewBag.BrandName</h2>
+                                }
                             </div>
 
                             <div class="order-filter">

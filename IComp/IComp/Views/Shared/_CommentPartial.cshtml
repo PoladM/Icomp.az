@@ -20,7 +20,7 @@
                                 <small class="text-muted">@item.CreatedAt</small>
                             </div>
                         </div>
-                        <span class="fs-1 my-0 fw-bolder text-success">@item.Rate</span>
+                        <span class="fs-1 my-0 fw-bolder @(item.Rate >= 4 ? "text-success" : item.Rate == 3 ? "text-warning" : "text-danger")">@item.Rate</span>
                     </div>
                     <div class="card-body py-2">
                         <p class="card-text">@item.Text</p>

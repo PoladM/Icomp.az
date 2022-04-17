@@ -11,6 +11,9 @@ namespace IComp.Core.Entities
     {
         public int Id { get; set; }
         public string Image { get; set; }
+        [Required]
+        [StringLength(1000)]
+        public string Url { get; set; }
         public byte Order { get; set; }
         public bool IsFirst { get; set; }
         public bool IsSecond { get; set; }

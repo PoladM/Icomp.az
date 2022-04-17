@@ -1,6 +1,6 @@
 ﻿@model DetailViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = $"{@Model.Product.Name} Baku, Bakıda ucuz almaq, ucuz satışı, kreditə almaq";
     var product = Model.Product;
     var imageCounter = 1;
 }
@@ -479,6 +479,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="comment-form">
+                                                            <input type="hidden" form="comment-form" name="productid" value="@product.Id" />
                                                             @Html.Partial("_CommentFormPartial",@Model.Comment)
                                                         </div>
                                                     </div>
