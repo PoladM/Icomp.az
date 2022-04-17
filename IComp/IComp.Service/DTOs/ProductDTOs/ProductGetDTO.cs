@@ -9,7 +9,18 @@ namespace IComp.Service.DTOs.ProductDTOs
     public class ProductGetDTO
     {
         public int Id { get; set; }
+        public int CategoryId { get; set; }
+        public int BrandId { get; set; }
         public string Name { get; set; }
+        public int DestinationId { get; set; }
+        public int? HardDiscId { get; set; }
+        public int? SSDId { get; set; }
+        public int? ProdMemoryId { get; set; }
+        public int? MotherBoardId { get; set; }
+        public int ProdTypeId { get; set; }
+        public int? VideoCardId { get; set; }
+        public int? ColorId { get; set; }
+        public int? SoftwareId { get; set; }
 
         public decimal SalePrice { get; set; }
         public decimal CostPrice { get; set; }

@@ -19,10 +19,10 @@
                 <img style="width: 80%;" src="~/uploads/products/@item.Product.ProductImages.FirstOrDefault(x => x.PosterStatus == true)?.Image">
             </div>
             <div class="product-details">
-                <div class="product-title">@item.Product.Name</div>
+                <div class="product-title"><a asp-action="index" asp-controller="detail" asp-route-id="@item.Product.Id" class="text-dark">@item.Product.Name</a></div>
                 <p class="product-description">
                     @(item.Product.Processor?.ProcessorSerie?.Name == null ? "" : item.Product.Processor?.ProcessorSerie?.Name + "|")  @(item.Product.ProdMemory?.MemoryCapacity?.Capacity == null ? "" : item.Product.ProdMemory?.MemoryCapacity?.Capacity + "|") @(item.Product.ProdMemory?.DDRType == null ? "" : item.Product.ProdMemory?.DDRType + "|") @(item.Product.SSD?.SSDCapacity?.Capacity == null? "" : item.Product.SSD?.SSDCapacity?.Capacity + "SSD |")  @(item.Product.HardDisc?.HDDCapacity?.Capacity == null? "" : item.Product.HardDisc?.HDDCapacity?.Capacity + "HDD |")  @(item.Product.Processor?.ModelName == null ? "" : item.Product.Processor?.ModelName + "|")
-                    @(item.Product.VideoCard?.CoreSpeed == null ? "" : item.Product.VideoCard?.CoreSpeed + "|") @(item.Product.VideoCard?.MemoryCapacity==null? "" : item.Product.VideoCard?.MemoryCapacity + "|") @(item.Product.VideoCard?.VideoCardSerie?.Name==null? "" : item.Product.VideoCard?.VideoCardSerie?.Name + " series |")  @(item.Product.GraphCard == null ? "" : item.Product.GraphCard + "|") @(item.Product.MotherBoardSound == null ? "" : item.Product.MotherBoardSound+ "|") @(item.Product.Network == null ? "" : item.Product.Network + "|")
+                    @(item.Product.VideoCard?.CoreSpeed == null ? "" : item.Product.VideoCard?.CoreSpeed + "|") @(item.Product.VideoCard?.MemoryCapacity==null? "" : item.Product.VideoCard?.MemoryCapacity + "|") @(item.Product.VideoCard?.VideoCardSerie?.Name==null? "" : item.Product.VideoCard?.VideoCardSerie?.Name + " series |")  @(item.Product.Network == null ? "" : item.Product.Network + "|")
                 </p>
             </div>
             <div class="product-price-basket">price:  ₼@((item.Product.DiscountPercent > 0 ?item.Product.SalePrice*(1-item.Product.DiscountPercent/100):item.Product.SalePrice).ToString("0.00"))</div>
@@ -32,8 +32,10 @@
                 <input type="hidden" value="@item.Product.Id" class="product-Id">
 
             </div>
-            <div class="product-removal">
-                <a asp-action="deleteprodfromcheckout" asp-controller="catalog" asp-route-id="@item.Product.Id" class="remove-checkout">
+            <div class="product-removal" style="text-align: center;
+    background: #c66;
+    border-radius: 3px;">
+                <a asp-action="deleteprodfromcheckout" asp-controller="catalog" asp-route-id="@item.Product.Id" class="remove-checkout text-white">
                     Remove
                 </a>
             </div>

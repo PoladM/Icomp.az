@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4iwiWZly6OQoeiICqRPJ8anlIHiBkcVpnjHOWz1w4wzBrzlTv0KWxFIKV2oZA68iPcZm7ee3/SVaF90lgq5bVQ==",
+  "dgSpecHash": "B2OAM/VbiN3vNA/cvpfMhL5IdQ1C9deMf12enDtkhreyFzZA9TqOPI3lOO/smIqDOMVntiUfJOnVcY5gm6MvKw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp\\IComp.csproj",
+  "projectFilePath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp\\IComp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USER\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\USER\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

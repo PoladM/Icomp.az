@@ -68,24 +68,6 @@ namespace IComp.Core.Entities
 
         [StringLength(maximumLength: 500)]
 
-        public string GraphCard { get; set; }
-        [StringLength(maximumLength: 500)]
-
-        public string MotherBoardSound { get; set; }
-        [StringLength(maximumLength: 500)]
-        public string RamLightning { get; set; }
-
-        [StringLength(maximumLength: 500)]
-        public string MaxResolution { get; set; }
-
-        [StringLength(maximumLength: 500)]
-
-        public string Ports { get; set; }
-        [StringLength(maximumLength: 500)]
-
-        public string Material { get; set; }
-        [StringLength(maximumLength: 500)]
-
         public string Speed { get; set; }
 
         public Processor Processor { get; set; }

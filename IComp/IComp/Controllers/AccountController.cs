@@ -300,7 +300,7 @@ namespace IComp.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(resetPasswordVm);
             }
 
             var dbUser = await _userManager.FindByIdAsync(id);
@@ -314,7 +314,7 @@ namespace IComp.Controllers
                 {
                     ModelState.AddModelError("", error.Description);
                 }
-                return View();
+                return View(resetPasswordVm);
             }
 
             return RedirectToAction("index", "home");

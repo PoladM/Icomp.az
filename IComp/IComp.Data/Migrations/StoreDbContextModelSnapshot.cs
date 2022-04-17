@@ -608,10 +608,6 @@ namespace IComp.Data.Migrations
                     b.Property<decimal>("DiscountPercent")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("GraphCard")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
                     b.Property<int?>("HardDiscId")
                         .HasColumnType("int");
 
@@ -654,14 +650,6 @@ namespace IComp.Data.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("Material")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("MaxResolution")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
                     b.Property<DateTime>("ModifiedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -670,20 +658,12 @@ namespace IComp.Data.Migrations
                     b.Property<int?>("MotherBoardId")
                         .HasColumnType("int");
 
-                    b.Property<string>("MotherBoardSound")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
                     b.Property<string>("Network")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Ports")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
@@ -699,10 +679,6 @@ namespace IComp.Data.Migrations
 
                     b.Property<int>("ProdTypeId")
                         .HasColumnType("int");
-
-                    b.Property<string>("RamLightning")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
 
                     b.Property<int?>("Rate")
                         .HasColumnType("int");
@@ -1324,7 +1300,7 @@ namespace IComp.Data.Migrations
             modelBuilder.Entity("IComp.Core.Entities.ProdMemory", b =>
                 {
                     b.HasOne("IComp.Core.Entities.MemoryCapacity", "MemoryCapacity")
-                        .WithMany()
+                        .WithMany("Memories")
                         .HasForeignKey("MemoryCapacityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1349,7 +1325,7 @@ namespace IComp.Data.Migrations
                         .HasForeignKey("ColorId");
 
                     b.HasOne("IComp.Core.Entities.Destination", "Destination")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1371,7 +1347,7 @@ namespace IComp.Data.Migrations
                         .HasForeignKey("ProdMemoryId");
 
                     b.HasOne("IComp.Core.Entities.ProdType", "ProdType")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("ProdTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1381,7 +1357,7 @@ namespace IComp.Data.Migrations
                         .HasForeignKey("SSDId");
 
                     b.HasOne("IComp.Core.Entities.Software", "Software")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("SoftwareId");
 
                     b.HasOne("IComp.Core.Entities.VideoCard", "VideoCard")

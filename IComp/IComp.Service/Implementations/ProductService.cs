@@ -368,12 +368,6 @@ namespace IComp.Service.Implementations
                 Color = x.Color,
                 Software = x.Software,
                 IsAvailable = x.IsAvailable,
-                GraphCard = x.GraphCard,
-                MotherBoardSound = x.MotherBoardSound,
-                RamLightning = x.RamLightning,
-                MaxResolution = x.MaxResolution,
-                Ports = x.Ports,
-                Material = x.Material,
                 Speed = x.Speed,
                 Network = x.Network,
                 ProcessorId = x.ProcessorId,
@@ -543,7 +537,7 @@ namespace IComp.Service.Implementations
         }
         public List<BrandGetDto> GetBrands()
         {
-            var brands = _unitOfWork.BrandRepository.GetAll(x => !x.IsDeleted).ToList();
+            var brands = _unitOfWork.BrandRepository.GetAll(x => !x.IsDeleted, "Products").ToList();
 
             var brandsDto = _mapper.Map<List<BrandGetDto>>(brands);
             return brandsDto;
@@ -580,7 +574,7 @@ namespace IComp.Service.Implementations
 
         public List<MotherBoardGetDto> GetMotherBoards()
         {
-            var motherBoards = _unitOfWork.MotherBoardRepository.GetAll(x => !x.IsDeleted).ToList();
+            var motherBoards = _unitOfWork.MotherBoardRepository.GetAll(x => !x.IsDeleted, "Products").ToList();
 
             var motherBoardGetDtos = _mapper.Map<List<MotherBoardGetDto>>(motherBoards);
             return motherBoardGetDtos;
@@ -604,7 +598,7 @@ namespace IComp.Service.Implementations
 
         public List<ProdTypeGetDto> GetProdTypes()
         {
-            var prodTypes = _unitOfWork.ProdTypeRepository.GetAll().ToList();
+            var prodTypes = _unitOfWork.ProdTypeRepository.GetAll("Products").ToList();
 
             var prodTypeGetDtos = _mapper.Map<List<ProdTypeGetDto>>(prodTypes);
             return prodTypeGetDtos;
@@ -612,7 +606,7 @@ namespace IComp.Service.Implementations
 
         public List<DestinationGetDto> GetDestinations()
         {
-            var destinations = _unitOfWork.DestinationRepository.GetAll().ToList();
+            var destinations = _unitOfWork.DestinationRepository.GetAll("Products").ToList();
 
             var destinationGetDtos = _mapper.Map<List<DestinationGetDto>>(destinations);
             return destinationGetDtos;
@@ -816,17 +810,16 @@ namespace IComp.Service.Implementations
             {
                 existProduct.ProcessorId = default;
             }
-            if (existProduct.IsAvailable == false)
-            {
-                existProduct.IsAvailable = true;
-            }
+            //if (existProduct.IsAvailable == false)
+            //{
+            //    existProduct.IsAvailable = true;
+            //}
 
             await _unitOfWork.CommitAsync();
         }
-
         public List<ProcessorSerieGetDto> GetProcessirSeries()
         {
-            var proc = _unitOfWork.ProcessorSerieRepository.GetAll().ToList();
+            var proc = _unitOfWork.ProcessorSerieRepository.GetAll("Processors.Products.Processor").ToList();
 
             var processorGets = _mapper.Map<List<ProcessorSerieGetDto>>(proc);
             return processorGets;
@@ -834,7 +827,7 @@ namespace IComp.Service.Implementations
 
         public List<HardDiscCapacityGetDto> GetHardDiscCapacities()
         {
-            var capac = _unitOfWork.HardDiscCapacityRepository.GetAll().ToList();
+            var capac = _unitOfWork.HardDiscCapacityRepository.GetAll("HardDiscs.Products").ToList();
 
             var capacityGetDtos = _mapper.Map<List<HardDiscCapacityGetDto>>(capac);
             return capacityGetDtos;
@@ -842,7 +835,7 @@ namespace IComp.Service.Implementations
 
         public List<MCapacityGetDto> GetMemoryCapacities()
         {
-            var memoryCapacities = _unitOfWork.MemoryCapacityRepository.GetAll().ToList();
+            var memoryCapacities = _unitOfWork.MemoryCapacityRepository.GetAll("Memories.Products").ToList();
 
             var capacityGetDtos = _mapper.Map<List<MCapacityGetDto>>(memoryCapacities);
             return capacityGetDtos;
@@ -850,7 +843,7 @@ namespace IComp.Service.Implementations
 
         public List<VCSerieGetDto> GetVideoCardSeries()
         {
-            var series = _unitOfWork.VCSerieRepository.GetAll().ToList();
+            var series = _unitOfWork.VCSerieRepository.GetAll("VideoCards.Products").ToList();
 
             var serieGetDtos = _mapper.Map<List<VCSerieGetDto>>(series);
             return serieGetDtos;
@@ -866,7 +859,7 @@ namespace IComp.Service.Implementations
 
         public List<SoftwareGetDto> GetSoftwares()
         {
-            var softwares = _unitOfWork.SoftWareRepository.GetAll().ToList();
+            var softwares = _unitOfWork.SoftWareRepository.GetAll("Products").ToList();
 
             var softwareGetDtos = _mapper.Map<List<SoftwareGetDto>>(softwares);
             return softwareGetDtos;
@@ -1079,7 +1072,7 @@ namespace IComp.Service.Implementations
                 }
                 else
                 {
-                    products = products.Where(s => s.Name.Trim().ToLower().Contains(searchString.Trim().ToLower())).Take(maxProdCount ?? 10);
+                    products = products.Where(s => s.Name.Trim().ToLower().Contains(searchString.Trim().ToLower())).Take(maxProdCount ?? 6);
                 }
             }
             else
@@ -1103,8 +1096,10 @@ namespace IComp.Service.Implementations
             {
                 products = null;
             }
-            var dto = _mapper.Map<List<ProductGetDTO>>(products);
-            PaginatedListDto<ProductGetDTO> listDto = new PaginatedListDto<ProductGetDTO>(dto, dto.Count(), page, 8);
+
+            var showProd = products.Skip((page - 1) * 8).Take(8).ToList();
+            var dto = _mapper.Map<List<ProductGetDTO>>(showProd);
+            PaginatedListDto <ProductGetDTO> listDto = new PaginatedListDto<ProductGetDTO>(dto, products.Count(), page, 8);
 
             return listDto;
         }
@@ -1375,12 +1370,6 @@ namespace IComp.Service.Implementations
                 ProdMemory = x.ProdMemory,
                 VideoCard = x.VideoCard,
                 IsAvailable = x.IsAvailable,
-                GraphCard = x.GraphCard,
-                MotherBoardSound = x.MotherBoardSound,
-                RamLightning = x.RamLightning,
-                MaxResolution = x.MaxResolution,
-                Ports = x.Ports,
-                Material = x.Material,
                 Speed = x.Speed,
                 Network = x.Network
             }).ToList();
@@ -1495,7 +1484,6 @@ namespace IComp.Service.Implementations
                     {
                         item.Product.Count = item.Product.Count - 1;
                         item.Product.IsAvailable = false;
-                        item.Product.IsDeleted = true;
                     }
                     else
                     {
@@ -1503,7 +1491,6 @@ namespace IComp.Service.Implementations
                         if (item.Product.Count == 0)
                         {
                             item.Product.IsAvailable = false;
-                            item.Product.IsDeleted = true;
                         }
                     }
 
@@ -1629,7 +1616,7 @@ namespace IComp.Service.Implementations
                 {
                     cookieItems = JsonConvert.DeserializeObject<List<BasketCookieItemViewModel>>(cookieItemsStr);
                 }
-            }
+            }   
             else
             {
                 cookieItems = _unitOfWork.BasketItemRepository.GetAll(x => x.AppUserId == appUser.Id).Select(b => new BasketCookieItemViewModel { ProductId = b.ProductId, Count = b.Count }).ToList();
@@ -1739,7 +1726,7 @@ namespace IComp.Service.Implementations
             {
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.CategoryId == categoryid);
             }
-            if (brandid != null)
+            if (brandid != null && categoryid == null)
             {
                 query = _unitOfWork.ProductRepository.Filter(query, x => x.BrandId == brandid);
             }

@@ -5803,11 +5803,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj",
+      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj",
       "projectName": "IComp.Service",
-      "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj",
+      "projectPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Service\\IComp.Service.csproj",
       "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp.Service\\obj\\",
+      "outputPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Service\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5824,8 +5824,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj": {
-              "projectPath": "C:\\Users\\USER\\Desktop\\Icomp.az-master\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj"
+            "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj": {
+              "projectPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj"
             }
           }
         }

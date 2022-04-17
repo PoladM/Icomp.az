@@ -85,9 +85,17 @@
                                     <div class="filter-input">
                                         @foreach (var item in Model.destinationGetDtos)
                                         {
+                                            var prods = 0;
+                                            @foreach (var item2 in item.Products)
+                                            {
+                                                @if (item2.CategoryId == (ViewBag.categoryid ?? 0) || item2.BrandId == (ViewBag.brandid ?? 0))
+                                                {
+                                                    prods++;
+                                                }
+                                            }
                                             <div class="input-block">
                                                 <input form="filterForm" type="radio" @(ViewBag.destinationid == item.Id ? "checked" : "") name="destinationid" value="@item.Id" id="destination-@item.Id">
-                                                <label for="destination-@item.Id">@item.Name <span>(318)</span></label>
+                                                <label for="destination-@item.Id">@item.Name <span>(@prods)</span></label>
                                             </div>
                                         }
                                     </div>
@@ -98,14 +106,21 @@
                                         <div class="filter-title">
                                             <h2>ANA PLATA</h2>
                                             <i class="fa-solid fa-angle-down"></i>
-
                                         </div>
                                         <div class="filter-input">
                                             @foreach (var item in Model.motherBoardGetDtos)
                                             {
+                                                var prods = 0;
+                                                @foreach (var item2 in item.Products)
+                                                {
+                                                    @if (item2.CategoryId == (ViewBag.categoryid ?? 0) || item2.BrandId == (ViewBag.brandid ?? 0))
+                                                    {
+                                                        prods++;
+                                                    }
+                                                }
                                                 <div class="input-block">
                                                     <input form="filterForm" type="radio" @(ViewBag.motherboardid == item.Id ? "checked" : "") name="motherboardid" value="@item.Id" id="motherboard-@item.Id">
-                                                    <label for="motherboard-@item.Id">@item.ModelName <span>(318)</span></label>
+                                                    <label for="motherboard-@item.Id">@item.ModelName <span>(@prods)</span></label>
                                                 </div>
                                             }
 
@@ -124,9 +139,20 @@
                                         <div class="filter-input">
                                             @foreach (var item in Model.processorSerieGetDtos)
                                             {
+                                                var prods = 0;
+                                                @foreach (var item2 in item.Processors)
+                                                {
+                                                    @foreach (var item3 in item2.Products)
+                                                    {
+                                                        @if (item3.CategoryId == (ViewBag.categoryid ?? 0) || item3.BrandId == (ViewBag.brandid ?? 0))
+                                                        {
+                                                            prods++;
+                                                        }
+                                                    }
+                                                }
                                                 <div class="input-block">
                                                     <input form="filterForm" type="radio" @(ViewBag.processorserieid == item.Id ? "checked" : "") name="processorserieid" value="@item.Id" id="processor-@item.Id">
-                                                    <label for="processor-@item.Id">@item.Name <span>(318)</span></label>
+                                                    <label for="processor-@item.Id">@item.Name <span>(@prods)</span></label>
                                                 </div>
                                             }
 
@@ -144,9 +170,20 @@
                                         <div class="filter-input">
                                             @foreach (var item in Model.mCapacityGetDtos)
                                             {
+                                                var prods = 0;
+                                                @foreach (var item2 in item.Memories)
+                                                {
+                                                    @foreach (var item3 in item2.Products)
+                                                    {
+                                                        @if (item3.CategoryId == (ViewBag.categoryid ?? 0) || item3.BrandId == (ViewBag.brandid ?? 0))
+                                                        {
+                                                            prods++;
+                                                        }
+                                                    }
+                                                }
                                                 <div class="input-block">
                                                     <input form="filterForm" type="radio" @(ViewBag.memorycapacityid == item.Id ? "checked" : "") name="memorycapacityid" value="@item.Id" id="memory-@item.Id">
-                                                    <label for="memory-@item.Id">@item.Capacity <span>(318)</span></label>
+                                                    <label for="memory-@item.Id">@item.Capacity <span>(@prods)</span></label>
                                                 </div>
                                             }
                                         </div>
@@ -164,9 +201,20 @@
                                         <div class="filter-input">
                                             @foreach (var item in Model.vCSerieGets)
                                             {
+                                                var prods = 0;
+                                                @foreach (var item2 in item.VideoCards)
+                                                {
+                                                    @foreach (var item3 in item2.Products)
+                                                    {
+                                                        @if (item3.CategoryId == (ViewBag.categoryid ?? 0) || item3.BrandId == (ViewBag.brandid ?? 0))
+                                                        {
+                                                            prods++;
+                                                        }
+                                                    }
+                                                }
                                                 <div class="input-block">
                                                     <input form="filterForm" type="radio" @(ViewBag.videocardserieid == item.Id ? "checked" : "") name="videocardserieid" value="@item.Id" id="vc-@item.Id">
-                                                    <label for="vc-@item.Id">@item.Name <span>(318)</span></label>
+                                                    <label for="vc-@item.Id">@item.Name <span>(@prods)</span></label>
                                                 </div>
                                             }
                                         </div>
@@ -183,10 +231,21 @@
                                         <div class="filter-input">
                                             @foreach (var item in Model.hardDiscCapacityGetDtos)
                                             {
+                                                var prods = 0;
+                                                @foreach (var item2 in item.HardDiscs)
+                                                {
+                                                    @foreach (var item3 in item2.Products)
+                                                    {
+                                                        @if (item3.CategoryId == (ViewBag.categoryid ?? 0) || item3.BrandId == (ViewBag.brandid ?? 0))
+                                                        {
+                                                            prods++;
+                                                        }
+                                                    }
+                                                }
 
                                                 <div class="input-block">
                                                     <input form="filterForm" type="radio" @(ViewBag.hddcapacityid == item.Id ? "checked" : "") name="hddcapacityid" value="@item.Id" id="hdd-@item.Id">
-                                                    <label for="hdd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                                    <label for="hdd-@item.Id">@item.Capacity <span>(@prods)</span></label>
                                                 </div>
 
                                             }
@@ -200,15 +259,24 @@
                                         <div class="filter-title">
                                             <h2>SSD (SƏRT SƏTHLİ DİSK)</h2>
                                             <i class="fa-solid fa-angle-down"></i>
-
                                         </div>
                                         <div class="filter-input">
                                             @foreach (var item in Model.SSDCapacities)
                                             {
-
+                                                var prods = 0;
+                                                @foreach (var item2 in item.SSDs)
+                                                {
+                                                    @foreach (var item3 in item2.Products)
+                                                    {
+                                                        @if (item3.CategoryId == (ViewBag.categoryid ?? 0) || item3.BrandId == (ViewBag.brandid ?? 0))
+                                                        {
+                                                            prods++;
+                                                        }
+                                                    }
+                                                }
                                                 <div class="input-block">
                                                     <input form="filterForm" type="radio" @(ViewBag.ssdcapacityid == item.Id ? "checked" : "") name="ssdcapacityid" value="@item.Id" id="ssd-@item.Id">
-                                                    <label for="ssd-@item.Id">@item.Capacity <span>(318)</span></label>
+                                                    <label for="ssd-@item.Id">@item.Capacity <span>(@prods)</span></label>
                                                 </div>
                                             }
                                         </div>
@@ -224,9 +292,22 @@
                                     <div class="filter-input">
                                         @foreach (var item in Model.brandGetDtos)
                                         {
+                                            var prods = 0;
+                                            @foreach (var item2 in item.Products)
+                                            {
+
+                                                @if (@item2.CategoryId == ViewBag.categoryid)
+                                                {
+                                                    prods++;
+                                                }
+                                                else if (ViewBag.Categoryid == null)
+                                                {
+                                                    prods++;
+                                                }
+                                            }
                                             <div class="input-block">
                                                 <input form="filterForm" type="radio" @(ViewBag.brandid == item.Id ? "checked" : "") name="brandid" value="@item.Id" id="brand-@item.Id">
-                                                <label for="brand-@item.Id">@item.Name <span>(318)</span></label>
+                                                <label for="brand-@item.Id">@item.Name <span>(@prods)</span></label>
                                             </div>
                                         }
                                     </div>
@@ -242,9 +323,17 @@
                                         <div class="filter-input">
                                             @foreach (var item in Model.Softwares)
                                             {
+                                                var prods = 0;
+                                                @foreach (var item2 in item.Products)
+                                                {
+                                                    @if (item2.CategoryId == (ViewBag.categoryid ?? 0) || item2.BrandId == (ViewBag.brandid ?? 0))
+                                                    {
+                                                        prods++;
+                                                    }
+                                                }
                                                 <div class="input-block">
                                                     <input form="filterForm" type="radio" @(ViewBag.softwareid == item.Id ? "checked" : "") name="softwareid" value="@item.Id" id="software-@item.Id">
-                                                    <label for="software-@item.Id">@item.Name <span>(318)</span></label>
+                                                    <label for="software-@item.Id">@item.Name <span>(@prods)</span></label>
                                                 </div>
                                             }
 
@@ -260,7 +349,10 @@
                                     <form id="cleanForm" asp-action="Index" asp-controller="Catalog" method="get">
                                         <input type="hidden" name="page" value="@Model.Paginated.PageIndex" />
                                         <input type="hidden" name="categoryid" value="@ViewBag.categoryid" />
-                                        <input type="hidden" name="brandid" value="@ViewBag.brandid" />
+                                        @if (ViewBag.categoryid == null)
+                                        {
+                                            <input type="hidden" name="brandid" value="@ViewBag.brandid" />
+                                        }
                                         <button type="submit" class="btn btn-primary filter-btn">Təmizləmək</button>
                                     </form>
                                 </div>
@@ -318,19 +410,19 @@
                                     @if (Model.Paginated.HasPrev)
                                     {
                                         <li>
-                                            <a class="Previous" asp-action="index" asp-route-minprice="@filterMin" asp-route-maxprice="@filterMax" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
+                                            <a class="Previous" asp-action="index" asp-route-softwareid="@ViewBag.softwareid" asp-route-minprice="@filterMin" asp-route-maxprice="@filterMax" asp-route-page="@(Model.Paginated.PageIndex - 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
                                         </li>
                                     }
                                     @for (var i = 1; i <= 3; i++, temp++)
                                     {
                                         if ((Model.Paginated.PageIndex + temp) != 0 && (Model.Paginated.PageIndex + temp) != -1)
                                         {
-                                            <li class="@(Model.Paginated.PageIndex + temp == Model.Paginated.PageIndex ? "active" : "" )"><a asp-action="index" asp-route-minprice="@filterMin" asp-route-maxprice="@filterMax" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort" style="display:@((Model.Paginated.PageIndex+temp)>Model.Paginated.TotalPage?"none":"block")">@(Model.Paginated.PageIndex+temp)</a></li>
+                                            <li class="@(Model.Paginated.PageIndex + temp == Model.Paginated.PageIndex ? "active" : "" )"><a asp-action="index" asp-route-softwareid="@ViewBag.softwareid" asp-route-minprice="@filterMin" asp-route-maxprice="@filterMax" asp-route-page="@i" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort" style="display:@((Model.Paginated.PageIndex+temp)>Model.Paginated.TotalPage?"none":"block")">@(Model.Paginated.PageIndex+temp)</a></li>
                                         }
                                     }
                                     @if (Model.Paginated.HasNext)
                                     {
-                                        <li><a class="Next" asp-action="index" asp-route-minprice="@filterMin" asp-route-maxprice="@filterMax" asp-route-page="@(Model.Paginated.PageIndex + 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                        <li><a class="Next" asp-action="index" asp-route-softwareid="@ViewBag.softwareid" asp-route-minprice="@filterMin" asp-route-maxprice="@filterMax" asp-route-page="@(Model.Paginated.PageIndex + 1)" asp-route-processorserieid="@ViewBag.processorserieid" asp-route-videocardserieid="@ViewBag.videocardserieid" asp-route-motherboardid="@ViewBag.motherboardid" asp-route-prodtypeid="@ViewBag.prodtypeid" asp-route-memorycapacityid="@ViewBag.memorycapacityid" asp-route-brandid="@ViewBag.brandid" asp-route-destinationid="@ViewBag.destinationid" asp-route-categoryid="@ViewBag.categoryid" asp-route-hddcapacityid="@ViewBag.hddcapacityid" asp-route-ssdcapacityid="@ViewBag.ssdcapacityid" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     }
                                 </ul>
                             </div>

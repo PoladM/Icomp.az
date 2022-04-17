@@ -103,32 +103,6 @@ namespace IComp
 
             app.ExceptionHandler();
 
-
-            //app.UseStatusCodePages(async context =>
-            //{
-            //    if (context.HttpContext.Response.StatusCode == 400)
-            //    {
-            //        context.HttpContext.Response.Redirect("~/Views/Shared/_Error.cshtml");
-            //    }
-            //    else if (context.HttpContext.Response.StatusCode == 404)
-            //    {
-            //        context.HttpContext.Response.Redirect("~/Views/Shared/_Error.cshtml");
-            //    }
-            //});
-
-
-
-            //app.Use(async (context, next) =>
-            //{
-            //    await next.Invoke();
-            //    if (context.Response.StatusCode == 404)
-            //    {
-            //        context.Request.Path = "/Home/Error";
-            //    }
-            //    await next.Invoke();
-            //});
-
-
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();

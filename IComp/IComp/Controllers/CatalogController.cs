@@ -36,7 +36,7 @@ namespace IComp.Controllers
 
             
 
-            var filterProd = _productService.ProductsForFilter(categoryid, brandid);
+            var filterProd = _productService.ProductsForFilter(categoryid,brandid);
 
             NumberFormatInfo nfi = new NumberFormatInfo();
 
@@ -54,6 +54,9 @@ namespace IComp.Controllers
             ViewBag.ssdcapacityid = ssdcapacityid;
             ViewBag.softwareid = softwareid;
             ViewBag.sort = sort;
+
+
+
             if (categoryid != null)
             {
                 ViewBag.CategoryName = _productService.GetCategories().FirstOrDefault(x => x.Id == categoryid).Name;
@@ -242,14 +245,14 @@ namespace IComp.Controllers
                 cookie = JsonConvert.SerializeObject(cookieItems);
                 HttpContext.Response.Cookies.Append("basket", cookie);
 
-                TempData["Success"] = "Product added to basket";
+                TempData["Success"] = $"{product.Name} səbətə əlavə olundu.";
                 return PartialView("_BasketPartial", await _productService._getBasket(cookieItems));
             }
             else
             {
                 var basketItem = await _productService.UserBasket(id, appUser);
-
-                TempData["Success"] = "Product added to basket";
+                var product = await _productService.GetByIdAsync(id);
+                TempData["Success"] = $"{product.Name} səbətə əlavə olundu.";
                 return PartialView("_BasketPartial", await _productService._getBasket(basketItem));
             }
         }
@@ -281,13 +284,17 @@ namespace IComp.Controllers
 
         public async Task<IActionResult> SearchAll(string searchString, int page = 1)
         {
-            return View(await _productService.SearchProdAll(searchString,page));
+            ViewBag.Str = searchString;
+            var paginated = await _productService.SearchProdAll(searchString, page);
+            ViewBag.ItemCount = paginated.ItemCount;    
+            return View(paginated);
         }
 
         [HttpPost]
         public async Task<IActionResult> Search(string searchString)
         {
-            return PartialView("_SearchProductPartial", await _productService.SearchProd(searchString,10));
+            ViewBag.Str = searchString;
+            return PartialView("_SearchProductPartial", await _productService.SearchProd(searchString,6));
         }
     }
 }

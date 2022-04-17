@@ -11,10 +11,12 @@ namespace IComp.Service.DTOs
             TotalPage = (int)Math.Ceiling(count / (double)pageSize);
             this.Items.AddRange(items);
             this.PageIndex = pageIndex;
+            this.ItemCount = count;
         }
         public List<TItem> Items { get; set; } = new List<TItem>();
         public int TotalPage { get; set; }
         public int PageIndex { get; set; }
+        public int ItemCount { get; set; }
         public bool HasNext { get => PageIndex < TotalPage; }
         public bool HasPrev { get => PageIndex > 1; }
 

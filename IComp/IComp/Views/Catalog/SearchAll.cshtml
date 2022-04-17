@@ -34,38 +34,27 @@
                             <div class="content-heading">
                                 <h3>Axtarış nəticəsi</h3>
                                 <br />
-                                <h3>Tapıldı (@Model.Items.Count) məhsul</h3>
+                                <h3>Tapıldı (@ViewBag.ItemCount) məhsul</h3>
                             </div>
-                            <div class="order-filter">
-                                <select form="filterForm" name="sort" id="orderFilter">
-                                    <!option @(ViewBag.Sort == "default" ? "selected" : "") value="default">Varsayılan olaraq</!option>
-                                    <!option @(ViewBag.Sort == "price_high" ? "selected" : "") value="price_high">Qiyməti artır</!option>
-                                    <!option @(ViewBag.Sort == "price_low" ? "selected" : "") value="price_low">Qiyməti azalır</!option>
-                                    <!option @(ViewBag.Sort == "name_asc" ? "selected" : "") value="name_asc">Başlığa görə(A-Z)</!option>
-                                    <!option @(ViewBag.Sort == "name_desc" ? "selected" : "") value="name_desc">Başlığa görə(Z-A)</!option>
-                                    <!option @(ViewBag.Sort == "popular" ? "selected" : "") value="popular">Populyarlıq</!option>
-                                </select>
-                            </div>
-
                             <div class="paginatoin-area">
                                 <ul class="pagination-box">
 
                                     @if (Model.HasPrev)
                                     {
                                         <li>
-                                            <a class="Previous" asp-action="index" asp-route-page="@(Model.PageIndex - 1)" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-left"></i></a>
+                                            <a class="Previous" asp-action="SearchAll" asp-route-page="@(Model.PageIndex - 1)" asp-route-searchString="@ViewBag.Str"><i class="fa-solid fa-chevron-left"></i></a>
                                         </li>
                                     }
                                     @for (var i = 1; i <= 3; i++, temp++)
                                     {
                                         if ((Model.PageIndex + temp) != 0 && (Model.PageIndex + temp) != -1)
                                         {
-                                            <li class="@(Model.PageIndex + temp == Model.PageIndex ? "active" : "" )"><a asp-action="index" asp-route-page="@i" asp-route-sort="@ViewBag.sort" style="display:@((Model.PageIndex+temp)>Model.TotalPage?"none":"block")">@(Model.PageIndex+temp)</a></li>
+                                            <li class="@(Model.PageIndex + temp == Model.PageIndex ? "active" : "" )"><a asp-action="SearchAll" asp-route-page="@i" asp-route-searchString="@ViewBag.Str" style="display:@((Model.PageIndex+temp)>Model.TotalPage?"none":"block")">@(Model.PageIndex+temp)</a></li>
                                         }
                                     }
                                     @if (Model.HasNext)
                                     {
-                                        <li><a class="Next" asp-action="index" asp-route-page="@(Model.PageIndex + 1)" asp-route-sort="@ViewBag.sort"><i class="fa-solid fa-chevron-right"></i></a></li>
+                                        <li><a class="Next" asp-action="SearchAll" asp-route-page="@(Model.PageIndex + 1)" asp-route-searchString="@ViewBag.Str"><i class="fa-solid fa-chevron-right"></i></a></li>
                                     }
                                 </ul>
                             </div>

@@ -8,12 +8,6 @@ namespace IComp.Controllers
     {
         public IActionResult Error()
         {
-            //var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            //ViewBag.ErrorPath = exceptionDetails.Path;
-            //ViewBag.ErrorMessage = exceptionDetails.Error.Message;
-            //ViewBag.ErrorSource = exceptionDetails.Error.Source;
-            //ViewBag.ErrorStackTrace = exceptionDetails.Error.StackTrace;
-            //return View("Error");
             return PartialView("_Error");
         }
     }

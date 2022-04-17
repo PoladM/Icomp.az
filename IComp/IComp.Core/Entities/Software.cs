@@ -11,5 +11,6 @@ namespace IComp.Core.Entities
         [Required]
         [StringLength(maximumLength:30)]
         public string Name { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

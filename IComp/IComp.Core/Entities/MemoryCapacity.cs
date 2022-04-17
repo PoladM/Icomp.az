@@ -11,5 +11,6 @@ namespace IComp.Core.Entities
         [Required]
         [StringLength(maximumLength:100)]
         public string Capacity { get; set; }
+        public List<ProdMemory> Memories { get; set; }
     }
 }

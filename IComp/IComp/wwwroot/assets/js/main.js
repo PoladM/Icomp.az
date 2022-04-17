@@ -105,7 +105,7 @@ $(document).ready(function () {
                 return response.text();
             }
             else {
-                throw response
+                throw response;
             }
         })
             .then(data => {
