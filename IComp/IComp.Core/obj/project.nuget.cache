@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "UTnX4a7LbHht6OWM2mB64ZA7RTX0rR5HQ5tUsNQ72cTq/xMzXUk2MQI5hQobq+Dqlt49OO4Wg60vCsM2dI7x1A==",
+  "dgSpecHash": "fG2VxvNbk4HI+dQpMiD8dtlkJK+61IjrULRLu2AoiRc/zqsRDjw77pIGlNanWJ8qNs8oIq6j3H9UtXppepTeOw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj",
+  "projectFilePath": "C:\\Icomp\\IComp\\IComp.Core\\IComp.Core.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.23\\microsoft.aspnetcore.http.features.3.1.23.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.23\\microsoft.aspnetcore.jsonpatch.3.1.23.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.23\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.23.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.23\\microsoft.extensions.primitives.3.1.23.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\system.io.pipelines\\4.7.5\\system.io.pipelines.4.7.5.nupkg.sha512"
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.1.23\\microsoft.aspnetcore.http.features.3.1.23.nupkg.sha512",
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.23\\microsoft.aspnetcore.jsonpatch.3.1.23.nupkg.sha512",
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.23\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.23.nupkg.sha512",
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.23\\microsoft.extensions.primitives.3.1.23.nupkg.sha512",
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
+    "C:\\Users\\PoladMammadli\\.nuget\\packages\\system.io.pipelines\\4.7.5\\system.io.pipelines.4.7.5.nupkg.sha512"
   ],
   "logs": []
 }

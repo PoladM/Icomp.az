@@ -38,3 +38,13 @@ C:\Users\USER\Desktop\icompbackup-master\Final-Back\IComp\IComp.Core\obj\Debug\n
 C:\Users\USER\Desktop\icompbackup-master\Final-Back\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.csproj.CoreCompileInputs.cache
 C:\Users\USER\Desktop\icompbackup-master\Final-Back\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.dll
 C:\Users\USER\Desktop\icompbackup-master\Final-Back\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.pdb
+C:\Icomp\IComp\IComp.Core\bin\Debug\netcoreapp3.1\IComp.Core.deps.json
+C:\Icomp\IComp\IComp.Core\bin\Debug\netcoreapp3.1\IComp.Core.dll
+C:\Icomp\IComp\IComp.Core\bin\Debug\netcoreapp3.1\IComp.Core.pdb
+C:\Icomp\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.csproj.AssemblyReference.cache
+C:\Icomp\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Icomp\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.AssemblyInfoInputs.cache
+C:\Icomp\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.AssemblyInfo.cs
+C:\Icomp\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.csproj.CoreCompileInputs.cache
+C:\Icomp\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.dll
+C:\Icomp\IComp\IComp.Core\obj\Debug\netcoreapp3.1\IComp.Core.pdb

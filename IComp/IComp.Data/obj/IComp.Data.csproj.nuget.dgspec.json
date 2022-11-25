@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj": {}
+    "C:\\Icomp\\IComp\\IComp.Data\\IComp.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj": {
+    "C:\\Icomp\\IComp\\IComp.Core\\IComp.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj",
+        "projectUniqueName": "C:\\Icomp\\IComp\\IComp.Core\\IComp.Core.csproj",
         "projectName": "IComp.Core",
-        "projectPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Core\\obj\\",
+        "projectPath": "C:\\Icomp\\IComp\\IComp.Core\\IComp.Core.csproj",
+        "packagesPath": "C:\\Users\\PoladMammadli\\.nuget\\packages\\",
+        "outputPath": "C:\\Icomp\\IComp\\IComp.Core\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PoladMammadli\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +58,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,21 +68,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj": {
+    "C:\\Icomp\\IComp\\IComp.Data\\IComp.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj",
+        "projectUniqueName": "C:\\Icomp\\IComp\\IComp.Data\\IComp.Data.csproj",
         "projectName": "IComp.Data",
-        "projectPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Data\\IComp.Data.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Data\\obj\\",
+        "projectPath": "C:\\Icomp\\IComp\\IComp.Data\\IComp.Data.csproj",
+        "packagesPath": "C:\\Users\\PoladMammadli\\.nuget\\packages\\",
+        "outputPath": "C:\\Icomp\\IComp\\IComp.Data\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PoladMammadli\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -92,8 +99,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj": {
-                "projectPath": "C:\\Users\\USER\\Desktop\\Final-Back\\Final-Back\\IComp\\IComp.Core\\IComp.Core.csproj"
+              "C:\\Icomp\\IComp\\IComp.Core\\IComp.Core.csproj": {
+                "projectPath": "C:\\Icomp\\IComp\\IComp.Core\\IComp.Core.csproj"
               }
             }
           }
@@ -137,7 +144,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -146,7 +154,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
